@@ -20,6 +20,9 @@ public class ColidedWithDough : MonoBehaviour
      void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Dough")
+        {
             this.gameObject.SetActive(false);
+
+        }
     }
 }

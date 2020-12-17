@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class StickOnColision : MonoBehaviour
 {
+
+    float zPos; 
     // Start is called before the first frame update
     void Start()
     {
-
+        zPos = this.transform.position.z;
     }
 
     // Update is called once per frame
@@ -21,6 +23,7 @@ public class StickOnColision : MonoBehaviour
 
             this.transform.GetComponent<Rigidbody>().detectCollisions = true;
             this.transform.GetComponent<Rigidbody>().isKinematic = false;
+           // this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, zPos);
         }
         
     }
@@ -39,7 +42,7 @@ public class StickOnColision : MonoBehaviour
 
             this.transform.GetComponent<Rigidbody>().detectCollisions = false;
            this.transform.GetComponent<Rigidbody>().isKinematic = true;
-            this.transform.position =  new Vector3(collision.transform.position.x+1.6f, collision.transform.position.y , collision.transform.position.z);
+            this.transform.position =  new Vector3(collision.transform.position.x+1.6f, collision.transform.position.y , zPos);
         }
         
         
