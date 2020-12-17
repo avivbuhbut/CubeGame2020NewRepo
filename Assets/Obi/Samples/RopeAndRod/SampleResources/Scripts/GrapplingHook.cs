@@ -65,12 +65,8 @@ public class GrapplingHook : MonoBehaviour
     /**
 	 * Raycast against the scene to see if we can attach the hook to something.
 	 */
-    public void LaunchHook()
+    private void LaunchHook()
     {
-
-      
-
-        
 
         // Get the mouse position in the scene, in the same XY plane as this object:
         Vector3 mouse = Input.mousePosition;
@@ -81,24 +77,11 @@ public class GrapplingHook : MonoBehaviour
         Ray ray = new Ray(transform.position, mouseInScene - transform.position);
 
         // Raycast to see what we hit:
-    
-
         if (Physics.Raycast(ray, out hookAttachment))
         {
 
-            RaycastHit hit;
-
-            Ray ray2 = Camera.main.ScreenPointToRay(Input.mousePosition);                    ///Very Useful Code! - tells the object name when clicked by the mouse
-
-            // Casts the ray and get the first game object hit
-            Physics.Raycast(ray2, out hit);
-
-
-
             // We actually hit something, so attach the hook!
-
-            if (hit.transform.name != "BackGround")
-                StartCoroutine(AttachHook());
+            StartCoroutine(AttachHook());
         }
 
     }
@@ -144,40 +127,27 @@ public class GrapplingHook : MonoBehaviour
 
     void Update()
     {
-      
-       
-            if (Input.GetMouseButtonDown(0)   )
+        if (Input.GetMouseButtonDown(0))
             DetachHook();
 
-        //if (Input.GetKey(KeyCode.N))
-            if (Input.GetMouseButtonDown(1))
-            {
-                if (!rope.isLoaded)
-                    LaunchHook();
-               // else
-                   // DetachHook();
-            }
-
-            if (rope.isLoaded)
-            {
-
-           
-
-            //   GameObject.FindWithTag("Player").GetComponent<DragRigidbody>().enabled = false;
-            if (Input.GetKey(KeyCode.W))
-                {
-                    cursor.ChangeLength(rope.restLength - hookExtendRetractSpeed * Time.deltaTime *2f);
-                }
-                if (Input.GetKey(KeyCode.S))
-                {
-                    cursor.ChangeLength(rope.restLength + hookExtendRetractSpeed * Time.deltaTime * 2f);
-                }
-        }
-        else//ddsf
+        if (Input.GetMouseButtonDown(1))
         {
-          //  GameObject.FindWithTag("Player").GetComponent<DragRigidbody>().enabled = true;
+            if (!rope.isLoaded)
+                LaunchHook();
+          //  else
+               // DetachHook();
         }
 
+        if (rope.isLoaded)
+        {
+            if (Input.GetKey(KeyCode.W))
+            {
+                cursor.ChangeLength(rope.restLength - hookExtendRetractSpeed * Time.deltaTime);
+            }
+            if (Input.GetKey(KeyCode.S))
+            {
+                cursor.ChangeLength(rope.restLength + hookExtendRetractSpeed * Time.deltaTime);
+            }
         }
     }
-
+}
