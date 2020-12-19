@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class StickOnColision : MonoBehaviour
 {
-
+    Vector3 PlayerPos;
     float zPos; 
     // Start is called before the first frame update
     void Start()
     {
+
         zPos = this.transform.position.z;
     }
 
@@ -16,15 +17,17 @@ public class StickOnColision : MonoBehaviour
 
     void Update()
     {
+     
+
         if (Input.GetKey(KeyCode.V))
         {
-            this.transform.parent = null;
+         
+                this.transform.parent = null;
 
 
             this.transform.GetComponent<Rigidbody>().detectCollisions = true;
             this.transform.GetComponent<Rigidbody>().isKinematic = false;
-          //  if(this.transform.tag == "PizzaBox")
-        //    this.transform.position = new Vector3(this.transform.position.x+0.1f, this.transform.position.y, zPos);
+     
         }
         
     }
@@ -39,11 +42,13 @@ public class StickOnColision : MonoBehaviour
 
         if (collision.transform.tag == "Player")
         {
-            this.transform.parent = collision.transform;
+         
+                this.transform.parent = collision.transform;
 
             this.transform.GetComponent<Rigidbody>().detectCollisions = false;
            this.transform.GetComponent<Rigidbody>().isKinematic = true;
-            this.transform.position =  new Vector3(collision.transform.position.x+1.6f, collision.transform.position.y , zPos);
+           this.transform.position =  new Vector3(collision.transform.position.x+1.6f, collision.transform.position.y , zPos);
+            PlayerPos = new Vector3(collision.transform.position.x, collision.transform.position.y, collision.transform.position.z);
         }
         
         

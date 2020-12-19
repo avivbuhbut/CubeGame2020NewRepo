@@ -38,7 +38,7 @@ public class StartTimerEnterFirstChallange : MonoBehaviour
             // Debug.Log(timeLeft % 60);
             //   AnimHalfLevelGoUpAnim.SetBool("Activate", true);
 
-            timeLeft -= 0.4f * Time.deltaTime;
+            timeLeft -= 0.8f * Time.deltaTime;
             Min = (int)timeLeft / 60;
            
             PlayerTimerTMP.gameObject.SetActive(true);
