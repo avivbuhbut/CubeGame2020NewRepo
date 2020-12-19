@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 3772427938286053818}
   - component: {fileID: 5224904442310796819}
   - component: {fileID: 3724120720209920678}
-  - component: {fileID: 585796711982726952}
   - component: {fileID: 8233810651980628342}
   m_Layer: 0
   m_Name: PizzaBOX1(Clone)
@@ -65,6 +64,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -89,6 +90,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &2584286771335974294
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -185,19 +187,6 @@ MonoBehaviour:
   Box3LocalSocre: 0
   Box3GlobalSocre: 0
   pizzaBox3InAir: 0
---- !u!114 &585796711982726952
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2845764834830814472}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7acf4199e11e4f3e9df159eda615526, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  FinishLineCubeTrans: {fileID: 0}
 --- !u!114 &8233810651980628342
 MonoBehaviour:
   m_ObjectHideFlags: 0

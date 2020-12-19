@@ -11,7 +11,7 @@ public class StartTimerEnterFirstChallange : MonoBehaviour
     public static bool PlayerPassThrow;
     bool PizzaBoxPassThrow;
     public TextMeshPro PlayerTimerTMP;
-    public static float timeLeft = 120;
+    public static float timeLeft = 60;
     public Transform Player;
     Color OriginalTextColor;
     // Start is called before the first frame update

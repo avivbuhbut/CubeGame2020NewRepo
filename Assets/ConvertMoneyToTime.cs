@@ -29,7 +29,7 @@ void OnEnable()
   
         if (display7Sec)
         {
-         
+            Debug.Log(timeShown);
             timeShown -= Time.deltaTime;
             if (timeShown >= 0)
             {
@@ -55,17 +55,20 @@ void OnEnable()
 
     void MyFunction()// your listener calls this function
 {
-        if (PlayerMoney.moneyCounter > 0&&StartTimerEnterFirstChallange.PlayerPassThrow)
+        if (PlayerMoney.moneyCounter >= 0&&StartTimerEnterFirstChallange.PlayerPassThrow)
         {
        
             display7Sec = true;
-           
+
+            if (PlayerMoney.moneyCounter > 0)
+            {
                 PlayerMoney.moneyCounter -= 1;
 
                 StartTimerEnterFirstChallange.timeLeft += 7f;
                 CoutnerSecPlayerBuy += 7;
                 timeShown = CoutnerSecPlayerBuy;
-            
+
+            }
         }
         else
             display7Sec = false;

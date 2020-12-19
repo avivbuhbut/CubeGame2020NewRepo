@@ -23,7 +23,8 @@ public class StickOnColision : MonoBehaviour
 
             this.transform.GetComponent<Rigidbody>().detectCollisions = true;
             this.transform.GetComponent<Rigidbody>().isKinematic = false;
-           // this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, zPos);
+          //  if(this.transform.tag == "PizzaBox")
+        //    this.transform.position = new Vector3(this.transform.position.x+0.1f, this.transform.position.y, zPos);
         }
         
     }

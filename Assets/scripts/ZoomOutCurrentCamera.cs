@@ -2,16 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class ZoomOutCurrentCamera : MonoBehaviour
 {
-
+    
+    public Button ConvertMoneyToTimeButton;
     public TextMeshPro PlayerMoneyTMP;
     public TextMeshPro PlayerMoneyTMPWide;
+    Vector3 OriginalPosButton;
     // Start is called before the first frame update
     void Start()
     {
-        
+        OriginalPosButton = ConvertMoneyToTimeButton.transform.localPosition;
     }
 
     // Update is called once per frame
@@ -27,6 +30,7 @@ public class ZoomOutCurrentCamera : MonoBehaviour
                 //    Camera.main.orthographicSize += 0.5;
                 PlayerMoneyTMP.gameObject.SetActive(false);
                 PlayerMoneyTMPWide.gameObject.SetActive(true);
+                ConvertMoneyToTimeButton.transform.localPosition = new Vector3(-87f,-47f,-488.2f);
 
         }
         else if(Input.GetKeyDown(KeyCode.C) && Camera.main.fieldOfView == 90)
@@ -35,6 +39,8 @@ public class ZoomOutCurrentCamera : MonoBehaviour
             Camera.main.fieldOfView = 60;
                 PlayerMoneyTMP.gameObject.SetActive(true);
                 PlayerMoneyTMPWide.gameObject.SetActive(false);
+
+                ConvertMoneyToTimeButton.transform.localPosition = OriginalPosButton;
             }
     
 
