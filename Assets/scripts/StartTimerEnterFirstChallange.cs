@@ -3,18 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+
 public class StartTimerEnterFirstChallange : MonoBehaviour
 {
 
    // public Animator AnimHalfLevelGoUpAnim;
-    bool PlayerPassThrow;
+    public static bool PlayerPassThrow;
     bool PizzaBoxPassThrow;
     public TextMeshPro PlayerTimerTMP;
-    public float timeLeft = 120;
+    public static float timeLeft = 120;
     public Transform Player;
+    Color OriginalTextColor;
     // Start is called before the first frame update
     void Start()
     {
+      // Time.timeScale = 1f; //try it its funny
+         OriginalTextColor = PlayerTimerTMP.color;
         PlayerTimerTMP.gameObject.SetActive(true);
       //  AnimHalfLevelGoUpAnim.SetBool("Activate", false);
     }
@@ -24,25 +28,27 @@ public class StartTimerEnterFirstChallange : MonoBehaviour
     {
         int Min;
 
+      // Debug.Log(Time.time);
 
-  
+
 
         //  PlayerTimerTMP.text = "TIME LEFT: \n" + timeLeft;
         if (PlayerPassThrow)
         {
-           // Debug.Log(timeLeft % 60);
+            // Debug.Log(timeLeft % 60);
             //   AnimHalfLevelGoUpAnim.SetBool("Activate", true);
 
-            timeLeft -= Time.deltaTime;
+            timeLeft -= 0.4f * Time.deltaTime;
             Min = (int)timeLeft / 60;
-
+           
             PlayerTimerTMP.gameObject.SetActive(true);
-            if (timeLeft % 60 > 10 && timeLeft>0)
-                PlayerTimerTMP.text = "TIME LEFT: \n" + Min + ":" + timeLeft % 60;
-           else if (timeLeft % 60 < 10 && timeLeft > 0)
+            if (timeLeft % 60 > 10 && timeLeft > 0)
+                    PlayerTimerTMP.text = "TIME LEFT: \n" + Min + ":" + (int)timeLeft % 60;
+            else if (timeLeft % 60 < 10 && timeLeft > 0)
             {
-                PlayerTimerTMP.text = "TIME LEFT: \n" + Min + ":" + "0" + timeLeft % 60;
-            }else if(timeLeft%60 <=0)
+                PlayerTimerTMP.text = "TIME LEFT: \n" + Min + ":" + "0" + (int)timeLeft % 60;
+            }
+            else if (timeLeft % 60 <= 0)
             {
 
                 Player.transform.GetComponent<MeshDestroy>().DestroyMesh(Player.transform.gameObject.GetComponent<MeshFilter>().mesh, Player.transform.GetComponent<MeshDestroy>(), Player.gameObject);

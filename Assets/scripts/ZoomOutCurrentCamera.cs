@@ -7,6 +7,7 @@ public class ZoomOutCurrentCamera : MonoBehaviour
 {
 
     public TextMeshPro PlayerMoneyTMP;
+    public TextMeshPro PlayerMoneyTMPWide;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +26,7 @@ public class ZoomOutCurrentCamera : MonoBehaviour
                 // if (Camera.main.orthographicSize <= 20)
                 //    Camera.main.orthographicSize += 0.5;
                 PlayerMoneyTMP.gameObject.SetActive(false);
+                PlayerMoneyTMPWide.gameObject.SetActive(true);
 
         }
         else if(Input.GetKeyDown(KeyCode.C) && Camera.main.fieldOfView == 90)
@@ -32,6 +34,7 @@ public class ZoomOutCurrentCamera : MonoBehaviour
 
             Camera.main.fieldOfView = 60;
                 PlayerMoneyTMP.gameObject.SetActive(true);
+                PlayerMoneyTMPWide.gameObject.SetActive(false);
             }
     
 
