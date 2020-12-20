@@ -13,12 +13,12 @@ public class PlayerbecomeKinematic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.K))
+        if (Input.GetKey(KeyCode.Q))
         {
             this.transform.GetComponent<Rigidbody>().isKinematic = true;
         }
 
-        if (Input.GetKey(KeyCode.K) && this.transform.GetComponent<Rigidbody>().isKinematic ==true)
+        if (Input.GetKey(KeyCode.Q) && this.transform.GetComponent<Rigidbody>().isKinematic ==true)
         {
             this.transform.GetComponent<Rigidbody>().isKinematic = false;
         }

@@ -140,7 +140,7 @@ public class GrapplingHook : MonoBehaviour
 
         if (rope.isLoaded)
         {
-            if (Input.GetKey(KeyCode.W))
+            if (Input.GetKey(KeyCode.Mouse1))
             {
                 cursor.ChangeLength(rope.restLength - hookExtendRetractSpeed * Time.deltaTime);
             }
