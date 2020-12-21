@@ -22,7 +22,7 @@ public class ColidedWithPlayerAddMoney : MonoBehaviour
         if(collision.transform.tag == "Player")
         {
             this.transform.gameObject.SetActive(false);
-            PlayerMoney.moneyCounter++;
+            PlayerMoney.moneyCounter+=2;
         }
 
     }

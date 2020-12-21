@@ -33,7 +33,7 @@ public class StopTimerOnPizzaEnter : MonoBehaviour
             pizzaHit = true;
                 pizzaValue = PizzaValue.pizzaValue;
 
-                StartTimerEnterFirstChallange.PlayerPassThrow = false;
+            //    StartTimerEnterFirstChallange.PlayerPassThrow = false;
             collision.transform.gameObject.SetActive(false);
             MoneyTrans.gameObject.SetActive(true);
         }
@@ -44,7 +44,7 @@ public class StopTimerOnPizzaEnter : MonoBehaviour
     {
         if (collision.transform.tag == "PizzaBox")
         {
-            StartTimerEnterFirstChallange.PlayerPassThrow = true;
+            //StartTimerEnterFirstChallange.PlayerPassThrow = true;
         }
     }
 }

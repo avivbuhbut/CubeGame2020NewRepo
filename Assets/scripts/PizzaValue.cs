@@ -5,7 +5,7 @@ using TMPro;
 public class PizzaValue : MonoBehaviour
 {
     public float Timer = 10;
-    public static int pizzaValue = 20;
+    public static int pizzaValue = 10;
     public TextMeshPro pizzaValueTmp;
     public TextMeshPro pizzaValueOtherSideTmp;
 
