@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class ContinueTimerAndOpenDoors : MonoBehaviour
 {
-
+    public Animator anim;
     public Button button;
     [SerializeField] TextMeshProUGUI feeCounterTMP;
   //  public TextMeshProUGUI FeeCoutnerTMP;
@@ -16,9 +16,12 @@ public class ContinueTimerAndOpenDoors : MonoBehaviour
     
 
     public static int CoutnerSecPlayerBuy = 0;
+     void Start()
+    {
+        anim.SetBool("Activate", false);
+    }
 
-
-     void Update()
+    void Update()
     {
       
        TimeLeftToNextBumpInFee -= 0.8f * Time.deltaTime;
@@ -45,10 +48,11 @@ public class ContinueTimerAndOpenDoors : MonoBehaviour
 
     void MyFunction()// your listener calls this function
     {
-        if (PlayerMoney.moneyCounter >= 6 && StartTimerEnterFirstChallange.PlayerPassThrow == false)
+        if (PlayerMoney.moneyCounter >= tempFeeCounter)
         {
-
-            StartTimerEnterFirstChallange.PlayerPassThrow = true;
+            PlayerMoney.moneyCounter -= tempFeeCounter;
+            anim.SetBool("Activate", true);
+            //     StartTimerEnterFirstChallange.PlayerPassThrow = true;
 
 
         }

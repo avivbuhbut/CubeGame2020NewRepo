@@ -137,43 +137,12 @@ public class CreatePizza : MonoBehaviour
 
             }
         }
-                 int counter = 1;
-        if(maxTemp)
-        {
-   
-            if (counter == 1)
-            {
-                timerTempetureRise = 7;
-                counter++;
-            }
-            timerTempetureRise -= 0.8f * Time.deltaTime;
-            Debug.Log(timerTempetureRise);
-            if ((int)timerTempetureRise == 3)
-            {
-
-                TempetureTMP.text = "100c";
-                TempetureTMP.color = Color.blue;
-                maxTemp = false;
-                TemeptureRise = false;
-            }
-
-            if ((int)timerTempetureRise == 5)
-            {
-                TempetureTMP.text = "130c";
-                TempetureTMP.color = Color.yellow;
-            }
-
-            if ((int)timerTempetureRise == 7)
-            {
-                TempetureTMP.text = "180c";
-                TempetureTMP.color = TempetureOriginalColor;
-           
-
-            }
+      
+      
          
 
 
-        }
+        
 
 
             if (Input.GetKey(KeyCode.Mouse0) && ButtonPreesed && hit.transform.name == "RightSideStove")
@@ -187,12 +156,12 @@ public class CreatePizza : MonoBehaviour
             FireStove1ParticleSystem.Play();
             FireStove2ParticleSystem.Play();
 
-            if ((int)TempTimePressedButton >= 2)
+            if ((int)TempTimePressedButton >= 3)
             {
                 emissionModule.rateOverTime = 5f;
                 emissionModule2.rateOverTime = 5f;
             }
-            if ((int)TempTimePressedButton >= 4)
+            if ((int)TempTimePressedButton >= 7)
             {
                 emissionModule.rateOverTime = 15f;
                 emissionModule2.rateOverTime = 15f;
@@ -202,16 +171,38 @@ public class CreatePizza : MonoBehaviour
             Debug.Log("Button" +
                 " is pressed down!");
         }
-        else 
-        {
-            OnOffTMP.text = "Off";
-            OnOffTMP.color = onOffOriginalColor;
-         
-            FireStove1ParticleSystem.Stop();
-            FireStove2ParticleSystem.Stop();
-            emissionModule.rateOverTime = 0;
-            emissionModule2.rateOverTime = 0;
-        }
+
+            /*
+          if(Input.GetMouseButton(0))
+        
+                if (ButtonPreesed && maxTemp)
+           {
+            emissionModule.rateOverTime = 3f;
+            emissionModule2.rateOverTime = 3f;
+            //  OnOffTMP.text = "On";
+           
+          
+        
+        if(ButtonPreesed )
+           {
+            
+               OnOffTMP.text = "Off";
+              OnOffTMP.color = onOffOriginalColor;
+             emissionModule.rateOverTime = 0;
+             emissionModule2.rateOverTime = 0;
+               TempetureTMP.gameObject.SetActive(false);
+            // maxTemp = false;
+          }
+        }*/
+
+        // OnOffTMP.text = "Off";
+        // OnOffTMP.color = onOffOriginalColor;
+
+        // FireStove1ParticleSystem.Stop();
+        // FireStove2ParticleSystem.Stop();
+        //  emissionModule.rateOverTime = 0;
+        //  emissionModule2.rateOverTime = 0;
+
 
 
 

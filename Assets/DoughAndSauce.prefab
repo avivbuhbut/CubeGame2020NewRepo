@@ -32,7 +32,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 121293884399666414}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: 6.539745, y: 0.6552834, z: -7.11}
+  m_LocalPosition: {x: 5.6090527, y: -0.33614683, z: -7.0625305}
   m_LocalScale: {x: 40.57963, y: 40.579628, z: 40.579628}
   m_Children:
   - {fileID: 968139730280898197}
@@ -171,7 +171,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19636f7eccbaf7c44b5064ec6c6e06c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SauceTransGamObj: {fileID: 0}
+  SauceTransGamObj: {fileID: 1531516625405354070, guid: ed591bdf3598b8749aa639e424b1789a,
+    type: 3}
   DoughAndSauceGamObj: {fileID: 121293884399666414}
 --- !u!1 &968139730280898196
 GameObject:

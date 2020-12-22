@@ -10,7 +10,7 @@ public class DowStickToSauce : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        DoughAndSauceGamObj.SetActive(false);
+      //  DoughAndSauceGamObj.SetActive(false);
     }
 
     // Update is called once per frame
@@ -27,8 +27,10 @@ public class DowStickToSauce : MonoBehaviour
         if (collision.gameObject.transform.tag == "Sauce")
         {
 
-            DoughAndSauceGamObj.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z);
-            Instantiate(DoughAndSauceGamObj, new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z), Quaternion.identity);
+          //  DoughAndSauceGamObj.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z);
+            GameObject DoughAndSauceClone =  Instantiate(DoughAndSauceGamObj, new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z), Quaternion.identity);
+            DoughAndSauceClone.transform.localRotation = Quaternion.Euler(-89.141f, 0, 0);
+
             DoughAndSauceGamObj.SetActive(true);
 
      
