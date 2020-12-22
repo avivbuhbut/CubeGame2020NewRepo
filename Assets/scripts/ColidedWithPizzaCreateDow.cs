@@ -11,7 +11,7 @@ public class ColidedWithPizzaCreateDow : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        DoughGameObj.SetActive(false);
+       // DoughGameObj.SetActive(false);
     }
 
     // Update is called once per frame
@@ -27,7 +27,10 @@ public class ColidedWithPizzaCreateDow : MonoBehaviour
         {
 
             DoughGameObj.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z);
-            Instantiate(DoughGameObj, new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z), Quaternion.identity);
+
+             GameObject DoughClone = Instantiate(DoughGameObj, new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z), Quaternion.identity);
+            DoughClone.transform.localRotation = Quaternion.Euler(-89.141f, 0, 0);
+
             DoughGameObj.SetActive(true);
 
     

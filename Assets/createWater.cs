@@ -49,13 +49,13 @@ public class createWater : MonoBehaviour
 
         if (TimeLeftToNextCreation <= 0)
         {
-            GameObject Clone2 = Instantiate(WaterGameObj, new Vector3(this.transform.position.x + 0.2f, this.transform.position.y-0.7f, PlayerTrans.transform.position.z), Quaternion.identity);
+            GameObject Clone2 = Instantiate(WaterGameObj, new Vector3(this.transform.position.x , this.transform.position.y-2f, PlayerTrans.transform.position.z), Quaternion.identity);
 
             StartTimeLeftToNextCreation += 3;
             TimeLeftToNextCreation = StartTimeLeftToNextCreation;
 
             WaterVaule++;
-            startTimer = false;
+          //  startTimer = false;
             buttonPressed = false;
             WaterValueTMP.text = (int)WaterVaule + "$";
         }
