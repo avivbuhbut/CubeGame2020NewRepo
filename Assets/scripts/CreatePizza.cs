@@ -212,7 +212,7 @@ public class CreatePizza : MonoBehaviour
     {
 
         if (collision.gameObject.transform.name == "DoughAndSauce(Clone)" || collision.gameObject.transform.name == "DoughAndSauce" 
-            && GameObject.Find("CubeCheckForRainColision").GetComponent<CubeCheckForRainHit>().hit.transform.name != "StoveCelling" || colidedWithSauceAndDough)
+            || colidedWithSauceAndDough)
         {
 
 
