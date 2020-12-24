@@ -45,6 +45,7 @@ TagManager:
   - SphereEnemy
   - DestructionBall
   - Capsule
+  - OneDollar
   layers:
   - Default
   - TransparentFX
