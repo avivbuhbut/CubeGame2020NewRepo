@@ -39,16 +39,15 @@ public class StickOnColision : MonoBehaviour
     {
 
 
-
-        if (collision.transform.tag == "Player")
+        Debug.Log(collision.transform.tag);
+        if (collision.transform.name == "WideBelt1m")
         {
          
                 this.transform.parent = collision.transform;
 
             this.transform.GetComponent<Rigidbody>().detectCollisions = false;
            this.transform.GetComponent<Rigidbody>().isKinematic = true;
-           this.transform.position =  new Vector3(collision.transform.position.x+1.6f, collision.transform.position.y , zPos);
-            PlayerPos = new Vector3(collision.transform.position.x, collision.transform.position.y, collision.transform.position.z);
+
         }
         
         

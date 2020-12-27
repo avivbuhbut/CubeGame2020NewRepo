@@ -39,7 +39,7 @@ public class MoneyDroperGetUserInput : MonoBehaviour
                 UserInputField.enabled = false;
                // CreationMoneyTimeTMP.gameObject.SetActive(false);
 
-                GameObject Clone2 = Instantiate(MoneyGamObj, new Vector3(this.transform.position.x, this.transform.position.y - 5f, this.transform.position.z), Quaternion.identity);
+                GameObject Clone2 = Instantiate(MoneyGamObj, new Vector3(this.transform.position.x, this.transform.position.y - 5f, this.transform.position.z+0.5f), Quaternion.identity);
                     Clone2.transform.localRotation = Quaternion.Euler(0, 270, 0);
                    
                 
