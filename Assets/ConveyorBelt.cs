@@ -39,10 +39,11 @@ public class ConveyorBelt : MonoBehaviour
 
             // Casts the ray and get the first game object hit
             Physics.Raycast(ray, out hit);
-        Debug.Log(hit.transform.name);
+  
 
         if (Input.GetMouseButtonDown(0))
         {
+            Debug.Log(hit.transform.name);
             if (hit.transform.name == "ArrowRight")
             {
                RightArrow.transform.GetComponent<Renderer>().material.color = Color.red;
