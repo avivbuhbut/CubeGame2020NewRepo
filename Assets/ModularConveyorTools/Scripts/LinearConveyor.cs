@@ -45,6 +45,8 @@ public class LinearConveyor : MonoBehaviour {
 		rb.position =  (rb.position - mov);
 		rb.MovePosition (rb.position + mov);
 
+        Debug.Log("this is the time scaled: " + Time.timeScale);
+
 	}
 
 	public void ChangeSpeed (float _speed) {
