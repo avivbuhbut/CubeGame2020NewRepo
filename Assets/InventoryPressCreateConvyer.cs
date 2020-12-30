@@ -9,21 +9,7 @@ public class InventoryPressCreateConvyer : MonoBehaviour
     public Button ButtonInvenMonDroper;
     public GameObject ConvyerBeltGamObj;
     public Transform Player;
-    // Start is called before the first frame update
-    void Start()
-    {
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (ButtonPressed)
-        {
-
-
-        }
-    }
 
     void OnEnable()
     {
@@ -36,9 +22,9 @@ public class InventoryPressCreateConvyer : MonoBehaviour
     {
         ButtonPressed = true;
         Debug.Log("You pressed on money Droper Inven Slot");
-        GameObject Clone2 = Instantiate(ConvyerBeltGamObj, new Vector3(Player.transform.position.x + 1, Player.transform.position.y + 2f, Player.transform.position.z), Quaternion.identity);
+        GameObject Clone2 =  Instantiate(ConvyerBeltGamObj, new Vector3(Player.transform.position.x + 1, Player.transform.position.y + 2f, Player.transform.position.z), Quaternion.identity);
         Clone2.transform.localRotation = Quaternion.Euler(-89.98f, 0, 0);
-       // Clone2.transform.parent = GameObject.Find("Canvas").transform;
+  
 
     }
 

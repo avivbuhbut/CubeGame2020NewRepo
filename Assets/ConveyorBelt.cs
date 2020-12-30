@@ -8,8 +8,8 @@ public class ConveyorBelt : MonoBehaviour
     public Transform EndPointLeft;
     public int currentSpeed;
     public int maxSpeed;
-    public Transform LeftArrow;
-    public Transform RightArrow;
+     public Transform LeftArrow;
+     public Transform RightArrow;
 
     Color LeftArrowOriginalColor;
     Color RightArrowOriginalColor;
@@ -22,6 +22,8 @@ public class ConveyorBelt : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        LeftArrow = this.transform.Find("ArrowLeft");
+        RightArrow = this.transform.Find("ArrowRight");
         LeftArrowOriginalColor = LeftArrow.transform.GetComponent<Renderer>().material.color;
         RightArrowOriginalColor = RightArrow.transform.GetComponent<Renderer>().material.color;
     }
@@ -34,27 +36,28 @@ public class ConveyorBelt : MonoBehaviour
 
 
         RaycastHit hit;
-    
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);                    ///Very Useful Code! - tells the object name when clicked by the mouse
 
-            // Casts the ray and get the first game object hit
-            Physics.Raycast(ray, out hit);
-  
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);                    ///Very Useful Code! - tells the object name when clicked by the mouse
+
+        // Casts the ray and get the first game object hit
+        Physics.Raycast(ray, out hit);
+
 
         if (Input.GetMouseButtonDown(0))
         {
-            Debug.Log(hit.transform.name);
-            if (hit.transform.name == "ArrowRight")
+   
+            if (hit.collider.gameObject == RightArrow.gameObject)
             {
-               RightArrow.transform.GetComponent<Renderer>().material.color = Color.red;
+                RightArrow.transform.GetComponent<Renderer>().material.color = Color.red;
                 LeftArrow.transform.GetComponent<Renderer>().material.color = LeftArrowOriginalColor;
                 boolRightArrow = true;
                 boolLeftArrow = false;
             }
 
 
-            if (hit.transform.name == "ArrowLeft")
+            if (hit.collider.gameObject == LeftArrow.gameObject)
             {
+
                 LeftArrow.transform.GetComponent<Renderer>().material.color = Color.red;
                 RightArrow.transform.GetComponent<Renderer>().material.color = RightArrowOriginalColor;
                 boolLeftArrow = true;
@@ -66,35 +69,40 @@ public class ConveyorBelt : MonoBehaviour
 
 
 
+            if (collided && boolRightArrow)
+            {
+                RightArrow.transform.GetComponent<Renderer>().material.color = Color.red;
+                LeftArrow.transform.GetComponent<Renderer>().material.color = LeftArrowOriginalColor;
 
-        if (collided&& boolRightArrow)
-        {
-            RightArrow.transform.GetComponent<Renderer>().material.color = Color.red;
-            LeftArrow.transform.GetComponent<Renderer>().material.color = LeftArrowOriginalColor;
-
-            boolLeftArrow = false;
-            ColidedTrans.transform.position = Vector3.MoveTowards(ColidedTrans.transform.position
-    , EndPoint.transform.position, currentSpeed * Time.deltaTime);
-        }
+                boolLeftArrow = false;
+                ColidedTrans.transform.position = Vector3.MoveTowards(ColidedTrans.transform.position
+        , EndPoint.transform.position, currentSpeed * Time.deltaTime);
+            }
 
 
-        if (collided && boolLeftArrow)
-        {
-            RightArrow.transform.GetComponent<Renderer>().material.color = RightArrowOriginalColor;
-            LeftArrow.transform.GetComponent<Renderer>().material.color = Color.red;
+            if (collided && boolLeftArrow)
+            {
+                RightArrow.transform.GetComponent<Renderer>().material.color = RightArrowOriginalColor;
+                LeftArrow.transform.GetComponent<Renderer>().material.color = Color.red;
 
-            boolRightArrow = false;
-            ColidedTrans.transform.position = Vector3.MoveTowards(ColidedTrans.transform.position
-    , EndPointLeft.transform.position, currentSpeed * Time.deltaTime);
-        }
+                boolRightArrow = false;
+                ColidedTrans.transform.position = Vector3.MoveTowards(ColidedTrans.transform.position
+        , EndPointLeft.transform.position, currentSpeed * Time.deltaTime);
+            }
+        
+
     }
-
 
      void OnCollisionEnter(Collision collision)
     {
-        ColidedTrans = collision.transform;
-        collided = true;
+        if (collision.transform.tag== "Floor" || collision.transform.tag == "Untagged")
+            collided = false;
 
+        else
+        {
+            ColidedTrans = collision.transform;
+            collided = true;
+        }
     }
 
     void OnCollisionExit(Collision collision)
