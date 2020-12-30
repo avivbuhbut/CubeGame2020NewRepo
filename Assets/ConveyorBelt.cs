@@ -18,10 +18,14 @@ public class ConveyorBelt : MonoBehaviour
     bool boolRightArrow;
     bool boolLeftArrow;
     Transform ColidedTrans;
-
+    string ColiisionOriginalTag;
+    public List<GameObject> TouchingObjects;
+    int i = 0;
+    RaycastHit hit;
     // Start is called before the first frame update
     void Start()
     {
+        TouchingObjects = new List<GameObject>();
         LeftArrow = this.transform.Find("ArrowLeft");
         RightArrow = this.transform.Find("ArrowRight");
         LeftArrowOriginalColor = LeftArrow.transform.GetComponent<Renderer>().material.color;
@@ -32,10 +36,12 @@ public class ConveyorBelt : MonoBehaviour
     void FixedUpdate()
     {
 
+    //   foreach(var go in bombList)
+    // {
+     //    Debug.Log(go.name);
+   //  }
 
 
-
-        RaycastHit hit;
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);                    ///Very Useful Code! - tells the object name when clicked by the mouse
 
@@ -67,7 +73,7 @@ public class ConveyorBelt : MonoBehaviour
 
 
 
-
+        /*
 
             if (collided && boolRightArrow)
             {
@@ -89,17 +95,23 @@ public class ConveyorBelt : MonoBehaviour
                 ColidedTrans.transform.position = Vector3.MoveTowards(ColidedTrans.transform.position
         , EndPointLeft.transform.position, currentSpeed * Time.deltaTime);
             }
-        
+        */
 
     }
 
+    /*
      void OnCollisionEnter(Collision collision)
     {
+     
+        Debug.Log(collision.transform.name);
         if (collision.transform.tag== "Floor" || collision.transform.tag == "Untagged")
             collided = false;
 
         else
         {
+            TouchingObjects.Add(collision.gameObject);
+            ColiisionOriginalTag = collision.transform.tag;
+            collision.transform.tag = "Flour";
             ColidedTrans = collision.transform;
             collided = true;
         }
@@ -107,8 +119,39 @@ public class ConveyorBelt : MonoBehaviour
 
     void OnCollisionExit(Collision collision)
     {
+        TouchingObjects.Remove(collision.gameObject);
         collided = false;
+        collision.transform.tag = ColiisionOriginalTag;
+    }
+    */
 
+    void OnCollisionStay(Collision collision)
+    {
+        if (collision.transform.tag != "Floor" )
+      {
+          
+
+                if (boolRightArrow)
+                {
+
+                  collision.transform.position = Vector3.MoveTowards(collision.transform.position
+                , EndPoint.transform.position, currentSpeed * Time.deltaTime);
+  
+
+                }
+
+
+
+                if ( boolLeftArrow)
+                {
+
+                  collision.transform.position = Vector3.MoveTowards(collision.transform.position
+                , EndPointLeft.transform.position, currentSpeed * Time.deltaTime);
+
+        }
+
+            }
+        
     }
 
 }

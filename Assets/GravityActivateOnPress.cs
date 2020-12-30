@@ -22,7 +22,7 @@ public class GravityActivateOnPress : MonoBehaviour
 
         if (Input.GetKey(KeyCode.Mouse0))
         {
-            Debug.Log(hit.transform.name);
+
             if (hit.transform.name == "WaterMachine")
             {
                 this.transform.GetComponent<Rigidbody>().isKinematic = false;

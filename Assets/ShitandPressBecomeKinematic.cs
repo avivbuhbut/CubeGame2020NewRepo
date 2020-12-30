@@ -39,10 +39,11 @@ public class ShitandPressBecomeKinematic : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             if (hit.transform.name == "BasicConveyorBelt(Clone)" || hit.transform.name == "BasicConveyorBelt"||
-                hit.transform.name == " BasicConveyorBelt 2(Clone)")
+                hit.transform.name == " BasicConveyorBelt 2(Clone)" )
             {
 
                 // hit.transform.gameObject.AddComponent<Rigidbody>();
+              
                 this.transform.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionZ |
                     RigidbodyConstraints.FreezeRotation;
 

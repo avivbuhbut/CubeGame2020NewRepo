@@ -23,7 +23,7 @@ public class GravityOnPressSauceMachine : MonoBehaviour
 
         if (Input.GetKey(KeyCode.Mouse0))
         {
-            Debug.Log(hit.collider.gameObject.name);
+
             if (hit.transform.name == "SauceMachineNeon")
             {
                 this.transform.GetComponent<Rigidbody>().isKinematic = false;

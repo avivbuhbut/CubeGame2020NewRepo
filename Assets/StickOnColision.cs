@@ -39,7 +39,7 @@ public class StickOnColision : MonoBehaviour
     {
 
 
-        Debug.Log(collision.transform.tag);
+   
         if (collision.transform.name == "WideBelt1m")
         {
          

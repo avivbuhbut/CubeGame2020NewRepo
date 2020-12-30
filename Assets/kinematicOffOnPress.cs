@@ -23,7 +23,7 @@ public class kinematicOffOnPress : MonoBehaviour
 
             if (Input.GetKey(KeyCode.Mouse0))
             {
-                Debug.Log(hit.transform.name);
+
                 if (hit.transform.name == "MoneyDroperMachine" || hit.transform.name == "MoneyDroperMachine(Clone)")
                 {
                     this.transform.GetComponent<Rigidbody>().isKinematic = false;
