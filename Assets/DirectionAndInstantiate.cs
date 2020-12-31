@@ -133,15 +133,6 @@ public class DirectionAndInstantiate : MonoBehaviour
 
 
 
-        if (LeftArrowActive&& LeftInstantiateDone==false)
-        {
-            GameObject Clone2 = Instantiate(TransToOutPut, new Vector3(this.transform.position.x + 1, this.transform.position.y + 2f, this.transform.position.z), Quaternion.identity);
-            LeftInstantiateDone = true;
-        }else if (DownArrowActive && DownInstantiateDone == false)
-        {
-            GameObject Clone2 = Instantiate(TransToOutPut, new Vector3(this.transform.position.x + 1, this.transform.position.y + 2f, this.transform.position.z), Quaternion.identity);
-            DownInstantiateDone = true;
-        }
 
 
 
@@ -149,18 +140,84 @@ public class DirectionAndInstantiate : MonoBehaviour
 
     }
 
+    static int counter = 0;
 
-
-     void OnCollisionEnter(Collision collision)
+    void OnCollisionEnter(Collision collision)
     {
 
 
         TransToOutPut = collision.gameObject;
 
+        /*
+
+        if (LeftArrowActive && DownArrowActive)
+        {
+            GameObject Clone2 = Instantiate(TransToOutPut, new Vector3(this.transform.position.x - 1, this.transform.position.y, this.transform.position.z), Quaternion.identity);
+
+            counter++;
+
+            if(counter ==1 && (LeftArrowActive && DownArrowActive))
+            {
+
+            }
+        }
+        else
+        {*/
+
+
+
+
+            if (LeftArrowActive && LeftInstantiateDone == false)
+            {
+                GameObject Clone2 = Instantiate(TransToOutPut, new Vector3(this.transform.position.x - 1, this.transform.position.y, this.transform.position.z), Quaternion.identity);
+                LeftInstantiateDone = true;
+
+            }
+
+            if (DownArrowActive && DownInstantiateDone == false)
+            {
+                GameObject Clone3 = Instantiate(TransToOutPut, new Vector3(this.transform.position.x, this.transform.position.y - 1, this.transform.position.z), Quaternion.identity);
+                DownInstantiateDone = true;
+            }
+
+            if (RightArrowActive && RightInstantiateDone == false)
+            {
+                GameObject Clone3 = Instantiate(TransToOutPut, new Vector3(this.transform.position.x + 1, this.transform.position.y, this.transform.position.z), Quaternion.identity);
+                RightInstantiateDone = true;
+            }
+
+
+        if (LeftInstantiateDone && RightInstantiateDone && DownInstantiateDone)
+        {
+            LeftInstantiateDone = false;
+            RightInstantiateDone = false;
+            DownInstantiateDone = false;
+
+        }
+
+
+    
+
+
+   }
+
+    void OnCollisionExit(Collision collision)
+    {
+        if (collision.transform == TransToOutPut)
+            TransToOutPut = null;
+
+
+        if (LeftArrowActive && LeftInstantiateDone == true)
+        {
+            LeftInstantiateDone = false;
+        }
+
+        if (DownArrowActive && DownInstantiateDone == true)
+        {
+            DownInstantiateDone = false;
+        }
+
+
     }
-
-
-
-
 
 }
