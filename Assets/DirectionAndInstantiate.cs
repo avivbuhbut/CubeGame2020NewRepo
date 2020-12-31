@@ -12,6 +12,15 @@ public class DirectionAndInstantiate : MonoBehaviour
     Color RightArrowDirectinCubeOriginalColor;
     float timer;
 
+    GameObject TransToOutPut;
+
+    bool LeftArrowActive;
+    bool RightArrowActive;
+    bool DownArrowActive;
+
+    bool LeftInstantiateDone;
+    bool DownInstantiateDone;
+    bool RightInstantiateDone;
     // Start is called before the first frame update
     void Start()
     {
@@ -44,8 +53,8 @@ public class DirectionAndInstantiate : MonoBehaviour
             if (hit.collider.gameObject == LeftArrowDirectinCube.gameObject)
             {
                 LeftArrowDirectinCube.transform.GetComponent<Renderer>().material.color = Color.blue;
-         
 
+                LeftArrowActive = true;
             }
         }
         if (Input.GetKey(KeyCode.Mouse0) &&
@@ -73,7 +82,7 @@ public class DirectionAndInstantiate : MonoBehaviour
             {
                 RightArrowDirectinCube.transform.GetComponent<Renderer>().material.color = Color.blue;
 
-
+                RightArrowActive = true;
             }
         }
         if (Input.GetKey(KeyCode.Mouse0) &&
@@ -103,7 +112,7 @@ public class DirectionAndInstantiate : MonoBehaviour
             {
                 DownArrowDirectinCube.transform.GetComponent<Renderer>().material.color = Color.blue;
 
-
+                DownArrowActive = true;
             }
         }
         if (Input.GetKey(KeyCode.Mouse0) &&
@@ -120,11 +129,35 @@ public class DirectionAndInstantiate : MonoBehaviour
 
         }
         /////////////////////DownARROW (End)////////////////////////////////
+        ///
+
+
+
+        if (LeftArrowActive&& LeftInstantiateDone==false)
+        {
+            GameObject Clone2 = Instantiate(TransToOutPut, new Vector3(this.transform.position.x + 1, this.transform.position.y + 2f, this.transform.position.z), Quaternion.identity);
+            LeftInstantiateDone = true;
+        }else if (DownArrowActive && DownInstantiateDone == false)
+        {
+            GameObject Clone2 = Instantiate(TransToOutPut, new Vector3(this.transform.position.x + 1, this.transform.position.y + 2f, this.transform.position.z), Quaternion.identity);
+            DownInstantiateDone = true;
+        }
+
+
+
+
+
     }
 
 
 
+     void OnCollisionEnter(Collision collision)
+    {
 
+
+        TransToOutPut = collision.gameObject;
+
+    }
 
 
 
