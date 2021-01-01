@@ -96,7 +96,7 @@ public class DirectionAndInstantiate : MonoBehaviour
             if ((int)timer == 1)
             {
                 timer = 0;
-                RightArrowActive = false;
+               RightArrowActive = false;
                 RightArrowDirectinCube.transform.GetComponent<Renderer>().material.color = LeftArrowDirectinCubeOriginalColor;
             }
 
@@ -127,7 +127,7 @@ public class DirectionAndInstantiate : MonoBehaviour
             if ((int)timer == 1)
             {
                 timer = 0;
-                DownArrowActive = false;
+              DownArrowActive = false;
                 DownArrowDirectinCube.transform.GetComponent<Renderer>().material.color = LeftArrowDirectinCubeOriginalColor;
             }
 
@@ -143,7 +143,7 @@ public class DirectionAndInstantiate : MonoBehaviour
         {
             TimeLeftToNextCreation += 0.8f * Time.deltaTime;
 
-            if (TimeLeftToNextCreation <= 2 && TimeLeftToNextCreation > 0)
+            if (TimeLeftToNextCreation < 2 && TimeLeftToNextCreation > 0)
             {
                 NotDone = true;
             }
@@ -153,25 +153,26 @@ public class DirectionAndInstantiate : MonoBehaviour
             if (LeftArrowActive && (int)TimeLeftToNextCreation == 2)
             {
                 GameObject Clone2 = Instantiate(TransToOutPut, new Vector3(this.transform.position.x - 1.3f, this.transform.position.y, this.transform.position.z), Quaternion.identity);
-                // Clone2.transform.GetComponent<Rigidbody>().useGravity= true;-89.311
+                //Clone2.transform.GetComponent<Rigidbody>().useGravity= true;-89.311
                 Clone2.transform.localRotation = Quaternion.Euler(-89.311f, 0, 0);
 
                 TimeLeftToNextCreation = 0;
             }
+        
 
-            if (DownArrowActive && (int)TimeLeftToNextCreation == 2)
+             if (DownArrowActive && (int)TimeLeftToNextCreation == 2 )
             {
                 GameObject Clone3 = Instantiate(TransToOutPut, new Vector3(this.transform.position.x, this.transform.position.y - 1, this.transform.position.z), Quaternion.identity);
                 Clone3.transform.localRotation = Quaternion.Euler(-89.311f, 0, 0);
-
+                Debug.Log("Down");
                 TimeLeftToNextCreation = 0;
             }
 
-            if (RightArrowActive && (int)TimeLeftToNextCreation == 2)
+             if (RightArrowActive && (int)TimeLeftToNextCreation == 2)
             {
                 
                 GameObject Clone4 = Instantiate(TransToOutPut, new Vector3(this.transform.position.x + 1.5f, this.transform.position.y, this.transform.position.z), Quaternion.identity);
-               //  Clone4.transform.localRotation = Quaternion.Euler(-89.311f, 0, 0);
+               Clone4.transform.localRotation = Quaternion.Euler(-89.311f, 0, 0);
 
                 TimeLeftToNextCreation = 0;
             }
