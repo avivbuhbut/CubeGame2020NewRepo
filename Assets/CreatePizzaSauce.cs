@@ -52,8 +52,9 @@ public class CreatePizzaSauce : MonoBehaviour
 
         if (TimeLeftToNextCreation <= 0)
         {
-            GameObject Clone2 = Instantiate(PizzaGameObj, new Vector3(this.transform.position.x + 0.2f, this.transform.position.y - 0.2f, this.transform.position.z), Quaternion.identity);
+            GameObject Clone2 = Instantiate(PizzaGameObj, new Vector3(this.transform.position.x + 0.2f, this.transform.position.y - 2f, this.transform.position.z), Quaternion.identity);
             Clone2.transform.localRotation = Quaternion.Euler(0, 270, 0);
+            Clone2.transform.GetComponent<Rigidbody>().useGravity = true;
 
             StartTimeLeftToNextCreation += 3;
             TimeLeftToNextCreation = StartTimeLeftToNextCreation;

@@ -50,7 +50,7 @@ public class createWater : MonoBehaviour
         if (TimeLeftToNextCreation <= 0)
         {
             GameObject Clone2 = Instantiate(WaterGameObj, new Vector3(this.transform.position.x , this.transform.position.y-2f, PlayerTrans.transform.position.z), Quaternion.identity);
-
+            Clone2.transform.GetComponent<Rigidbody>().useGravity = true;
             StartTimeLeftToNextCreation += 3;
             TimeLeftToNextCreation = StartTimeLeftToNextCreation;
 

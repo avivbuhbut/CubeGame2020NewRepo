@@ -5,7 +5,10 @@ using UnityEngine;
 public class StickOnColision : MonoBehaviour
 {
     Vector3 PlayerPos;
-    float zPos; 
+    float zPos;
+    bool colided;
+    Transform PlayerTrans;
+  
     // Start is called before the first frame update
     void Start()
     {
@@ -17,17 +20,24 @@ public class StickOnColision : MonoBehaviour
 
     void Update()
     {
+
+        if (colided && this.transform.parent.name == "Player")
+        {
+           this.transform.GetComponent<Rigidbody>().isKinematic = true;
+          this.transform.position = new Vector3(PlayerTrans.position.x +1.5f , PlayerTrans.position.y, PlayerTrans.position.z) ;
+        }
      
 
         if (Input.GetKey(KeyCode.V))
         {
-         
-                this.transform.parent = null;
+            colided = false;
+              this.transform.parent = null;
 
 
-            this.transform.GetComponent<Rigidbody>().detectCollisions = true;
+            //  this.transform.GetComponent<Rigidbody>().detectCollisions = true;
             this.transform.GetComponent<Rigidbody>().isKinematic = false;
-     
+            this.transform.GetComponent<Rigidbody>().useGravity = true;
+           // this.transform.GetComponent<Rigidbody>().AddForce(Vector3.forward * 2.2f) ;
         }
         
     }
@@ -40,16 +50,26 @@ public class StickOnColision : MonoBehaviour
 
 
    
-        if (collision.transform.name == "WideBelt1m")
+        if (collision.transform.name == "Player")
         {
-         
-                this.transform.parent = collision.transform;
+            colided = true;
+            PlayerTrans = collision.transform;
+           
+       this.transform.parent = collision.transform;
 
-            this.transform.GetComponent<Rigidbody>().detectCollisions = false;
-           this.transform.GetComponent<Rigidbody>().isKinematic = true;
+          //  this.transform.GetComponent<Rigidbody>().detectCollisions = false;
+       //   this.transform.GetComponent<Rigidbody>().isKinematic = true;
 
         }
         
         
     }
+
+
+    void OnCollisionExit(Collision collision)
+
+
+    {
+        colided = false;
+            }
 }

@@ -11,9 +11,10 @@ public class DirectionAndInstantiate : MonoBehaviour
     Color DownArrowDirectinCubeOriginalColor;
     Color RightArrowDirectinCubeOriginalColor;
     float timer;
-
+    float TimeLeftToNextCreation = 0;
     GameObject TransToOutPut;
 
+    bool NotDone;
     bool LeftArrowActive;
     bool RightArrowActive;
     bool DownArrowActive;
@@ -66,6 +67,7 @@ public class DirectionAndInstantiate : MonoBehaviour
             if ((int)timer == 1)
             {
                 timer = 0;
+                LeftArrowActive = false;
                 LeftArrowDirectinCube.transform.GetComponent<Renderer>().material.color = LeftArrowDirectinCubeOriginalColor;
             }
 
@@ -94,6 +96,7 @@ public class DirectionAndInstantiate : MonoBehaviour
             if ((int)timer == 1)
             {
                 timer = 0;
+                RightArrowActive = false;
                 RightArrowDirectinCube.transform.GetComponent<Renderer>().material.color = LeftArrowDirectinCubeOriginalColor;
             }
 
@@ -124,6 +127,7 @@ public class DirectionAndInstantiate : MonoBehaviour
             if ((int)timer == 1)
             {
                 timer = 0;
+                DownArrowActive = false;
                 DownArrowDirectinCube.transform.GetComponent<Renderer>().material.color = LeftArrowDirectinCubeOriginalColor;
             }
 
@@ -135,19 +139,63 @@ public class DirectionAndInstantiate : MonoBehaviour
 
 
 
+        if (Colided || NotDone)
+        {
+            TimeLeftToNextCreation += 0.8f * Time.deltaTime;
+
+            if (TimeLeftToNextCreation <= 2 && TimeLeftToNextCreation > 0)
+            {
+                NotDone = true;
+            }
+            else
+                NotDone = false;
+
+            if (LeftArrowActive && (int)TimeLeftToNextCreation == 2)
+            {
+                GameObject Clone2 = Instantiate(TransToOutPut, new Vector3(this.transform.position.x - 1.3f, this.transform.position.y, this.transform.position.z), Quaternion.identity);
+                // Clone2.transform.GetComponent<Rigidbody>().useGravity= true;-89.311
+                Clone2.transform.localRotation = Quaternion.Euler(-89.311f, 0, 0);
+
+                TimeLeftToNextCreation = 0;
+            }
+
+            if (DownArrowActive && (int)TimeLeftToNextCreation == 2)
+            {
+                GameObject Clone3 = Instantiate(TransToOutPut, new Vector3(this.transform.position.x, this.transform.position.y - 1, this.transform.position.z), Quaternion.identity);
+                Clone3.transform.localRotation = Quaternion.Euler(-89.311f, 0, 0);
+
+                TimeLeftToNextCreation = 0;
+            }
+
+            if (RightArrowActive && (int)TimeLeftToNextCreation == 2)
+            {
+                
+                GameObject Clone4 = Instantiate(TransToOutPut, new Vector3(this.transform.position.x + 1.5f, this.transform.position.y, this.transform.position.z), Quaternion.identity);
+               //  Clone4.transform.localRotation = Quaternion.Euler(-89.311f, 0, 0);
+
+                TimeLeftToNextCreation = 0;
+            }
+
+
+        
+
+
+        }
+
 
 
 
     }
 
     static int counter = 0;
+    bool Colided;
 
     void OnCollisionEnter(Collision collision)
     {
 
 
         TransToOutPut = collision.gameObject;
-
+        Colided = true;
         /*
 
         if (LeftArrowActive && DownArrowActive)
@@ -164,45 +212,15 @@ public class DirectionAndInstantiate : MonoBehaviour
         else
         {*/
 
+  
 
 
-
-            if (LeftArrowActive && LeftInstantiateDone == false)
-            {
-                GameObject Clone2 = Instantiate(TransToOutPut, new Vector3(this.transform.position.x - 1, this.transform.position.y, this.transform.position.z), Quaternion.identity);
-                LeftInstantiateDone = true;
-
-            }
-
-            if (DownArrowActive && DownInstantiateDone == false)
-            {
-                GameObject Clone3 = Instantiate(TransToOutPut, new Vector3(this.transform.position.x, this.transform.position.y - 1, this.transform.position.z), Quaternion.identity);
-                DownInstantiateDone = true;
-            }
-
-            if (RightArrowActive && RightInstantiateDone == false)
-            {
-                GameObject Clone3 = Instantiate(TransToOutPut, new Vector3(this.transform.position.x + 1, this.transform.position.y, this.transform.position.z), Quaternion.identity);
-                RightInstantiateDone = true;
-            }
-
-
-        if (LeftInstantiateDone && RightInstantiateDone && DownInstantiateDone)
-        {
-            LeftInstantiateDone = false;
-            RightInstantiateDone = false;
-            DownInstantiateDone = false;
-
-        }
-
-
-    
-
-
-   }
+    }
 
     void OnCollisionExit(Collision collision)
     {
+
+      Colided = false;
         if (collision.transform == TransToOutPut)
             TransToOutPut = null;
 
