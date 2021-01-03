@@ -356,7 +356,7 @@ public class MeshDestroy : MonoBehaviour
      void OnCollisionEnter(Collision collision)
     {
 
-        Debug.Log(collision.gameObject.tag);
+
 
         if (collision.gameObject.tag == "DestructionBall" && counter <20)
         {

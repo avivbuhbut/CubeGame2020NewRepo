@@ -50,7 +50,7 @@ public class DirectionAndInstantiate : MonoBehaviour
 
 
 
-            Debug.Log(hit.collider.gameObject.name);
+
             if (hit.collider.gameObject == LeftArrowDirectinCube.gameObject)
             {
                 LeftArrowDirectinCube.transform.GetComponent<Renderer>().material.color = Color.blue;
@@ -79,7 +79,7 @@ public class DirectionAndInstantiate : MonoBehaviour
         /////////////////////RightARROW (Start)////////////////////////////////
         if (Input.GetMouseButtonDown(0))
         {
-            Debug.Log(hit.collider.gameObject.name);
+
             if (hit.collider.gameObject == RightArrowDirectinCube.gameObject)
             {
                 RightArrowDirectinCube.transform.GetComponent<Renderer>().material.color = Color.blue;
@@ -110,7 +110,7 @@ public class DirectionAndInstantiate : MonoBehaviour
         /////////////////////DownARROW (Start)////////////////////////////////
         if (Input.GetMouseButtonDown(0))
         {
-            Debug.Log(hit.collider.gameObject.name);
+
             if (hit.collider.gameObject == DownArrowDirectinCube.gameObject)
             {
                 DownArrowDirectinCube.transform.GetComponent<Renderer>().material.color = Color.blue;

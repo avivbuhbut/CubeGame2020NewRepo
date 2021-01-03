@@ -25,6 +25,8 @@ public class CreatePizza : MonoBehaviour
     public GameObject DoughAndSauceGamObj;
     public GameObject PizzaBox1GamObj;
     bool ButtonPreesed;
+    public Transform PlayerTrans;
+    public TextMeshPro TimerPizza;
 
     bool colidedWithSauceAndDough;
 
@@ -57,9 +59,23 @@ public class CreatePizza : MonoBehaviour
     void Update()
     {
 
+        if (colidedWithSauceAndDough)
+        {
+            timeLeft -= Time.deltaTime;
 
+            Debug.Log("HEREEEE");
+            if((int)timeLeft == 0)
+            {
+                GameObject Clone = Instantiate(PizzaBox1GamObj, new Vector3(this.transform.position.x, this.transform.position.y-2, PlayerTrans.position.z-2f), Quaternion.identity);
+                Clone.transform.name = "PizzaBoxClone" + counterPizzaGen;
 
+                PizzaBox1GamObj.gameObject.SetActive(true);
+                colidedWithSauceAndDough = false;
+                timeLeft = 4;
+            }
+        }
 
+        /*
             if (colidedWithSauceAndDough && timeLeft>0 && GameObject.Find("CubeCheckForRainColision").GetComponent<CubeCheckForRainHit>().hit.transform.name != "StoveCelling")
         {
             timeLeft -= Time.deltaTime;
@@ -98,7 +114,7 @@ public class CreatePizza : MonoBehaviour
         }
 
 
-
+        */
 
 
         RaycastHit hit;
@@ -211,6 +227,7 @@ public class CreatePizza : MonoBehaviour
      void OnCollisionEnter(Collision collision)
     {
 
+        Debug.Log("collision.gameObject.transform.name " + collision.gameObject.transform.name);
         if (collision.gameObject.transform.name == "DoughAndSauce(Clone)" || collision.gameObject.transform.name == "DoughAndSauce" 
             || colidedWithSauceAndDough)
         {
