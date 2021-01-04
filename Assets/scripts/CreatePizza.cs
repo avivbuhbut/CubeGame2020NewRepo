@@ -20,6 +20,8 @@ public class CreatePizza : MonoBehaviour
     [SerializeField] TextMeshProUGUI OnOffTMP;
     [SerializeField] TextMeshProUGUI TempetureTMP;
 
+    public TextMeshPro TimerTMP;
+
     public static int counterPizzaGen = 0;
     //public GameObject DoughAndSauceGamObjClone;
     public GameObject DoughAndSauceGamObj;
@@ -40,6 +42,7 @@ public class CreatePizza : MonoBehaviour
     bool TemeptureRise;
     float timerTempetureRise;
     bool maxTemp;
+    static bool FirstTimeCreatingPizza;
     // Start is called before the first frame update
     void Start()
     {
@@ -53,6 +56,7 @@ public class CreatePizza : MonoBehaviour
         PizzaBox1GamObj.gameObject.SetActive(false);
         DoughAndSauceGamObj.gameObject.SetActive(false);
         PizzaBox1GamObj.name = "PizzaBoxClone1";
+        TimerPizza.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -61,17 +65,25 @@ public class CreatePizza : MonoBehaviour
 
         if (colidedWithSauceAndDough)
         {
+            TimerPizza.gameObject.SetActive(true);
             timeLeft -= Time.deltaTime;
-
+            TimerPizza.text = (int)timeLeft + "S";
+            TimerPizza.color = Color.red;
             Debug.Log("HEREEEE");
             if((int)timeLeft == 0)
             {
-                GameObject Clone = Instantiate(PizzaBox1GamObj, new Vector3(this.transform.position.x, this.transform.position.y-2, PlayerTrans.position.z-2f), Quaternion.identity);
+                if (FirstTimeCreatingPizza == false)
+                {
+                    PizzaBox1GamObj.transform.position = new Vector3(this.transform.position.x, this.transform.position.y - 2, PizzaBox1GamObj.transform.position.z);
+                    FirstTimeCreatingPizza = true;
+                }
+                    GameObject Clone = Instantiate(PizzaBox1GamObj, new Vector3(this.transform.position.x, this.transform.position.y-2, PizzaBox1GamObj.transform.position.z), Quaternion.identity);
                 Clone.transform.name = "PizzaBoxClone" + counterPizzaGen;
 
                 PizzaBox1GamObj.gameObject.SetActive(true);
                 colidedWithSauceAndDough = false;
                 timeLeft = 4;
+                TimerPizza.gameObject.SetActive(false);
             }
         }
 
