@@ -212,13 +212,7 @@ GameObject:
   - component: {fileID: 6416227669624422579}
   - component: {fileID: 6416227669624422536}
   - component: {fileID: 6416227669624422578}
-  - component: {fileID: 6416227669624422538}
-  - component: {fileID: 6416227669624422539}
-  - component: {fileID: 6416227669624422540}
   - component: {fileID: 6416227669624422541}
-  - component: {fileID: 6416227669624422542}
-  - component: {fileID: 6416227669624422528}
-  - component: {fileID: 6416227669624422543}
   m_Layer: 0
   m_Name: PizzaBOX1 1
   m_TagString: PizzaBox
@@ -392,48 +386,6 @@ MonoBehaviour:
   Box3LocalSocre: 0
   Box3GlobalSocre: 0
   pizzaBox3InAir: 0
---- !u!114 &6416227669624422538
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6416227669624422577}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6389b6a615e46f64a8c641fd282c28c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PizzaBox1Cam: {fileID: 0}
-  PizzaCloneTrans: {fileID: 534161541930499528, guid: 14fa92b73c4ae334eba930f6965afe5b,
-    type: 3}
-  pizzaCounter: 0
---- !u!114 &6416227669624422539
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6416227669624422577}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1af010f234d33aa498ed0d4b06919d5a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TimeNotInRain: 0
-  pizzaIsNotInRain: 0
---- !u!114 &6416227669624422540
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6416227669624422577}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05cab45f5b1dc634cbb234fbda744c4f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &6416227669624422541
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -449,48 +401,6 @@ MonoBehaviour:
   Timer: 10
   pizzaValueTmp: {fileID: 6416227669293777132}
   pizzaValueOtherSideTmp: {fileID: 6416227670069581536}
---- !u!114 &6416227669624422542
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6416227669624422577}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b41a28baf85441e449321df91dc8a4dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &6416227669624422528
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6416227669624422577}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6757b231cedd544c583ef8aeaf773b2a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  material: {fileID: 0}
-  phase: 0
-  thickness: 0
-  m_SourceCollider: {fileID: 6416227669624422580}
-  m_DistanceField: {fileID: 0}
---- !u!114 &6416227669624422543
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6416227669624422577}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62359d80fdc0e4315ab6331b78ec5b90, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  kinematicForParticles: 0
 --- !u!1 &6416227670069581549
 GameObject:
   m_ObjectHideFlags: 0

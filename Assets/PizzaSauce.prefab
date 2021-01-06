@@ -93,11 +93,9 @@ GameObject:
   - component: {fileID: 1837578119576266356}
   - component: {fileID: 1837578119576266316}
   - component: {fileID: 1837578119576266357}
-  - component: {fileID: 1837578119576266358}
   - component: {fileID: 1837578119576266312}
   - component: {fileID: 1837578119576266314}
   - component: {fileID: 1837578119576266317}
-  - component: {fileID: 1837578119576266319}
   - component: {fileID: -3003425786903669286}
   m_Layer: 0
   m_Name: PizzaSauce
@@ -165,23 +163,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b41a28baf85441e449321df91dc8a4dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1837578119576266358
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1531516625405354070}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6757b231cedd544c583ef8aeaf773b2a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  material: {fileID: 0}
-  phase: 0
-  thickness: 0
-  m_SourceCollider: {fileID: 1837578119576266316}
-  m_DistanceField: {fileID: 0}
 --- !u!114 &1837578119576266312
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -223,19 +204,6 @@ MonoBehaviour:
   CutCascades: 1
   ExplodeForce: 0
   Distraction1: 0
---- !u!114 &1837578119576266319
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1531516625405354070}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62359d80fdc0e4315ab6331b78ec5b90, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  kinematicForParticles: 0
 --- !u!114 &-3003425786903669286
 MonoBehaviour:
   m_ObjectHideFlags: 0
