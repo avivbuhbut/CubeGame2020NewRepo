@@ -64,8 +64,16 @@ public class ShitandPressBecomeKinematic : MonoBehaviour
 
     }
 
-
+     void OnCollisionEnter(Collision collision)
+    {
+        if(collision.transform.name == "BasicConveyorBelt(Clone)" || collision.transform.name == "BasicConveyorBelt")
+        {
+            this.transform.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+        }
     }
+
+
+}
 
 
 

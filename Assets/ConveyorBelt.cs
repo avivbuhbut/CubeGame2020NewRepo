@@ -10,6 +10,7 @@ public class ConveyorBelt : MonoBehaviour
     public int maxSpeed;
      public Transform LeftArrow;
      public Transform RightArrow;
+    public Transform PauseTrans;
 
     Color LeftArrowOriginalColor;
     Color RightArrowOriginalColor;
@@ -28,6 +29,7 @@ public class ConveyorBelt : MonoBehaviour
         TouchingObjects = new List<GameObject>();
         LeftArrow = this.transform.Find("ArrowLeft");
         RightArrow = this.transform.Find("ArrowRight");
+        PauseTrans = this.transform.Find("Pause");
         LeftArrowOriginalColor = LeftArrow.transform.GetComponent<Renderer>().material.color;
         RightArrowOriginalColor = RightArrow.transform.GetComponent<Renderer>().material.color;
     }
@@ -51,8 +53,18 @@ public class ConveyorBelt : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-   
-            if (hit.collider.gameObject == RightArrow.gameObject)
+
+
+            if (hit.collider.gameObject == PauseTrans.gameObject)
+            {
+                LeftArrow.transform.GetComponent<Renderer>().material.color = LeftArrowOriginalColor;
+                RightArrow.transform.GetComponent<Renderer>().material.color = RightArrowOriginalColor;
+                boolRightArrow = false;
+                boolLeftArrow = false;
+
+            }
+
+                if (hit.collider.gameObject == RightArrow.gameObject)
             {
                 RightArrow.transform.GetComponent<Renderer>().material.color = Color.red;
                 LeftArrow.transform.GetComponent<Renderer>().material.color = LeftArrowOriginalColor;
@@ -125,16 +137,29 @@ public class ConveyorBelt : MonoBehaviour
     }
     */
 
+     void OnTriggerEnter(Collider other)
+    {
+        if (other.transform.name != "BasicConveyorBelt" ||
+        other.transform.name != "BasicConveyorBelt(Clone)")
+        {
+            other.transform.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+
+        }
+    }
+
+
     void OnCollisionStay(Collision collision)
     {
-        if (collision.transform.tag != "Floor" )
-      {
-          
+
+
+        if (collision.transform.tag != "Floor")
+        {
 
                 if (boolRightArrow)
                 {
 
-                  collision.transform.position = Vector3.MoveTowards(collision.transform.position
+      
+                    collision.transform.position = Vector3.MoveTowards(collision.transform.position
                 , EndPoint.transform.position, currentSpeed * Time.deltaTime);
   
 
@@ -145,7 +170,8 @@ public class ConveyorBelt : MonoBehaviour
                 if ( boolLeftArrow)
                 {
 
-                  collision.transform.position = Vector3.MoveTowards(collision.transform.position
+          
+                    collision.transform.position = Vector3.MoveTowards(collision.transform.position
                 , EndPointLeft.transform.position, currentSpeed * Time.deltaTime);
 
         }
@@ -153,5 +179,7 @@ public class ConveyorBelt : MonoBehaviour
             }
         
     }
+
+ 
 
 }

@@ -79,14 +79,12 @@ public class CreatePizza : MonoBehaviour
             Debug.Log("HEREEEE");
             if((int)timeLeft == 0)
             {
-                if (FirstTimeCreatingPizza == false)
-                {
-                    PizzaBox1GamObj.transform.position = new Vector3(this.transform.position.x, this.transform.position.y - 2, PizzaBox1GamObj.transform.position.z);
-                    FirstTimeCreatingPizza = true;
-                    numberTImeHit--;
-                }
-                else
-                {
+              
+                 //   PizzaBox1GamObj.transform.position = new Vector3(this.transform.position.x, this.transform.position.y - 2, PizzaBox1GamObj.transform.position.z);
+                //    FirstTimeCreatingPizza = true;
+                 //   numberTImeHit--;
+                
+               
                     numberTImeHit--;
                     GameObject Clone = Instantiate(PizzaBox1GamObj, new Vector3(this.transform.position.x, this.transform.position.y - 2, PizzaBox1GamObj.transform.position.z), Quaternion.identity);
                     Clone.transform.name = "PizzaBoxClone" + counterPizzaGen;
@@ -95,7 +93,7 @@ public class CreatePizza : MonoBehaviour
 
                     timeLeft = 4;
                     //TimerPizza.gameObject.SetActive(false);
-                }
+                
 
             }
         }
@@ -249,6 +247,7 @@ public class CreatePizza : MonoBehaviour
 
     }
 
+    /*
      void OnCollisionEnter(Collision collision)
     {
 
@@ -273,7 +272,7 @@ public class CreatePizza : MonoBehaviour
     
 
         
-    }
+    }*/
 
 
      void OnTriggerEnter(Collider other)
