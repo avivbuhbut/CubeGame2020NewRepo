@@ -3981,7 +3981,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ButtonInvenMonDroper: {fileID: 193533244}
-  ConvyerBeltGamObj: {fileID: 1120229264363178931, guid: 2282f68a012113048984a2e654da17ca,
+  ConvyerBeltGamObj: {fileID: 1292267811559271832, guid: 2282f68a012113048984a2e654da17ca,
     type: 3}
   Player: {fileID: 1814706066}
 --- !u!114 &193533244
@@ -45443,12 +45443,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1672398712}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!54 &1675637172 stripped
-Rigidbody:
-  m_CorrespondingSourceObject: {fileID: 7785936130677249217, guid: fa2f7d107f688924c8165a878ecaa939,
-    type: 3}
-  m_PrefabInstance: {fileID: 8036516944133787401}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1676922731
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -59132,10 +59126,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -9013614845702287856, guid: fa2f7d107f688924c8165a878ecaa939,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 88
+      objectReference: {fileID: 0}
     - target: {fileID: 7785936130677249211, guid: fa2f7d107f688924c8165a878ecaa939,
         type: 3}
       propertyPath: m_RootOrder
-      value: 87
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7785936130677249211, guid: fa2f7d107f688924c8165a878ecaa939,
         type: 3}
@@ -59191,7 +59190,7 @@ PrefabInstance:
         type: 3}
       propertyPath: ConveyorRigidBody
       value: 
-      objectReference: {fileID: 1675637172}
+      objectReference: {fileID: 0}
     - target: {fileID: 7785936130677249218, guid: fa2f7d107f688924c8165a878ecaa939,
         type: 3}
       propertyPath: m_Name
@@ -59228,6 +59227,31 @@ PrefabInstance:
         type: 3}
       propertyPath: currentSpeed
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8244375156648161936, guid: fa2f7d107f688924c8165a878ecaa939,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 87
+      objectReference: {fileID: 0}
+    - target: {fileID: 8244375156648161936, guid: fa2f7d107f688924c8165a878ecaa939,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 17.31
+      objectReference: {fileID: 0}
+    - target: {fileID: 8244375156648161936, guid: fa2f7d107f688924c8165a878ecaa939,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 7.13
+      objectReference: {fileID: 0}
+    - target: {fileID: 8698656152958744235, guid: fa2f7d107f688924c8165a878ecaa939,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 88
+      objectReference: {fileID: 0}
+    - target: {fileID: 8698656152958744274, guid: fa2f7d107f688924c8165a878ecaa939,
+        type: 3}
+      propertyPath: m_Name
+      value: BasicConveyorBelt
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fa2f7d107f688924c8165a878ecaa939, type: 3}
