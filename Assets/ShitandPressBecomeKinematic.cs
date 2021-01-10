@@ -9,6 +9,8 @@ public class ShitandPressBecomeKinematic : MonoBehaviour
     Transform ArrowLeft;
     Vector3 ArrowRightZPos;
     Vector3 ArrowLeftZPos;
+    bool colided;
+    Transform ColidedConveyerTans;
 
     // Start is called before the first frame update
     void Start()
@@ -36,12 +38,12 @@ public class ShitandPressBecomeKinematic : MonoBehaviour
 
 
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && colided == false)
         {
             if (hit.transform.name == "BasicConveyorBelt(Clone)" || hit.transform.name == "BasicConveyorBelt"||
                 hit.transform.name == " BasicConveyorBelt 2(Clone)" )
             {
-
+                colided = false;
                 // hit.transform.gameObject.AddComponent<Rigidbody>();
               
                 this.transform.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionZ |
@@ -53,7 +55,11 @@ public class ShitandPressBecomeKinematic : MonoBehaviour
 
         }
        
-
+        if(colided == true)
+        {
+            ColidedConveyerTans.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+            this.transform.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+        }
 
 
 
@@ -68,7 +74,11 @@ public class ShitandPressBecomeKinematic : MonoBehaviour
     {
         if(collision.transform.name == "BasicConveyorBelt(Clone)" || collision.transform.name == "BasicConveyorBelt")
         {
+            ColidedConveyerTans = collision.transform;
+            ColidedConveyerTans.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
             this.transform.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+            colided = true;
+      
         }
     }
 
