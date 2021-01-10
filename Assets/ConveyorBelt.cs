@@ -26,6 +26,8 @@ public class ConveyorBelt : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+    
         TouchingObjects = new List<GameObject>();
         LeftArrow = this.transform.Find("ArrowLeft");
         RightArrow = this.transform.Find("ArrowRight");
