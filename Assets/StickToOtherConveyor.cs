@@ -5,25 +5,37 @@ using UnityEngine;
 public class StickToOtherConveyor : MonoBehaviour
 {
     // Start is called before the first frame update
+    float defaultRotation;
     void Start()
     {
-        
+        defaultRotation = this.transform.localRotation.x;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
+      
+
+
     }
 
     void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.transform.name == "BasicConveyorBelt(Clone)" ||
-            collision.gameObject.transform.name == "BasicConveyorBelt")
+            collision.gameObject.transform.name == "BasicConveyorBelt" && collision.transform.localRotation.x == defaultRotation)
         {
-            Debug.Log(collision.transform.GetChild(1).gameObject.name);
 
-            if(collision.transform.position.x < this.transform.position.x)//to the left of the conveyer.
+
+
+          
+
+
+
+
+
+            //stick conveyor togheter  - same hight 
+            if (collision.transform.position.x < this.transform.position.x)//to the left of the conveyer.
             {
                 this.transform.position = new Vector3(collision.transform.position.x +5.8f, this.transform.position.y,
                     this.transform.position.z);

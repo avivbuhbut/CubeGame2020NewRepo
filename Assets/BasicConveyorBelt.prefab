@@ -262,6 +262,7 @@ GameObject:
   - component: {fileID: 8017125055291121546}
   - component: {fileID: 4731803141767106972}
   - component: {fileID: 2582078178398097342}
+  - component: {fileID: 8700644661852717837}
   m_Layer: 0
   m_Name: BasicConveyorBelt
   m_TagString: Untagged
@@ -415,6 +416,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7bfce5e2c2ab0ee4aa76435a93eee864, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8700644661852717837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1292267811559271832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8c5d8bf0efa14f4182ea382e6f150e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2638437745196619669
