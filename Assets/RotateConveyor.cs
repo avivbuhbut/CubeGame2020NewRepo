@@ -34,18 +34,18 @@ public class RotateConveyor : MonoBehaviour
             // Casts the ray and get the first game object hit
             Physics.Raycast(ray, out hit);
 
-     
 
+       // Debug.Log(this.transform.rotation.x);
+  
 
 
         if (Input.GetKey(KeyCode.Mouse0) && hit.transform.name == "BasicConveyorBelt(Clone)")
             {
-            Debug.Log(Difficulty);
+     
             if (Input.GetAxis("Mouse ScrollWheel") > 0 && Difficulty < 3 && hitMax==false)
             {
 
-                Debug.Log("Er2");
-                Debug.Log(Difficulty);
+                
                 Difficulty += Input.GetAxis("Mouse ScrollWheel");
                 hit.transform.Rotate(0, Difficulty, 0);
                 if (Difficulty >= 3)
@@ -62,9 +62,9 @@ public class RotateConveyor : MonoBehaviour
 
             if (Input.GetAxis("Mouse ScrollWheel") < 0 && Difficulty > -3 && hitMax2==false)
             {
-                Debug.Log("Er");
+            
 
-                Debug.Log(Difficulty);
+          
                 Difficulty += Input.GetAxis("Mouse ScrollWheel");
                 hit.transform.Rotate(0, Difficulty, 0);
                 if (Difficulty <= -3)

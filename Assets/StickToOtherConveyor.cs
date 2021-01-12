@@ -15,7 +15,7 @@ public class StickToOtherConveyor : MonoBehaviour
     void Update()
     {
 
-      
+   
 
 
     }
@@ -23,12 +23,11 @@ public class StickToOtherConveyor : MonoBehaviour
     void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.transform.name == "BasicConveyorBelt(Clone)" ||
-            collision.gameObject.transform.name == "BasicConveyorBelt" && collision.transform.localRotation.x == defaultRotation)
+            collision.gameObject.transform.name == "BasicConveyorBelt" )
         {
 
 
 
-          
 
 
 
