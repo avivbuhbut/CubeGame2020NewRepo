@@ -84,6 +84,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: BasicConveyorBelt (1) Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 1292267811559271905, guid: 2282f68a012113048984a2e654da17ca,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 69.93654
+      objectReference: {fileID: 0}
+    - target: {fileID: 1292267811559271905, guid: 2282f68a012113048984a2e654da17ca,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 53.62098
+      objectReference: {fileID: 0}
+    - target: {fileID: 1292267811559271905, guid: 2282f68a012113048984a2e654da17ca,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 51.57351
+      objectReference: {fileID: 0}
     - target: {fileID: 7033007822631603637, guid: 2282f68a012113048984a2e654da17ca,
         type: 3}
       propertyPath: m_Name

@@ -79,6 +79,7 @@ public class CreateBlocks : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0))
             {
+            {
                 CubeGamObj.SetActive(true);
                 mousepos = Input.mousePosition;
                 mousepos.z = 15.2f;
