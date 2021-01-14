@@ -8,6 +8,7 @@ public class OpenManuOnPress : MonoBehaviour
 
     public Button ConveyLogicButton;
     public GameObject PanelGamObj;
+    int coutnerButtonPressed=0;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,7 +19,12 @@ public class OpenManuOnPress : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (coutnerButtonPressed ==2&& PanelGamObj.activeSelf)
+        {
+            coutnerButtonPressed = 0;
+            PanelGamObj.SetActive(false) ;
+         
+        }
     }
 
 
@@ -33,7 +39,7 @@ public class OpenManuOnPress : MonoBehaviour
 
     void MyFunction()// your listener calls this function
     {
-
+        coutnerButtonPressed++;
         PanelGamObj.SetActive(true);
     }
 }
