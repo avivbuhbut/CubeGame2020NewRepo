@@ -151,14 +151,14 @@ public class ConveyorBelt : MonoBehaviour
 
      int   switchCounter = 0;
     bool RightDone;
-    
+    bool somthingHit;
     void OnCollisionStay(Collision collision)
     {
 
         /*General Case*/ //collision.transform.name != "BasicConveyorBelt(Clone)"
-        if (collision.transform.tag != "Floor" && collision.transform.name != "Flour" )
+        if (collision.transform.tag != "Floor" && collision.transform.name != "Flour"&& somthingHit==true)
         {
-            Debug.Log("Not the right place loop ");
+          
             if (boolRightArrow)
             {
 
@@ -260,6 +260,14 @@ public class ConveyorBelt : MonoBehaviour
     {
        if(collision.transform.name=="Flour")
             switchCounter++;
+
+        if (collision.transform.name == "BasicConveyorBelt(Clone)")
+            somthingHit = false;
+        else
+        somthingHit = true;
+
+
+      
 
 
     }
