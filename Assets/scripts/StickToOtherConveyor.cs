@@ -53,7 +53,7 @@ public class StickToOtherConveyor : MonoBehaviour
 
             collision.gameObject.transform.position = new Vector3(collision.gameObject.transform.position.x, this.transform.position.y, collision.gameObject.transform.position.z);
             this.transform.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-            //   collision.gameObject.transform.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+            //  collision.gameObject.transform.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
         }
     }
 }
