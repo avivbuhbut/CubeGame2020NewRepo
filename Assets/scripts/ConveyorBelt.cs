@@ -149,39 +149,129 @@ public class ConveyorBelt : MonoBehaviour
         }
     }
 
-
+     int   switchCounter = 0;
+    bool RightDone;
+    
     void OnCollisionStay(Collision collision)
     {
 
-
-        if (collision.transform.tag != "Floor")
+        /*General Case*/
+        if (collision.transform.tag != "Floor" && collision.transform.name != "Flour")
         {
 
+            if (boolRightArrow)
+            {
+
+
+                collision.transform.position = Vector3.MoveTowards(collision.transform.position
+            , EndPoint.transform.position, currentSpeed * Time.deltaTime);
+
+
+            }
+
+
+
+            if (boolLeftArrow)
+            {
+
+
+                collision.transform.position = Vector3.MoveTowards(collision.transform.position
+            , EndPointLeft.transform.position, currentSpeed * Time.deltaTime);
+
+            }
+
+        }
+
+
+        /*Case Flour*/
+        if (collision.transform.name == "Flour") {
+   
+            Debug.Log(switchCounter);
+            if (OpenManuOnPress.bolFlourGoesRight)
+            {
+            collision.transform.position = Vector3.MoveTowards(collision.transform.position
+                , EndPoint.transform.position, currentSpeed * Time.deltaTime);
+
+            }
+
+
+            if (OpenManuOnPress.bolFlourGoesLeft)
+            {
+                collision.transform.position = Vector3.MoveTowards(collision.transform.position
+           , EndPointLeft.transform.position, currentSpeed * Time.deltaTime);
+            }
+
+            if (OpenManuOnPress.bolFlourGoesSwitch)
+            {
+              
+                if(switchCounter ==1 )
+                {
+                    collision.transform.position = Vector3.MoveTowards(collision.transform.position
+                   , EndPoint.transform.position, currentSpeed * Time.deltaTime);
+
+              
+                }
+                if (switchCounter == 2 && RightDone == true)
+                {
+                    collision.transform.position = Vector3.MoveTowards(collision.transform.position
+                    , EndPointLeft.transform.position, currentSpeed * Time.deltaTime);
+              
+                    RightDone = false;
+                   // switchCounter = 0;
+
+
+                }
+  
+            }
+
+                if (OpenManuOnPress.bolFlourGoesRight == false && OpenManuOnPress.bolFlourGoesLeft == false && OpenManuOnPress.bolFlourGoesSwitch ==false)
+            {
                 if (boolRightArrow)
                 {
 
-      
+
                     collision.transform.position = Vector3.MoveTowards(collision.transform.position
                 , EndPoint.transform.position, currentSpeed * Time.deltaTime);
-  
+
 
                 }
 
 
 
-                if ( boolLeftArrow)
+                if (boolLeftArrow)
                 {
 
-          
+
                     collision.transform.position = Vector3.MoveTowards(collision.transform.position
                 , EndPointLeft.transform.position, currentSpeed * Time.deltaTime);
 
+                }
+            }
+
         }
 
-            }
+    
         
     }
 
- 
+
+     void OnCollisionEnter(Collision collision)
+    {
+       if(collision.transform.name=="Flour")
+            switchCounter++;
+
+
+    }
+
+    void OnCollisionExit(Collision collision)
+    {
+        if (collision.transform.name == "Flour")
+        {
+            RightDone = true;
+        }
+    }
+
+
+
 
 }

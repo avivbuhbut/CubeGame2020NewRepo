@@ -577,6 +577,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cab6e21cca97484b87eddef80d55420, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RightFlourBtn: {fileID: 6101339770467875423}
+  LeftFlourBtn: {fileID: 7539783522938180100}
+  SwitchFlourBtn: {fileID: 160636958022211854}
   ConveyLogicButton: {fileID: 5387713800404193977}
   PanelGamObj: {fileID: 5911567466658823370}
 --- !u!1 &1429495330202820591
