@@ -19,14 +19,16 @@ public class createFlournew : MonoBehaviour
     [SerializeField] TextMeshProUGUI NotEnoughMoneyTMP;
     bool startTimer;
     bool buttonPressed;
-    float FlourVaule;
+   public static float FlourVaule=3;
     float TimerNotEnoughMoney;
     bool NotEnoughMoney;
+    int playerMoneyUpdate;
     // Start is called before the first frame update
     void Start()
     {
-        
-        FlourVaule = 3;
+        playerMoneyUpdate = 0;
+       // FlourVaule = 3;
+       // FlourVaule = 3;
         StartTimeLeftToNextCreation = 10;
         startTimer = true;
 
@@ -35,16 +37,21 @@ public class createFlournew : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (startTimer && buttonPressed)
-        {
 
-            TimeLeftToNextCreation -= 0.8f * Time.deltaTime;
+
+
+
+
+        if (startTimer && buttonPressed || AutoBuy.AutoButton==true && PlayerMoney.moneyCounter >= FlourVaule)
+        {
+            playerMoneyUpdate = 0;
+                 TimeLeftToNextCreation -= 0.8f * Time.deltaTime;
             if (FlourNextCreationTMP != null)
                 FlourNextCreationTMP.text = (int)TimeLeftToNextCreation + "S";
             if (FlourValueTMP != null)
                 FlourValueTMP.text = FlourVaule + "$";
         }
-        else
+        else 
         {
             if (FlourNextCreationTMP != null)
                 FlourNextCreationTMP.text = (int)StartTimeLeftToNextCreation + "S";
@@ -53,7 +60,7 @@ public class createFlournew : MonoBehaviour
 
         }
 
-        if (TimeLeftToNextCreation <= 0)
+        if (TimeLeftToNextCreation <= 0 )
         {
             GameObject Clone2 = Instantiate(FlourGameObj, new Vector3(this.transform.position.x , this.transform.position.y - 1f, PlayerTrans.transform.position.z), Quaternion.identity);
           Clone2.transform.localRotation = Quaternion.Euler(-89.141f, 0, 0);
@@ -61,11 +68,31 @@ public class createFlournew : MonoBehaviour
             StartTimeLeftToNextCreation += 3;
             TimeLeftToNextCreation = StartTimeLeftToNextCreation;
 
-            FlourVaule++;
-           // startTimer = false;
+            
+            if (AutoBuy.AutoButton == true&&playerMoneyUpdate==0)
+            {
+                playerMoneyUpdate++;
+                //some how this motherfuck is taking twice the amount of the flour cost (6 insted of 3)
+                PlayerMoney.moneyCounter = PlayerMoney.moneyCounter - (int)FlourVaule;
+                Debug.Log(playerMoneyUpdate);
+             // FlourVaule++; 
+
+            }
+
+   
+
+
+            // startTimer = false;
             buttonPressed = false;
             FlourValueTMP.text = (int)FlourVaule + "$";
+
+
+            if (!(PlayerMoney.moneyCounter >= FlourVaule))
+            AutoBuy.AutoButton = false;
+
         }
+
+        
 
         if (NotEnoughMoney)
         {
@@ -96,7 +123,8 @@ public class createFlournew : MonoBehaviour
     {
         if (PlayerMoney.moneyCounter >= FlourVaule)
         {
-            PlayerMoney.moneyCounter -= (int)FlourVaule;
+
+        PlayerMoney.moneyCounter -= (int)FlourVaule;
             //StartTimerEnterFirstChallange.PlayerPassThrow = true;
             buttonPressed = true;
 
@@ -107,6 +135,8 @@ public class createFlournew : MonoBehaviour
         }
 
     }
+
+
 
 
 
