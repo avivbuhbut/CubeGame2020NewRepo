@@ -40,11 +40,15 @@ public class ConveyorBelt : MonoBehaviour
     void FixedUpdate()
     {
 
-    //   foreach(var go in bombList)
-    // {
-     //    Debug.Log(go.name);
-   //  }
+        //   foreach(var go in bombList)
+        // {
+        //    Debug.Log(go.name);
+        //  }
+        if (FlourColiderForConeyor.FlourHitConveyor == false && RightDone == true)
+            switchCounter=2;
 
+        if (FlourColiderForConeyor.FlourHitConveyor == false && LeftDone == true)
+            switchCounter = 1;
 
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);                    ///Very Useful Code! - tells the object name when clicked by the mouse
@@ -149,9 +153,10 @@ public class ConveyorBelt : MonoBehaviour
         }
     }
 
-     int   switchCounter = 0;
+     int   switchCounter = 1;
     bool RightDone;
     bool somthingHit;
+    bool LeftDone;
     void OnCollisionStay(Collision collision)
     {
 
@@ -184,13 +189,14 @@ public class ConveyorBelt : MonoBehaviour
 
 
         /*Case Flour*/
-        if (collision.transform.name == "Flour") {
-   
-            Debug.Log(switchCounter);
+        if (collision.transform.name == "Flour"|| collision.transform.name == "Flour 1(Clone)")
+        {
+
+
             if (OpenManuOnPress.bolFlourGoesRight)
             {
-            collision.transform.position = Vector3.MoveTowards(collision.transform.position
-                , EndPoint.transform.position, currentSpeed * Time.deltaTime);
+                collision.transform.position = Vector3.MoveTowards(collision.transform.position
+                    , EndPoint.transform.position, currentSpeed * Time.deltaTime);
 
             }
 
@@ -203,30 +209,51 @@ public class ConveyorBelt : MonoBehaviour
 
             if (OpenManuOnPress.bolFlourGoesSwitch)
             {
-              
-                if(switchCounter ==1 )
+           
+
+
+
+                if (FlourColiderForConeyor.FlourHitConveyor == true && switchCounter == 1)
                 {
-                    collision.transform.position = Vector3.MoveTowards(collision.transform.position
-                   , EndPoint.transform.position, currentSpeed * Time.deltaTime);
+                    Debug.Log("sdfsdfasdf");
+                    if (switchCounter == 1)
+                    {
+                        collision.transform.position = Vector3.MoveTowards(collision.transform.position
+                       , EndPoint.transform.position, currentSpeed * Time.deltaTime);
+                        RightDone = true;
+                        LeftDone = false;
+                    }
+               
 
-              
                 }
-                if (switchCounter == 2 )
+
+       
+
+
+                if (FlourColiderForConeyor.FlourHitConveyor == true && switchCounter == 2)
                 {
-                    collision.transform.position = Vector3.MoveTowards(collision.transform.position
-                    , EndPointLeft.transform.position, currentSpeed * Time.deltaTime);
-                   
+                    if (switchCounter == 2)
+                    {
+                        collision.transform.position = Vector3.MoveTowards(collision.transform.position
+                        , EndPointLeft.transform.position, currentSpeed * Time.deltaTime);
 
-                   // switchCounter = 0;
+                        RightDone = false;
+                        LeftDone = true;
+                        // switchCounter = 0;
+
+
+                    }
 
 
                 }
-  
+
+
+            
             }
 
-                if (OpenManuOnPress.bolFlourGoesRight == false && OpenManuOnPress.bolFlourGoesLeft == false && OpenManuOnPress.bolFlourGoesSwitch ==false)
+            if (OpenManuOnPress.bolFlourGoesRight == false && OpenManuOnPress.bolFlourGoesLeft == false && OpenManuOnPress.bolFlourGoesSwitch == false)
             {
-           
+                Debug.Log("sefsdf");
                 if (boolRightArrow)
                 {
 
@@ -249,17 +276,17 @@ public class ConveyorBelt : MonoBehaviour
                 }
             }
 
+
+
         }
 
-    
-        
     }
 
 
      void OnCollisionEnter(Collision collision)
     {
-       if(collision.transform.name=="Flour")
-            switchCounter++;
+      // if(collision.transform.name=="Flour")
+        //    switchCounter++;
 
         if (collision.transform.name == "BasicConveyorBelt(Clone)")
             somthingHit = false;
@@ -274,10 +301,10 @@ public class ConveyorBelt : MonoBehaviour
 
     void OnCollisionExit(Collision collision)
     {
-        if (collision.transform.name == "Flour"&& switchCounter==2)
-        {
-            switchCounter = 0;
-        }
+      //  if (collision.transform.name == "Flour"&& switchCounter==2)
+      //  {
+       //     switchCounter = 0;
+      //  }
 
 
       
@@ -288,4 +315,5 @@ public class ConveyorBelt : MonoBehaviour
 
 
 
-}
+
+    }
