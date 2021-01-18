@@ -56,7 +56,7 @@ public class AutoBuy : MonoBehaviour
         {
             AutoButton = true;
             counterPressedAutoBuy++;
-            PlayerMoney.moneyCounter -= (int)createFlournew.FlourVaule;
+          //  PlayerMoney.moneyCounter -= (int)createFlournew.FlourVaule;
         }
      
     }

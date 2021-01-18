@@ -39,8 +39,7 @@ public class createFlournew : MonoBehaviour
     {
 
 
-
-
+      
 
         if (startTimer && buttonPressed || AutoBuy.AutoButton==true && PlayerMoney.moneyCounter >= FlourVaule)
         {
@@ -53,7 +52,7 @@ public class createFlournew : MonoBehaviour
         }
         else 
         {
-            if (FlourNextCreationTMP != null)
+            if (FlourNextCreationTMP != null&& StartTimeLeftToNextCreation>0)
                 FlourNextCreationTMP.text = (int)StartTimeLeftToNextCreation + "S";
             if (FlourValueTMP != null)
                 FlourValueTMP.text = FlourVaule + "$";
@@ -64,15 +63,21 @@ public class createFlournew : MonoBehaviour
         {
             GameObject Clone2 = Instantiate(FlourGameObj, new Vector3(this.transform.position.x , this.transform.position.y - 1f, PlayerTrans.transform.position.z), Quaternion.identity);
           Clone2.transform.localRotation = Quaternion.Euler(-89.141f, 0, 0);
+            Clone2.name = "Flour";
 
-            StartTimeLeftToNextCreation += 3;
+            StartTimeLeftToNextCreation -= 1;
             TimeLeftToNextCreation = StartTimeLeftToNextCreation;
 
-            
+
+            if (StartTimeLeftToNextCreation < 0)
+            {
+                TimeLeftToNextCreation = 2;
+            }
+
             if (AutoBuy.AutoButton == true&&playerMoneyUpdate==0)
             {
                 playerMoneyUpdate++;
-                //some how this motherfuck is taking twice the amount of the flour cost (6 insted of 3)
+            
                 PlayerMoney.moneyCounter = PlayerMoney.moneyCounter - (int)FlourVaule;
                 Debug.Log(playerMoneyUpdate);
              // FlourVaule++; 
