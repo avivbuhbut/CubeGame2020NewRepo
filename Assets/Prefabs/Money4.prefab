@@ -187,14 +187,14 @@ GameObject:
   m_Component:
   - component: {fileID: 9120080798214832802}
   - component: {fileID: 8726762590877132634}
-  - component: {fileID: 919132147574069964}
+  - component: {fileID: -6600179615156257181}
   m_Layer: 0
-  m_Name: Money (2)
+  m_Name: Money4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &9120080798214832802
 Transform:
   m_ObjectHideFlags: 0
@@ -228,7 +228,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 120
   m_CollisionDetection: 0
---- !u!114 &919132147574069964
+--- !u!114 &-6600179615156257181
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -237,7 +237,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8492339221049415704}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b177cb2404cd4cd4ab69e4a040a8924d, type: 3}
+  m_Script: {fileID: 11500000, guid: a0313e88becddb247803ce2f4f0628d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &8726762592405123806
@@ -338,7 +338,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 2$
+  m_text: 4$
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

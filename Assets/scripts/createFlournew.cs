@@ -29,7 +29,7 @@ public class createFlournew : MonoBehaviour
         playerMoneyUpdate = 0;
        // FlourVaule = 3;
        // FlourVaule = 3;
-        StartTimeLeftToNextCreation = 10;
+        StartTimeLeftToNextCreation = 3;
         startTimer = true;
 
     }

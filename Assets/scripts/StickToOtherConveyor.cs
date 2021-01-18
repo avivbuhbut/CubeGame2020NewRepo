@@ -6,6 +6,8 @@ public class StickToOtherConveyor : MonoBehaviour
 {
     // Start is called before the first frame update
     float defaultRotation;
+    Transform FirstColisionConveyor;
+
     void Start()
     {
         defaultRotation = this.transform.localRotation.x;
@@ -31,12 +33,10 @@ public class StickToOtherConveyor : MonoBehaviour
 
 
 
-
-
             //stick conveyor togheter  - same hight 
             if (collision.transform.position.x < this.transform.position.x)//to the left of the conveyer.
             {
-                this.transform.position = new Vector3(collision.transform.position.x +5.8f, this.transform.position.y,
+                this.transform.position = new Vector3(collision.transform.position.x + 5.9f, this.transform.position.y,
                     this.transform.position.z);
 
                 this.transform.GetChild(1).position = new Vector3(collision.transform.GetChild(1).position.x,
@@ -47,6 +47,9 @@ public class StickToOtherConveyor : MonoBehaviour
 
             if (collision.transform.position.x > this.transform.position.x)//to the left of the conveyer.
             {
+               // this.transform.position = new Vector3(collision.transform.position.x - 5.9f, this.transform.position.y,
+                 // this.transform.position.z);
+
                 collision.transform.GetChild(1).position = new Vector3(this.transform.GetChild(1).position.x,
                     this.transform.GetChild(1).position.y, this.transform.GetChild(1).position.z);
             }

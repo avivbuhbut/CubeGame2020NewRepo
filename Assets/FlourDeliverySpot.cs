@@ -16,18 +16,20 @@ public class FlourDeliverySpot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (FlourHit && FlourValue >= 0)
+        if (FlourHit )
         {
-
+     
             GameObject Clone = Instantiate(MoneyTrans, new Vector3(this.transform.position.x, this.transform.position.y + 1.5f, this.transform.position.z), Quaternion.identity);
             Clone.transform.localRotation = Quaternion.Euler(0, 270, 0);
-            FlourValue--;
+            // FlourValue--;
+            FlourHit = false;
         }
     }
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.transform.tag == "Flour" || collision.transform.name == "Flour 1(Clone)") 
+        if (collision.transform.tag == "Flour" || collision.transform.name == "Flour 1(Clone)"||
+            collision.transform.name == "Flour")
         {
             FlourHit = true;
             //FlourValue = PizzaValue.pizzaValue;
