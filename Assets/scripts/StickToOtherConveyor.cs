@@ -44,8 +44,8 @@ public class StickToOtherConveyor : MonoBehaviour
                 this.transform.position = new Vector3(collision.transform.position.x +6f, FirstConeyorTrans.transform.position.y,
                     collision.transform.position.z);
 
-                this.transform.GetChild(1).position = new Vector3(collision.transform.GetChild(1).position.x,
-                    collision.transform.GetChild(1).position.y, collision.transform.GetChild(1).position.z);
+              //  this.transform.GetChild(1).position = new Vector3(collision.transform.GetChild(1).position.x,
+                //    collision.transform.GetChild(1).position.y, collision.transform.GetChild(1).position.z);
                 //  this.transform.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
                 toTheLeftOfConvy = true;
                     toTheRightOfConvy = false;
@@ -58,8 +58,8 @@ public class StickToOtherConveyor : MonoBehaviour
                 this.transform.position = new Vector3(collision.transform.position.x -6f, FirstConeyorTrans.transform.position.y,
                  collision.transform.position.z);
 
-                this.transform.GetChild(1).position = new Vector3(collision.transform.GetChild(1).position.x,
-                    collision.transform.GetChild(1).position.y, collision.transform.GetChild(1).position.z);
+               // this.transform.GetChild(1).position = new Vector3(collision.transform.GetChild(1).position.x,
+                //    collision.transform.GetChild(1).position.y, collision.transform.GetChild(1).position.z);
                 //  this.transform.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
                 toTheRightOfConvy = true;
                 toTheLeftOfConvy = false;
