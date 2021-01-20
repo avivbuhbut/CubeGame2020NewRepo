@@ -12,7 +12,7 @@ public class createFlournew : MonoBehaviour
     public Transform PlayerTrans;
     public Button FlourBuyButton;
     public GameObject FlourGameObj;
-    float TimeLeftToNextCreation = 10;
+    float TimeLeftToNextCreation = 3;
     float StartTimeLeftToNextCreation;
     [SerializeField] TextMeshProUGUI FlourNextCreationTMP;
     [SerializeField] TextMeshProUGUI FlourValueTMP;
@@ -29,7 +29,7 @@ public class createFlournew : MonoBehaviour
         playerMoneyUpdate = 0;
        // FlourVaule = 3;
        // FlourVaule = 3;
-        StartTimeLeftToNextCreation = 3;
+        StartTimeLeftToNextCreation = 4;
         startTimer = true;
 
     }
@@ -63,16 +63,18 @@ public class createFlournew : MonoBehaviour
         {
             GameObject Clone2 = Instantiate(FlourGameObj, new Vector3(this.transform.position.x , this.transform.position.y - 1f, PlayerTrans.transform.position.z), Quaternion.identity);
           Clone2.transform.localRotation = Quaternion.Euler(-89.141f, 0, 0);
-            Clone2.name = "Flour";
+         //   Clone2.name = "Flour";
 
+            if(StartTimeLeftToNextCreation!=3)
             StartTimeLeftToNextCreation -= 1;
+
             TimeLeftToNextCreation = StartTimeLeftToNextCreation;
 
 
-            if (StartTimeLeftToNextCreation < 0)
-            {
-                TimeLeftToNextCreation = 2;
-            }
+        //    if (StartTimeLeftToNextCreation < 0)
+           // {
+            //    TimeLeftToNextCreation = 2;
+           // }
 
             if (AutoBuy.AutoButton == true&&playerMoneyUpdate==0)
             {

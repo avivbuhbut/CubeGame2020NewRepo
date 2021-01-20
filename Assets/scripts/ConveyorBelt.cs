@@ -161,7 +161,7 @@ public class ConveyorBelt : MonoBehaviour
     {
 
         /*General Case*/ //collision.transform.name != "BasicConveyorBelt(Clone)"
-        if (collision.transform.tag != "Floor" && collision.transform.name != "Flour"&& somthingHit==true)
+        if (collision.transform.tag != "Floor" && collision.transform.name != "Flour 1(Clone)" && somthingHit==true)
         {
           
             if (boolRightArrow)
@@ -198,16 +198,16 @@ public class ConveyorBelt : MonoBehaviour
                 collision.transform.position = Vector3.MoveTowards(collision.transform.position
                     , EndPoint.transform.position, currentSpeed * Time.deltaTime);
 
-            }
+            }         //need to be independed to every converyot THIS IS THE PROBLEM!(for exa: if i press S on 1 convyeor every time the flour will hit other conveyors it will go to left and right , thats why it need to be independed)
 
 
             if (OpenManuOnPress.bolFlourGoesLeft)
             {
                 collision.transform.position = Vector3.MoveTowards(collision.transform.position
            , EndPointLeft.transform.position, currentSpeed * Time.deltaTime);
-            }
+            }    //need to be independed to every converyotTHIS IS THE PROBLEM!
 
-            if (OpenManuOnPress.bolFlourGoesSwitch)
+            if (OpenManuOnPress.bolFlourGoesSwitch)   //need to be independed to every converyotTHIS IS THE PROBLEM!
             {
            
 
