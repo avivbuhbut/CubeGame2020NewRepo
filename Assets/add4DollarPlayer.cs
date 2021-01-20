@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class add4DollarPlayer : MonoBehaviour
 {
+
+    public static int MoneyValue;
     // Start is called before the first frame update
     void Start()
     {
-        
+        MoneyValue = 4;
     }
 
     // Update is called once per frame
@@ -23,7 +25,7 @@ public class add4DollarPlayer : MonoBehaviour
         if (collision.transform.tag == "Player")
         {
             this.transform.gameObject.SetActive(false);
-            PlayerMoney.moneyCounter += 4;
+            PlayerMoney.moneyCounter += MoneyValue;
         }
 
     }

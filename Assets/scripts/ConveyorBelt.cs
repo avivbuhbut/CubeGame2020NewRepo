@@ -189,7 +189,7 @@ public class ConveyorBelt : MonoBehaviour
 
 
         /*Case Flour*/
-        if (collision.transform.name == "Flour"|| collision.transform.name == "Flour 1(Clone)")
+        if (collision.transform.name == "Flour" || collision.transform.name == "Flour 1(Clone)")
         {
 
 
@@ -209,7 +209,7 @@ public class ConveyorBelt : MonoBehaviour
 
             if (this.transform.GetComponentInChildren<OpenManuOnPress>().SwitchFlourBtn.image.color == Color.green)  //need to be independed to every converyotTHIS IS THE PROBLEM!
             {
-           
+
 
 
 
@@ -223,11 +223,11 @@ public class ConveyorBelt : MonoBehaviour
                         RightDone = true;
                         LeftDone = false;
                     }
-               
+
 
                 }
 
-       
+
 
 
                 if (FlourColiderForConeyor.FlourHitConveyor == true && switchCounter == 2)
@@ -248,10 +248,72 @@ public class ConveyorBelt : MonoBehaviour
                 }
 
 
-            
+
             }
 
-            if (OpenManuOnPress.bolFlourGoesRight == false && OpenManuOnPress.bolFlourGoesLeft == false && OpenManuOnPress.bolFlourGoesSwitch == false)
+
+            if ( this.transform.GetComponentInChildren<OpenManuOnPress>().RightFlourBtn.image.color != Color.green
+               && this.transform.GetComponentInChildren<OpenManuOnPress>().LeftFlourBtn.image.color == Color.green
+                  && this.transform.GetComponentInChildren<OpenManuOnPress>().SwitchFlourBtn.image.color != Color.green)
+
+            {
+                collision.transform.position = Vector3.MoveTowards(collision.transform.position
+     , EndPointLeft.transform.position, currentSpeed * Time.deltaTime);
+            }
+
+
+
+            if (this.transform.GetComponentInChildren<OpenManuOnPress>().RightFlourBtn.image.color ==Color.green
+          && this.transform.GetComponentInChildren<OpenManuOnPress>().LeftFlourBtn.image.color != Color.green
+             && this.transform.GetComponentInChildren<OpenManuOnPress>().SwitchFlourBtn.image.color != Color.green) { 
+                collision.transform.position = Vector3.MoveTowards(collision.transform.position
+                                , EndPoint.position, currentSpeed * Time.deltaTime);
+            }
+
+
+
+        if (this.transform.GetComponentInChildren<OpenManuOnPress>().RightFlourBtn.image.color != Color.green
+&& this.transform.GetComponentInChildren<OpenManuOnPress>().LeftFlourBtn.image.color != Color.green
+&& this.transform.GetComponentInChildren<OpenManuOnPress>().SwitchFlourBtn.image.color == Color.green) { 
+
+            if (FlourColiderForConeyor.FlourHitConveyor == true && switchCounter == 1)
+                {
+                    Debug.Log("sdfsdfasdf");
+                    if (switchCounter == 1)
+                    {
+                        collision.transform.position = Vector3.MoveTowards(collision.transform.position
+                       , EndPoint.transform.position, currentSpeed * Time.deltaTime);
+                        RightDone = true;
+                        LeftDone = false;
+                    }
+
+
+                }
+
+
+
+
+                if (FlourColiderForConeyor.FlourHitConveyor == true && switchCounter == 2)
+                {
+                    if (switchCounter == 2)
+                    {
+                        collision.transform.position = Vector3.MoveTowards(collision.transform.position
+                        , EndPointLeft.transform.position, currentSpeed * Time.deltaTime);
+
+                        RightDone = false;
+                        LeftDone = true;
+                        // switchCounter = 0;
+
+
+                    }
+
+
+                }
+            }
+
+            if (this.transform.GetComponentInChildren<OpenManuOnPress>().RightFlourBtn.image.color != Color.green
+&& this.transform.GetComponentInChildren<OpenManuOnPress>().LeftFlourBtn.image.color != Color.green
+&& this.transform.GetComponentInChildren<OpenManuOnPress>().SwitchFlourBtn.image.color != Color.green)
             {
                 Debug.Log("sefsdf");
                 if (boolRightArrow)
