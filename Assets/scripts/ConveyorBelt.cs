@@ -193,21 +193,21 @@ public class ConveyorBelt : MonoBehaviour
         {
 
 
-            if (OpenManuOnPress.bolFlourGoesRight)
+            if (this.transform.GetComponentInChildren<OpenManuOnPress>().RightFlourBtn.image.color == Color.green)
             {
                 collision.transform.position = Vector3.MoveTowards(collision.transform.position
-                    , EndPoint.transform.position, currentSpeed * Time.deltaTime);
+                    , EndPoint.position, currentSpeed * Time.deltaTime);
 
             }         //need to be independed to every converyot THIS IS THE PROBLEM!(for exa: if i press S on 1 convyeor every time the flour will hit other conveyors it will go to left and right , thats why it need to be independed)
 
 
-            if (OpenManuOnPress.bolFlourGoesLeft)
+            if (this.transform.GetComponentInChildren<OpenManuOnPress>().LeftFlourBtn.image.color == Color.green)
             {
                 collision.transform.position = Vector3.MoveTowards(collision.transform.position
            , EndPointLeft.transform.position, currentSpeed * Time.deltaTime);
             }    //need to be independed to every converyotTHIS IS THE PROBLEM!
 
-            if (OpenManuOnPress.bolFlourGoesSwitch)   //need to be independed to every converyotTHIS IS THE PROBLEM!
+            if (this.transform.GetComponentInChildren<OpenManuOnPress>().SwitchFlourBtn.image.color == Color.green)  //need to be independed to every converyotTHIS IS THE PROBLEM!
             {
            
 
