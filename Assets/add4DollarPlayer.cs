@@ -5,7 +5,7 @@ using UnityEngine;
 public class add4DollarPlayer : MonoBehaviour
 {
 
-    public static int MoneyValue;
+    public  int MoneyValue;
     // Start is called before the first frame update
     void Start()
     {

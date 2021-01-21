@@ -90,58 +90,10 @@ public class ConveyorBelt : MonoBehaviour
         }
 
 
-
-        /*
-
-            if (collided && boolRightArrow)
-            {
-                RightArrow.transform.GetComponent<Renderer>().material.color = Color.red;
-                LeftArrow.transform.GetComponent<Renderer>().material.color = LeftArrowOriginalColor;
-
-                boolLeftArrow = false;
-                ColidedTrans.transform.position = Vector3.MoveTowards(ColidedTrans.transform.position
-        , EndPoint.transform.position, currentSpeed * Time.deltaTime);
-            }
-
-
-            if (collided && boolLeftArrow)
-            {
-                RightArrow.transform.GetComponent<Renderer>().material.color = RightArrowOriginalColor;
-                LeftArrow.transform.GetComponent<Renderer>().material.color = Color.red;
-
-                boolRightArrow = false;
-                ColidedTrans.transform.position = Vector3.MoveTowards(ColidedTrans.transform.position
-        , EndPointLeft.transform.position, currentSpeed * Time.deltaTime);
-            }
-        */
-
     }
 
-    /*
-     void OnCollisionEnter(Collision collision)
-    {
-     
-        Debug.Log(collision.transform.name);
-        if (collision.transform.tag== "Floor" || collision.transform.tag == "Untagged")
-            collided = false;
 
-        else
-        {
-            TouchingObjects.Add(collision.gameObject);
-            ColiisionOriginalTag = collision.transform.tag;
-            collision.transform.tag = "Flour";
-            ColidedTrans = collision.transform;
-            collided = true;
-        }
-    }
-
-    void OnCollisionExit(Collision collision)
-    {
-        TouchingObjects.Remove(collision.gameObject);
-        collided = false;
-        collision.transform.tag = ColiisionOriginalTag;
-    }
-    */
+   
 
      void OnTriggerEnter(Collider other)
     {
@@ -213,7 +165,7 @@ public class ConveyorBelt : MonoBehaviour
 
 
 
-                if (FlourColiderForConeyor.FlourHitConveyor == true && switchCounter == 1)
+                if ( switchCounter == 1)
                 {
                     Debug.Log("sdfsdfasdf");
                     if (switchCounter == 1)
@@ -230,7 +182,7 @@ public class ConveyorBelt : MonoBehaviour
 
 
 
-                if (FlourColiderForConeyor.FlourHitConveyor == true && switchCounter == 2)
+                if ( switchCounter == 2)
                 {
                     if (switchCounter == 2)
                     {
@@ -276,7 +228,7 @@ public class ConveyorBelt : MonoBehaviour
 && this.transform.GetComponentInChildren<OpenManuOnPress>().LeftFlourBtn.image.color != Color.green
 && this.transform.GetComponentInChildren<OpenManuOnPress>().SwitchFlourBtn.image.color == Color.green) { 
 
-            if (FlourColiderForConeyor.FlourHitConveyor == true && switchCounter == 1)
+            if (switchCounter == 1)
                 {
                     Debug.Log("sdfsdfasdf");
                     if (switchCounter == 1)
@@ -293,7 +245,7 @@ public class ConveyorBelt : MonoBehaviour
 
 
 
-                if (FlourColiderForConeyor.FlourHitConveyor == true && switchCounter == 2)
+                if (switchCounter == 2)
                 {
                     if (switchCounter == 2)
                     {

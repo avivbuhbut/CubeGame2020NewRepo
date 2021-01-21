@@ -9,11 +9,13 @@ public class FlourDeliverySpot : MonoBehaviour
     bool FlourHit;
     int FlourValue=0;
     int numberOfFourHit;
-
+    GameObject Clone;
+    int MoneyValue = 4;
     // Start is called before the first frame update
     void Start()
     {
         MoneyTrans.gameObject.SetActive(false);
+        GetComponent<add4DollarPlayer>().MoneyValue = 4;
     }
 
     // Update is called once per frame
@@ -22,19 +24,27 @@ public class FlourDeliverySpot : MonoBehaviour
         if (numberOfFourHit == 5)
         {
             numberOfFourHit = 0;
-            add4DollarPlayer.MoneyValue++;
+            MoneyValue += 1;
         }
-        Debug.Log(" Money Value For Flour: "+add4DollarPlayer.MoneyValue);
-        MoneyValueTMP.text = add4DollarPlayer.MoneyValue + "$";
+       // Debug.Log(" Money Value For Flour: " + GetComponent<add4DollarPlayer>().MoneyValue);
+      //  MoneyValueTMP.text = add4DollarPlayer.MoneyValue + "$";
         if (FlourHit )
         {
      
-            GameObject Clone = Instantiate(MoneyTrans, new Vector3(this.transform.position.x, this.transform.position.y + 1.5f, this.transform.position.z), Quaternion.identity);
+             Clone = Instantiate(MoneyTrans, new Vector3(this.transform.position.x, this.transform.position.y + 1.5f, this.transform.position.z), Quaternion.identity);
             Clone.transform.localRotation = Quaternion.Euler(0, 270, 0);
-            MoneyValueTMP.text = add4DollarPlayer.MoneyValue + "$";
+         
                  // FlourValue--;
                  FlourHit = false;
         }
+        if (Clone != null)
+        {
+            Debug.Log("text mesh pro value:" + Clone.GetComponentInChildren<TextMeshPro>().text);
+            Clone.GetComponent<add4DollarPlayer>().MoneyValue = MoneyValue;
+
+            Clone.GetComponentInChildren<TextMeshPro>().text = MoneyValue + "$";
+        }
+
     }
 
     void OnCollisionEnter(Collision collision)
@@ -43,7 +53,7 @@ public class FlourDeliverySpot : MonoBehaviour
             collision.transform.name == "Flour")
         {
 
-            
+           
 
             numberOfFourHit++;
         
