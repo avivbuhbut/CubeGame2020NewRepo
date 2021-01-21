@@ -30704,6 +30704,48 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 80
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1162147784 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 321892830421380765, guid: 53347165b6986f64dbac2940fec64ad5,
+    type: 3}
+  m_PrefabInstance: {fileID: 321892830127541694}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1162147786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1162147784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2291527aef42b24793c2757439f3b96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpringJointArm: {fileID: 1162147787}
+--- !u!145 &1162147787
+SpringJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1162147784}
+  m_ConnectedBody: {fileID: 0}
+  m_Anchor: {x: 0, y: 0.5, z: 0}
+  m_AutoConfigureConnectedAnchor: 1
+  m_ConnectedAnchor: {x: -8.93, y: 5.7799997, z: -7.11}
+  serializedVersion: 2
+  m_Spring: 40.43
+  m_Damper: 7.9
+  m_MinDistance: 0
+  m_MaxDistance: 0
+  m_Tolerance: 0.025
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 1
+  m_MassScale: 1
+  m_ConnectedMassScale: 1
 --- !u!1001 &1171787669
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -57875,12 +57917,12 @@ PrefabInstance:
     - target: {fileID: 321892829657577473, guid: 53347165b6986f64dbac2940fec64ad5,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -9.99
+      value: -8.93
       objectReference: {fileID: 0}
     - target: {fileID: 321892829657577473, guid: 53347165b6986f64dbac2940fec64ad5,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6.81
+      value: 7.06
       objectReference: {fileID: 0}
     - target: {fileID: 321892829657577473, guid: 53347165b6986f64dbac2940fec64ad5,
         type: 3}
@@ -57921,6 +57963,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 321892829657577477, guid: 53347165b6986f64dbac2940fec64ad5,
+        type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 321892829657577477, guid: 53347165b6986f64dbac2940fec64ad5,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 124
       objectReference: {fileID: 0}
     - target: {fileID: 321892829657577479, guid: 53347165b6986f64dbac2940fec64ad5,
         type: 3}

@@ -37,6 +37,14 @@ public class AutoContolArm : MonoBehaviour
           
         }
 
+        if (Input.GetKey(KeyCode.O))
+        {
+            Vector3 screenPosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y,this.transform.position.z);
+            //this.transform.GetComponent<Rigidbody>().isKinematic = false;
+
+           this.transform.position =  Vector3.MoveTowards(this.transform.position, screenPosition, Time.deltaTime * 1.1f);
+        }
+
        
     }
 
