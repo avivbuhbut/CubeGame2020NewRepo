@@ -349,7 +349,7 @@ namespace PathCreation {
         public void MovePoint (int i, Vector3 pointPos, bool suppressPathModifiedEvent = false) {
 
             if (space == PathSpace.xy) {
-                pointPos.z = 0;
+                pointPos.z = 0;//6.97f;
             } else if (space == PathSpace.xz) {
                 pointPos.y = 0;
             }
@@ -599,13 +599,15 @@ namespace PathCreation {
             // The axis with the smallest bounds will be discarded.
             if (previousSpace == PathSpace.xyz) {
                 Vector3 boundsSize = PathBounds.size;
-                float minBoundsSize = Mathf.Min (boundsSize.x, boundsSize.y, boundsSize.z);
+                float minBoundsSize = Mathf.Min (boundsSize.x, boundsSize.y, -6.97f);
 
                 for (int i = 0; i < NumPoints; i++) {
                     if (space == PathSpace.xy) {
+                      //  points[i] = new Vector3(x, y, -6.97f);
+               
                         float x = (minBoundsSize == boundsSize.x) ? points[i].z : points[i].x;
                         float y = (minBoundsSize == boundsSize.y) ? points[i].z : points[i].y;
-                        points[i] = new Vector3 (x, y, 0);
+                        points[i] = new Vector3 (x, y, -6.97f);
                     } else if (space == PathSpace.xz) {
                         float x = (minBoundsSize == boundsSize.x) ? points[i].y : points[i].x;
                         float z = (minBoundsSize == boundsSize.z) ? points[i].y : points[i].z;
