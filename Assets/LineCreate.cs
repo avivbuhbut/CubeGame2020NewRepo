@@ -71,14 +71,14 @@ public class LineCreate : MonoBehaviour
 
                 //ConveyorStach.transform.Rotate(90.0f, 90.0f, 90.0f, Space.Self); ;
                 counter++;
-                centerPos = new Vector3(ConveyorStartTrans.position.x + ConveyorEndTrans.transform.position.x, ConveyorStartTrans.position.y + 3 +
-  ConveyorEndTrans.transform.position.y + 3) / 2f;
-
-                centerPos.z = -6.3f;
+        
                 //scaling with the object
 
             }
+            centerPos = new Vector3(ConveyorStartTrans.position.x + ConveyorEndTrans.transform.position.x, ConveyorStartTrans.position.y + 3 +
+  ConveyorEndTrans.transform.position.y + 3) / 2f;
 
+            centerPos.z = -6.3f;
             //try ConveyorStach rotation.z  = ConveyorEndTrans.position.y *5
 
 
@@ -90,6 +90,9 @@ public class LineCreate : MonoBehaviour
            
             ConveyorStach.transform.localScale = new Vector3(scaleX, 0.3f, 1);
 
+            Vector3 directionToFace = ConveyorEndTrans.position - ConveyorStach.transform.position;
+
+            ConveyorStach.transform.rotation = Quaternion.LookRotation(directionToFace);
 
             //   float scaleY = Vector3.Distance(new Vector3(0, ConveyorStartTrans.position.y, 0), new Vector3(0, ConveyorEndTrans.transform.position.y, 0));
 
