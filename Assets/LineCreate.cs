@@ -22,6 +22,7 @@ public class LineCreate : MonoBehaviour
     GameObject ConveyorStach;
     // Start is called before the first frame update
     int counter = 0;
+    float angel = 1;
     void Start()
     {
         
@@ -43,8 +44,8 @@ public class LineCreate : MonoBehaviour
 
             LineRender.startColor = Color.black;
         LineRender.endColor = Color.black;
-        LineRender.startWidth = 3f;
-        LineRender.endWidth = 3f;
+        LineRender.startWidth = 1f;
+        LineRender.endWidth = 1f;
         LineRender.positionCount = 2;
         LineRender.useWorldSpace = true;
 
@@ -67,7 +68,7 @@ public class LineCreate : MonoBehaviour
             if (counter == 0)
             {
 
-              ConveyorStach = Instantiate(StarchConeyorTrans.gameObject, new Vector3(ConveyorStartTrans.position.x - 5, ConveyorStartTrans.position.y, 3), Quaternion.identity);
+              ConveyorStach = Instantiate(StarchConeyorTrans.gameObject, new Vector3(ConveyorStartTrans.position.x+10 , ConveyorStartTrans.position.y, 3), Quaternion.identity);
 
                 //ConveyorStach.transform.Rotate(90.0f, 90.0f, 90.0f, Space.Self); ;
                 counter++;
@@ -75,24 +76,52 @@ public class LineCreate : MonoBehaviour
                 //scaling with the object
 
             }
-            centerPos = new Vector3(ConveyorStartTrans.position.x + ConveyorEndTrans.transform.position.x, ConveyorStartTrans.position.y + 3 +
-  ConveyorEndTrans.transform.position.y + 3) / 2f;
 
-            centerPos.z = -6.3f;
+
+
+
             //try ConveyorStach rotation.z  = ConveyorEndTrans.position.y *5
+   
 
 
-
-            float scaleX = Vector3.Distance(new Vector3(ConveyorStartTrans.position.x, 0, 0), new Vector3(ConveyorEndTrans.transform.position.x, 0, 0));
+            float scaleX = Vector3.Distance(new Vector3(ConveyorStartTrans.position.x + 1, 0, 0), new Vector3(ConveyorEndTrans.transform.position.x+1, 0, 0));
 
             ConveyorStach.transform.position = centerPos;
+
+
+            centerPos = new Vector3(ConveyorStartTrans.position.x + ConveyorEndTrans.transform.position.x , ConveyorStartTrans.position.y + 0.9f +
+        ConveyorEndTrans.transform.position.y + 0.9f)/2;
+
+            Physics.IgnoreCollision(ConveyorStach.GetComponent<BoxCollider>(), PlayerPos.GetComponent<BoxCollider>());
+
+            centerPos.z = -6.3f;
+            ConveyorStach.transform.localScale = new Vector3(scaleX, 0.3f, 3);
+
+         //     ConveyorStach.transform.localRotation = Quaternion.Euler(ConveyorStach.transform.position.x, ConveyorStach.transform.position.y, -ConveyorEndTrans.transform.position.y * 10) ;
+
+            //  Vector3 directionToFace = ConveyorEndTrans.position - ConveyorStach.transform.position;
+
+
+
+            // if(ConveyorEndTrans.transform.position.y>1)
+       //     if (scaleX > 0.5f)
+        //   {
+                //(angel < 10 ? angel++ : angel=1)
+          //      ConveyorStach.transform.localRotation = Quaternion.Euler(ConveyorStach.transform.position.x, ConveyorStach.transform.position.y, -ConveyorEndTrans.transform.position.y * 6) ;
+     //     //      centerPos = new Vector3(ConveyorStartTrans.position.x-1 + ConveyorEndTrans.transform.position.x, ConveyorStartTrans.position.y + 2 +
+     //    ConveyorEndTrans.transform.position.y + 2) / 2f;
+
+          //      centerPos.z = -6.3f;
+
+
+          //  }
+          //  else
+    
+
             
-           
-            ConveyorStach.transform.localScale = new Vector3(scaleX, 0.3f, 1);
 
-            Vector3 directionToFace = ConveyorEndTrans.position - ConveyorStach.transform.position;
-
-            ConveyorStach.transform.rotation = Quaternion.LookRotation(directionToFace);
+            //else
+            //   ConveyorStach.transform.localRotation = Quaternion.Euler(ConveyorStach.transform.position.x, ConveyorStach.transform.position.y, ConveyorStach.transform.position.z); 
 
             //   float scaleY = Vector3.Distance(new Vector3(0, ConveyorStartTrans.position.y, 0), new Vector3(0, ConveyorEndTrans.transform.position.y, 0));
 
@@ -134,6 +163,8 @@ public class LineCreate : MonoBehaviour
 
      void OnCollisionStay(Collision collision)
     {
+
+
         if(collision.transform.name == "ConeyorBlockStart")
         {
             ConveyorStartTrans = collision.transform;
