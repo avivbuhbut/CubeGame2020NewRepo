@@ -50143,12 +50143,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1758135474}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &1771460728 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7437701352114277693, guid: d337788505b70b6449dbbe432e7a0c13,
-    type: 3}
-  m_PrefabInstance: {fileID: 7837438151850281069}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1779005976
 GameObject:
   m_ObjectHideFlags: 0
@@ -52240,7 +52234,8 @@ MonoBehaviour:
   LineRender: {fileID: 1814706086}
   FlourPos: {fileID: 1281415794}
   PlayerPos: {fileID: 1814706066}
-  StarchConeyorTrans: {fileID: 1771460728}
+  StarchConeyorTrans: {fileID: 7287570198692824213, guid: 023a4a91ed0bd6649aaf9fb00aeca20e,
+    type: 3}
   StartPosSCTrans: {fileID: 1815787109}
   EndPosSCTrans: {fileID: 1631399934}
 --- !u!1 &1815787105
@@ -62486,6 +62481,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RootOrder
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7437701352114277693, guid: d337788505b70b6449dbbe432e7a0c13,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.007120532
+      objectReference: {fileID: 0}
+    - target: {fileID: 7437701352114277693, guid: d337788505b70b6449dbbe432e7a0c13,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7437701352114277693, guid: d337788505b70b6449dbbe432e7a0c13,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.99997467
+      objectReference: {fileID: 0}
+    - target: {fileID: 7437701352114277693, guid: d337788505b70b6449dbbe432e7a0c13,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7437701352114277693, guid: d337788505b70b6449dbbe432e7a0c13,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -180.816
       objectReference: {fileID: 0}
     - target: {fileID: 7837438150703516096, guid: d337788505b70b6449dbbe432e7a0c13,
         type: 3}

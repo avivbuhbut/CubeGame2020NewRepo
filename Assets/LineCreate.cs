@@ -18,7 +18,7 @@ public class LineCreate : MonoBehaviour
     public Transform StarchConeyorTrans;
     public Transform StartPosSCTrans;
     public Transform EndPosSCTrans;
-
+    Vector3 centerPos;
     GameObject ConveyorStach;
     // Start is called before the first frame update
     int counter = 0;
@@ -69,30 +69,49 @@ public class LineCreate : MonoBehaviour
 
               ConveyorStach = Instantiate(StarchConeyorTrans.gameObject, new Vector3(ConveyorStartTrans.position.x - 5, ConveyorStartTrans.position.y, 3), Quaternion.identity);
 
+                //ConveyorStach.transform.Rotate(90.0f, 90.0f, 90.0f, Space.Self); ;
                 counter++;
+                centerPos = new Vector3(ConveyorStartTrans.position.x + ConveyorEndTrans.transform.position.x, ConveyorStartTrans.position.y + 3 +
+  ConveyorEndTrans.transform.position.y + 3) / 2f;
+
+                centerPos.z = -6.3f;
+                //scaling with the object
+
             }
 
-         
+            //try ConveyorStach rotation.z  = ConveyorEndTrans.position.y *5
 
-            //scaling with the object
 
-               Vector3 centerPos = new Vector3(ConveyorStartTrans.position.x + ConveyorEndTrans.transform.position.x, ConveyorStartTrans.position.y+3 +
-                ConveyorEndTrans.transform.position.y+3) / 2f;
-            centerPos.z = -6.3f;
 
-               float scaleX = Vector3.Distance(new Vector3(ConveyorStartTrans.position.x, 0, 0), new Vector3(ConveyorEndTrans.transform.position.x, 0, 0));
-               //   float scaleY = Vector3.Distance(new Vector3(0, ConveyorStartTrans.position.y, 0), new Vector3(0, ConveyorEndTrans.transform.position.y, 0));
-                 ConveyorStach.transform.position = centerPos;
-               ConveyorStach.transform.localScale = new Vector3(scaleX, 0.3f, 1);
+            float scaleX = Vector3.Distance(new Vector3(ConveyorStartTrans.position.x, 0, 0), new Vector3(ConveyorEndTrans.transform.position.x, 0, 0));
+
+            ConveyorStach.transform.position = centerPos;
+            
+           
+            ConveyorStach.transform.localScale = new Vector3(scaleX, 0.3f, 1);
+
+
+            //   float scaleY = Vector3.Distance(new Vector3(0, ConveyorStartTrans.position.y, 0), new Vector3(0, ConveyorEndTrans.transform.position.y, 0));
+
             //Vector3 eulerRotation = new Vector3(LineRender.transform.rotation.eulerAngles.x, LineRender.transform.rotation.eulerAngles.y, LineRender.transform.rotation.eulerAngles.z);
 
-       
-        //      ConveyorStach.transform.LookAt(new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z)) ;
-      
-        //     ConveyorStach.transform.LookAt(ConveyorEndTrans);
-          //  StartPosSCTrans.transform.LookAt(ConveyorStartTrans);
-        
-        // ConveyorStach.transform.localRotation = Quaternion.Euler(LineRender.transform.rotation.eulerAngles.x, LineRender.transform.rotation.eulerAngles.y, LineRender.transform.rotation.eulerAngles.z); // try to play with that a bit
+            // Vector3 targetPostition = new Vector3(ConveyorEndTrans.position.x,
+            //                         ConveyorEndTrans.transform.position.y,
+            //                          ConveyorEndTrans.position.z);
+            // ConveyorStach.transform.LookAt(targetPostition);
+
+            //ConveyorStach.transform.LookAt(ConveyorEndTrans);
+
+
+
+            //ConveyorStach.transform.eulerAngles = new Vector3(0,180, 0); 
+
+            //      ConveyorStach.transform.LookAt(new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z)) ;
+            //ConveyorStach.transform.localRotation = Quaternion.Euler(5, 0, 5);
+            //ConveyorStach.transform.LookAt(ConveyorEndTrans);
+            //  StartPosSCTrans.transform.LookAt(ConveyorStartTrans);
+
+            // ConveyorStach.transform.localRotation = Quaternion.Euler(LineRender.transform.rotation.eulerAngles.x, LineRender.transform.rotation.eulerAngles.y, LineRender.transform.rotation.eulerAngles.z); // try to play with that a bit
 
 
 
