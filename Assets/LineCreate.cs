@@ -67,23 +67,28 @@ public class LineCreate : MonoBehaviour
             if (counter == 0)
             {
 
-             //   ConveyorStach = Instantiate(StarchConeyorTrans.gameObject, new Vector3(ConveyorStartTrans.position.x - 5, ConveyorStartTrans.position.y, ConveyorStartTrans.position.z), Quaternion.identity);
+              ConveyorStach = Instantiate(StarchConeyorTrans.gameObject, new Vector3(ConveyorStartTrans.position.x - 5, ConveyorStartTrans.position.y, 3), Quaternion.identity);
 
                 counter++;
             }
 
-            //try this 
-            //https://answers.unity.com/questions/551461/how-to-scale-an-object-between-two-values-over-dis.html
+         
 
             //scaling with the object
 
-            //    Vector3 centerPos = new Vector3(ConveyorStartTrans.position.x + ConveyorEndTrans.transform.position.x, ConveyorStartTrans.position.y +
-            //       ConveyorEndTrans.transform.position.y) / 2f;
+               Vector3 centerPos = new Vector3(ConveyorStartTrans.position.x + ConveyorEndTrans.transform.position.x, ConveyorStartTrans.position.y+3 +
+                ConveyorEndTrans.transform.position.y+3) / 2f;
+            centerPos.z = -6.3f;
 
-            //    float scaleX = Vector3.Distance(new Vector3(ConveyorStartTrans.position.x, 0, 0), new Vector3(ConveyorEndTrans.transform.position.x, 0, 0));
-            ////       float scaleY = Vector3.Distance(new Vector3(0, ConveyorStartTrans.position.y, 0), new Vector3(0, ConveyorEndTrans.transform.position.y, 0));
-            //       ConveyorStach.transform.position = centerPos;
-            //    ConveyorStach.transform.localScale = new Vector3(scaleX, 2, 1);
+               float scaleX = Vector3.Distance(new Vector3(ConveyorStartTrans.position.x, 0, 0), new Vector3(ConveyorEndTrans.transform.position.x, 0, 0));
+               //   float scaleY = Vector3.Distance(new Vector3(0, ConveyorStartTrans.position.y, 0), new Vector3(0, ConveyorEndTrans.transform.position.y, 0));
+                 ConveyorStach.transform.position = centerPos;
+               ConveyorStach.transform.localScale = new Vector3(scaleX, 0.3f, 1);
+            Vector3 eulerRotation = new Vector3(LineRender.transform.rotation.eulerAngles.x, LineRender.transform.rotation.eulerAngles.y, LineRender.transform.rotation.eulerAngles.z);
+
+            ConveyorStach.transform.rotation = Quaternion.Euler(eulerRotation);
+
+            // ConveyorStach.transform.localRotation = Quaternion.Euler(LineRender.transform.rotation.eulerAngles.x, LineRender.transform.rotation.eulerAngles.y, LineRender.transform.rotation.eulerAngles.z); // try to play with that a bit
 
 
 
@@ -91,9 +96,8 @@ public class LineCreate : MonoBehaviour
             //need to be a combination of these two
 
 
-            //   ConveyorStach.transform.localScale = new Vector3(Mathf.Abs(ConveyorStartTrans.position.x - ConveyorEndTrans.position.x), 0.1f, LineRender.startWidth);
-            //       ConveyorStach.transform.position = new Vector3((ConveyorStartTrans.position.x + ConveyorEndTrans.position.x), (ConveyorStartTrans.position.y + ConveyorEndTrans.position.y) + 2, LineRender.GetPosition(1).z);
-            //     ConveyorStach.transform.localRotation = Quaternion.Euler(0, 0, 0); // try to play with that a bit
+            //  ConveyorStach.transform.localScale = new Vector3(Mathf.Abs(ConveyorStartTrans.position.x - ConveyorEndTrans.position.x), 0.1f, LineRender.startWidth);
+            //    ConveyorStach.transform.position = new Vector3((ConveyorStartTrans.position.x + ConveyorEndTrans.position.x), (ConveyorStartTrans.position.y + ConveyorEndTrans.position.y) + 2, LineRender.GetPosition(1).z);
 
             // Debug.Log("ConveyorStach roattion.y: " + ConveyorStach.transform.rotation.eulerAngles.z);
             //   Debug.Log("LINE render roattion.y: " + LineRender.transform.rotation.eulerAngles.z);
