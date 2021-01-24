@@ -84,11 +84,15 @@ public class LineCreate : MonoBehaviour
                //   float scaleY = Vector3.Distance(new Vector3(0, ConveyorStartTrans.position.y, 0), new Vector3(0, ConveyorEndTrans.transform.position.y, 0));
                  ConveyorStach.transform.position = centerPos;
                ConveyorStach.transform.localScale = new Vector3(scaleX, 0.3f, 1);
-            Vector3 eulerRotation = new Vector3(LineRender.transform.rotation.eulerAngles.x, LineRender.transform.rotation.eulerAngles.y, LineRender.transform.rotation.eulerAngles.z);
+            //Vector3 eulerRotation = new Vector3(LineRender.transform.rotation.eulerAngles.x, LineRender.transform.rotation.eulerAngles.y, LineRender.transform.rotation.eulerAngles.z);
 
-            ConveyorStach.transform.rotation = Quaternion.Euler(eulerRotation);
-
-            // ConveyorStach.transform.localRotation = Quaternion.Euler(LineRender.transform.rotation.eulerAngles.x, LineRender.transform.rotation.eulerAngles.y, LineRender.transform.rotation.eulerAngles.z); // try to play with that a bit
+       
+        //      ConveyorStach.transform.LookAt(new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z)) ;
+      
+        //     ConveyorStach.transform.LookAt(ConveyorEndTrans);
+          //  StartPosSCTrans.transform.LookAt(ConveyorStartTrans);
+        
+        // ConveyorStach.transform.localRotation = Quaternion.Euler(LineRender.transform.rotation.eulerAngles.x, LineRender.transform.rotation.eulerAngles.y, LineRender.transform.rotation.eulerAngles.z); // try to play with that a bit
 
 
 
