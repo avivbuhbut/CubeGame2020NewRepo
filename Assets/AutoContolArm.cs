@@ -20,12 +20,18 @@ public class AutoContolArm : MonoBehaviour
     bool RobotHasMoved;
     bool ProductDeliverd;
     Vector3 AnchorStartConfiguration;
+    float timeRobotBackAtStartPos=3;
+    float SpringDeafult;
+    float SprintdamperDeafult;
     // Start is called before the first frame update
     void Start()
     {
         AnchorStartConfiguration = new Vector3(Arm.GetComponent<SpringJoint>().anchor.x,
             Arm.GetComponent<SpringJoint>().anchor.y,
             Arm.GetComponent<SpringJoint>().anchor.z);
+
+        SpringDeafult = 40.43f;
+        SprintdamperDeafult = 13.66f;
         StartPosRoboticArm = this.transform.position;
 
     }
@@ -57,7 +63,7 @@ public class AutoContolArm : MonoBehaviour
             SpringJointParent.spring = 1000.4f;
             SpringJointParent.damper = 400;
           //  ArmthrowObject = false;
-
+        
             float Horizantal = Input.GetAxis("Horizontal");
 
             /*time move the robot to the left or right*/
@@ -78,10 +84,14 @@ public class AutoContolArm : MonoBehaviour
 
                 if ((int)Vector3.Distance(StartPosRoboticArm, RobotPosToMoveTo)==4)
                 {
+                    timeLeftBeforeMovment = 3;
                     ProductDeliverd = true;
                     Debug.Log("Got to positino");
                     Arm.GetComponent<SpringJoint>().connectedBody = null;
-                    this.transform.GetComponentInChildren<StickToIngredient>().ColidedWithFlour = false;
+                    Arm.GetComponent<Rigidbody>().mass = 1;
+                   this.transform.GetComponentInChildren<StickToIngredient>().ColidedWithFlour = false;
+            
+
                 }
               //  Arm.transform.GetComponent<Rigidbody>().AddForce(Arm.right * Horizantal, ForceMode.Impulse);
               //   SpringJointParent.connectedBody = null;
@@ -98,6 +108,7 @@ public class AutoContolArm : MonoBehaviour
         if (ProductDeliverd == false)
         {
             timeLeft -= 0.8f * Time.deltaTime;
+
             Debug.Log((int)timeLeft);
             if ((int)timeLeft == 0 && ColidedWithFlour == false)
             {
@@ -112,6 +123,8 @@ public class AutoContolArm : MonoBehaviour
         if (ProductDeliverd == true && this.transform.GetComponentInChildren<StickToIngredient>().ColidedWithFlour == false)
         {
 
+            timeRobotBackAtStartPos -= 0.8f * Time.deltaTime;
+
             /*droping product done, come back to start pos*/
 
             this.transform.position = Vector3.MoveTowards(this.transform.position,
@@ -121,10 +134,11 @@ public class AutoContolArm : MonoBehaviour
             RobotPosToMoveTo = this.transform.position;
             Debug.Log((int)Vector3.Distance(StartPosRoboticArm, RobotPosToMoveTo));
 
-            if ((int)Vector3.Distance(StartPosRoboticArm, RobotPosToMoveTo) == 0)
+            if ((int)Vector3.Distance(StartPosRoboticArm, RobotPosToMoveTo) == 0 && (int)timeRobotBackAtStartPos==0)
             {
                 Arm.GetComponent<SpringJoint>().anchor = AnchorStartConfiguration;
                      ProductDeliverd = false;
+                timeRobotBackAtStartPos = 3;
             }
 
             // ProductDeliverd = false;
