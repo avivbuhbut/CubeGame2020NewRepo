@@ -18,6 +18,12 @@ public class StickToIngredient : MonoBehaviour
     void Update()
     {
 
+     //   Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);                    ///Very Useful Code! - tells the object name when clicked by the mouse
+
+        // Casts the ray and get the first game object hit
+      
+          //  Debug.DrawRay(this.transform.position, transform.TransformDirection(Vector3.down) * 10, Color.white);
+
         if (Input.GetKey(KeyCode.L))
         {
             SpringJointArm.spring = 0;

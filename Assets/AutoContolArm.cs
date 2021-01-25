@@ -75,7 +75,7 @@ public class AutoContolArm : MonoBehaviour
               //  Arm.GetComponent<SpringJoint>().damper = 160f;
                 this.transform.position = Vector3.MoveTowards(this.transform.position, 
                     new Vector3(this.transform.position.x - 2f,this.transform.position.y, this.transform.position.z)
-                    , 2 * Time.deltaTime);
+                    , 2.2f * Time.deltaTime);
 
 
                 RobotPosToMoveTo = this.transform.position;
@@ -132,7 +132,7 @@ public class AutoContolArm : MonoBehaviour
 
             this.transform.position = Vector3.MoveTowards(this.transform.position,
           StartPosRoboticArm
-           , 2 * Time.deltaTime);
+           , 2.2f * Time.deltaTime);
 
             RobotPosToMoveTo = this.transform.position;
 
