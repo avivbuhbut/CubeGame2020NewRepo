@@ -79,9 +79,10 @@ public class LineCreate : MonoBehaviour
 
 
 
-
+            ConveyorStach.transform.Find("StartPos").position = new Vector3(ConveyorStartTrans.position.x, ConveyorStartTrans.position.y+1.5f, ConveyorStartTrans.position.z)  ;
+            ConveyorStach.transform.Find("EndPos").position = new Vector3(ConveyorEndTrans.position.x, ConveyorEndTrans.position.y + 1.5f, ConveyorEndTrans.position.z);
             //try ConveyorStach rotation.z  = ConveyorEndTrans.position.y *5
-   
+
 
 
             float scaleX = Vector3.Distance(new Vector3(ConveyorStartTrans.position.x + 1, 0, 0), new Vector3(ConveyorEndTrans.transform.position.x+1, 0, 0));
@@ -94,7 +95,7 @@ public class LineCreate : MonoBehaviour
 
             Physics.IgnoreCollision(ConveyorStach.GetComponent<BoxCollider>(), PlayerPos.GetComponent<BoxCollider>());
 
-            centerPos.z = -6.3f;
+            centerPos.z = -7.2f;
             ConveyorStach.transform.localScale = new Vector3(scaleX, 0.3f, 3);
 
          //     ConveyorStach.transform.localRotation = Quaternion.Euler(ConveyorStach.transform.position.x, ConveyorStach.transform.position.y, -ConveyorEndTrans.transform.position.y * 10) ;

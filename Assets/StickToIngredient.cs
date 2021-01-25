@@ -44,12 +44,17 @@ public class StickToIngredient : MonoBehaviour
     void OnCollisionStay(Collision collision)
     {
 
-        if(collision.transform.name == "Flour")
-        SpringJointArm.connectedBody = collision.transform.GetComponent<Rigidbody>();
+        if (collision.transform.name == "Flour" || collision.transform.name == "Flour 1(Clone)")
+        {
+            SpringJointArm.connectedBody = collision.transform.GetComponent<Rigidbody>();
+         
+            //collision.transform.position = new Vector3(  SpringJointArm.transform.position.x, collision.transform.position.y, collision.transform.position.z);
+
+        }
     }
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.transform.name == "Flour")
+        if (collision.transform.name == "Flour" || collision.transform.name == "Flour 1(Clone)")
         {
             ColidedWithFlour = true;
         

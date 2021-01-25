@@ -58,7 +58,7 @@ public class AutoContolArm : MonoBehaviour
         if (this.transform.GetComponentInChildren<StickToIngredient>().ColidedWithFlour)
         {
             timeLeftBeforeMovment -= 0.8f * Time.deltaTime;
-            Debug.Log("HERE");
+
         //    SpringJointParent.connectedBody.GetComponent<Rigidbody>().mass = 1;
             SpringJointParent.spring = 1000.4f;
             SpringJointParent.damper = 400;
@@ -69,13 +69,14 @@ public class AutoContolArm : MonoBehaviour
             /*time move the robot to the left or right*/
             if ((int)timeLeftBeforeMovment == 0 )
             {
-              // ArmthrowObject = true;
+                // ArmthrowObject = true;
 
                 /*move the robot to left*/
+              //  Arm.GetComponent<SpringJoint>().damper = 160f;
                 this.transform.position = Vector3.MoveTowards(this.transform.position, 
-                    new Vector3(this.transform.position.x - 1.3f,this.transform.position.y, this.transform.position.z)
+                    new Vector3(this.transform.position.x - 2f,this.transform.position.y, this.transform.position.z)
                     , 2 * Time.deltaTime);
-                Debug.Log((int)Vector3.Distance(StartPosRoboticArm, RobotPosToMoveTo));
+
 
                 RobotPosToMoveTo = this.transform.position;
                 /*reach the position to the left , drop the product*/
@@ -86,8 +87,10 @@ public class AutoContolArm : MonoBehaviour
                 {
                     timeLeftBeforeMovment = 3;
                     ProductDeliverd = true;
-                    Debug.Log("Got to positino");
+
                     Arm.GetComponent<SpringJoint>().connectedBody = null;
+                  //  Arm.GetComponent<SpringJoint>().damper = 7.9f;
+
                     Arm.GetComponent<Rigidbody>().mass = 1;
                    this.transform.GetComponentInChildren<StickToIngredient>().ColidedWithFlour = false;
             
@@ -109,7 +112,7 @@ public class AutoContolArm : MonoBehaviour
         {
             timeLeft -= 0.8f * Time.deltaTime;
 
-            Debug.Log((int)timeLeft);
+
             if ((int)timeLeft == 0 && ColidedWithFlour == false)
             {
                 SpringJointParent.connectedBody.GetComponent<Rigidbody>().mass = 45.19f;
@@ -132,7 +135,7 @@ public class AutoContolArm : MonoBehaviour
            , 2 * Time.deltaTime);
 
             RobotPosToMoveTo = this.transform.position;
-            Debug.Log((int)Vector3.Distance(StartPosRoboticArm, RobotPosToMoveTo));
+
 
             if ((int)Vector3.Distance(StartPosRoboticArm, RobotPosToMoveTo) == 0 && (int)timeRobotBackAtStartPos==0)
             {
