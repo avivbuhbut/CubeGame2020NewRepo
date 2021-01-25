@@ -15,12 +15,12 @@ public class getConveyorEnd : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
-     void OnCollisionEnter(Collision collision)
+     void OnCollisionStay(Collision collision)
     {
-        if(collision.transform.name== "ConeyorBlockEnd")
+        if(collision.transform.name== "ConeyorBlockEnd2")
         {
             HitConveyorEnd = true;
             ConveyorEnd = collision.transform;

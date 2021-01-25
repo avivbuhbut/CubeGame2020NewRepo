@@ -11,12 +11,14 @@ public class ConveyorLineRender : MonoBehaviour
     public LineRenderer LineRender;
 
 
-     Transform PlayerTrans;
+  Transform PlayerTrans;
     bool hitConeyorStart;
     bool hitConvyorEnd;
     Transform ConveyorStartTrans;
     Transform ConveyorEndTrans;
     public Transform StarchConeyorTrans;
+    Transform EndConvTrans;
+
 
     Vector3 centerPos;
     GameObject ConveyorStach;
@@ -27,7 +29,12 @@ public class ConveyorLineRender : MonoBehaviour
     bool HitPlayer;
     void Start()
     {
-     
+        LineRender.startColor = Color.black;
+        LineRender.endColor = Color.black;
+        LineRender.startWidth = 1f;
+        LineRender.endWidth = 1f;
+        LineRender.positionCount = 2;
+        LineRender.useWorldSpace = true;
     }
 
     // Update is called once per frame
@@ -44,12 +51,7 @@ public class ConveyorLineRender : MonoBehaviour
 
         //For creating line renderer object
 
-        LineRender.startColor = Color.black;
-        LineRender.endColor = Color.black;
-        LineRender.startWidth = 1f;
-        LineRender.endWidth = 1f;
-        LineRender.positionCount = 2;
-        LineRender.useWorldSpace = true;
+    
 
 
         //For drawing line in the world space, provide the x,y,z values
@@ -57,21 +59,27 @@ public class ConveyorLineRender : MonoBehaviour
         // set the position
         if (HitPlayer)
         {
-            LineRender.SetPosition(0, ConveyorStartTrans.transform.position);
+
+            Debug.Log("HitPlayer");
+            
+            LineRender.SetPosition(0, this.transform.position);
             LineRender.SetPosition(1, PlayerTrans.transform.position);
         }
-        /*
+
         if (PlayerTrans.transform.GetComponent<getConveyorEnd>().HitConveyorEnd)
         {
             LineRender.SetPosition(1, PlayerTrans.transform.GetComponent<getConveyorEnd>().ConveyorEnd.position);
-            // LineRender.SetPosition(1)
+        }
+        EndConvTrans = PlayerTrans.transform.GetComponent<getConveyorEnd>().ConveyorEnd;
 
-            float _Distance = Vector3.Distance(ConveyorStartTrans.position, PlayerTrans.transform.GetComponent<getConveyorEnd>().ConveyorEnd.position);
+        Debug.Log("EndConvTrans.position.x" + EndConvTrans.position.x);
+      
+        float _Distance = Vector3.Distance(ConveyorStartTrans.position, EndConvTrans.position);
             if (counter == 0)
             {
-
+            Debug.Log("Instantiate) - not getting into here i dont know why!");
                 ConveyorStach = Instantiate(StarchConeyorTrans.gameObject, new Vector3(this.transform.position.x + 10, this.transform.position.y, 3), Quaternion.identity);
-
+ 
                 //ConveyorStach.transform.Rotate(90.0f, 90.0f, 90.0f, Space.Self); ;
                 counter++;
 
@@ -79,22 +87,22 @@ public class ConveyorLineRender : MonoBehaviour
 
             }
 
+            
 
-
-            ConveyorStach.transform.Find("StartPos").position = new Vector3(ConveyorStartTrans.position.x, ConveyorStartTrans.position.y + 1.5f, ConveyorStartTrans.position.z);
-            ConveyorStach.transform.Find("EndPos").position = new Vector3(PlayerTrans.transform.GetComponent<getConveyorEnd>().ConveyorEnd.position.x,
-               PlayerTrans.transform.GetComponent<getConveyorEnd>().ConveyorEnd.position.y + 1.5f, PlayerTrans.transform.GetComponent<getConveyorEnd>().ConveyorEnd.position.z);
+            ConveyorStach.transform.Find("StartPos").position = new Vector3(this.transform.position.x, this.transform.position.y + 1.5f, this.transform.position.z);
+            ConveyorStach.transform.Find("EndPos").position = new Vector3(EndConvTrans.position.x,
+              EndConvTrans.position.y + 1.5f, EndConvTrans.position.z);
             //try ConveyorStach rotation.z  = ConveyorEndTrans.position.y *5
 
 
 
-            float scaleX = Vector3.Distance(new Vector3(ConveyorStartTrans.position.x + 1, 0, 0), new Vector3(PlayerTrans.transform.GetComponent<getConveyorEnd>().ConveyorEnd.position.x + 1, 0, 0));
+            float scaleX = Vector3.Distance(new Vector3(this.transform.position.x + 1, 0, 0), new Vector3(EndConvTrans.position.x + 1, 0, 0));
 
             ConveyorStach.transform.position = centerPos;
 
 
-            centerPos = new Vector3(ConveyorStartTrans.position.x + PlayerTrans.transform.GetComponent<getConveyorEnd>().ConveyorEnd.position.x, ConveyorStartTrans.position.y + 0.9f +
-        PlayerTrans.transform.GetComponent<getConveyorEnd>().ConveyorEnd.position.y + 0.9f) / 2;
+            centerPos = new Vector3(this.transform.position.x + EndConvTrans.position.x, this.transform.position.y + 0.9f +
+       EndConvTrans.position.y + 0.9f) / 2;
 
             Physics.IgnoreCollision(ConveyorStach.GetComponent<BoxCollider>(), PlayerTrans.GetComponent<BoxCollider>());
 
@@ -160,7 +168,7 @@ public class ConveyorLineRender : MonoBehaviour
 
             // Debug.Log("ConveyorStach roattion.y: " + ConveyorStach.transform.rotation.eulerAngles.z);
             //   Debug.Log("LINE render roattion.y: " + LineRender.transform.rotation.eulerAngles.z);
-        }*/
+        
 
     }
 
