@@ -41,6 +41,8 @@ public class StickToIngredient : MonoBehaviour
 
         }
 
+        
+
 
     }
 
@@ -54,7 +56,7 @@ public class StickToIngredient : MonoBehaviour
         {
             SpringJointArm.connectedBody = collision.transform.GetComponent<Rigidbody>();
          
-            //collision.transform.position = new Vector3(  SpringJointArm.transform.position.x, collision.transform.position.y, collision.transform.position.z);
+      //    collision.transform.position = new Vector3(  this.transform.position.x  , this.transform.position.y-3, this.transform.position.z);
 
         }
     }

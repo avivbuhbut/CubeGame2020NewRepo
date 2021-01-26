@@ -97,18 +97,22 @@ public class AutoContolArm : MonoBehaviour
           //  ArmthrowObject = false;
         
             float Horizantal = Input.GetAxis("Horizontal");
-
-            /*time move the robot to the left or right*/
-            if ((int)timeLeftBeforeMovment == 0 )
+        
+                /*time move the robot to the left or right*/
+                if ((int)timeLeftBeforeMovment <= 0 )
             {
-                // ArmthrowObject = true;
 
-                /*move the robot to left*/
-              //  Arm.GetComponent<SpringJoint>().damper = 160f;
-                this.transform.position = Vector3.MoveTowards(this.transform.position, 
-                    new Vector3(this.transform.position.x - 2f,this.transform.position.y, this.transform.position.z)
-                    , 2.2f * Time.deltaTime);
+                if (GoLeft)
+                {
+                    // ArmthrowObject = true;
 
+                    /*move the robot to left*/
+                    //  Arm.GetComponent<SpringJoint>().damper = 160f;
+
+                    this.transform.position = Vector3.MoveTowards(this.transform.position,
+                        new Vector3(this.transform.position.x - 2f, this.transform.position.y, this.transform.position.z)
+                        , 2.2f * Time.deltaTime);
+              
 
                 RobotPosToMoveTo = this.transform.position;
                 /*reach the position to the left , drop the product*/
@@ -128,13 +132,15 @@ public class AutoContolArm : MonoBehaviour
             
 
                 }
-              //  Arm.transform.GetComponent<Rigidbody>().AddForce(Arm.right * Horizantal, ForceMode.Impulse);
-              //   SpringJointParent.connectedBody = null;
-              //timeLeftBeforeSwing = 0;
-            }
-       
+                }
 
-         
+                //  Arm.transform.GetComponent<Rigidbody>().AddForce(Arm.right * Horizantal, ForceMode.Impulse);
+                //   SpringJointParent.connectedBody = null;
+                //timeLeftBeforeSwing = 0;
+            }
+
+
+
 
 
         }
