@@ -20,7 +20,7 @@ public class getConveyorEnd : MonoBehaviour
 
      void OnCollisionStay(Collision collision)
     {
-        if(collision.transform.name== "ConeyorBlockEnd2")
+        if(collision.transform.name== "ConeyorBlockEnd2"|| collision.transform.name == "ConeyorBlockEnd2(Clone)")
         {
             HitConveyorEnd = true;
             ConveyorEnd = collision.transform;

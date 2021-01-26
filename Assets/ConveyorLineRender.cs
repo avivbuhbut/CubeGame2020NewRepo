@@ -27,6 +27,7 @@ public class ConveyorLineRender : MonoBehaviour
     float angel = 1;
 
     bool HitPlayer;
+
     void Start()
     {
         LineRender.startColor = Color.black;
@@ -72,13 +73,13 @@ public class ConveyorLineRender : MonoBehaviour
         }
         EndConvTrans = PlayerTrans.transform.GetComponent<getConveyorEnd>().ConveyorEnd;
 
-        Debug.Log("EndConvTrans.position.x" + EndConvTrans.position.x);
-      
-        float _Distance = Vector3.Distance(ConveyorStartTrans.position, EndConvTrans.position);
+
+
+       // float _Distance = Vector3.Distance(ConveyorStartTrans.position, EndConvTrans.position);
             if (counter == 0)
             {
-            Debug.Log("Instantiate) - not getting into here i dont know why!");
-                ConveyorStach = Instantiate(StarchConeyorTrans.gameObject, new Vector3(this.transform.position.x + 10, this.transform.position.y, 3), Quaternion.identity);
+            Debug.Log("Problem counter:" + counter);
+            ConveyorStach = Instantiate(StarchConeyorTrans.gameObject, new Vector3(this.transform.position.x + 10, this.transform.position.y, 3), Quaternion.identity);
  
                 //ConveyorStach.transform.Rotate(90.0f, 90.0f, 90.0f, Space.Self); ;
                 counter++;
