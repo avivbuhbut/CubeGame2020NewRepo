@@ -8,6 +8,7 @@ public class StickToIngredient : MonoBehaviour
 
     public SpringJoint SpringJointArm;
     public bool ColidedWithFlour;
+    public Transform ArmHitTransfrom;
     // Start is called before the first frame update
     void Start()
     {
@@ -51,7 +52,7 @@ public class StickToIngredient : MonoBehaviour
 
     void OnCollisionStay(Collision collision)
     {
-
+        ArmHitTransfrom = collision.transform;
         if (collision.transform.name == "Flour" || collision.transform.name == "Flour 1(Clone)")
         {
             SpringJointArm.connectedBody = collision.transform.GetComponent<Rigidbody>();

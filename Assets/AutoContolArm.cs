@@ -32,6 +32,11 @@ public class AutoContolArm : MonoBehaviour
     RaycastHit hit;
     bool GoLeft;
     bool GoRight;
+    bool firstTimeActive;
+    RaycastHit hitUnderArm;
+    bool DoneLiftArm;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -65,6 +70,7 @@ public class AutoContolArm : MonoBehaviour
                 GoLeft = true;
                 GoRight = false;
 
+
             }
 
             if (hit.collider.gameObject == RightArrowRoboticArm.gameObject)
@@ -77,6 +83,8 @@ public class AutoContolArm : MonoBehaviour
 
         }
 
+
+
         if (Input.GetKey(KeyCode.O))
         {
            // Vector3 screenPosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, this.transform.position.z);
@@ -86,8 +94,120 @@ public class AutoContolArm : MonoBehaviour
                 new Vector3(this.transform.position.x+5,this.transform.position.y,this.transform.position.z), Time.deltaTime * 1.1f);
         }
 
-     
-        if (this.transform.GetComponentInChildren<StickToIngredient>().ColidedWithFlour)
+        //Smart arm implementation (Work on distance of arm from the objecet and checks if there is an actuall object under the arm)
+        /*
+     if(Physics.Raycast(SpringJointParent.connectedBody.GetComponent<Rigidbody>().position, SpringJointParent.connectedBody.GetComponent<Rigidbody>().transform.TransformDirection(Vector3.down), out hitUnderArm)){
+          
+            
+          //  Debug.Log(hitUnderArm.transform.name);
+        
+        }
+
+        if (Vector3.Distance(SpringJointParent.connectedBody.GetComponent<Rigidbody>().position, hitUnderArm.transform.position) <= 6)
+        {
+
+            Debug.Log("Smart Arm");
+            if (ProductDeliverd == false && GoLeft && hitUnderArm.transform.name == "Flour" || hitUnderArm.transform.name == "Flour(Clone)")
+            {
+                // timeLeft -= 0.8f * Time.deltaTime;
+
+
+                if (ColidedWithFlour == false)//(int)timeLeft == 0 &&
+                {
+
+                    SpringJointParent.connectedBody.GetComponent<Rigidbody>().mass = 45.19f;
+                    SpringJointParent.spring = 0;
+                    SpringJointParent.damper = 0;
+                    //  timeLeft = 3;
+                }
+
+            }
+
+
+
+            if (ProductDeliverd == false && GoRight && hitUnderArm.transform.name == "Flour" || hitUnderArm.transform.name == "Flour(Clone)")
+            {
+                //  timeLeft -= 0.8f * Time.deltaTime;
+
+
+                if (ColidedWithFlour == false)//(int)timeLeft == 0 &&
+                {
+
+                    SpringJointParent.connectedBody.GetComponent<Rigidbody>().mass = 45.19f;
+                    SpringJointParent.spring = 0;
+                    SpringJointParent.damper = 0;
+                    //timeLeft = 3;
+                }
+            }
+        }*/
+
+            if (ProductDeliverd == false && GoLeft )
+            {
+                 timeLeft -= 0.8f * Time.deltaTime;
+
+
+                if ((int)timeLeft == 0 && ColidedWithFlour == false)
+                {
+
+                    SpringJointParent.connectedBody.GetComponent<Rigidbody>().mass = 45.19f;
+                    SpringJointParent.spring = 0;
+                    SpringJointParent.damper = 0;
+                timeLeft = 3;
+
+
+
+              
+            }
+                /*Try More
+            if (SpringJointParent.spring == 1000.4f && this.transform.GetComponentInChildren<StickToIngredient>().ArmHitTransfrom == null && DoneLiftArm == true)
+            {
+                SpringJointParent.connectedBody.GetComponent<Rigidbody>().mass = 45.19f;
+                SpringJointParent.spring = 0;
+                SpringJointParent.damper = 0;
+
+                if (SpringJointParent.spring == 0)
+                    DoneLiftArm = false;
+
+            }
+            if (this.transform.GetComponentInChildren<StickToIngredient>().ArmHitTransfrom.name != "Flour" && DoneLiftArm == false )
+            {
+             
+
+             
+                    SpringJointParent.spring = 1000.4f;
+                    SpringJointParent.damper = 400;
+
+                if (SpringJointParent.spring == 1000.4f)
+                    DoneLiftArm = true;
+
+
+            }
+            */
+
+
+        }
+
+
+
+            if (ProductDeliverd == false && GoRight )
+            {
+               timeLeft -= 0.8f * Time.deltaTime;
+
+
+                if ((int)timeLeft == 0 && ColidedWithFlour == false)
+                {
+
+                    SpringJointParent.connectedBody.GetComponent<Rigidbody>().mass = 45.19f;
+                    SpringJointParent.spring = 0;
+                    SpringJointParent.damper = 0;
+                    timeLeft = 3;
+                }
+            }
+
+        
+
+
+            if (this.transform.GetComponentInChildren<StickToIngredient>().ColidedWithFlour)
         {
             timeLeftBeforeMovment -= 0.8f * Time.deltaTime;
 
@@ -102,7 +222,7 @@ public class AutoContolArm : MonoBehaviour
                 if ((int)timeLeftBeforeMovment <= 0 )
             {
 
-                if (GoLeft)
+                if (GoLeft && GoRight == false)
                 {
                     // ArmthrowObject = true;
 
@@ -134,6 +254,39 @@ public class AutoContolArm : MonoBehaviour
                 }
                 }
 
+
+                if (GoRight && GoLeft == false)
+                {
+                    // ArmthrowObject = true;
+
+                    /*move the robot to left*/
+                    //  Arm.GetComponent<SpringJoint>().damper = 160f;
+
+                    this.transform.position = Vector3.MoveTowards(this.transform.position,
+                        new Vector3(this.transform.position.x + 2f, this.transform.position.y, this.transform.position.z)
+                        , 2.2f * Time.deltaTime);
+
+
+                    RobotPosToMoveTo = this.transform.position;
+                    /*reach the position to the left , drop the product*/
+
+                    Debug.Log((int)Vector3.Distance(StartPosRoboticArm, RobotPosToMoveTo));
+
+                    if ((int)Vector3.Distance(StartPosRoboticArm, RobotPosToMoveTo) == 4)
+                    {
+                        timeLeftBeforeMovment = 3;
+                        ProductDeliverd = true;
+
+                        Arm.GetComponent<SpringJoint>().connectedBody = null;
+                        //  Arm.GetComponent<SpringJoint>().damper = 7.9f;
+
+                        Arm.GetComponent<Rigidbody>().mass = 1;
+                        this.transform.GetComponentInChildren<StickToIngredient>().ColidedWithFlour = false;
+
+
+                    }
+                }
+
                 //  Arm.transform.GetComponent<Rigidbody>().AddForce(Arm.right * Horizantal, ForceMode.Impulse);
                 //   SpringJointParent.connectedBody = null;
                 //timeLeftBeforeSwing = 0;
@@ -146,20 +299,8 @@ public class AutoContolArm : MonoBehaviour
         }
 
 
-        if (ProductDeliverd == false)
-        {
-            timeLeft -= 0.8f * Time.deltaTime;
 
 
-            if ((int)timeLeft == 0 && ColidedWithFlour == false)
-            {
-                SpringJointParent.connectedBody.GetComponent<Rigidbody>().mass = 45.19f;
-                SpringJointParent.spring = 0;
-                SpringJointParent.damper = 0;
-                timeLeft = 3;
-            }
-
-        }
 
         if (ProductDeliverd == true && this.transform.GetComponentInChildren<StickToIngredient>().ColidedWithFlour == false)
         {
