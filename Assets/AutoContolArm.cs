@@ -37,6 +37,7 @@ public class AutoContolArm : MonoBehaviour
     bool DoneLiftArm;
     float ArmMass;
     float TimerLoweringArm;
+    bool HitChosenObject;
     // Start is called before the first frame update
     void Start()
     {
@@ -174,7 +175,8 @@ public class AutoContolArm : MonoBehaviour
 
         if (ProductDeliverd == false && GoLeft)
             {
-                timeLeft -= 0.8f * Time.deltaTime;
+
+            timeLeft -= 0.8f * Time.deltaTime;
 
 
                 if ((int)timeLeft == 0 && ColidedWithFlour == false)
@@ -182,52 +184,66 @@ public class AutoContolArm : MonoBehaviour
 
                 if (Physics.Raycast(SpringJointParent.connectedBody.GetComponent<Rigidbody>().position, SpringJointParent.connectedBody.GetComponent<Rigidbody>().transform.TransformDirection(Vector3.down), out hitUnderArm))
                 {
-                   // Debug.Log((int)Vector3.Distance(SpringJointParent.connectedBody.GetComponent<Rigidbody>().position, hitUnderArm.transform.position));
+                    // Debug.Log((int)Vector3.Distance(SpringJointParent.connectedBody.GetComponent<Rigidbody>().position, hitUnderArm.transform.position));
                     SpringJointParent.maxDistance = (int)Vector3.Distance(SpringJointParent.connectedBody.GetComponent<Rigidbody>().position, hitUnderArm.transform.position);
-                }
+         
 
+     
+                    
+                }
+            
                 SpringJointParent.connectedBody.GetComponent<Rigidbody>().mass = 45.19f;
                     SpringJointParent.spring = 0;
                     SpringJointParent.damper = 0;
                     timeLeft = 3;
 
 
-
-
+                if (hitUnderArm.transform.name == "Flour" || hitUnderArm.transform.name == "Flour(Clone)" && HitChosenObject == false)
+                {
+                    hitUnderArm.transform.GetComponent<FlourBackAndForthStrachConv>().Speed = 0.1f;
+                    HitChosenObject = true;
                 }
+
             }
-            /*Try More
-        if (SpringJointParent.spring == 1000.4f && this.transform.GetComponentInChildren<StickToIngredient>().ArmHitTransfrom == null && DoneLiftArm == true)
-        {
-            SpringJointParent.connectedBody.GetComponent<Rigidbody>().mass = 45.19f;
-            SpringJointParent.spring = 0;
-            SpringJointParent.damper = 0;
 
-            if (SpringJointParent.spring == 0)
-                DoneLiftArm = false;
 
+
+            
         }
-        if (this.transform.GetComponentInChildren<StickToIngredient>().ArmHitTransfrom.name != "Flour" && DoneLiftArm == false )
-        {
+
+
+        /*Try More
+    if (SpringJointParent.spring == 1000.4f && this.transform.GetComponentInChildren<StickToIngredient>().ArmHitTransfrom == null && DoneLiftArm == true)
+    {
+        SpringJointParent.connectedBody.GetComponent<Rigidbody>().mass = 45.19f;
+        SpringJointParent.spring = 0;
+        SpringJointParent.damper = 0;
+
+        if (SpringJointParent.spring == 0)
+            DoneLiftArm = false;
+
+    }
+    if (this.transform.GetComponentInChildren<StickToIngredient>().ArmHitTransfrom.name != "Flour" && DoneLiftArm == false )
+    {
 
 
 
-                SpringJointParent.spring = 1000.4f;
-                SpringJointParent.damper = 400;
+            SpringJointParent.spring = 1000.4f;
+            SpringJointParent.damper = 400;
 
-            if (SpringJointParent.spring == 1000.4f)
-                DoneLiftArm = true;
-
-
-        }
-        */
+        if (SpringJointParent.spring == 1000.4f)
+            DoneLiftArm = true;
 
 
+    }
+    */
 
 
 
 
-            if (ProductDeliverd == false && GoRight)
+
+
+        if (ProductDeliverd == false && GoRight)
             {
                 timeLeft -= 0.8f * Time.deltaTime;
 
@@ -253,7 +269,8 @@ public class AutoContolArm : MonoBehaviour
 
             if (this.transform.GetComponentInChildren<StickToIngredient>().ColidedWithFlour)
             {
-                timeLeftBeforeMovment -= 0.8f * Time.deltaTime;
+        
+            timeLeftBeforeMovment -= 0.8f * Time.deltaTime;
             SpringJointParent.maxDistance = 0;
                 //    SpringJointParent.connectedBody.GetComponent<Rigidbody>().mass = 1;
                 SpringJointParent.spring = 1000.4f;
@@ -294,8 +311,11 @@ public class AutoContolArm : MonoBehaviour
                             Arm.GetComponent<Rigidbody>().mass = 1;
                             this.transform.GetComponentInChildren<StickToIngredient>().ColidedWithFlour = false;
 
+                        HitChosenObject = false;
+                        hitUnderArm.transform.GetComponent<FlourBackAndForthStrachConv>().Speed = 0.8f;
 
-                        }
+
+                    }
                     }
 
 

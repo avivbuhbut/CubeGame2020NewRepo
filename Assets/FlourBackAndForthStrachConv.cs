@@ -10,10 +10,11 @@ public class FlourBackAndForthStrachConv : MonoBehaviour
     bool ColidedAnotherFlouronConv;
     bool ColidedStrachConv;
     Transform AnotherFlourOnConvTrans;
+     public  float Speed;
     // Start is called before the first frame update
     void Start()
     {
-        
+        Speed = 0.8f;
     }
 
     // Update is called once per frame
@@ -45,7 +46,7 @@ public class FlourBackAndForthStrachConv : MonoBehaviour
                 if (ReachStartPos == false)
                 {
                 this.transform.position = Vector3.MoveTowards(new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z),
-                    new Vector3(StartPos.x, this.transform.position.y, this.transform.position.z), 0.8f * Time.deltaTime);
+                    new Vector3(StartPos.x, this.transform.position.y, this.transform.position.z), Speed * Time.deltaTime);
 
 
                     Debug.Log((int)Vector3.Distance(this.transform.position, StartPos));
@@ -65,7 +66,7 @@ public class FlourBackAndForthStrachConv : MonoBehaviour
 
                 if (ReachStartPos)
                 {
-                this.transform.position = Vector3.MoveTowards(this.transform.position, EndPos, 0.8f * Time.deltaTime);
+                this.transform.position = Vector3.MoveTowards(this.transform.position, EndPos, Speed * Time.deltaTime);
 
                
                     if ((int)Vector3.Distance(this.transform.position, EndPos) == 0)
