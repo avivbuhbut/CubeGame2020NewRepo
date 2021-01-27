@@ -35,11 +35,13 @@ public class AutoContolArm : MonoBehaviour
     bool firstTimeActive;
     RaycastHit hitUnderArm;
     bool DoneLiftArm;
-
-
+    float ArmMass;
+    float TimerLoweringArm;
     // Start is called before the first frame update
     void Start()
     {
+        TimerLoweringArm = 2;
+        ArmMass = 70f;
         RightArrowOriginalColor = RightArrowRoboticArm.transform.GetComponent<Renderer>().material.color;
         LeftArrowOriginalColor = LeftArrowRoboticArm.transform.GetComponent<Renderer>().material.color;
         AnchorStartConfiguration = new Vector3(Arm.GetComponent<SpringJoint>().anchor.x,
@@ -87,270 +89,313 @@ public class AutoContolArm : MonoBehaviour
 
         if (Input.GetKey(KeyCode.O))
         {
-           // Vector3 screenPosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, this.transform.position.z);
+            // Vector3 screenPosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, this.transform.position.z);
             //this.transform.GetComponent<Rigidbody>().isKinematic = false;
 
             this.transform.position = Vector3.MoveTowards(this.transform.position,
-                new Vector3(this.transform.position.x+5,this.transform.position.y,this.transform.position.z), Time.deltaTime * 1.1f);
+                new Vector3(this.transform.position.x + 5, this.transform.position.y, this.transform.position.z), Time.deltaTime * 1.1f);
         }
 
         //Smart arm implementation (Work on distance of arm from the objecet and checks if there is an actuall object under the arm)
+
+
+
+            //  Debug.Log(hitUnderArm.transform.name);
+
+
         /*
-     if(Physics.Raycast(SpringJointParent.connectedBody.GetComponent<Rigidbody>().position, SpringJointParent.connectedBody.GetComponent<Rigidbody>().transform.TransformDirection(Vector3.down), out hitUnderArm)){
-          
-            
-          //  Debug.Log(hitUnderArm.transform.name);
-        
-        }
 
-        if (Vector3.Distance(SpringJointParent.connectedBody.GetComponent<Rigidbody>().position, hitUnderArm.transform.position) <= 6)
-        {
-
-            Debug.Log("Smart Arm");
-            if (ProductDeliverd == false && GoLeft && hitUnderArm.transform.name == "Flour" || hitUnderArm.transform.name == "Flour(Clone)")
+            Debug.Log((int)Vector3.Distance(SpringJointParent.connectedBody.GetComponent<Rigidbody>().position, hitUnderArm.transform.position));
+            if ((int)Vector3.Distance(SpringJointParent.connectedBody.GetComponent<Rigidbody>().position, hitUnderArm.transform.position) >4)
             {
-                // timeLeft -= 0.8f * Time.deltaTime;
-
-
-                if (ColidedWithFlour == false)//(int)timeLeft == 0 &&
+                if (ProductDeliverd == false && GoLeft == false && GoRight == false && hitUnderArm.transform.name != "Flour" || hitUnderArm.transform.name != "Flour(Clone)")
                 {
+                    TimerLoweringArm-= 0.8f * Time.deltaTime;
 
-                    SpringJointParent.connectedBody.GetComponent<Rigidbody>().mass = 45.19f;
-                    SpringJointParent.spring = 0;
-                    SpringJointParent.damper = 0;
-                    //  timeLeft = 3;
+                    if ((int)TimerLoweringArm == 0)
+                    {
+                        SpringJointParent.connectedBody.GetComponent<Rigidbody>().mass = ArmMass += 6;
+                        TimerLoweringArm = 2;
+                    }
+
                 }
 
-            }
-
-
-
-            if (ProductDeliverd == false && GoRight && hitUnderArm.transform.name == "Flour" || hitUnderArm.transform.name == "Flour(Clone)")
-            {
-                //  timeLeft -= 0.8f * Time.deltaTime;
-
-
-                if (ColidedWithFlour == false)//(int)timeLeft == 0 &&
-                {
-
-                    SpringJointParent.connectedBody.GetComponent<Rigidbody>().mass = 45.19f;
-                    SpringJointParent.spring = 0;
-                    SpringJointParent.damper = 0;
-                    //timeLeft = 3;
-                }
             }
         }*/
 
-            if (ProductDeliverd == false && GoLeft )
+        /*
+          if ((int)Vector3.Distance(SpringJointParent.connectedBody.GetComponent<Rigidbody>().position, hitUnderArm.transform.position) != 3
+              )
+          {
+
+              if (ProductDeliverd == false && GoLeft && hitUnderArm.transform.name != "Flour" || hitUnderArm.transform.name != "Flour(Clone)")
+              {
+
+                  SpringJointParent.connectedBody.GetComponent<Rigidbody>().mass = ArmMass -= 2;
+
+              }
+          }*/
+
+        /*
+        Debug.Log("Smart Arm");
+        if (ProductDeliverd == false && GoLeft && hitUnderArm.transform.name == "Flour" || hitUnderArm.transform.name == "Flour(Clone)")
+        {
+            // timeLeft -= 0.8f * Time.deltaTime;
+
+
+            if (ColidedWithFlour == false)//(int)timeLeft == 0 &&
             {
-                 timeLeft -= 0.8f * Time.deltaTime;
 
-
-                if ((int)timeLeft == 0 && ColidedWithFlour == false)
-                {
-
-                    SpringJointParent.connectedBody.GetComponent<Rigidbody>().mass = 45.19f;
-                    SpringJointParent.spring = 0;
-                    SpringJointParent.damper = 0;
-                timeLeft = 3;
-
-
-
-              
-            }
-                /*Try More
-            if (SpringJointParent.spring == 1000.4f && this.transform.GetComponentInChildren<StickToIngredient>().ArmHitTransfrom == null && DoneLiftArm == true)
-            {
                 SpringJointParent.connectedBody.GetComponent<Rigidbody>().mass = 45.19f;
                 SpringJointParent.spring = 0;
                 SpringJointParent.damper = 0;
-
-                if (SpringJointParent.spring == 0)
-                    DoneLiftArm = false;
-
+                //  timeLeft = 3;
             }
-            if (this.transform.GetComponentInChildren<StickToIngredient>().ArmHitTransfrom.name != "Flour" && DoneLiftArm == false )
-            {
-             
-
-             
-                    SpringJointParent.spring = 1000.4f;
-                    SpringJointParent.damper = 400;
-
-                if (SpringJointParent.spring == 1000.4f)
-                    DoneLiftArm = true;
-
-
-            }
-            */
-
 
         }
 
 
 
-            if (ProductDeliverd == false && GoRight )
+        if (ProductDeliverd == false && GoRight && hitUnderArm.transform.name == "Flour" || hitUnderArm.transform.name == "Flour(Clone)")
+        {
+            //  timeLeft -= 0.8f * Time.deltaTime;
+
+
+            if (ColidedWithFlour == false)//(int)timeLeft == 0 &&
             {
-               timeLeft -= 0.8f * Time.deltaTime;
+
+                SpringJointParent.connectedBody.GetComponent<Rigidbody>().mass = 45.19f;
+                SpringJointParent.spring = 0;
+                SpringJointParent.damper = 0;
+                //timeLeft = 3;
+            }
+        }
+    }*/
+
+        if (ProductDeliverd == false && GoLeft)
+            {
+                timeLeft -= 0.8f * Time.deltaTime;
 
 
                 if ((int)timeLeft == 0 && ColidedWithFlour == false)
                 {
 
-                    SpringJointParent.connectedBody.GetComponent<Rigidbody>().mass = 45.19f;
+                if (Physics.Raycast(SpringJointParent.connectedBody.GetComponent<Rigidbody>().position, SpringJointParent.connectedBody.GetComponent<Rigidbody>().transform.TransformDirection(Vector3.down), out hitUnderArm))
+                {
+                   // Debug.Log((int)Vector3.Distance(SpringJointParent.connectedBody.GetComponent<Rigidbody>().position, hitUnderArm.transform.position));
+                    SpringJointParent.maxDistance = (int)Vector3.Distance(SpringJointParent.connectedBody.GetComponent<Rigidbody>().position, hitUnderArm.transform.position);
+                }
+
+                SpringJointParent.connectedBody.GetComponent<Rigidbody>().mass = 45.19f;
                     SpringJointParent.spring = 0;
+                    SpringJointParent.damper = 0;
+                    timeLeft = 3;
+
+
+
+
+                }
+            }
+            /*Try More
+        if (SpringJointParent.spring == 1000.4f && this.transform.GetComponentInChildren<StickToIngredient>().ArmHitTransfrom == null && DoneLiftArm == true)
+        {
+            SpringJointParent.connectedBody.GetComponent<Rigidbody>().mass = 45.19f;
+            SpringJointParent.spring = 0;
+            SpringJointParent.damper = 0;
+
+            if (SpringJointParent.spring == 0)
+                DoneLiftArm = false;
+
+        }
+        if (this.transform.GetComponentInChildren<StickToIngredient>().ArmHitTransfrom.name != "Flour" && DoneLiftArm == false )
+        {
+
+
+
+                SpringJointParent.spring = 1000.4f;
+                SpringJointParent.damper = 400;
+
+            if (SpringJointParent.spring == 1000.4f)
+                DoneLiftArm = true;
+
+
+        }
+        */
+
+
+
+
+
+
+            if (ProductDeliverd == false && GoRight)
+            {
+                timeLeft -= 0.8f * Time.deltaTime;
+
+
+                if ((int)timeLeft == 0 && ColidedWithFlour == false)
+                {
+
+                if (Physics.Raycast(SpringJointParent.connectedBody.GetComponent<Rigidbody>().position, SpringJointParent.connectedBody.GetComponent<Rigidbody>().transform.TransformDirection(Vector3.down), out hitUnderArm))
+                {
+                    // Debug.Log((int)Vector3.Distance(SpringJointParent.connectedBody.GetComponent<Rigidbody>().position, hitUnderArm.transform.position));
+                    SpringJointParent.maxDistance = (int)Vector3.Distance(SpringJointParent.connectedBody.GetComponent<Rigidbody>().position, hitUnderArm.transform.position);
+                }
+                SpringJointParent.connectedBody.GetComponent<Rigidbody>().mass = 45.19f;
+
+                SpringJointParent.spring = 0;
                     SpringJointParent.damper = 0;
                     timeLeft = 3;
                 }
             }
 
-        
+
 
 
             if (this.transform.GetComponentInChildren<StickToIngredient>().ColidedWithFlour)
-        {
-            timeLeftBeforeMovment -= 0.8f * Time.deltaTime;
+            {
+                timeLeftBeforeMovment -= 0.8f * Time.deltaTime;
+            SpringJointParent.maxDistance = 0;
+                //    SpringJointParent.connectedBody.GetComponent<Rigidbody>().mass = 1;
+                SpringJointParent.spring = 1000.4f;
+                SpringJointParent.damper = 400;
+                //  ArmthrowObject = false;
 
-        //    SpringJointParent.connectedBody.GetComponent<Rigidbody>().mass = 1;
-            SpringJointParent.spring = 1000.4f;
-            SpringJointParent.damper = 400;
-          //  ArmthrowObject = false;
-        
-            float Horizantal = Input.GetAxis("Horizontal");
-        
+                float Horizantal = Input.GetAxis("Horizontal");
+
                 /*time move the robot to the left or right*/
-                if ((int)timeLeftBeforeMovment <= 0 )
+                if ((int)timeLeftBeforeMovment <= 0)
+                {
+
+                    if (GoLeft && GoRight == false)
+                    {
+                        // ArmthrowObject = true;
+
+                        /*move the robot to left*/
+                        //  Arm.GetComponent<SpringJoint>().damper = 160f;
+
+                        this.transform.position = Vector3.MoveTowards(this.transform.position,
+                            new Vector3(this.transform.position.x - 2f, this.transform.position.y, this.transform.position.z)
+                            , 2.2f * Time.deltaTime);
+
+
+                        RobotPosToMoveTo = this.transform.position;
+                        /*reach the position to the left , drop the product*/
+
+
+
+                        if ((int)Vector3.Distance(StartPosRoboticArm, RobotPosToMoveTo) == 4)
+                        {
+                            timeLeftBeforeMovment = 3;
+                            ProductDeliverd = true;
+
+                            Arm.GetComponent<SpringJoint>().connectedBody = null;
+                            //  Arm.GetComponent<SpringJoint>().damper = 7.9f;
+
+                            Arm.GetComponent<Rigidbody>().mass = 1;
+                            this.transform.GetComponentInChildren<StickToIngredient>().ColidedWithFlour = false;
+
+
+                        }
+                    }
+
+
+                    if (GoRight && GoLeft == false)
+                    {
+                        // ArmthrowObject = true;
+
+                        /*move the robot to left*/
+                        //  Arm.GetComponent<SpringJoint>().damper = 160f;
+
+                        this.transform.position = Vector3.MoveTowards(this.transform.position,
+                            new Vector3(this.transform.position.x + 2f, this.transform.position.y, this.transform.position.z)
+                            , 2.2f * Time.deltaTime);
+
+
+                        RobotPosToMoveTo = this.transform.position;
+                        /*reach the position to the left , drop the product*/
+
+                        Debug.Log((int)Vector3.Distance(StartPosRoboticArm, RobotPosToMoveTo));
+
+                        if ((int)Vector3.Distance(StartPosRoboticArm, RobotPosToMoveTo) == 4)
+                        {
+                            timeLeftBeforeMovment = 3;
+                            ProductDeliverd = true;
+
+                            Arm.GetComponent<SpringJoint>().connectedBody = null;
+                            //  Arm.GetComponent<SpringJoint>().damper = 7.9f;
+
+                            Arm.GetComponent<Rigidbody>().mass = 1;
+                            this.transform.GetComponentInChildren<StickToIngredient>().ColidedWithFlour = false;
+
+
+                        }
+                    }
+
+                    //  Arm.transform.GetComponent<Rigidbody>().AddForce(Arm.right * Horizantal, ForceMode.Impulse);
+                    //   SpringJointParent.connectedBody = null;
+                    //timeLeftBeforeSwing = 0;
+                }
+
+
+
+
+
+            }
+
+
+
+
+
+            if (ProductDeliverd == true && this.transform.GetComponentInChildren<StickToIngredient>().ColidedWithFlour == false)
             {
 
-                if (GoLeft && GoRight == false)
-                {
-                    // ArmthrowObject = true;
+                timeRobotBackAtStartPos -= 0.8f * Time.deltaTime;
 
-                    /*move the robot to left*/
-                    //  Arm.GetComponent<SpringJoint>().damper = 160f;
+                /*droping product done, come back to start pos*/
 
-                    this.transform.position = Vector3.MoveTowards(this.transform.position,
-                        new Vector3(this.transform.position.x - 2f, this.transform.position.y, this.transform.position.z)
-                        , 2.2f * Time.deltaTime);
-              
+                this.transform.position = Vector3.MoveTowards(this.transform.position,
+              StartPosRoboticArm
+               , 2.2f * Time.deltaTime);
 
                 RobotPosToMoveTo = this.transform.position;
-                /*reach the position to the left , drop the product*/
 
 
-
-                if ((int)Vector3.Distance(StartPosRoboticArm, RobotPosToMoveTo)==4)
+                if ((int)Vector3.Distance(StartPosRoboticArm, RobotPosToMoveTo) == 0 && (int)timeRobotBackAtStartPos == 0)
                 {
-                    timeLeftBeforeMovment = 3;
-                    ProductDeliverd = true;
-
-                    Arm.GetComponent<SpringJoint>().connectedBody = null;
-                  //  Arm.GetComponent<SpringJoint>().damper = 7.9f;
-
-                    Arm.GetComponent<Rigidbody>().mass = 1;
-                   this.transform.GetComponentInChildren<StickToIngredient>().ColidedWithFlour = false;
-            
-
-                }
+                    Arm.GetComponent<SpringJoint>().anchor = AnchorStartConfiguration;
+                    ProductDeliverd = false;
+                    timeRobotBackAtStartPos = 3;
                 }
 
+                // ProductDeliverd = false;
+            }
 
-                if (GoRight && GoLeft == false)
+
+
+
+
+            /*
+             *
+                     timeLeft -= 0.8f * Time.deltaTime;
+                Debug.Log((int)timeLeft);
+                if ((int)timeLeft == 0&& colidedWithFLour==false)
                 {
-                    // ArmthrowObject = true;
-
-                    /*move the robot to left*/
-                    //  Arm.GetComponent<SpringJoint>().damper = 160f;
-
-                    this.transform.position = Vector3.MoveTowards(this.transform.position,
-                        new Vector3(this.transform.position.x + 2f, this.transform.position.y, this.transform.position.z)
-                        , 2.2f * Time.deltaTime);
-
-
-                    RobotPosToMoveTo = this.transform.position;
-                    /*reach the position to the left , drop the product*/
-
-                    Debug.Log((int)Vector3.Distance(StartPosRoboticArm, RobotPosToMoveTo));
-
-                    if ((int)Vector3.Distance(StartPosRoboticArm, RobotPosToMoveTo) == 4)
-                    {
-                        timeLeftBeforeMovment = 3;
-                        ProductDeliverd = true;
-
-                        Arm.GetComponent<SpringJoint>().connectedBody = null;
-                        //  Arm.GetComponent<SpringJoint>().damper = 7.9f;
-
-                        Arm.GetComponent<Rigidbody>().mass = 1;
-                        this.transform.GetComponentInChildren<StickToIngredient>().ColidedWithFlour = false;
+                    SpringJointParent.spring = 0;
+                    SpringJointParent.damper = 0;
+                    ///TransColided.transform.GetComponent<Rigidbody>().isKinematic = true;
+                    //  TransColided.transform.position = new Vector3(this.transform.position.x, TransColided.transform.position.y-1 , this.transform.position.z);
+                    //timeLeft = 3;
+                }else if ((int)timeLeft==2&& colidedWithFLour)
+                {
+                    SpringJointParent.spring = 43;
+                    SpringJointParent.damper = 20;
 
 
-                    }
+
                 }
+        */
 
-                //  Arm.transform.GetComponent<Rigidbody>().AddForce(Arm.right * Horizantal, ForceMode.Impulse);
-                //   SpringJointParent.connectedBody = null;
-                //timeLeftBeforeSwing = 0;
-            }
-
-
-
-
-
-        }
-
-
-
-
-
-        if (ProductDeliverd == true && this.transform.GetComponentInChildren<StickToIngredient>().ColidedWithFlour == false)
-        {
-
-            timeRobotBackAtStartPos -= 0.8f * Time.deltaTime;
-
-            /*droping product done, come back to start pos*/
-
-            this.transform.position = Vector3.MoveTowards(this.transform.position,
-          StartPosRoboticArm
-           , 2.2f * Time.deltaTime);
-
-            RobotPosToMoveTo = this.transform.position;
-
-
-            if ((int)Vector3.Distance(StartPosRoboticArm, RobotPosToMoveTo) == 0 && (int)timeRobotBackAtStartPos==0)
-            {
-                Arm.GetComponent<SpringJoint>().anchor = AnchorStartConfiguration;
-                     ProductDeliverd = false;
-                timeRobotBackAtStartPos = 3;
-            }
-
-            // ProductDeliverd = false;
-        }
-
-
-
-
-
-        /*
-         *
-                 timeLeft -= 0.8f * Time.deltaTime;
-            Debug.Log((int)timeLeft);
-            if ((int)timeLeft == 0&& colidedWithFLour==false)
-            {
-                SpringJointParent.spring = 0;
-                SpringJointParent.damper = 0;
-                ///TransColided.transform.GetComponent<Rigidbody>().isKinematic = true;
-                //  TransColided.transform.position = new Vector3(this.transform.position.x, TransColided.transform.position.y-1 , this.transform.position.z);
-                //timeLeft = 3;
-            }else if ((int)timeLeft==2&& colidedWithFLour)
-            {
-                SpringJointParent.spring = 43;
-                SpringJointParent.damper = 20;
-
-
-
-            }
-    */
-
+        
     }
 
 
