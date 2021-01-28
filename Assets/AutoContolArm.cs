@@ -319,7 +319,7 @@ public class AutoContolArm : MonoBehaviour
 
 
 
-                        if ((int)Vector3.Distance(StartPosRoboticArm, RobotPosToMoveTo) == 4)
+                        if ((int)Vector3.Distance(StartPosRoboticArm, RobotPosToMoveTo) == 5)
                         {
                       
                         timeLeftBeforeMovment = 3;
@@ -358,7 +358,7 @@ public class AutoContolArm : MonoBehaviour
 
                         Debug.Log((int)Vector3.Distance(StartPosRoboticArm, RobotPosToMoveTo));
 
-                        if ((int)Vector3.Distance(StartPosRoboticArm, RobotPosToMoveTo) == 4)
+                        if ((int)Vector3.Distance(StartPosRoboticArm, RobotPosToMoveTo) == 5)
                         {
                         timeLeftBeforeMovment = 3;
                         // 

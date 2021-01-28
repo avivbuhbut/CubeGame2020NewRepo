@@ -31926,7 +31926,7 @@ SpringJoint:
   m_ConnectedBody: {fileID: 0}
   m_Anchor: {x: 0, y: 0.5, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -10.339739, y: 16.519512, z: -7.11}
+  m_ConnectedAnchor: {x: -10.340017, y: 16.519512, z: -7.11}
   serializedVersion: 2
   m_Spring: 40.43
   m_Damper: 7.9
@@ -36785,7 +36785,7 @@ PrefabInstance:
     - target: {fileID: 321892829657577473, guid: 53347165b6986f64dbac2940fec64ad5,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 19.16
+      value: 26.16
       objectReference: {fileID: 0}
     - target: {fileID: 321892829657577473, guid: 53347165b6986f64dbac2940fec64ad5,
         type: 3}
@@ -43887,7 +43887,7 @@ SpringJoint:
   m_ConnectedBody: {fileID: 0}
   m_Anchor: {x: 0, y: 0.5, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -33.549736, y: 16.519512, z: -7.11}
+  m_ConnectedAnchor: {x: -33.550014, y: 23.519512, z: -7.11}
   serializedVersion: 2
   m_Spring: 40.43
   m_Damper: 7.9
