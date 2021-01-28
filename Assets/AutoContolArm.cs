@@ -39,6 +39,9 @@ public class AutoContolArm : MonoBehaviour
     float TimerLoweringArm;
     bool HitChosenObject;
     Transform ProductTransfering;
+    float DurationPressMouse=3;
+    bool PositionEditRightActivate;
+    bool PositionEditLeftActivate;
     // Start is called before the first frame update
     void Start()
     {
@@ -65,27 +68,95 @@ public class AutoContolArm : MonoBehaviour
         Physics.Raycast(ray, out hit);
 
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetKey(KeyCode.Mouse0))
         {
-            if (hit.collider.gameObject == LeftArrowRoboticArm.gameObject)
+ 
+            DurationPressMouse -= 0.8f * Time.deltaTime;
+            Debug.Log((int)DurationPressMouse);
+            if (DurationPressMouse <= 0)
             {
+                DurationPressMouse = 0;
+            }
+            
+
+            if((int)DurationPressMouse==0 && hit.collider.gameObject == LeftArrowRoboticArm.gameObject)
+                LeftArrowRoboticArm.transform.GetComponent<Renderer>().material.color = Color.Lerp(Color.white, Color.black, Mathf.PingPong(Time.time, 1));
+
+
+            if ((int)DurationPressMouse == 0 && hit.collider.gameObject == RightArrowRoboticArm.gameObject)
+                RightArrowRoboticArm.transform.GetComponent<Renderer>().material.color = Color.Lerp(Color.white, Color.black, Mathf.PingPong(Time.time, 1));
+
+            /*
+        if (PositionEditRightActivate&& hit.collider.gameObject == RightArrowRoboticArm.gameObject)
+        {
+            this.transform.position = Vector3.MoveTowards(this.transform.position,
+                          new Vector3(this.transform.position.x + 2f, this.transform.position.y, this.transform.position.z)
+                          , 2.2f * Time.deltaTime);
+
+        }*/
+
+        }
+     
+
+
+        if(Input.GetMouseButtonUp(0))
+        {
+
+
+            if (hit.collider.gameObject == LeftArrowRoboticArm.gameObject&&(int)DurationPressMouse>1)
+            {
+            
+                PositionEditRightActivate = false;
+                PositionEditLeftActivate = false;
+
                 LeftArrowRoboticArm.transform.GetComponent<Renderer>().material.color = Color.red;
                 RightArrowRoboticArm.transform.GetComponent<Renderer>().material.color = RightArrowOriginalColor;
                 GoLeft = true;
                 GoRight = false;
-
+          
 
             }
 
-            if (hit.collider.gameObject == RightArrowRoboticArm.gameObject)
+            if (hit.collider.gameObject == RightArrowRoboticArm.gameObject && (int)DurationPressMouse > 1)
             {
+ 
+                PositionEditRightActivate = false;
+                PositionEditLeftActivate = false;
                 RightArrowRoboticArm.transform.GetComponent<Renderer>().material.color = Color.red;
                 LeftArrowRoboticArm.transform.GetComponent<Renderer>().material.color = RightArrowOriginalColor;
                 GoRight = true;
                 GoLeft = false;
+             
+            }
+
+
+            if (hit.collider.gameObject == LeftArrowRoboticArm.gameObject && (int)DurationPressMouse == 0)
+            {
+                PositionEditLeftActivate = true;
+                GoRight = false;
+                GoLeft = false;
+                RightArrowRoboticArm.transform.GetComponent<Renderer>().material.color = RightArrowOriginalColor;
+                LeftArrowRoboticArm.transform.GetComponent<Renderer>().material.color = Color.yellow ;
+                DurationPressMouse = 3;
+            }
+
+
+
+            if (hit.collider.gameObject == RightArrowRoboticArm.gameObject && (int)DurationPressMouse == 0)
+            {
+                PositionEditRightActivate = true;
+                GoRight = false;
+                GoLeft = false;
+                LeftArrowRoboticArm.transform.GetComponent<Renderer>().material.color = LeftArrowOriginalColor;
+                RightArrowRoboticArm.transform.GetComponent<Renderer>().material.color = Color.yellow;
+                DurationPressMouse = 3;
             }
 
         }
+
+
+
+
 
 
 

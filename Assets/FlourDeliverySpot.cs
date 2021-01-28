@@ -23,8 +23,9 @@ public class FlourDeliverySpot : MonoBehaviour
     {
         if (numberOfFourHit == 5)
         {
-            numberOfFourHit = 0;
             MoneyValue += 1;
+            numberOfFourHit = 0;
+          
         }
        // Debug.Log(" Money Value For Flour: " + GetComponent<add4DollarPlayer>().MoneyValue);
       //  MoneyValueTMP.text = add4DollarPlayer.MoneyValue + "$";
