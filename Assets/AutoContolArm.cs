@@ -203,7 +203,7 @@ public class AutoContolArm : MonoBehaviour
 
 
        
-            if (hitUnderArm.transform.name == "Flour" || hitUnderArm.transform.name == "Flour(Clone)" && HitChosenObject == false && ColidedWithFlour == false)
+            if (hitUnderArm.transform.name == "Flour" || hitUnderArm.transform.name == "Flour 1(Clone)" && HitChosenObject == false && ColidedWithFlour == false)
             {
                 hitUnderArm.transform.GetComponent<FlourBackAndForthStrachConv>().Speed = 0.1f;
                 ProductTransfering = hitUnderArm.transform;
@@ -254,18 +254,34 @@ public class AutoContolArm : MonoBehaviour
                 if ((int)timeLeft == 0 && ColidedWithFlour == false)
                 {
 
-                if (Physics.Raycast(SpringJointParent.connectedBody.GetComponent<Rigidbody>().position, SpringJointParent.connectedBody.GetComponent<Rigidbody>().transform.TransformDirection(Vector3.down), out hitUnderArm))
-                {
-                    // Debug.Log((int)Vector3.Distance(SpringJointParent.connectedBody.GetComponent<Rigidbody>().position, hitUnderArm.transform.position));
-                    SpringJointParent.maxDistance = (int)Vector3.Distance(SpringJointParent.connectedBody.GetComponent<Rigidbody>().position, hitUnderArm.transform.position);
-                }
+          
                 SpringJointParent.connectedBody.GetComponent<Rigidbody>().mass = 45.19f;
 
                 SpringJointParent.spring = 0;
                     SpringJointParent.damper = 0;
                     timeLeft = 3;
                 }
+
+
+
+            if (HitChosenObject == false && Physics.Raycast(SpringJointParent.connectedBody.GetComponent<Rigidbody>().position, SpringJointParent.connectedBody.GetComponent<Rigidbody>().transform.TransformDirection(Vector3.down), out hitUnderArm))
+            {
+                // Debug.Log((int)Vector3.Distance(SpringJointParent.connectedBody.GetComponent<Rigidbody>().position, hitUnderArm.transform.position));
+                SpringJointParent.maxDistance = (int)Vector3.Distance(SpringJointParent.connectedBody.GetComponent<Rigidbody>().position, hitUnderArm.transform.position);
+
+
+
+
+
+                if (hitUnderArm.transform.name == "Flour" || hitUnderArm.transform.name == "Flour 1(Clone)" && HitChosenObject == false && ColidedWithFlour == false)
+                {
+                    hitUnderArm.transform.GetComponent<FlourBackAndForthStrachConv>().Speed = 0.1f;
+                    ProductTransfering = hitUnderArm.transform;
+                    HitChosenObject = true;
+                }
+
             }
+        }
 
 
 
@@ -344,17 +360,22 @@ public class AutoContolArm : MonoBehaviour
 
                         if ((int)Vector3.Distance(StartPosRoboticArm, RobotPosToMoveTo) == 4)
                         {
-                            timeLeftBeforeMovment = 3;
-                            ProductDeliverd = true;
+                        timeLeftBeforeMovment = 3;
+                        // 
+                        //ProductTransfering = null;
+                        ProductDeliverd = true;
 
-                            Arm.GetComponent<SpringJoint>().connectedBody = null;
-                            //  Arm.GetComponent<SpringJoint>().damper = 7.9f;
+                        Arm.GetComponent<SpringJoint>().connectedBody = null;
+                        //  Arm.GetComponent<SpringJoint>().damper = 7.9f;
 
-                            Arm.GetComponent<Rigidbody>().mass = 1;
-                            this.transform.GetComponentInChildren<StickToIngredient>().ColidedWithFlour = false;
+                        Arm.GetComponent<Rigidbody>().mass = 1;
+                        this.transform.GetComponentInChildren<StickToIngredient>().ColidedWithFlour = false;
+
+                        HitChosenObject = false;
+                        hitUnderArm.transform.GetComponent<FlourBackAndForthStrachConv>().Speed = 0.8f;
 
 
-                        }
+                    }
                     }
 
                     //  Arm.transform.GetComponent<Rigidbody>().AddForce(Arm.right * Horizantal, ForceMode.Impulse);
