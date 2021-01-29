@@ -113,8 +113,8 @@ public class AutoContolArm : MonoBehaviour
                 RightArrowRoboticArm.transform.GetComponent<Renderer>().material.color = RightArrowOriginalColor;
                 GoLeft = true;
                 GoRight = false;
-          
 
+                DurationPressMouse = 3;
             }
 
             if (hit.collider.gameObject == RightArrowRoboticArm.gameObject && (int)DurationPressMouse > 1)
@@ -126,7 +126,7 @@ public class AutoContolArm : MonoBehaviour
                 LeftArrowRoboticArm.transform.GetComponent<Renderer>().material.color = RightArrowOriginalColor;
                 GoRight = true;
                 GoLeft = false;
-             
+                DurationPressMouse = 3;
             }
 
 
