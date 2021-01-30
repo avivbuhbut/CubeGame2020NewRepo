@@ -127,7 +127,7 @@ SpringJoint:
   m_ConnectedBody: {fileID: 321892830421380762}
   m_Anchor: {x: 0, y: 0.5, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.00013510245, y: 15.370033, z: 0}
+  m_ConnectedAnchor: {x: 0.000011208192, y: 15.370033, z: 0}
   serializedVersion: 2
   m_Spring: 40.43
   m_Damper: 7.9
@@ -156,6 +156,8 @@ MonoBehaviour:
   Arm: {fileID: 321892830421380758}
   LeftArrowRoboticArm: {fileID: 0}
   RightArrowRoboticArm: {fileID: 0}
+  FakeCube: {fileID: 6086675326062054779, guid: 41198024bb54061418b29d44a623f4d0,
+    type: 3}
 --- !u!1 &321892830421380765
 GameObject:
   m_ObjectHideFlags: 0

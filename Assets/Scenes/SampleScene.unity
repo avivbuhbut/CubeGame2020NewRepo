@@ -31923,12 +31923,12 @@ PrefabInstance:
     - target: {fileID: 2150433172509632588, guid: d1aaadb23abe551469159855c70eb0f1,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.96
+      value: -16.24
       objectReference: {fileID: 0}
     - target: {fileID: 2150433172509632588, guid: d1aaadb23abe551469159855c70eb0f1,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 13.44
+      value: 10.41
       objectReference: {fileID: 0}
     - target: {fileID: 2150433172509632588, guid: d1aaadb23abe551469159855c70eb0f1,
         type: 3}
@@ -44107,7 +44107,7 @@ SpringJoint:
   m_GameObject: {fileID: 1476312497}
   m_ConnectedBody: {fileID: 0}
   m_Anchor: {x: 0, y: 0.5, z: 0}
-  m_AutoConfigureConnectedAnchor: 1
+  m_AutoConfigureConnectedAnchor: 0
   m_ConnectedAnchor: {x: -33.550014, y: 23.519512, z: -7.11}
   serializedVersion: 2
   m_Spring: 40.43

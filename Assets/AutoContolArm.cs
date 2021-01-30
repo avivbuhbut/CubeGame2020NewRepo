@@ -39,9 +39,12 @@ public class AutoContolArm : MonoBehaviour
     float TimerLoweringArm;
     bool HitChosenObject;
     Transform ProductTransfering;
-    float DurationPressMouse=3;
+    static float DurationPressMouse=3;
     bool PositionEditRightActivate;
     bool PositionEditLeftActivate;
+    bool EditPosRight;
+    bool EditPosLeft;
+    float tempMouseDurationEditMode;
     // Start is called before the first frame update
     void Start()
     {
@@ -66,9 +69,71 @@ public class AutoContolArm : MonoBehaviour
 
         // Casts the ray and get the first game object hit
         Physics.Raycast(ray, out hit);
+        
+       // if (PositionEditRightActivate && Input.GetKey(KeyCode.Mouse0) && !Input.GetMouseButtonUp(0) && hit.collider.gameObject != LeftArrowRoboticArm.gameObject && !Input.GetKey(KeyCode.KeypadEnter))
+   //     {
+
+            /*
+            if (Input.GetKey(KeyCode.Mouse0))
+            {
+                tempMouseDurationEditMode -= 0.8f * Time.deltaTime;
+
+                if (tempMouseDurationEditMode <= 0)
+                {
+                    tempMouseDurationEditMode = 0;
+                }
+                else
+                {
+                    DurationPressMouse = 3;
+                }
+            }*/
+
+       //     this.transform.position = Vector3.MoveTowards(this.transform.position,
+     //  new Vector3(this.transform.position.x + 2f, this.transform.position.y, this.transform.position.z)
+     //  , 2.2f * Time.deltaTime);
+
+       //     Arm.GetComponent<StickToIngredient>().SpringJointArm.connectedBody = this.transform.GetComponent<Rigidbody>();
+      //      RobotPosToMoveTo = this.transform.position;
+      //        DurationPressMouse = 0;
+      //      LeftArrowRoboticArm.transform.GetComponent<Renderer>().material.color = RightArrowOriginalColor;
+     //   }
+     //   if (PositionEditLeftActivate && Input.GetKey(KeyCode.Mouse0) && !Input.GetMouseButtonUp(0) && hit.collider.gameObject != RightArrowRoboticArm.gameObject && !Input.GetKey(KeyCode.KeypadEnter))
+     //   {
 
 
-        if (Input.GetKey(KeyCode.Mouse0))
+            /*
+            if (Input.GetKey(KeyCode.Mouse0))
+            {
+                tempMouseDurationEditMode -= 0.8f * Time.deltaTime;
+
+                if (tempMouseDurationEditMode <= 0)
+                {
+                    tempMouseDurationEditMode = 0;
+                }
+                else
+                {
+                    DurationPressMouse = 3;
+                }
+            }*/
+
+
+      //      this.transform.position = Vector3.MoveTowards(this.transform.position,
+   //    new Vector3(this.transform.position.x - 2f, this.transform.position.y, this.transform.position.z)
+    //   , 2.2f * Time.deltaTime);
+
+     //       Arm.GetComponent<StickToIngredient>().SpringJointArm.connectedBody = this.transform.GetComponent<Rigidbody>();
+     //       RobotPosToMoveTo = this.transform.position;
+     //       DurationPressMouse = 0;
+     //       RightArrowRoboticArm.transform.GetComponent<Renderer>().material.color = RightArrowOriginalColor;
+
+    //    }
+        //
+
+
+       // if (Input.GetMouseButtonDown(0) && hit.collider.gameObject != LeftArrowRoboticArm.gameObject || hit.collider.gameObject != RightArrowRoboticArm.gameObject)
+         //   DurationPressMouse = 3;
+
+            if (Input.GetKey(KeyCode.Mouse0))
         {
  
             DurationPressMouse -= 0.8f * Time.deltaTime;
@@ -77,36 +142,51 @@ public class AutoContolArm : MonoBehaviour
             {
                 DurationPressMouse = 0;
             }
-            
+            else
+            {
+                EditPosLeft = false;
+                EditPosRight = false;
 
-            if((int)DurationPressMouse==0 && hit.collider.gameObject == LeftArrowRoboticArm.gameObject)
+            }
+
+
+            if ((int)DurationPressMouse == 0 && hit.collider.gameObject == LeftArrowRoboticArm.gameObject )
+            {
                 LeftArrowRoboticArm.transform.GetComponent<Renderer>().material.color = Color.Lerp(Color.white, Color.black, Mathf.PingPong(Time.time, 1));
 
+                 EditPosLeft = true;
+            }
 
-            if ((int)DurationPressMouse == 0 && hit.collider.gameObject == RightArrowRoboticArm.gameObject)
+
+            if ((int)DurationPressMouse == 0 && hit.collider.gameObject == RightArrowRoboticArm.gameObject )
+            {
                 RightArrowRoboticArm.transform.GetComponent<Renderer>().material.color = Color.Lerp(Color.white, Color.black, Mathf.PingPong(Time.time, 1));
+                EditPosRight = true;
+            }
 
-            /*
-        if (PositionEditRightActivate&& hit.collider.gameObject == RightArrowRoboticArm.gameObject)
-        {
-            this.transform.position = Vector3.MoveTowards(this.transform.position,
-                          new Vector3(this.transform.position.x + 2f, this.transform.position.y, this.transform.position.z)
-                          , 2.2f * Time.deltaTime);
+                /*
+            if (PositionEditRightActivate&& hit.collider.gameObject == RightArrowRoboticArm.gameObject)
+            {
+                this.transform.position = Vector3.MoveTowards(this.transform.position,
+                              new Vector3(this.transform.position.x + 2f, this.transform.position.y, this.transform.position.z)
+                              , 2.2f * Time.deltaTime);
 
-        }*/
+            }*/
 
-        }
+            }
      
 
 
         if(Input.GetMouseButtonUp(0))
         {
 
-
+  
             if (hit.collider.gameObject == LeftArrowRoboticArm.gameObject&&(int)DurationPressMouse>1)
             {
-            
-                PositionEditRightActivate = false;
+
+                EditPosRight = false;
+                EditPosLeft = false;
+                    PositionEditRightActivate = false;
                 PositionEditLeftActivate = false;
 
                 LeftArrowRoboticArm.transform.GetComponent<Renderer>().material.color = Color.red;
@@ -119,7 +199,10 @@ public class AutoContolArm : MonoBehaviour
 
             if (hit.collider.gameObject == RightArrowRoboticArm.gameObject && (int)DurationPressMouse > 1)
             {
- 
+
+                EditPosRight = false;
+                EditPosLeft = false;
+
                 PositionEditRightActivate = false;
                 PositionEditLeftActivate = false;
                 RightArrowRoboticArm.transform.GetComponent<Renderer>().material.color = Color.red;
@@ -130,19 +213,22 @@ public class AutoContolArm : MonoBehaviour
             }
 
 
-            if (hit.collider.gameObject == LeftArrowRoboticArm.gameObject && (int)DurationPressMouse == 0)
+            if (hit.collider.gameObject == LeftArrowRoboticArm.gameObject && (int)DurationPressMouse == 0 && EditPosLeft)
             {
                 PositionEditLeftActivate = true;
                 GoRight = false;
                 GoLeft = false;
                 RightArrowRoboticArm.transform.GetComponent<Renderer>().material.color = RightArrowOriginalColor;
                 LeftArrowRoboticArm.transform.GetComponent<Renderer>().material.color = Color.yellow ;
+     
+
+
                 DurationPressMouse = 3;
             }
 
 
 
-            if (hit.collider.gameObject == RightArrowRoboticArm.gameObject && (int)DurationPressMouse == 0)
+            if (hit.collider.gameObject == RightArrowRoboticArm.gameObject && (int)DurationPressMouse == 0 && EditPosRight)
             {
                 PositionEditRightActivate = true;
                 GoRight = false;
@@ -155,7 +241,8 @@ public class AutoContolArm : MonoBehaviour
         }
 
 
-
+     
+       
 
 
 
