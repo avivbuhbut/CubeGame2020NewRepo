@@ -45,6 +45,7 @@ public class AutoContolArm : MonoBehaviour
     bool EditPosRight;
     bool EditPosLeft;
     float tempMouseDurationEditMode;
+    bool RepositionRobot;
     // Start is called before the first frame update
     void Start()
     {
@@ -183,7 +184,7 @@ public class AutoContolArm : MonoBehaviour
   
             if (hit.collider.gameObject == LeftArrowRoboticArm.gameObject&&(int)DurationPressMouse>1)
             {
-
+                RepositionRobot = false;
                 EditPosRight = false;
                 EditPosLeft = false;
                     PositionEditRightActivate = false;
@@ -199,7 +200,7 @@ public class AutoContolArm : MonoBehaviour
 
             if (hit.collider.gameObject == RightArrowRoboticArm.gameObject && (int)DurationPressMouse > 1)
             {
-
+                RepositionRobot = false;
                 EditPosRight = false;
                 EditPosLeft = false;
 
@@ -240,11 +241,40 @@ public class AutoContolArm : MonoBehaviour
 
         }
 
+        if(PositionEditLeftActivate && Input.GetKey(KeyCode.Mouse0) && hit.collider.gameObject == LeftArrowRoboticArm.gameObject)
+        {
 
-     
-       
+                 this.transform.position = Vector3.MoveTowards(this.transform.position,
+              new Vector3(this.transform.position.x - 2f, this.transform.position.y, this.transform.position.z)
+              , 2.2f * Time.deltaTime);
+
+                 Arm.GetComponent<StickToIngredient>().SpringJointArm.connectedBody = this.transform.GetComponent<Rigidbody>();
+                  RobotPosToMoveTo = this.transform.position;
+
+            RepositionRobot = true;
+                   // DurationPressMouse = 0;
+              //    LeftArrowRoboticArm.transform.GetComponent<Renderer>().material.color = RightArrowOriginalColor;
+        }
 
 
+
+        if (PositionEditRightActivate && Input.GetKey(KeyCode.Mouse0) && hit.collider.gameObject == RightArrowRoboticArm.gameObject)
+        {
+            RepositionRobot = true;
+            this.transform.position = Vector3.MoveTowards(this.transform.position,
+         new Vector3(this.transform.position.x +2f, this.transform.position.y, this.transform.position.z)
+         , 2.2f * Time.deltaTime);
+
+            Arm.GetComponent<StickToIngredient>().SpringJointArm.connectedBody = this.transform.GetComponent<Rigidbody>();
+            RobotPosToMoveTo = this.transform.position;
+            // DurationPressMouse = 0;
+            //    LeftArrowRoboticArm.transform.GetComponent<Renderer>().material.color = RightArrowOriginalColor;
+        }
+
+        if (RepositionRobot == true)
+        {
+            StartPosRoboticArm = this.transform.position;
+        }
 
 
         if (Input.GetKey(KeyCode.O))
