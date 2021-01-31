@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 8726762592235189165}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Money
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -188,13 +188,14 @@ GameObject:
   - component: {fileID: 9120080798214832802}
   - component: {fileID: 8726762590877132634}
   - component: {fileID: -6600179615156257181}
+  - component: {fileID: -2600766515725642237}
   m_Layer: 0
   m_Name: Money4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &9120080798214832802
 Transform:
   m_ObjectHideFlags: 0
@@ -241,6 +242,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MoneyValue: 0
+--- !u!114 &-2600766515725642237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8492339221049415704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee8edf214220f314d8267460d9d51dc2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Speed: 0
 --- !u!1001 &40335133629334769
 PrefabInstance:
   m_ObjectHideFlags: 0

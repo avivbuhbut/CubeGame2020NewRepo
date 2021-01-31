@@ -34,15 +34,15 @@ public class FlourDeliverySpot : MonoBehaviour
      
              Clone = Instantiate(MoneyTrans, new Vector3(this.transform.position.x, this.transform.position.y + 1.5f, this.transform.position.z), Quaternion.identity);
             Clone.transform.localRotation = Quaternion.Euler(0, 270, 0);
-         
-                 // FlourValue--;
-                 FlourHit = false;
+           
+                        // FlourValue--;
+                        FlourHit = false;
         }
         if (Clone != null)
         {
-            Debug.Log("text mesh pro value:" + Clone.GetComponentInChildren<TextMeshPro>().text);
-            Clone.GetComponent<add4DollarPlayer>().MoneyValue = MoneyValue;
 
+            Clone.GetComponent<add4DollarPlayer>().MoneyValue = MoneyValue;
+         
             Clone.GetComponentInChildren<TextMeshPro>().text = MoneyValue + "$";
         }
 

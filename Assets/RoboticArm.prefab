@@ -156,7 +156,7 @@ MonoBehaviour:
   Arm: {fileID: 321892830421380758}
   LeftArrowRoboticArm: {fileID: 0}
   RightArrowRoboticArm: {fileID: 0}
-  FakeCube: {fileID: 6086675326062054779, guid: 41198024bb54061418b29d44a623f4d0,
+  FutureEndPoint: {fileID: 8048606837640266431, guid: 1aba48bec152662479d052c446a4012c,
     type: 3}
 --- !u!1 &321892830421380765
 GameObject:

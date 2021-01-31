@@ -46,6 +46,7 @@ public class AutoContolArm : MonoBehaviour
     bool EditPosLeft;
     float tempMouseDurationEditMode;
     bool RepositionRobot;
+    //public Transform FutureEndPoint;
     // Start is called before the first frame update
     void Start()
     {
@@ -60,7 +61,7 @@ public class AutoContolArm : MonoBehaviour
         SpringDeafult = 40.43f;
         SprintdamperDeafult = 13.66f;
         StartPosRoboticArm = this.transform.position;
-
+        Debug.Log(DurationPressMouse);
     }
 
     // Update is called once per frame
@@ -134,7 +135,7 @@ public class AutoContolArm : MonoBehaviour
        // if (Input.GetMouseButtonDown(0) && hit.collider.gameObject != LeftArrowRoboticArm.gameObject || hit.collider.gameObject != RightArrowRoboticArm.gameObject)
          //   DurationPressMouse = 3;
 
-            if (Input.GetKey(KeyCode.Mouse0))
+            if (Input.GetKey(KeyCode.Mouse0) && hit.collider.gameObject == LeftArrowRoboticArm.gameObject || hit.collider.gameObject == RightArrowRoboticArm.gameObject)
         {
  
             DurationPressMouse -= 0.8f * Time.deltaTime;
@@ -267,6 +268,10 @@ public class AutoContolArm : MonoBehaviour
 
             Arm.GetComponent<StickToIngredient>().SpringJointArm.connectedBody = this.transform.GetComponent<Rigidbody>();
             RobotPosToMoveTo = this.transform.position;
+
+        //    FutureEndPoint.transform.position = RobotPosToMoveTo;
+         //   FutureEndPoint.GetComponent<LineRenderer>().SetPosition(0, RobotPosToMoveTo);
+    //        FutureEndPoint.GetComponent<LineRenderer>().SetPosition(1, new Vector3(RobotPosToMoveTo.x, RobotPosToMoveTo.y-2, RobotPosToMoveTo.z));
             // DurationPressMouse = 0;
             //    LeftArrowRoboticArm.transform.GetComponent<Renderer>().material.color = RightArrowOriginalColor;
         }
@@ -468,86 +473,68 @@ public class AutoContolArm : MonoBehaviour
                     HitChosenObject = true;
                 }
 
+                if (hitUnderArm.transform.tag == "Money" && HitChosenObject == false && ColidedWithFlour == false)
+                {
+                    hitUnderArm.transform.GetComponent<MoneyBackAndForthOnConv>().Speed = 0.1f;
+                    ProductTransfering = hitUnderArm.transform;
+                    HitChosenObject = true;
+                }
+
             }
         }
 
 
 
+        FlourCollision();
+      //  MoneyCollision();
+
+
+
+  
+
+    }
+
+
+
+    void FlourCollision()
+    {
 
         if (this.transform.GetComponentInChildren<StickToIngredient>().ColidedWithFlour)
-            {
-         
+        {
+
             timeLeftBeforeMovment -= 0.8f * Time.deltaTime;
             SpringJointParent.maxDistance = 0;
-                //    SpringJointParent.connectedBody.GetComponent<Rigidbody>().mass = 1;
-                SpringJointParent.spring = 1000.4f;
-                SpringJointParent.damper = 400;
-                //  ArmthrowObject = false;
+            //    SpringJointParent.connectedBody.GetComponent<Rigidbody>().mass = 1;
+            SpringJointParent.spring = 1000.4f;
+            SpringJointParent.damper = 400;
+            //  ArmthrowObject = false;
 
-                float Horizantal = Input.GetAxis("Horizontal");
+            float Horizantal = Input.GetAxis("Horizontal");
             ProductTransfering.GetComponent<FlourBackAndForthStrachConv>().Speed = 0.8f;
 
             /*time move the robot to the left or right*/
             if ((int)timeLeftBeforeMovment <= 0)
-                {
+            {
                 if (GoLeft && GoRight == false)
+                {
+                    // ArmthrowObject = true;
+
+                    /*move the robot to left*/
+                    //  Arm.GetComponent<SpringJoint>().damper = 160f;
+
+                    this.transform.position = Vector3.MoveTowards(this.transform.position,
+                        new Vector3(this.transform.position.x - 2f, this.transform.position.y, this.transform.position.z)
+                        , 2.2f * Time.deltaTime);
+
+
+                    RobotPosToMoveTo = this.transform.position;
+                    /*reach the position to the left , drop the product*/
+
+
+
+                    if ((int)Vector3.Distance(StartPosRoboticArm, RobotPosToMoveTo) == 5)
                     {
-                        // ArmthrowObject = true;
 
-                        /*move the robot to left*/
-                        //  Arm.GetComponent<SpringJoint>().damper = 160f;
-
-                        this.transform.position = Vector3.MoveTowards(this.transform.position,
-                            new Vector3(this.transform.position.x - 2f, this.transform.position.y, this.transform.position.z)
-                            , 2.2f * Time.deltaTime);
-
-
-                        RobotPosToMoveTo = this.transform.position;
-                        /*reach the position to the left , drop the product*/
-
-
-
-                        if ((int)Vector3.Distance(StartPosRoboticArm, RobotPosToMoveTo) == 5)
-                        {
-                      
-                        timeLeftBeforeMovment = 3;
-                       // 
-//ProductTransfering = null;
-                        ProductDeliverd = true;
-
-                            Arm.GetComponent<SpringJoint>().connectedBody = null;
-                            //  Arm.GetComponent<SpringJoint>().damper = 7.9f;
-
-                            Arm.GetComponent<Rigidbody>().mass = 1;
-                            this.transform.GetComponentInChildren<StickToIngredient>().ColidedWithFlour = false;
-
-                        HitChosenObject = false;
-                        hitUnderArm.transform.GetComponent<FlourBackAndForthStrachConv>().Speed = 0.8f;
-
-
-                    }
-                    }
-
-
-                    if (GoRight && GoLeft == false)
-                    {
-                        // ArmthrowObject = true;
-
-                        /*move the robot to left*/
-                        //  Arm.GetComponent<SpringJoint>().damper = 160f;
-
-                        this.transform.position = Vector3.MoveTowards(this.transform.position,
-                            new Vector3(this.transform.position.x + 2f, this.transform.position.y, this.transform.position.z)
-                            , 2.2f * Time.deltaTime);
-
-
-                        RobotPosToMoveTo = this.transform.position;
-                        /*reach the position to the left , drop the product*/
-
-                        Debug.Log((int)Vector3.Distance(StartPosRoboticArm, RobotPosToMoveTo));
-
-                        if ((int)Vector3.Distance(StartPosRoboticArm, RobotPosToMoveTo) == 5)
-                        {
                         timeLeftBeforeMovment = 3;
                         // 
                         //ProductTransfering = null;
@@ -564,74 +551,226 @@ public class AutoContolArm : MonoBehaviour
 
 
                     }
-                    }
-
-                    //  Arm.transform.GetComponent<Rigidbody>().AddForce(Arm.right * Horizantal, ForceMode.Impulse);
-                    //   SpringJointParent.connectedBody = null;
-                    //timeLeftBeforeSwing = 0;
                 }
 
 
-
-
-
-        }
-        
-
-
-
-
-
-        if (ProductDeliverd == true && this.transform.GetComponentInChildren<StickToIngredient>().ColidedWithFlour == false)
-            {
-
-                timeRobotBackAtStartPos -= 0.8f * Time.deltaTime;
-
-                /*droping product done, come back to start pos*/
-
-                this.transform.position = Vector3.MoveTowards(this.transform.position,
-              StartPosRoboticArm
-               , 2.2f * Time.deltaTime);
-
-                RobotPosToMoveTo = this.transform.position;
-
-
-                if ((int)Vector3.Distance(StartPosRoboticArm, RobotPosToMoveTo) == 0 && (int)timeRobotBackAtStartPos == 0)
+                if (GoRight && GoLeft == false)
                 {
-                    Arm.GetComponent<SpringJoint>().anchor = AnchorStartConfiguration;
-                    ProductDeliverd = false;
-                    timeRobotBackAtStartPos = 3;
+                    // ArmthrowObject = true;
+
+                    /*move the robot to left*/
+                    //  Arm.GetComponent<SpringJoint>().damper = 160f;
+
+                    this.transform.position = Vector3.MoveTowards(this.transform.position,
+                        new Vector3(this.transform.position.x + 2f, this.transform.position.y, this.transform.position.z)
+                        , 2.2f * Time.deltaTime);
+
+
+                    RobotPosToMoveTo = this.transform.position;
+                    /*reach the position to the left , drop the product*/
+
+                    Debug.Log((int)Vector3.Distance(StartPosRoboticArm, RobotPosToMoveTo));
+
+                    if ((int)Vector3.Distance(StartPosRoboticArm, RobotPosToMoveTo) == 5)
+                    {
+                        timeLeftBeforeMovment = 3;
+                        // 
+                        //ProductTransfering = null;
+                        ProductDeliverd = true;
+
+                        Arm.GetComponent<SpringJoint>().connectedBody = null;
+                        //  Arm.GetComponent<SpringJoint>().damper = 7.9f;
+
+                        Arm.GetComponent<Rigidbody>().mass = 1;
+                        this.transform.GetComponentInChildren<StickToIngredient>().ColidedWithFlour = false;
+
+                        HitChosenObject = false;
+                        hitUnderArm.transform.GetComponent<FlourBackAndForthStrachConv>().Speed = 0.8f;
+
+
+                    }
                 }
 
-                // ProductDeliverd = false;
+                //  Arm.transform.GetComponent<Rigidbody>().AddForce(Arm.right * Horizantal, ForceMode.Impulse);
+                //   SpringJointParent.connectedBody = null;
+                //timeLeftBeforeSwing = 0;
             }
 
 
 
 
 
-            /*
-             *
-                     timeLeft -= 0.8f * Time.deltaTime;
-                Debug.Log((int)timeLeft);
-                if ((int)timeLeft == 0&& colidedWithFLour==false)
+        }
+
+
+
+
+
+
+        if (ProductDeliverd == true && this.transform.GetComponentInChildren<StickToIngredient>().ColidedWithFlour == false)
+        {
+
+            timeRobotBackAtStartPos -= 0.8f * Time.deltaTime;
+
+            /*droping product done, come back to start pos*/
+
+            this.transform.position = Vector3.MoveTowards(this.transform.position,
+          StartPosRoboticArm
+           , 2.2f * Time.deltaTime);
+
+            RobotPosToMoveTo = this.transform.position;
+
+
+            if ((int)Vector3.Distance(StartPosRoboticArm, RobotPosToMoveTo) == 0 && (int)timeRobotBackAtStartPos == 0)
+            {
+                Arm.GetComponent<SpringJoint>().anchor = AnchorStartConfiguration;
+                ProductDeliverd = false;
+                timeRobotBackAtStartPos = 3;
+            }
+
+            // ProductDeliverd = false;
+        }
+
+
+    }
+
+
+    void MoneyCollision()
+    {
+
+        if (this.transform.GetComponentInChildren<StickToIngredient>().ColidedWithMoney)
+        {
+
+            timeLeftBeforeMovment -= 0.8f * Time.deltaTime;
+            SpringJointParent.maxDistance = 0;
+            //    SpringJointParent.connectedBody.GetComponent<Rigidbody>().mass = 1;
+            SpringJointParent.spring = 1000.4f;
+            SpringJointParent.damper = 400;
+            //  ArmthrowObject = false;
+
+            float Horizantal = Input.GetAxis("Horizontal");
+            ProductTransfering.GetComponent<MoneyBackAndForthOnConv>().Speed = 0.8f;
+
+            /*time move the robot to the left or right*/
+            if ((int)timeLeftBeforeMovment <= 0)
+            {
+                if (GoLeft && GoRight == false)
                 {
-                    SpringJointParent.spring = 0;
-                    SpringJointParent.damper = 0;
-                    ///TransColided.transform.GetComponent<Rigidbody>().isKinematic = true;
-                    //  TransColided.transform.position = new Vector3(this.transform.position.x, TransColided.transform.position.y-1 , this.transform.position.z);
-                    //timeLeft = 3;
-                }else if ((int)timeLeft==2&& colidedWithFLour)
-                {
-                    SpringJointParent.spring = 43;
-                    SpringJointParent.damper = 20;
+                    // ArmthrowObject = true;
+
+                    /*move the robot to left*/
+                    //  Arm.GetComponent<SpringJoint>().damper = 160f;
+
+                    this.transform.position = Vector3.MoveTowards(this.transform.position,
+                        new Vector3(this.transform.position.x - 2f, this.transform.position.y, this.transform.position.z)
+                        , 2.2f * Time.deltaTime);
+
+
+                    RobotPosToMoveTo = this.transform.position;
+                    /*reach the position to the left , drop the product*/
 
 
 
+                    if ((int)Vector3.Distance(StartPosRoboticArm, RobotPosToMoveTo) == 5)
+                    {
+
+                        timeLeftBeforeMovment = 3;
+                        // 
+                        //ProductTransfering = null;
+                        ProductDeliverd = true;
+
+                        Arm.GetComponent<SpringJoint>().connectedBody = null;
+                        //  Arm.GetComponent<SpringJoint>().damper = 7.9f;
+
+                        Arm.GetComponent<Rigidbody>().mass = 1;
+                        this.transform.GetComponentInChildren<StickToIngredient>().ColidedWithMoney = false;
+
+                        HitChosenObject = false;
+                        hitUnderArm.transform.GetComponent<MoneyBackAndForthOnConv>().Speed = 0.8f;
+
+
+                    }
                 }
-        */
 
-        
+
+                if (GoRight && GoLeft == false)
+                {
+                    // ArmthrowObject = true;
+
+                    /*move the robot to left*/
+                    //  Arm.GetComponent<SpringJoint>().damper = 160f;
+
+                    this.transform.position = Vector3.MoveTowards(this.transform.position,
+                        new Vector3(this.transform.position.x + 2f, this.transform.position.y, this.transform.position.z)
+                        , 2.2f * Time.deltaTime);
+
+
+                    RobotPosToMoveTo = this.transform.position;
+                    /*reach the position to the left , drop the product*/
+
+                    Debug.Log((int)Vector3.Distance(StartPosRoboticArm, RobotPosToMoveTo));
+
+                    if ((int)Vector3.Distance(StartPosRoboticArm, RobotPosToMoveTo) == 5)
+                    {
+                        timeLeftBeforeMovment = 3;
+                        // 
+                        //ProductTransfering = null;
+                        ProductDeliverd = true;
+
+                        Arm.GetComponent<SpringJoint>().connectedBody = null;
+                        //  Arm.GetComponent<SpringJoint>().damper = 7.9f;
+
+                        Arm.GetComponent<Rigidbody>().mass = 1;
+                        this.transform.GetComponentInChildren<StickToIngredient>().ColidedWithMoney = false;
+
+                        HitChosenObject = false;
+                        hitUnderArm.transform.GetComponent<MoneyBackAndForthOnConv>().Speed = 0.8f;
+
+
+                    }
+                }
+
+                //  Arm.transform.GetComponent<Rigidbody>().AddForce(Arm.right * Horizantal, ForceMode.Impulse);
+                //   SpringJointParent.connectedBody = null;
+                //timeLeftBeforeSwing = 0;
+            }
+
+
+
+
+
+        }
+
+
+
+
+
+
+        if (ProductDeliverd == true && this.transform.GetComponentInChildren<StickToIngredient>().ColidedWithMoney == false)
+        {
+
+            timeRobotBackAtStartPos -= 0.8f * Time.deltaTime;
+
+            /*droping product done, come back to start pos*/
+
+            this.transform.position = Vector3.MoveTowards(this.transform.position,
+          StartPosRoboticArm
+           , 2.2f * Time.deltaTime);
+
+            RobotPosToMoveTo = this.transform.position;
+
+
+            if ((int)Vector3.Distance(StartPosRoboticArm, RobotPosToMoveTo) == 0 && (int)timeRobotBackAtStartPos == 0)
+            {
+                Arm.GetComponent<SpringJoint>().anchor = AnchorStartConfiguration;
+                ProductDeliverd = false;
+                timeRobotBackAtStartPos = 3;
+            }
+
+            // ProductDeliverd = false;
+        }
+
+
     }
 
 

@@ -9,6 +9,7 @@ public class StickToIngredient : MonoBehaviour
     public SpringJoint SpringJointArm;
     public bool ColidedWithFlour;
     public Transform ArmHitTransfrom;
+    public bool ColidedWithMoney;
     // Start is called before the first frame update
     void Start()
     {
@@ -53,7 +54,7 @@ public class StickToIngredient : MonoBehaviour
     void OnCollisionStay(Collision collision)
     {
         ArmHitTransfrom = collision.transform;
-        if (collision.transform.name == "Flour" || collision.transform.name == "Flour 1(Clone)")
+        if (collision.transform.name == "Flour" || collision.transform.name == "Flour 1(Clone)" || collision.transform.tag == "Money")
         {
             SpringJointArm.connectedBody = collision.transform.GetComponent<Rigidbody>();
          
@@ -69,6 +70,13 @@ public class StickToIngredient : MonoBehaviour
         
             // collision.transform.GetComponent<Rigidbody>().isKinematic = true;
             //  collision.transform.position = new Vector3(this.transform.position.x, this.transform.position.y+1, this.transform.position.z);
+
+        }
+
+        if (collision.transform.tag == "Money")
+        {
+            ColidedWithMoney= true;
+
 
         }
     }

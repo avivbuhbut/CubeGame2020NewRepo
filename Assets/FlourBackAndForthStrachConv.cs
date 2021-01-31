@@ -9,7 +9,7 @@ public class FlourBackAndForthStrachConv : MonoBehaviour
     bool ReachStartPos;
     bool ColidedAnotherFlouronConv;
     bool ColidedStrachConv;
-    Transform AnotherFlourOnConvTrans;
+   public Transform AnotherFlourOnConvTrans;
      public  float Speed;
     // Start is called before the first frame update
     void Start()
