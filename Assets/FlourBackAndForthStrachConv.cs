@@ -49,7 +49,7 @@ public class FlourBackAndForthStrachConv : MonoBehaviour
                     new Vector3(StartPos.x, this.transform.position.y, this.transform.position.z), Speed * Time.deltaTime);
 
 
-                    Debug.Log((int)Vector3.Distance(this.transform.position, StartPos));
+
 
 
 

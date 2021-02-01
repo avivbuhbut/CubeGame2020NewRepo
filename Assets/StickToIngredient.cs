@@ -10,6 +10,8 @@ public class StickToIngredient : MonoBehaviour
     public bool ColidedWithFlour;
     public Transform ArmHitTransfrom;
     public bool ColidedWithMoney;
+    public Transform CurrentColidedFlour;
+    public Transform CurrentColidedMoney;
     // Start is called before the first frame update
     void Start()
     {
@@ -67,7 +69,7 @@ public class StickToIngredient : MonoBehaviour
         if (collision.transform.name == "Flour" || collision.transform.name == "Flour 1(Clone)")
         {
             ColidedWithFlour = true;
-        
+            CurrentColidedFlour = collision.transform;
             // collision.transform.GetComponent<Rigidbody>().isKinematic = true;
             //  collision.transform.position = new Vector3(this.transform.position.x, this.transform.position.y+1, this.transform.position.z);
 
@@ -76,7 +78,7 @@ public class StickToIngredient : MonoBehaviour
         if (collision.transform.tag == "Money")
         {
             ColidedWithMoney= true;
-
+            CurrentColidedMoney = collision.transform;
 
         }
     }

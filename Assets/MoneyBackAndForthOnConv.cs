@@ -14,7 +14,8 @@ public class MoneyBackAndForthOnConv : MonoBehaviour
     public float Speed;
     FlourBackAndForthStrachConv flourBackANdForth;
     // Start is called before the first frame update
-    RaycastHit MoneyRayRight;
+    RaycastHit MoneyRay;
+   // RaycastHit MoneyRayLeft;
     Transform CubeChildMoney;
     void Start()
     {
@@ -25,20 +26,63 @@ public class MoneyBackAndForthOnConv : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //  if (Physics.Raycast(this.transform.position, this.transform.TransformDirection(Vector3.back) * 20, out MoneyRayRight))
+        //  Debug.Log(MoneyRayRight.transform.name + " TO the right");
 
+   
 
-
+        //  Debug.DrawRay(this.transform.position, Vector3.right);
         if (ColidedStrachConv)
-            if (ColidedAnotherMoneyonConv)
+        {
+            if (Physics.Raycast(this.transform.position, this.transform.TransformDirection(Vector3.back) * 20, out MoneyRay))
             {
-                Physics.IgnoreCollision(CubeChildMoney.GetComponent<BoxCollider>(), AnotherMoneyOnConvTrans.GetComponent<BoxCollider>());
-                if (Physics.Raycast(CubeChildMoney.position, CubeChildMoney.TransformDirection(Vector3.right), out MoneyRayRight)) {
-                    Physics.IgnoreCollision(CubeChildMoney.GetComponentInChildren<BoxCollider>(), MoneyRayRight.transform.GetComponent<BoxCollider>());
-                    Debug.Log(MoneyRayRight.transform.name + "to the right ");
+                Debug.Log(MoneyRay.transform.name + " TO the right");
 
-                }
+                if(MoneyRay.transform.tag == "Money")
+                    Physics.IgnoreCollision(CubeChildMoney.transform.GetComponentInChildren<BoxCollider>(), MoneyRay.transform.Find("Cube").GetComponent<BoxCollider>());
+                else
+                Physics.IgnoreCollision(this.transform.transform.GetComponentInChildren<BoxCollider>(), MoneyRay.transform.GetComponent<BoxCollider>());
+
 
             }
+
+
+
+            if (Physics.Raycast(this.transform.position, this.transform.TransformDirection(Vector3.forward) * 20, out MoneyRay))
+            {
+                Debug.Log(MoneyRay.transform.name + " TO the left");
+                if (MoneyRay.transform.tag == "Money")
+                    Physics.IgnoreCollision(CubeChildMoney.transform.GetComponentInChildren<BoxCollider>(), MoneyRay.transform.Find("Cube").GetComponent<BoxCollider>());
+                else
+                    Physics.IgnoreCollision(this.transform.transform.GetComponentInChildren<BoxCollider>(), MoneyRay.transform.GetComponent<BoxCollider>());
+
+
+            }
+
+        }
+
+      
+
+
+        // Debug.DrawLine(Physics.Raycast(CubeChildMoney.position, CubeChildMoney.TransformDirection(Vector3.right), out MoneyRayRight)));
+        // Debug.DrawLine(Physics.Raycast(CubeChildMoney.position, CubeChildMoney.TransformDirection(Vector3.right), out MoneyRayRight)));
+    // if (ColidedAnotherMoneyonConv)
+    //  {
+      //     Physics.IgnoreCollision(this.transform.GetComponent<BoxCollider>(), AnotherMoneyOnConvTrans.GetComponent<BoxCollider>());
+       // }
+//
+           
+
+                //if (Physics.Raycast(this.transform.position, this.transform.TransformDirection(Vector3.forward) * 20, out MoneyRayRight))
+               // {
+                //    Debug.Log(MoneyRayRight.transform.name + " TO the right");
+                //    Physics.IgnoreCollision(this.transform.GetComponentInChildren<BoxCollider>(), MoneyRayRight.transform.GetComponent<BoxCollider>());
+
+
+               // }
+
+            
+        
     }
 
 
@@ -65,7 +109,7 @@ public class MoneyBackAndForthOnConv : MonoBehaviour
                     new Vector3(StartPos.x, this.transform.position.y, this.transform.position.z), Speed * Time.deltaTime);
 
 
-                Debug.Log((int)Vector3.Distance(this.transform.position, StartPos));
+
 
 
 
@@ -96,17 +140,34 @@ public class MoneyBackAndForthOnConv : MonoBehaviour
 
         }
 
+  
+
+
+    }
+
+
+     void OnCollisionEnter(Collision collision)
+    {
         if (collision.transform.tag == "Money")
         {
             ColidedAnotherMoneyonConv = true;
             AnotherMoneyOnConvTrans = collision.transform;
         }
 
-
+       // if(collision.transform.name == "Arm")
+      ///  {
+      //      ColidedAnotherMoneyonConv = false;
+        //}
     }
 
-
-
+    void OnCollisionExit(Collision collision)
+    {
+        if (collision.transform.tag == "Money")
+        {
+            ColidedAnotherMoneyonConv = false;
+            //AnotherMoneyOnConvTrans = collision.transform;
+        }
+    }
 
 
 }

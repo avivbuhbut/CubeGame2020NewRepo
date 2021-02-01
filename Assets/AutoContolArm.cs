@@ -38,7 +38,8 @@ public class AutoContolArm : MonoBehaviour
     float ArmMass;
     float TimerLoweringArm;
     bool HitChosenObject;
-    Transform ProductTransfering;
+    Transform ProductTransferingFlour;
+    Transform ProductTransferingMoney;
     static float DurationPressMouse=3;
     bool PositionEditRightActivate;
     bool PositionEditLeftActivate;
@@ -46,6 +47,7 @@ public class AutoContolArm : MonoBehaviour
     bool EditPosLeft;
     float tempMouseDurationEditMode;
     bool RepositionRobot;
+    bool hasReleventObjectUnder;
     //public Transform FutureEndPoint;
     // Start is called before the first frame update
     void Start()
@@ -71,73 +73,73 @@ public class AutoContolArm : MonoBehaviour
 
         // Casts the ray and get the first game object hit
         Physics.Raycast(ray, out hit);
-        
-       // if (PositionEditRightActivate && Input.GetKey(KeyCode.Mouse0) && !Input.GetMouseButtonUp(0) && hit.collider.gameObject != LeftArrowRoboticArm.gameObject && !Input.GetKey(KeyCode.KeypadEnter))
-   //     {
 
-            /*
-            if (Input.GetKey(KeyCode.Mouse0))
+        // if (PositionEditRightActivate && Input.GetKey(KeyCode.Mouse0) && !Input.GetMouseButtonUp(0) && hit.collider.gameObject != LeftArrowRoboticArm.gameObject && !Input.GetKey(KeyCode.KeypadEnter))
+        //     {
+
+        /*
+        if (Input.GetKey(KeyCode.Mouse0))
+        {
+            tempMouseDurationEditMode -= 0.8f * Time.deltaTime;
+
+            if (tempMouseDurationEditMode <= 0)
             {
-                tempMouseDurationEditMode -= 0.8f * Time.deltaTime;
-
-                if (tempMouseDurationEditMode <= 0)
-                {
-                    tempMouseDurationEditMode = 0;
-                }
-                else
-                {
-                    DurationPressMouse = 3;
-                }
-            }*/
-
-       //     this.transform.position = Vector3.MoveTowards(this.transform.position,
-     //  new Vector3(this.transform.position.x + 2f, this.transform.position.y, this.transform.position.z)
-     //  , 2.2f * Time.deltaTime);
-
-       //     Arm.GetComponent<StickToIngredient>().SpringJointArm.connectedBody = this.transform.GetComponent<Rigidbody>();
-      //      RobotPosToMoveTo = this.transform.position;
-      //        DurationPressMouse = 0;
-      //      LeftArrowRoboticArm.transform.GetComponent<Renderer>().material.color = RightArrowOriginalColor;
-     //   }
-     //   if (PositionEditLeftActivate && Input.GetKey(KeyCode.Mouse0) && !Input.GetMouseButtonUp(0) && hit.collider.gameObject != RightArrowRoboticArm.gameObject && !Input.GetKey(KeyCode.KeypadEnter))
-     //   {
-
-
-            /*
-            if (Input.GetKey(KeyCode.Mouse0))
+                tempMouseDurationEditMode = 0;
+            }
+            else
             {
-                tempMouseDurationEditMode -= 0.8f * Time.deltaTime;
+                DurationPressMouse = 3;
+            }
+        }*/
 
-                if (tempMouseDurationEditMode <= 0)
-                {
-                    tempMouseDurationEditMode = 0;
-                }
-                else
-                {
-                    DurationPressMouse = 3;
-                }
-            }*/
+        //     this.transform.position = Vector3.MoveTowards(this.transform.position,
+        //  new Vector3(this.transform.position.x + 2f, this.transform.position.y, this.transform.position.z)
+        //  , 2.2f * Time.deltaTime);
+
+        //     Arm.GetComponent<StickToIngredient>().SpringJointArm.connectedBody = this.transform.GetComponent<Rigidbody>();
+        //      RobotPosToMoveTo = this.transform.position;
+        //        DurationPressMouse = 0;
+        //      LeftArrowRoboticArm.transform.GetComponent<Renderer>().material.color = RightArrowOriginalColor;
+        //   }
+        //   if (PositionEditLeftActivate && Input.GetKey(KeyCode.Mouse0) && !Input.GetMouseButtonUp(0) && hit.collider.gameObject != RightArrowRoboticArm.gameObject && !Input.GetKey(KeyCode.KeypadEnter))
+        //   {
 
 
-      //      this.transform.position = Vector3.MoveTowards(this.transform.position,
-   //    new Vector3(this.transform.position.x - 2f, this.transform.position.y, this.transform.position.z)
-    //   , 2.2f * Time.deltaTime);
+        /*
+        if (Input.GetKey(KeyCode.Mouse0))
+        {
+            tempMouseDurationEditMode -= 0.8f * Time.deltaTime;
 
-     //       Arm.GetComponent<StickToIngredient>().SpringJointArm.connectedBody = this.transform.GetComponent<Rigidbody>();
-     //       RobotPosToMoveTo = this.transform.position;
-     //       DurationPressMouse = 0;
-     //       RightArrowRoboticArm.transform.GetComponent<Renderer>().material.color = RightArrowOriginalColor;
+            if (tempMouseDurationEditMode <= 0)
+            {
+                tempMouseDurationEditMode = 0;
+            }
+            else
+            {
+                DurationPressMouse = 3;
+            }
+        }*/
 
-    //    }
+
+        //      this.transform.position = Vector3.MoveTowards(this.transform.position,
+        //    new Vector3(this.transform.position.x - 2f, this.transform.position.y, this.transform.position.z)
+        //   , 2.2f * Time.deltaTime);
+
+        //       Arm.GetComponent<StickToIngredient>().SpringJointArm.connectedBody = this.transform.GetComponent<Rigidbody>();
+        //       RobotPosToMoveTo = this.transform.position;
+        //       DurationPressMouse = 0;
+        //       RightArrowRoboticArm.transform.GetComponent<Renderer>().material.color = RightArrowOriginalColor;
+
+        //    }
         //
 
 
-       // if (Input.GetMouseButtonDown(0) && hit.collider.gameObject != LeftArrowRoboticArm.gameObject || hit.collider.gameObject != RightArrowRoboticArm.gameObject)
-         //   DurationPressMouse = 3;
+        // if (Input.GetMouseButtonDown(0) && hit.collider.gameObject != LeftArrowRoboticArm.gameObject || hit.collider.gameObject != RightArrowRoboticArm.gameObject)
+        //   DurationPressMouse = 3;
 
-            if (Input.GetKey(KeyCode.Mouse0) && hit.collider.gameObject == LeftArrowRoboticArm.gameObject || hit.collider.gameObject == RightArrowRoboticArm.gameObject)
+        if (Input.GetKey(KeyCode.Mouse0) && hit.collider.gameObject == LeftArrowRoboticArm.gameObject || hit.collider.gameObject == RightArrowRoboticArm.gameObject)
         {
- 
+
             DurationPressMouse -= 0.8f * Time.deltaTime;
             Debug.Log((int)DurationPressMouse);
             if (DurationPressMouse <= 0)
@@ -152,43 +154,43 @@ public class AutoContolArm : MonoBehaviour
             }
 
 
-            if ((int)DurationPressMouse == 0 && hit.collider.gameObject == LeftArrowRoboticArm.gameObject )
+            if ((int)DurationPressMouse == 0 && hit.collider.gameObject == LeftArrowRoboticArm.gameObject)
             {
                 LeftArrowRoboticArm.transform.GetComponent<Renderer>().material.color = Color.Lerp(Color.white, Color.black, Mathf.PingPong(Time.time, 1));
 
-                 EditPosLeft = true;
+                EditPosLeft = true;
             }
 
 
-            if ((int)DurationPressMouse == 0 && hit.collider.gameObject == RightArrowRoboticArm.gameObject )
+            if ((int)DurationPressMouse == 0 && hit.collider.gameObject == RightArrowRoboticArm.gameObject)
             {
                 RightArrowRoboticArm.transform.GetComponent<Renderer>().material.color = Color.Lerp(Color.white, Color.black, Mathf.PingPong(Time.time, 1));
                 EditPosRight = true;
             }
 
-                /*
-            if (PositionEditRightActivate&& hit.collider.gameObject == RightArrowRoboticArm.gameObject)
-            {
-                this.transform.position = Vector3.MoveTowards(this.transform.position,
-                              new Vector3(this.transform.position.x + 2f, this.transform.position.y, this.transform.position.z)
-                              , 2.2f * Time.deltaTime);
+            /*
+        if (PositionEditRightActivate&& hit.collider.gameObject == RightArrowRoboticArm.gameObject)
+        {
+            this.transform.position = Vector3.MoveTowards(this.transform.position,
+                          new Vector3(this.transform.position.x + 2f, this.transform.position.y, this.transform.position.z)
+                          , 2.2f * Time.deltaTime);
 
-            }*/
+        }*/
 
-            }
-     
+        }
 
 
-        if(Input.GetMouseButtonUp(0))
+
+        if (Input.GetMouseButtonUp(0))
         {
 
-  
-            if (hit.collider.gameObject == LeftArrowRoboticArm.gameObject&&(int)DurationPressMouse>1)
+
+            if (hit.collider.gameObject == LeftArrowRoboticArm.gameObject && (int)DurationPressMouse > 1)
             {
                 RepositionRobot = false;
                 EditPosRight = false;
                 EditPosLeft = false;
-                    PositionEditRightActivate = false;
+                PositionEditRightActivate = false;
                 PositionEditLeftActivate = false;
 
                 LeftArrowRoboticArm.transform.GetComponent<Renderer>().material.color = Color.red;
@@ -221,8 +223,8 @@ public class AutoContolArm : MonoBehaviour
                 GoRight = false;
                 GoLeft = false;
                 RightArrowRoboticArm.transform.GetComponent<Renderer>().material.color = RightArrowOriginalColor;
-                LeftArrowRoboticArm.transform.GetComponent<Renderer>().material.color = Color.yellow ;
-     
+                LeftArrowRoboticArm.transform.GetComponent<Renderer>().material.color = Color.yellow;
+
 
 
                 DurationPressMouse = 3;
@@ -242,19 +244,19 @@ public class AutoContolArm : MonoBehaviour
 
         }
 
-        if(PositionEditLeftActivate && Input.GetKey(KeyCode.Mouse0) && hit.collider.gameObject == LeftArrowRoboticArm.gameObject)
+        if (PositionEditLeftActivate && Input.GetKey(KeyCode.Mouse0) && hit.collider.gameObject == LeftArrowRoboticArm.gameObject)
         {
 
-                 this.transform.position = Vector3.MoveTowards(this.transform.position,
-              new Vector3(this.transform.position.x - 2f, this.transform.position.y, this.transform.position.z)
-              , 2.2f * Time.deltaTime);
+            this.transform.position = Vector3.MoveTowards(this.transform.position,
+         new Vector3(this.transform.position.x - 2f, this.transform.position.y, this.transform.position.z)
+         , 2.2f * Time.deltaTime);
 
-                 Arm.GetComponent<StickToIngredient>().SpringJointArm.connectedBody = this.transform.GetComponent<Rigidbody>();
-                  RobotPosToMoveTo = this.transform.position;
+            Arm.GetComponent<StickToIngredient>().SpringJointArm.connectedBody = this.transform.GetComponent<Rigidbody>();
+            RobotPosToMoveTo = this.transform.position;
 
             RepositionRobot = true;
-                   // DurationPressMouse = 0;
-              //    LeftArrowRoboticArm.transform.GetComponent<Renderer>().material.color = RightArrowOriginalColor;
+            // DurationPressMouse = 0;
+            //    LeftArrowRoboticArm.transform.GetComponent<Renderer>().material.color = RightArrowOriginalColor;
         }
 
 
@@ -263,15 +265,15 @@ public class AutoContolArm : MonoBehaviour
         {
             RepositionRobot = true;
             this.transform.position = Vector3.MoveTowards(this.transform.position,
-         new Vector3(this.transform.position.x +2f, this.transform.position.y, this.transform.position.z)
+         new Vector3(this.transform.position.x + 2f, this.transform.position.y, this.transform.position.z)
          , 2.2f * Time.deltaTime);
 
             Arm.GetComponent<StickToIngredient>().SpringJointArm.connectedBody = this.transform.GetComponent<Rigidbody>();
             RobotPosToMoveTo = this.transform.position;
 
-        //    FutureEndPoint.transform.position = RobotPosToMoveTo;
-         //   FutureEndPoint.GetComponent<LineRenderer>().SetPosition(0, RobotPosToMoveTo);
-    //        FutureEndPoint.GetComponent<LineRenderer>().SetPosition(1, new Vector3(RobotPosToMoveTo.x, RobotPosToMoveTo.y-2, RobotPosToMoveTo.z));
+            //    FutureEndPoint.transform.position = RobotPosToMoveTo;
+            //   FutureEndPoint.GetComponent<LineRenderer>().SetPosition(0, RobotPosToMoveTo);
+            //        FutureEndPoint.GetComponent<LineRenderer>().SetPosition(1, new Vector3(RobotPosToMoveTo.x, RobotPosToMoveTo.y-2, RobotPosToMoveTo.z));
             // DurationPressMouse = 0;
             //    LeftArrowRoboticArm.transform.GetComponent<Renderer>().material.color = RightArrowOriginalColor;
         }
@@ -295,7 +297,7 @@ public class AutoContolArm : MonoBehaviour
 
 
 
-            //  Debug.Log(hitUnderArm.transform.name);
+        //  Debug.Log(hitUnderArm.transform.name);
 
 
         /*
@@ -367,74 +369,71 @@ public class AutoContolArm : MonoBehaviour
         }
     }*/
 
-        if (ProductDeliverd == false && GoLeft)
+        if (Physics.Raycast(SpringJointParent.connectedBody.GetComponent<Rigidbody>().position, SpringJointParent.connectedBody.GetComponent<Rigidbody>().transform.TransformDirection(Vector3.down), out hitUnderArm))
+            Debug.Log("hitUnderArm.transform.tag: " + hitUnderArm.transform.tag);
+
+
+        if (Physics.Raycast(SpringJointParent.connectedBody.GetComponent<Rigidbody>().position, SpringJointParent.connectedBody.GetComponent<Rigidbody>().transform.TransformDirection(Vector3.down), out hitUnderArm)){
+
+            if (hitUnderArm.transform.name == "Flour" || hitUnderArm.transform.name == "Flour 1(Clone)")
             {
+                hasReleventObjectUnder = true;
+            }
+            else
+                hasReleventObjectUnder = false;
+
+        }
+
+        if (ProductDeliverd == false && GoLeft)
+        {
 
             timeLeft -= 0.8f * Time.deltaTime;
 
 
-                if ((int)timeLeft == 0 && ColidedWithFlour == false)
-                {
+            if ((int)timeLeft == 0 && ColidedWithFlour == false)
+            {
 
-            
+
                 SpringJointParent.connectedBody.GetComponent<Rigidbody>().mass = 45.19f;
-                    SpringJointParent.spring = 0;
-                    SpringJointParent.damper = 0;
-                    timeLeft = 3;
+                SpringJointParent.spring = 0;
+                SpringJointParent.damper = 0;
+                timeLeft = 3;
 
 
 
             }
 
 
-            if (HitChosenObject==false&&Physics.Raycast(SpringJointParent.connectedBody.GetComponent<Rigidbody>().position, SpringJointParent.connectedBody.GetComponent<Rigidbody>().transform.TransformDirection(Vector3.down), out hitUnderArm))
+            if (HitChosenObject == false && Physics.Raycast(SpringJointParent.connectedBody.GetComponent<Rigidbody>().position, SpringJointParent.connectedBody.GetComponent<Rigidbody>().transform.TransformDirection(Vector3.down), out hitUnderArm))
             {
-                // Debug.Log((int)Vector3.Distance(SpringJointParent.connectedBody.GetComponent<Rigidbody>().position, hitUnderArm.transform.position));
+
                 SpringJointParent.maxDistance = (int)Vector3.Distance(SpringJointParent.connectedBody.GetComponent<Rigidbody>().position, hitUnderArm.transform.position);
 
 
 
 
-       
-            if (hitUnderArm.transform.name == "Flour" || hitUnderArm.transform.name == "Flour 1(Clone)" && HitChosenObject == false && ColidedWithFlour == false)
-            {
-                hitUnderArm.transform.GetComponent<FlourBackAndForthStrachConv>().Speed = 0.1f;
-                ProductTransfering = hitUnderArm.transform;
-                HitChosenObject = true;
-            }
+
+
+                if (hitUnderArm.transform.name == "Flour" || hitUnderArm.transform.name == "Flour 1(Clone)" && HitChosenObject == false && ColidedWithFlour == false)
+                {
+                    hitUnderArm.transform.GetComponent<FlourBackAndForthStrachConv>().Speed = 0.1f;
+                    ProductTransferingFlour = hitUnderArm.transform;
+                    HitChosenObject = true;
+                }
+
+                if (hitUnderArm.transform.tag == "Money" && HitChosenObject == false && ColidedWithFlour == false)
+                {
+                    hitUnderArm.transform.GetComponent<MoneyBackAndForthOnConv>().Speed = 0.1f;
+                    ProductTransferingMoney = hitUnderArm.transform;
+
+                    HitChosenObject = true;
+                }
 
             }
 
         }
 
-
-        /*Try More
-    if (SpringJointParent.spring == 1000.4f && this.transform.GetComponentInChildren<StickToIngredient>().ArmHitTransfrom == null && DoneLiftArm == true)
-    {
-        SpringJointParent.connectedBody.GetComponent<Rigidbody>().mass = 45.19f;
-        SpringJointParent.spring = 0;
-        SpringJointParent.damper = 0;
-
-        if (SpringJointParent.spring == 0)
-            DoneLiftArm = false;
-
-    }
-    if (this.transform.GetComponentInChildren<StickToIngredient>().ArmHitTransfrom.name != "Flour" && DoneLiftArm == false )
-    {
-
-
-
-            SpringJointParent.spring = 1000.4f;
-            SpringJointParent.damper = 400;
-
-        if (SpringJointParent.spring == 1000.4f)
-            DoneLiftArm = true;
-
-
-    }
-    */
-
-
+    
 
 
 
@@ -465,18 +464,20 @@ public class AutoContolArm : MonoBehaviour
 
 
 
-
                 if (hitUnderArm.transform.name == "Flour" || hitUnderArm.transform.name == "Flour 1(Clone)" && HitChosenObject == false && ColidedWithFlour == false)
                 {
                     hitUnderArm.transform.GetComponent<FlourBackAndForthStrachConv>().Speed = 0.1f;
-                    ProductTransfering = hitUnderArm.transform;
+                    ProductTransferingFlour = hitUnderArm.transform;
+             
                     HitChosenObject = true;
+                
                 }
 
                 if (hitUnderArm.transform.tag == "Money" && HitChosenObject == false && ColidedWithFlour == false)
                 {
                     hitUnderArm.transform.GetComponent<MoneyBackAndForthOnConv>().Speed = 0.1f;
-                    ProductTransfering = hitUnderArm.transform;
+                    ProductTransferingMoney = hitUnderArm.transform;
+              
                     HitChosenObject = true;
                 }
 
@@ -485,12 +486,12 @@ public class AutoContolArm : MonoBehaviour
 
 
 
-        FlourCollision();
-      //  MoneyCollision();
+            FlourCollision();
 
 
 
-  
+           // MoneyCollision();
+
 
     }
 
@@ -510,7 +511,7 @@ public class AutoContolArm : MonoBehaviour
             //  ArmthrowObject = false;
 
             float Horizantal = Input.GetAxis("Horizontal");
-            ProductTransfering.GetComponent<FlourBackAndForthStrachConv>().Speed = 0.8f;
+            ProductTransferingFlour.GetComponent<FlourBackAndForthStrachConv>().Speed = 0.8f;
 
             /*time move the robot to the left or right*/
             if ((int)timeLeftBeforeMovment <= 0)
@@ -537,7 +538,7 @@ public class AutoContolArm : MonoBehaviour
 
                         timeLeftBeforeMovment = 3;
                         // 
-                        //ProductTransfering = null;
+                        ProductTransferingFlour = null;
                         ProductDeliverd = true;
 
                         Arm.GetComponent<SpringJoint>().connectedBody = null;
@@ -575,7 +576,7 @@ public class AutoContolArm : MonoBehaviour
                     {
                         timeLeftBeforeMovment = 3;
                         // 
-                        //ProductTransfering = null;
+                        ProductTransferingFlour = null;
                         ProductDeliverd = true;
 
                         Arm.GetComponent<SpringJoint>().connectedBody = null;
@@ -649,7 +650,7 @@ public class AutoContolArm : MonoBehaviour
             //  ArmthrowObject = false;
 
             float Horizantal = Input.GetAxis("Horizontal");
-            ProductTransfering.GetComponent<MoneyBackAndForthOnConv>().Speed = 0.8f;
+            ProductTransferingMoney.GetComponent<MoneyBackAndForthOnConv>().Speed = 0.8f;
 
             /*time move the robot to the left or right*/
             if ((int)timeLeftBeforeMovment <= 0)
@@ -676,7 +677,7 @@ public class AutoContolArm : MonoBehaviour
 
                         timeLeftBeforeMovment = 3;
                         // 
-                        //ProductTransfering = null;
+                        ProductTransferingMoney = null;
                         ProductDeliverd = true;
 
                         Arm.GetComponent<SpringJoint>().connectedBody = null;
@@ -714,7 +715,7 @@ public class AutoContolArm : MonoBehaviour
                     {
                         timeLeftBeforeMovment = 3;
                         // 
-                        //ProductTransfering = null;
+                        ProductTransferingMoney = null;
                         ProductDeliverd = true;
 
                         Arm.GetComponent<SpringJoint>().connectedBody = null;

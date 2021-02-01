@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2859203078085228043}
   m_LocalRotation: {x: 0.00000001853914, y: -0.81022704, z: 0.0000000121071935, w: 0.5861162}
-  m_LocalPosition: {x: -0.47726873, y: -0.33162606, z: 0.77757263}
+  m_LocalPosition: {x: -0.71, y: -0.33, z: 0.68}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_Children: []
   m_Father: {fileID: 9120080798214832802}
@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 5395505560068676039}
   - component: {fileID: 3683379521615343449}
   - component: {fileID: 5051899426634265478}
-  - component: {fileID: 8726762592235189165}
+  - component: {fileID: 614294388489904301}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Money
@@ -108,8 +108,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8257301379749222189}
   m_LocalRotation: {x: 0.7026331, y: -0.07941521, z: 0.07941521, w: 0.7026331}
-  m_LocalPosition: {x: 0.006728432, y: -0.000000072629604, z: 0.000774035}
-  m_LocalScale: {x: -21.892405, y: -100, z: -183.10995}
+  m_LocalPosition: {x: 0.0070049, y: -0.000000043265, z: 0.00083994}
+  m_LocalScale: {x: -31.150629, y: -100, z: -183.10995}
   m_Children: []
   m_Father: {fileID: 9120080798214832802}
   m_RootOrder: 0
@@ -164,7 +164,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &8726762592235189165
+--- !u!65 &614294388489904301
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -175,8 +175,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.019635512, y: 0.019643476, z: 0.020882105}
-  m_Center: {x: -0.000012808999, y: -0.0002719086, z: -0.0003132952}
+  m_Size: {x: 0.073239274, y: 0.019643469, z: 0.020882105}
+  m_Center: {x: -0.026814662, y: -0.00027196828, z: -0.0003132947}
 --- !u!1 &8492339221049415704
 GameObject:
   m_ObjectHideFlags: 0
@@ -191,7 +191,7 @@ GameObject:
   - component: {fileID: -2600766515725642237}
   m_Layer: 0
   m_Name: Money4
-  m_TagString: Untagged
+  m_TagString: Money
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
