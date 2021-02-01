@@ -377,14 +377,29 @@ public class AutoContolArm : MonoBehaviour
 
             if (hitUnderArm.transform.name == "Flour" || hitUnderArm.transform.name == "Flour 1(Clone)")
             {
+                    ProductTransferingFlour = hitUnderArm.transform;
+
                 hasReleventObjectUnder = true;
             }
-            else
-                hasReleventObjectUnder = false;
+
+
+            if (hitUnderArm.transform.tag == "Money" )
+            {
+       
+                    ProductTransferingMoney = hitUnderArm.transform;
+
+                 
+               
+
+                hasReleventObjectUnder = true;
+            }
+
+
+
 
         }
 
-        if (ProductDeliverd == false && GoLeft)
+        if (ProductDeliverd == false && GoLeft&& hasReleventObjectUnder)
         {
 
             timeLeft -= 0.8f * Time.deltaTime;
@@ -421,13 +436,10 @@ public class AutoContolArm : MonoBehaviour
                     HitChosenObject = true;
                 }
 
-                if (hitUnderArm.transform.tag == "Money" && HitChosenObject == false && ColidedWithFlour == false)
-                {
-                    hitUnderArm.transform.GetComponent<MoneyBackAndForthOnConv>().Speed = 0.1f;
-                    ProductTransferingMoney = hitUnderArm.transform;
 
-                    HitChosenObject = true;
-                }
+
+                if (hitUnderArm.transform.tag == "Money")
+                    hitUnderArm.transform.GetComponent<MoneyBackAndForthOnConv>().Speed = 0.1f;
 
             }
 
@@ -438,7 +450,7 @@ public class AutoContolArm : MonoBehaviour
 
 
 
-        if (ProductDeliverd == false && GoRight)
+        if (ProductDeliverd == false && GoRight&& hasReleventObjectUnder)
             {
                 timeLeft -= 0.8f * Time.deltaTime;
 
@@ -473,13 +485,12 @@ public class AutoContolArm : MonoBehaviour
                 
                 }
 
-                if (hitUnderArm.transform.tag == "Money" && HitChosenObject == false && ColidedWithFlour == false)
+                if (hitUnderArm.transform.tag == "Money")
                 {
                     hitUnderArm.transform.GetComponent<MoneyBackAndForthOnConv>().Speed = 0.1f;
-                    ProductTransferingMoney = hitUnderArm.transform;
-              
                     HitChosenObject = true;
                 }
+
 
             }
         }
@@ -490,7 +501,7 @@ public class AutoContolArm : MonoBehaviour
 
 
 
-           // MoneyCollision();
+           MoneyCollision();
 
 
     }
@@ -516,7 +527,7 @@ public class AutoContolArm : MonoBehaviour
             /*time move the robot to the left or right*/
             if ((int)timeLeftBeforeMovment <= 0)
             {
-                if (GoLeft && GoRight == false)
+                if (GoLeft && GoRight == false && hasReleventObjectUnder)
                 {
                     // ArmthrowObject = true;
 
@@ -555,7 +566,7 @@ public class AutoContolArm : MonoBehaviour
                 }
 
 
-                if (GoRight && GoLeft == false)
+                if (GoRight && GoLeft == false&& hasReleventObjectUnder)
                 {
                     // ArmthrowObject = true;
 
@@ -588,7 +599,7 @@ public class AutoContolArm : MonoBehaviour
                         HitChosenObject = false;
                         hitUnderArm.transform.GetComponent<FlourBackAndForthStrachConv>().Speed = 0.8f;
 
-
+                  
                     }
                 }
 
@@ -627,6 +638,7 @@ public class AutoContolArm : MonoBehaviour
                 Arm.GetComponent<SpringJoint>().anchor = AnchorStartConfiguration;
                 ProductDeliverd = false;
                 timeRobotBackAtStartPos = 3;
+                hasReleventObjectUnder = false;
             }
 
             // ProductDeliverd = false;
@@ -639,7 +651,7 @@ public class AutoContolArm : MonoBehaviour
     void MoneyCollision()
     {
 
-        if (this.transform.GetComponentInChildren<StickToIngredient>().ColidedWithMoney)
+        if (this.transform.GetComponentInChildren<StickToIngredient>().ColidedWithMoney&& ProductTransferingMoney.transform.tag == "Money")
         {
 
             timeLeftBeforeMovment -= 0.8f * Time.deltaTime;
@@ -655,7 +667,7 @@ public class AutoContolArm : MonoBehaviour
             /*time move the robot to the left or right*/
             if ((int)timeLeftBeforeMovment <= 0)
             {
-                if (GoLeft && GoRight == false)
+                if (GoLeft && GoRight == false && hasReleventObjectUnder)
                 {
                     // ArmthrowObject = true;
 
@@ -694,7 +706,7 @@ public class AutoContolArm : MonoBehaviour
                 }
 
 
-                if (GoRight && GoLeft == false)
+                if (GoRight && GoLeft == false && hasReleventObjectUnder)
                 {
                     // ArmthrowObject = true;
 
@@ -766,6 +778,7 @@ public class AutoContolArm : MonoBehaviour
                 Arm.GetComponent<SpringJoint>().anchor = AnchorStartConfiguration;
                 ProductDeliverd = false;
                 timeRobotBackAtStartPos = 3;
+                hasReleventObjectUnder = false;
             }
 
             // ProductDeliverd = false;
