@@ -438,8 +438,8 @@ public class AutoContolArm : MonoBehaviour
 
 
 
-                if (hitUnderArm.transform.tag == "Money")
-                    hitUnderArm.transform.GetComponent<MoneyBackAndForthOnConv>().Speed = 0.1f;
+               // if (hitUnderArm.transform.tag == "Money")
+               //     hitUnderArm.transform.GetComponent<MoneyBackAndForthOnConv>().Speed = 0.1f;
 
             }
 
@@ -485,11 +485,11 @@ public class AutoContolArm : MonoBehaviour
                 
                 }
 
-                if (hitUnderArm.transform.tag == "Money")
-                {
-                    hitUnderArm.transform.GetComponent<MoneyBackAndForthOnConv>().Speed = 0.1f;
-                    HitChosenObject = true;
-                }
+             //   if (hitUnderArm.transform.tag == "Money")
+             //   {
+             //       hitUnderArm.transform.GetComponent<MoneyBackAndForthOnConv>().Speed = 0.1f;
+             //       HitChosenObject = true;
+             //   }
 
 
             }
@@ -501,7 +501,7 @@ public class AutoContolArm : MonoBehaviour
 
 
 
-           MoneyCollision();
+          /// MoneyCollision();
 
 
     }
