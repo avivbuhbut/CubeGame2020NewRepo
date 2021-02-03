@@ -293,81 +293,6 @@ public class AutoContolArm : MonoBehaviour
                 new Vector3(this.transform.position.x + 5, this.transform.position.y, this.transform.position.z), Time.deltaTime * 1.1f);
         }
 
-        //Smart arm implementation (Work on distance of arm from the objecet and checks if there is an actuall object under the arm)
-
-
-
-        //  Debug.Log(hitUnderArm.transform.name);
-
-
-        /*
-
-            Debug.Log((int)Vector3.Distance(SpringJointParent.connectedBody.GetComponent<Rigidbody>().position, hitUnderArm.transform.position));
-            if ((int)Vector3.Distance(SpringJointParent.connectedBody.GetComponent<Rigidbody>().position, hitUnderArm.transform.position) >4)
-            {
-                if (ProductDeliverd == false && GoLeft == false && GoRight == false && hitUnderArm.transform.name != "Flour" || hitUnderArm.transform.name != "Flour(Clone)")
-                {
-                    TimerLoweringArm-= 0.8f * Time.deltaTime;
-
-                    if ((int)TimerLoweringArm == 0)
-                    {
-                        SpringJointParent.connectedBody.GetComponent<Rigidbody>().mass = ArmMass += 6;
-                        TimerLoweringArm = 2;
-                    }
-
-                }
-
-            }
-        }*/
-
-        /*
-          if ((int)Vector3.Distance(SpringJointParent.connectedBody.GetComponent<Rigidbody>().position, hitUnderArm.transform.position) != 3
-              )
-          {
-
-              if (ProductDeliverd == false && GoLeft && hitUnderArm.transform.name != "Flour" || hitUnderArm.transform.name != "Flour(Clone)")
-              {
-
-                  SpringJointParent.connectedBody.GetComponent<Rigidbody>().mass = ArmMass -= 2;
-
-              }
-          }*/
-
-        /*
-        Debug.Log("Smart Arm");
-        if (ProductDeliverd == false && GoLeft && hitUnderArm.transform.name == "Flour" || hitUnderArm.transform.name == "Flour(Clone)")
-        {
-            // timeLeft -= 0.8f * Time.deltaTime;
-
-
-            if (ColidedWithFlour == false)//(int)timeLeft == 0 &&
-            {
-
-                SpringJointParent.connectedBody.GetComponent<Rigidbody>().mass = 45.19f;
-                SpringJointParent.spring = 0;
-                SpringJointParent.damper = 0;
-                //  timeLeft = 3;
-            }
-
-        }
-
-
-
-        if (ProductDeliverd == false && GoRight && hitUnderArm.transform.name == "Flour" || hitUnderArm.transform.name == "Flour(Clone)")
-        {
-            //  timeLeft -= 0.8f * Time.deltaTime;
-
-
-            if (ColidedWithFlour == false)//(int)timeLeft == 0 &&
-            {
-
-                SpringJointParent.connectedBody.GetComponent<Rigidbody>().mass = 45.19f;
-                SpringJointParent.spring = 0;
-                SpringJointParent.damper = 0;
-                //timeLeft = 3;
-            }
-        }
-    }*/
 
         if (Physics.Raycast(SpringJointParent.connectedBody.GetComponent<Rigidbody>().position, SpringJointParent.connectedBody.GetComponent<Rigidbody>().transform.TransformDirection(Vector3.down), out hitUnderArm))
             Debug.Log("hitUnderArm.transform.tag: " + hitUnderArm.transform.tag);
@@ -435,11 +360,21 @@ public class AutoContolArm : MonoBehaviour
                     ProductTransferingFlour = hitUnderArm.transform;
                     HitChosenObject = true;
                 }
+                else 
+                    if (ProductTransferingFlour.transform != null)
+                    ProductTransferingFlour.transform.GetComponent<FlourBackAndForthStrachConv>().Speed = 0.8f;
 
 
 
-               // if (hitUnderArm.transform.tag == "Money")
-               //     hitUnderArm.transform.GetComponent<MoneyBackAndForthOnConv>().Speed = 0.1f;
+                if (hitUnderArm.transform.tag == "Money" && HitChosenObject == false)
+               {
+                        hitUnderArm.transform.GetComponent<MoneyBackAndForthOnConv>().Speed = 0.1f;
+                    ProductTransferingMoney = hitUnderArm.transform;
+                    HitChosenObject = true;
+                }
+                else
+                    if (ProductTransferingMoney.transform != null)
+                    ProductTransferingMoney.transform.GetComponent<FlourBackAndForthStrachConv>().Speed = 0.8f;
 
             }
 
@@ -468,10 +403,13 @@ public class AutoContolArm : MonoBehaviour
 
 
 
+
             if (HitChosenObject == false && Physics.Raycast(SpringJointParent.connectedBody.GetComponent<Rigidbody>().position, SpringJointParent.connectedBody.GetComponent<Rigidbody>().transform.TransformDirection(Vector3.down), out hitUnderArm))
             {
-                // Debug.Log((int)Vector3.Distance(SpringJointParent.connectedBody.GetComponent<Rigidbody>().position, hitUnderArm.transform.position));
+
                 SpringJointParent.maxDistance = (int)Vector3.Distance(SpringJointParent.connectedBody.GetComponent<Rigidbody>().position, hitUnderArm.transform.position);
+
+
 
 
 
@@ -480,28 +418,33 @@ public class AutoContolArm : MonoBehaviour
                 {
                     hitUnderArm.transform.GetComponent<FlourBackAndForthStrachConv>().Speed = 0.1f;
                     ProductTransferingFlour = hitUnderArm.transform;
-             
                     HitChosenObject = true;
-                
+                }else
+                        if (ProductTransferingFlour.transform != null)
+                    ProductTransferingFlour.transform.GetComponent<FlourBackAndForthStrachConv>().Speed = 0.8f;
+
+
+
+                if (hitUnderArm.transform.tag == "Money" && HitChosenObject == false)
+                {
+                    hitUnderArm.transform.GetComponent<MoneyBackAndForthOnConv>().Speed = 0.1f;
+                    ProductTransferingMoney = hitUnderArm.transform;
+                    HitChosenObject = true;
                 }
-
-             //   if (hitUnderArm.transform.tag == "Money")
-             //   {
-             //       hitUnderArm.transform.GetComponent<MoneyBackAndForthOnConv>().Speed = 0.1f;
-             //       HitChosenObject = true;
-             //   }
-
+                if (ProductTransferingMoney.transform != null)
+                    ProductTransferingMoney.transform.GetComponent<FlourBackAndForthStrachConv>().Speed = 0.8f;
 
             }
         }
 
 
-
+        
+        if (ProductTransferingFlour.transform != null)
             FlourCollision();
 
 
-
-          /// MoneyCollision();
+        if(ProductTransferingMoney.transform!=null)
+           MoneyCollision();
 
 
     }
