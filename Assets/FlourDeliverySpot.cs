@@ -6,9 +6,11 @@ public class FlourDeliverySpot : MonoBehaviour
 {
     public GameObject MoneyTrans;
     public TextMeshPro MoneyValueTMP;
+    public TextMeshPro DeliverdFlourTMP;
+    int FlourDeliverdCounter;
     bool FlourHit;
     int FlourValue=0;
-    int numberOfFourHit;
+    static int numberOfFourHit;
     GameObject Clone;
     int MoneyValue = 4;
     // Start is called before the first frame update
@@ -21,18 +23,21 @@ public class FlourDeliverySpot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (numberOfFourHit == 5)
-        {
-            MoneyValue += 1;
-            numberOfFourHit = 0;
+     //   if (numberOfFourHit == 5)
+     //   {
+      //      MoneyValue += 1;
+      ///      numberOfFourHit = 0;
           
-        }
+     //   }
        // Debug.Log(" Money Value For Flour: " + GetComponent<add4DollarPlayer>().MoneyValue);
       //  MoneyValueTMP.text = add4DollarPlayer.MoneyValue + "$";
+
+        //Create Money
+        /*
         if (FlourHit )
         {
      
-             Clone = Instantiate(MoneyTrans, new Vector3(this.transform.position.x, this.transform.position.y + 1.5f, this.transform.position.z), Quaternion.identity);
+            Clone = Instantiate(MoneyTrans, new Vector3(this.transform.position.x, this.transform.position.y + 1.5f, this.transform.position.z), Quaternion.identity);
             Clone.transform.localRotation = Quaternion.Euler(0, 270, 0);
            
                         // FlourValue--;
@@ -44,7 +49,7 @@ public class FlourDeliverySpot : MonoBehaviour
             Clone.GetComponent<add4DollarPlayer>().MoneyValue = MoneyValue;
          
             Clone.GetComponentInChildren<TextMeshPro>().text = MoneyValue + "$";
-        }
+        }*/
 
     }
 
@@ -54,9 +59,19 @@ public class FlourDeliverySpot : MonoBehaviour
             collision.transform.name == "Flour")
         {
 
-           
+            if (numberOfFourHit <= 20)
+            {
+                numberOfFourHit++;
+                DeliverdFlourTMP.text = "Deliverd \n\n" + "     " + numberOfFourHit + "/20 ";
+            }
+            else
+            {
+                DeliverdFlourTMP.color = Color.green;
 
-            numberOfFourHit++;
+            }
+
+
+        
         
 
             FlourHit = true;

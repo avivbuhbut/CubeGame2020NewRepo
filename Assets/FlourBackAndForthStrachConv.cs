@@ -23,11 +23,19 @@ public class FlourBackAndForthStrachConv : MonoBehaviour
         if(ColidedStrachConv)
         if(ColidedAnotherFlouronConv)
             Physics.IgnoreCollision(this.transform.GetComponent<BoxCollider>(), AnotherFlourOnConvTrans.GetComponent<BoxCollider>());
+
+
+        
+
         }
     
 
     void OnCollisionStay(Collision collision)
     {
+
+        
+
+
 
         if (collision.transform.name == "StrachConveyor 1(Clone)")
         {

@@ -11,7 +11,7 @@ public class lineHoldsArm : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        ArmTrans.GetComponent<SpringJoint>().tolerance = 0.18f;
     }
 
     // Update is called once per frame

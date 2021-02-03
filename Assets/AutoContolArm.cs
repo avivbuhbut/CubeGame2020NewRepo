@@ -359,11 +359,13 @@ public class AutoContolArm : MonoBehaviour
                     hitUnderArm.transform.GetComponent<FlourBackAndForthStrachConv>().Speed = 0.1f;
                     ProductTransferingFlour = hitUnderArm.transform;
                     HitChosenObject = true;
-                }
-                else 
-                    if (ProductTransferingFlour.transform != null)
-                    ProductTransferingFlour.transform.GetComponent<FlourBackAndForthStrachConv>().Speed = 0.8f;
 
+          
+
+                }
+              
+
+        
 
 
                 if (hitUnderArm.transform.tag == "Money" && HitChosenObject == false)
@@ -419,10 +421,10 @@ public class AutoContolArm : MonoBehaviour
                     hitUnderArm.transform.GetComponent<FlourBackAndForthStrachConv>().Speed = 0.1f;
                     ProductTransferingFlour = hitUnderArm.transform;
                     HitChosenObject = true;
-                }else
-                        if (ProductTransferingFlour.transform != null)
-                    ProductTransferingFlour.transform.GetComponent<FlourBackAndForthStrachConv>().Speed = 0.8f;
 
+        
+                }
+               
 
 
                 if (hitUnderArm.transform.tag == "Money" && HitChosenObject == false)
@@ -439,12 +441,18 @@ public class AutoContolArm : MonoBehaviour
 
 
         
-        if (ProductTransferingFlour.transform != null)
+      //  if (ProductTransferingFlour.transform != null)
             FlourCollision();
 
 
-        if(ProductTransferingMoney.transform!=null)
-           MoneyCollision();
+        if (this.transform.GetComponentInChildren<StickToIngredient>().ColidedWithFlour&& hitUnderArm.transform.GetComponent<FlourBackAndForthStrachConv>().Speed==0.1f)
+            hitUnderArm.transform.GetComponent<FlourBackAndForthStrachConv>().Speed = 0.8f;
+        // if (this.transform.GetComponentInChildren<StickToIngredient>().ColidedWithFlour)
+        //    hitUnderArm.transform.GetComponent<FlourBackAndForthStrachConv>().Speed = 0.8f;
+
+
+        //  if(ProductTransferingMoney.transform!=null)
+        //    MoneyCollision();
 
 
     }
@@ -502,7 +510,7 @@ public class AutoContolArm : MonoBehaviour
                         this.transform.GetComponentInChildren<StickToIngredient>().ColidedWithFlour = false;
 
                         HitChosenObject = false;
-                        hitUnderArm.transform.GetComponent<FlourBackAndForthStrachConv>().Speed = 0.8f;
+                       hitUnderArm.transform.GetComponent<FlourBackAndForthStrachConv>().Speed = 0.8f;
 
 
                     }
@@ -551,7 +559,7 @@ public class AutoContolArm : MonoBehaviour
                 //timeLeftBeforeSwing = 0;
             }
 
-
+    
 
 
 
@@ -561,8 +569,7 @@ public class AutoContolArm : MonoBehaviour
 
 
 
-
-        if (ProductDeliverd == true && this.transform.GetComponentInChildren<StickToIngredient>().ColidedWithFlour == false)
+        if (ProductDeliverd == true && this.transform.GetComponentInChildren<StickToIngredient>().ColidedWithFlour == false && HitChosenObject == false)
         {
 
             timeRobotBackAtStartPos -= 0.8f * Time.deltaTime;
@@ -582,10 +589,12 @@ public class AutoContolArm : MonoBehaviour
                 ProductDeliverd = false;
                 timeRobotBackAtStartPos = 3;
                 hasReleventObjectUnder = false;
+                ProductDeliverd = false;
             }
 
-            // ProductDeliverd = false;
+           
         }
+
 
 
     }
@@ -642,7 +651,7 @@ public class AutoContolArm : MonoBehaviour
                         this.transform.GetComponentInChildren<StickToIngredient>().ColidedWithMoney = false;
 
                         HitChosenObject = false;
-                        hitUnderArm.transform.GetComponent<MoneyBackAndForthOnConv>().Speed = 0.8f;
+                      //  hitUnderArm.transform.GetComponent<MoneyBackAndForthOnConv>().Speed = 0.8f;
 
 
                     }
@@ -680,7 +689,7 @@ public class AutoContolArm : MonoBehaviour
                         this.transform.GetComponentInChildren<StickToIngredient>().ColidedWithMoney = false;
 
                         HitChosenObject = false;
-                        hitUnderArm.transform.GetComponent<MoneyBackAndForthOnConv>().Speed = 0.8f;
+                        //hitUnderArm.transform.GetComponent<MoneyBackAndForthOnConv>().Speed = 0.8f;
 
 
                     }
