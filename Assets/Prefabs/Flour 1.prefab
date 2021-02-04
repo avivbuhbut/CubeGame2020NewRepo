@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 1899787794388918539}
   - component: {fileID: 1899787794388918548}
   - component: {fileID: 1899787794388918549}
-  - component: {fileID: 1629193929164813047}
   - component: {fileID: -6656556814023896814}
   - component: {fileID: -8483910583759367205}
   m_Layer: 0
@@ -150,18 +149,6 @@ MonoBehaviour:
     type: 3}
   DoughGameObj: {fileID: 5764818039999319780, guid: 49d157a41f49e914596ac29a315f65e2,
     type: 3}
---- !u!114 &1629193929164813047
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1629193929164813046}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b41a28baf85441e449321df91dc8a4dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &-6656556814023896814
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,6 +173,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ff0a7d885746e044883d10e95d5a049, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AnotherFlourOnConvTrans: {fileID: 0}
+  Speed: 0
 --- !u!1 &1899787794248082139
 GameObject:
   m_ObjectHideFlags: 0

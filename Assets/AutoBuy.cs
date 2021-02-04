@@ -11,12 +11,14 @@ public class AutoBuy : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI AutoBtnTMP;
     Color AutoBtnTMPOriginColor;
+    
     // Start is called before the first frame update
     void Start()
     {
 
         AutoBtnTMPOriginColor = AutoBtnTMP.color;
         counterPressedAutoBuy = 0;
+
     }
 
     // Update is called once per frame
@@ -38,10 +40,10 @@ public class AutoBuy : MonoBehaviour
 
     }
 
-
+   
     void OnEnable()
     {
-
+       // if((int)GetComponent< createFlournew>().TimeLeftToNextCreation==0&& )
         AutoBuyBtn.onClick.AddListener(AutoBuyButton);//adds a listener for when you click the button
 
 
@@ -56,6 +58,7 @@ public class AutoBuy : MonoBehaviour
         {
             AutoButton = true;
             counterPressedAutoBuy++;
+      //      if(counterPressedAutoBuy!=2 && counterPressedAutoBuy==1)
           //  PlayerMoney.moneyCounter -= (int)createFlournew.FlourVaule;
         }
      

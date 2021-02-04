@@ -23,14 +23,14 @@ public class FlourDeliverySpot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-     //   if (numberOfFourHit == 5)
-     //   {
-      //      MoneyValue += 1;
-      ///      numberOfFourHit = 0;
-          
-     //   }
-       // Debug.Log(" Money Value For Flour: " + GetComponent<add4DollarPlayer>().MoneyValue);
-      //  MoneyValueTMP.text = add4DollarPlayer.MoneyValue + "$";
+        //   if (numberOfFourHit == 5)
+        //   {
+        //      MoneyValue += 1;
+        ///      numberOfFourHit = 0;
+
+        //   }
+        // Debug.Log(" Money Value For Flour: " + GetComponent<add4DollarPlayer>().MoneyValue);
+        //  MoneyValueTMP.text = add4DollarPlayer.MoneyValue + "$";
 
         //Create Money
         /*
@@ -51,6 +51,19 @@ public class FlourDeliverySpot : MonoBehaviour
             Clone.GetComponentInChildren<TextMeshPro>().text = MoneyValue + "$";
         }*/
 
+        if (numberOfFourHit <= 20)
+        {
+
+            DeliverdFlourTMP.text = "Deliverd \n\n" + "     " + numberOfFourHit + "/20 ";
+        }
+        else
+        {
+            numberOfFourHit = 20;
+            DeliverdFlourTMP.color = Color.green;
+
+        }
+
+
     }
 
     void OnCollisionEnter(Collision collision)
@@ -58,18 +71,8 @@ public class FlourDeliverySpot : MonoBehaviour
         if (collision.transform.tag == "Flour" || collision.transform.name == "Flour 1(Clone)"||
             collision.transform.name == "Flour")
         {
-
-            if (numberOfFourHit <= 20)
-            {
-                numberOfFourHit++;
-                DeliverdFlourTMP.text = "Deliverd \n\n" + "     " + numberOfFourHit + "/20 ";
-            }
-            else
-            {
-                DeliverdFlourTMP.color = Color.green;
-
-            }
-
+            numberOfFourHit++;
+       
 
         
         

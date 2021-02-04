@@ -63,7 +63,7 @@ public class AutoContolArm : MonoBehaviour
         SpringDeafult = 40.43f;
         SprintdamperDeafult = 13.66f;
         StartPosRoboticArm = this.transform.position;
-        Debug.Log(DurationPressMouse);
+
     }
 
     // Update is called once per frame

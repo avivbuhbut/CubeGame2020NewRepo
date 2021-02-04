@@ -11,6 +11,7 @@ public class FlourBackAndForthStrachConv : MonoBehaviour
     bool ColidedStrachConv;
    public Transform AnotherFlourOnConvTrans;
      public  float Speed;
+    float TimerSlowDown=6;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,8 +25,18 @@ public class FlourBackAndForthStrachConv : MonoBehaviour
         if(ColidedAnotherFlouronConv)
             Physics.IgnoreCollision(this.transform.GetComponent<BoxCollider>(), AnotherFlourOnConvTrans.GetComponent<BoxCollider>());
 
+        if (this.Speed == 0.1f)
+        {
+            TimerSlowDown -= 0.8f * Time.deltaTime;
 
-        
+            Debug.Log((int)TimerSlowDown);
+            if((int)TimerSlowDown==0)
+            {
+                TimerSlowDown = 6;
+                this.Speed = 0.8f;
+            }
+
+        }
 
         }
     

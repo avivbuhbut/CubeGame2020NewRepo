@@ -12,8 +12,8 @@ public class createFlournew : MonoBehaviour
     public Transform PlayerTrans;
     public Button FlourBuyButton;
     public GameObject FlourGameObj;
-    float TimeLeftToNextCreation = 3;
-    float StartTimeLeftToNextCreation;
+   public float TimeLeftToNextCreation = 3;
+  public  float StartTimeLeftToNextCreation;
     [SerializeField] TextMeshProUGUI FlourNextCreationTMP;
     [SerializeField] TextMeshProUGUI FlourValueTMP;
     [SerializeField] TextMeshProUGUI NotEnoughMoneyTMP;
@@ -23,6 +23,7 @@ public class createFlournew : MonoBehaviour
     float TimerNotEnoughMoney;
     bool NotEnoughMoney;
     int playerMoneyUpdate;
+    static int NineDollarCoutner = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -41,7 +42,7 @@ public class createFlournew : MonoBehaviour
 
       
 
-        if (startTimer && buttonPressed || AutoBuy.AutoButton==true && PlayerMoney.moneyCounter >= FlourVaule)
+        if (startTimer && buttonPressed || AutoBuy.AutoButton==true|| AutoBuyFlourNineDollars.boolAutoNineDollarButton && PlayerMoney.moneyCounter >= FlourVaule)
         {
             playerMoneyUpdate = 0;
                  TimeLeftToNextCreation -= 0.8f * Time.deltaTime;
@@ -79,14 +80,12 @@ public class createFlournew : MonoBehaviour
             if (AutoBuy.AutoButton == true&&playerMoneyUpdate==0)
             {
                 playerMoneyUpdate++;
-            
+                Debug.Log("Hereqweqwe");
                 PlayerMoney.moneyCounter = PlayerMoney.moneyCounter - (int)FlourVaule;
                 Debug.Log(playerMoneyUpdate);
              // FlourVaule++; 
 
             }
-
-   
 
 
             // startTimer = false;
@@ -97,6 +96,24 @@ public class createFlournew : MonoBehaviour
             if (!(PlayerMoney.moneyCounter >= FlourVaule))
             AutoBuy.AutoButton = false;
 
+
+            if (!(PlayerMoney.moneyCounter >= FlourVaule))
+                AutoBuyFlourNineDollars.boolAutoNineDollarButton = false;
+
+
+            if (AutoBuyFlourNineDollars.boolAutoNineDollarButton == true && (PlayerMoney.moneyCounter >= 9) && NineDollarCoutner <= 3)
+            {
+                Debug.Log("NineDollarCoutner" + NineDollarCoutner);
+                NineDollarCoutner += 1;
+                PlayerMoney.moneyCounter = PlayerMoney.moneyCounter - (int)FlourVaule;
+
+                if (NineDollarCoutner == 3)
+                {
+                    AutoBuyFlourNineDollars.boolAutoNineDollarButton = false;
+                    NineDollarCoutner = 0;
+                }
+            }
+       
         }
 
         

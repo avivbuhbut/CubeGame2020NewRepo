@@ -29,7 +29,7 @@ void OnEnable()
   
         if (display7Sec)
         {
-            Debug.Log(timeShown);
+        
             timeShown -= Time.deltaTime;
             if (timeShown >= 0)
             {
