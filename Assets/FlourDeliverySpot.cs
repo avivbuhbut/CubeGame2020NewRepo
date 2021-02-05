@@ -1,21 +1,32 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 public class FlourDeliverySpot : MonoBehaviour
 {
     public GameObject MoneyTrans;
     public TextMeshPro MoneyValueTMP;
     public TextMeshPro DeliverdFlourTMP;
+    public Button CollectMoneyBTN;
+    //public TextMeshPro CollectMoneyTMP;
+    [SerializeField] TextMeshProUGUI CollectMoneyTMP;
+//    public Image ButtonImage;
     int FlourDeliverdCounter;
     bool FlourHit;
     int FlourValue=0;
-    static int numberOfFourHit;
+    static int numberOfFourHit=0;
     GameObject Clone;
     int MoneyValue = 4;
+    bool PressedButton;
+    Color ButtonTMPOriginalColor;
     // Start is called before the first frame update
     void Start()
     {
+        // this.CollectMoneyBTN.transform.GetComponent<Image>().material.color = Color.white;
+
+        ButtonTMPOriginalColor = CollectMoneyTMP.color;
+        CollectMoneyBTN.gameObject.SetActive(false);
         MoneyTrans.gameObject.SetActive(false);
         GetComponent<add4DollarPlayer>().MoneyValue = 4;
     }
@@ -51,15 +62,26 @@ public class FlourDeliverySpot : MonoBehaviour
             Clone.GetComponentInChildren<TextMeshPro>().text = MoneyValue + "$";
         }*/
 
-        if (numberOfFourHit <= 20)
+        if (numberOfFourHit < 10)
         {
-
-            DeliverdFlourTMP.text = "Deliverd \n\n" + "     " + numberOfFourHit + "/20 ";
+            CollectMoneyBTN.gameObject.SetActive(false);
+            DeliverdFlourTMP.text = "Deliverd \n\n" + "     " + numberOfFourHit + "/10 ";
         }
-        else
+    
+        if(numberOfFourHit==10)
         {
-            numberOfFourHit = 20;
+            CollectMoneyBTN.gameObject.SetActive(true);
+            CollectMoneyTMP.color = Color.Lerp(Color.white, Color.red, Mathf.PingPong(Time.time, 1));
+
+            numberOfFourHit = 10;
             DeliverdFlourTMP.color = Color.green;
+            DeliverdFlourTMP.text = "Deliverd \n\n" + "     " + numberOfFourHit + "/10 ";
+        }
+
+
+        if (PressedButton)
+        {
+            CollectMoneyBTN.gameObject.SetActive(false);
 
         }
 
@@ -83,6 +105,8 @@ public class FlourDeliverySpot : MonoBehaviour
             //    StartTimerEnterFirstChallange.PlayerPassThrow = false;
             collision.transform.gameObject.SetActive(false);
             MoneyTrans.gameObject.SetActive(true);
+
+
         }
     }
 
@@ -90,6 +114,26 @@ public class FlourDeliverySpot : MonoBehaviour
     void OnCollisionExit(Collision collision)
     {
      
+    }
+
+
+    void OnEnable()
+    {
+        // if((int)GetComponent< createFlournew>().TimeLeftToNextCreation==0&& )
+        CollectMoneyBTN.onClick.AddListener(CollectMoney);//adds a listener for when you click the button
+
+
+    }
+
+
+    void CollectMoney()// your listener calls this function
+    {
+        if (PressedButton == false)
+        {
+            PlayerMoney.moneyCounter += 100;
+            PressedButton = true;
+        }
+
     }
 
 
