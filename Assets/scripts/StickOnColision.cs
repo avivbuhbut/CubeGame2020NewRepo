@@ -24,7 +24,7 @@ public class StickOnColision : MonoBehaviour
         if (colided && this.transform.parent.name == "Player")
         {
            this.transform.GetComponent<Rigidbody>().isKinematic = true;
-          this.transform.position = new Vector3(PlayerTrans.position.x +1.5f , PlayerTrans.position.y, PlayerTrans.position.z) ;
+          this.transform.position = new Vector3(PlayerTrans.position.x +2.8f , PlayerTrans.position.y+1, PlayerTrans.position.z) ;
         }
      
 
