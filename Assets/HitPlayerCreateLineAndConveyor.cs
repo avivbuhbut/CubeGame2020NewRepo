@@ -12,6 +12,8 @@ public class HitPlayerCreateLineAndConveyor : MonoBehaviour
     GameObject ConveyorStach;
     int counter = 0;
     Vector3 centerPos;
+   
+   
     // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +33,7 @@ public class HitPlayerCreateLineAndConveyor : MonoBehaviour
 
         if (PlayerTrans.GetComponent<HitEndCube>().PlayerHitEndCube)
         {
+            ColidedWithPlayer = false;
             LineRenderer.SetPosition(1, PlayerTrans.GetComponent<HitEndCube>().HitCubeTrans.position);
             CreateConvyor();
         }
@@ -56,12 +59,12 @@ public class HitPlayerCreateLineAndConveyor : MonoBehaviour
 
     void CreateConvyor()
     {
-
+        
         float _Distance = Vector3.Distance(this.transform.position, PlayerTrans.GetComponent<HitEndCube>().HitCubeTrans.position);
         if (counter == 0)
         {
 
-            ConveyorStach = Instantiate(StarchConeyorTrans.gameObject, new Vector3(this.transform.position.x + 10, this.transform.position.y, 3), Quaternion.identity);
+            ConveyorStach = Instantiate(StarchConeyorTrans.gameObject, new Vector3(this.transform.position.x, this.transform.position.y, 3), Quaternion.identity);
 
             //ConveyorStach.transform.Rotate(90.0f, 90.0f, 90.0f, Space.Self); ;
             counter++;
@@ -72,8 +75,8 @@ public class HitPlayerCreateLineAndConveyor : MonoBehaviour
 
 
 
-        ConveyorStach.transform.Find("StartPos").position = new Vector3(this.transform.position.x, this.transform.position.y + 1.5f, this.transform.position.z);
-        ConveyorStach.transform.Find("EndPos").position = new Vector3(PlayerTrans.GetComponent<HitEndCube>().HitCubeTrans.position.x, PlayerTrans.GetComponent<HitEndCube>().HitCubeTrans.position.y + 1.5f, PlayerTrans.GetComponent<HitEndCube>().HitCubeTrans.position.z);
+        ConveyorStach.transform.Find("StartPos").position = new Vector3(this.transform.position.x, this.transform.position.y + 1f, PlayerTrans.transform.position.z);
+        ConveyorStach.transform.Find("EndPos").position = new Vector3(PlayerTrans.GetComponent<HitEndCube>().HitCubeTrans.position.x, PlayerTrans.GetComponent<HitEndCube>().HitCubeTrans.position.y + 3f, PlayerTrans.GetComponent<HitEndCube>().HitCubeTrans.position.z);
         //try ConveyorStach rotation.z  = ConveyorEndTrans.position.y *5
 
 
@@ -83,8 +86,8 @@ public class HitPlayerCreateLineAndConveyor : MonoBehaviour
         ConveyorStach.transform.position = centerPos;
 
 
-        centerPos = new Vector3(this.transform.position.x + PlayerTrans.GetComponent<HitEndCube>().HitCubeTrans.position.x, this.transform.position.y + 0.9f +
-  PlayerTrans.GetComponent<HitEndCube>().HitCubeTrans.position.y + 0.9f) / 2;
+        centerPos = new Vector3(this.transform.position.x + PlayerTrans.GetComponent<HitEndCube>().HitCubeTrans.position.x, this.transform.position.y  +
+  PlayerTrans.GetComponent<HitEndCube>().HitCubeTrans.position.y ) / 2;
 
         Physics.IgnoreCollision(ConveyorStach.GetComponent<BoxCollider>(), PlayerTrans.GetComponent<BoxCollider>());
 
