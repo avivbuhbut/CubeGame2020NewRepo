@@ -295,7 +295,7 @@ public class AutoContolArm : MonoBehaviour
 
 
         if (Physics.Raycast(SpringJointParent.connectedBody.GetComponent<Rigidbody>().position, SpringJointParent.connectedBody.GetComponent<Rigidbody>().transform.TransformDirection(Vector3.down), out hitUnderArm))
-            Debug.Log("hitUnderArm.transform.tag: " + hitUnderArm.transform.tag);
+
 
 
         if (Physics.Raycast(SpringJointParent.connectedBody.GetComponent<Rigidbody>().position, SpringJointParent.connectedBody.GetComponent<Rigidbody>().transform.TransformDirection(Vector3.down), out hitUnderArm)){

@@ -66,11 +66,12 @@ public class ConveyorLineRender : MonoBehaviour
             LineRender.SetPosition(0, this.transform.position);
             LineRender.SetPosition(1, PlayerTrans.transform.position);
         }
-
+        if(PlayerTrans!=null)
         if (PlayerTrans.transform.GetComponent<getConveyorEnd>().HitConveyorEnd)
         {
             LineRender.SetPosition(1, PlayerTrans.transform.GetComponent<getConveyorEnd>().ConveyorEnd.position);
         }
+        if(EndConvTrans!=null)
         EndConvTrans = PlayerTrans.transform.GetComponent<getConveyorEnd>().ConveyorEnd;
 
 
@@ -85,14 +86,17 @@ public class ConveyorLineRender : MonoBehaviour
                 counter++;
 
                 //scaling with the object
-
-            }
-
-            
-
-            ConveyorStach.transform.Find("StartPos").position = new Vector3(this.transform.position.x, this.transform.position.y + 1.5f, this.transform.position.z);
+                ConveyorStach.transform.Find("StartPos").position = new Vector3(this.transform.position.x, this.transform.position.y + 1.5f, this.transform.position.z);
             ConveyorStach.transform.Find("EndPos").position = new Vector3(EndConvTrans.position.x,
               EndConvTrans.position.y + 1.5f, EndConvTrans.position.z);
+            }
+
+ 
+       
+            
+        
+        
+
             //try ConveyorStach rotation.z  = ConveyorEndTrans.position.y *5
 
 

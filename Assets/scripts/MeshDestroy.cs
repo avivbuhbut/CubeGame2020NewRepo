@@ -40,22 +40,7 @@ public class MeshDestroy : MonoBehaviour
         {
             // DestroyMesh();
         }
-        /*
-        if (PizzaThrowcolidedWithSphere && counterPizzaThrow > 80)
-        {
-           counterPizzaThrow--;
-            GameObject.Find("ThrowPizzaObj").transform.GetComponent<MeshDestroy>().DestroyMesh(GameObject.Find("ThrowPizzaObj").transform.gameObject.GetComponent<MeshFilter>().mesh, GameObject.Find("ThrowPizzaObj").transform.GetComponent<MeshDestroy>(), GameObject.Find("ThrowPizzaObj").gameObject);
-        }*/
 
-        /*
-        
-        if(ThrowHitSphere&& CounterThrowHitSphere > 80)
-        {
-            CounterThrowHitSphere--;
-            GameObject.Find("EnemySphere (1)").transform.GetComponent<MeshDestroy>().DestroyMesh(GameObject.Find("EnemySphere (1)").transform.gameObject.GetComponent<MeshFilter>().mesh, GameObject.Find("EnemySphere (1)").transform.GetComponent<MeshDestroy>(), GameObject.Find("EnemySphere (1)").gameObject);
-
-        }*/
-        //  if() add the exact same thing but for the sphere(enemy itself)
 
     }
  
