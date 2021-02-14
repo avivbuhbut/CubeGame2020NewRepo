@@ -23,7 +23,7 @@ public class HitPlayerCreateLineAndConveyor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        LineRenderer.material.color = Color.blue;
         if (ColidedWithPlayer)
         {
           //  if (PlayerTrans.transform.position.x < this.transform.position.x)
