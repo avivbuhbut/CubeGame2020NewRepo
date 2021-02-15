@@ -9,8 +9,9 @@ public class HitPlayerCreateLineAndConveyor : MonoBehaviour
     public LineRenderer LineRenderer;
     bool ColidedWithPlayer;
     public Transform StarchConeyorTrans;
-    GameObject ConveyorStach;
+   public  GameObject ConveyorStach;
     int counter = 0;
+    public Material ConvyorColorMat;
     Vector3 centerPos;
    
    
@@ -23,7 +24,8 @@ public class HitPlayerCreateLineAndConveyor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        LineRenderer.material.color = Color.blue;
+     //   LeftArrowRoboticArm.transform.GetComponent<Renderer>().material.color = Color.Lerp(Color.white, Color.black, Mathf.PingPong(Time.time, 1));
+        LineRenderer.material.color = Color.Lerp(Color.white, Color.blue, Mathf.PingPong(Time.time, 1));
         if (ColidedWithPlayer)
         {
           //  if (PlayerTrans.transform.position.x < this.transform.position.x)
@@ -65,9 +67,9 @@ public class HitPlayerCreateLineAndConveyor : MonoBehaviour
         {
 
             ConveyorStach = Instantiate(StarchConeyorTrans.gameObject, new Vector3(this.transform.position.x, this.transform.position.y, 3), Quaternion.identity);
-
-            //ConveyorStach.transform.Rotate(90.0f, 90.0f, 90.0f, Space.Self); ;
-            counter++;
+            ConveyorStach.GetComponent<Renderer>().material.color= ConvyorColorMat.color;
+              //ConveyorStach.transform.Rotate(90.0f, 90.0f, 90.0f, Space.Self); ;
+              counter++;
 
             //scaling with the object
 

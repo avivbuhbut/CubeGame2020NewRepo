@@ -7,6 +7,7 @@ public class PowerCellsCounter : MonoBehaviour
 
     public TextMeshPro PowerCellTMP;
     int coutnerPowerCells;
+   // public Material ConvyorMat;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,15 +21,17 @@ public class PowerCellsCounter : MonoBehaviour
     }
 
 
-     void OnCollisionEnter(Collision collision)
+     void OnTriggerEnter(Collider other)
+   
     {
 
-        if(collision.transform.name == "PowerCircle(Clone)")
+        if(other.transform.name == "PowerCircle(Clone)")
         {
+            //ConvyorMat.color = other.transform.GetComponent<Renderer>().material.color;
             coutnerPowerCells++;
             PowerCellTMP.text = "Power Cells: " + coutnerPowerCells;
             PowerCellTMP.color = Color.green;
         }
-        Debug.Log(collision.transform.name);
+        Debug.Log(other.transform.name);
     }
 }

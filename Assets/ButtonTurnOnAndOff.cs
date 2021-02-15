@@ -6,6 +6,10 @@ using TMPro;
 public class ButtonTurnOnAndOff : MonoBehaviour
 {
     public Button OnOffButton;
+    public Transform ContraierTrans;
+    public Transform EndCube;
+    public Transform PlayerTrans;
+
  //   public TextMeshPro OffOnTMP;
  public static int  counterClicks=0;
     Color OriginalBtnColor;
@@ -13,6 +17,7 @@ public class ButtonTurnOnAndOff : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        EndCube.gameObject.SetActive(false);
         OriginalBtnColor = this.transform.GetComponentInChildren<Image>().color;
 
 
@@ -24,6 +29,8 @@ public class ButtonTurnOnAndOff : MonoBehaviour
         if (counterClicks == 2)
             counterClicks = 0;
 
+
+        
     }
 
 
@@ -42,15 +49,22 @@ public class ButtonTurnOnAndOff : MonoBehaviour
         {
             this.transform.GetComponentInChildren<Image>().color = Color.green;
             OnOffTMP.text = "On";
-
+            ContraierTrans.transform.GetComponent<Rigidbody>().isKinematic = true;
+            EndCube.position = new Vector3(this.transform.position.x - 2, this.transform.position.y, PlayerTrans.transform.position.z);
+            EndCube.gameObject.SetActive(true);
         }
 
 
         if (counterClicks == 2)
         {
+            EndCube.gameObject.SetActive(false);
+            this.transform.GetComponentInParent<HitPlayerCreateLineAndConveyor>().ConveyorStach.gameObject.SetActive(false);
+           //  this.transform.GetComponentInParent<LineRenderer>().gameObject.SetActive(false);
+          //  this.transform.GetComponentInParent<LineRenderer>().SetPosition(0 , this.transform.GetComponentInParent<Transform>().position)
             this.transform.GetComponentInChildren<Image>().color = OriginalBtnColor;
             OnOffTMP.text = "Off";
-    
+            ContraierTrans.transform.GetComponent<Rigidbody>().isKinematic = false;
+
         }
     }
     }
