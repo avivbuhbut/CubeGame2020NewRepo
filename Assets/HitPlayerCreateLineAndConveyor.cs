@@ -38,7 +38,14 @@ public class HitPlayerCreateLineAndConveyor : MonoBehaviour
             ColidedWithPlayer = false;
             LineRenderer.SetPosition(1, PlayerTrans.GetComponent<HitEndCube>().HitCubeTrans.position);
             CreateConvyor();
-        }
+
+                if (PlayerTrans.GetComponent<HitEndCube>().HitCubeTrans.position.x < this.transform.position.x)
+                {
+
+                }
+
+
+            }
 
 
 

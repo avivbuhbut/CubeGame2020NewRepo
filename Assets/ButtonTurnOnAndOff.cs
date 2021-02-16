@@ -29,7 +29,7 @@ public class ButtonTurnOnAndOff : MonoBehaviour
         if (counterClicks == 2)
             counterClicks = 0;
 
-
+  
         
     }
 
@@ -55,12 +55,14 @@ public class ButtonTurnOnAndOff : MonoBehaviour
             ContraierTrans.transform.GetComponent<Rigidbody>().isKinematic = true;
             EndCube.position = new Vector3(this.transform.position.x - 2, this.transform.position.y, PlayerTrans.transform.position.z);
             EndCube.gameObject.SetActive(true);
+
+    
         }
 
 
         if (counterClicks == 2)
-        {
-            counterClicks = 0;
+        {//sd
+
             //this.transform.GetComponentInParent<HitPlayerCreateLineAndConveyor>().enabled = false;
             EndCube.gameObject.SetActive(false);
             this.transform.GetComponentInParent<HitPlayerCreateLineAndConveyor>().ConveyorStach.gameObject.SetActive(false);
@@ -72,6 +74,7 @@ public class ButtonTurnOnAndOff : MonoBehaviour
             this.transform.GetComponentInChildren<Image>().color = OriginalBtnColor;
             OnOffTMP.text = "Off";
            ContraierTrans.transform.GetComponent<Rigidbody>().isKinematic = false;
+            counterClicks = 0;
 
         }
     }
