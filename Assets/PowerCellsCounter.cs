@@ -31,6 +31,7 @@ public class PowerCellsCounter : MonoBehaviour
             coutnerPowerCells++;
             PowerCellTMP.text = "Power Cells: " + coutnerPowerCells;
             PowerCellTMP.color = Color.green;
+            other.gameObject.SetActive(false);
         }
         Debug.Log(other.transform.name);
     }

@@ -43,10 +43,13 @@ public class ButtonTurnOnAndOff : MonoBehaviour
 
 
     void TurnOn()
-    {
+    {   
         counterClicks++;
         if (counterClicks == 1)
         {
+            //this.transform.GetComponentInParent<HitPlayerCreateLineAndConveyor>().enabled = true;
+          
+        //    this.transform.GetComponentInParent<LineRenderer>().SetPosition(0, this.transform.GetComponentInParent<Transform>().position); 
             this.transform.GetComponentInChildren<Image>().color = Color.green;
             OnOffTMP.text = "On";
             ContraierTrans.transform.GetComponent<Rigidbody>().isKinematic = true;
@@ -57,13 +60,18 @@ public class ButtonTurnOnAndOff : MonoBehaviour
 
         if (counterClicks == 2)
         {
+            counterClicks = 0;
+            //this.transform.GetComponentInParent<HitPlayerCreateLineAndConveyor>().enabled = false;
             EndCube.gameObject.SetActive(false);
             this.transform.GetComponentInParent<HitPlayerCreateLineAndConveyor>().ConveyorStach.gameObject.SetActive(false);
-           //  this.transform.GetComponentInParent<LineRenderer>().gameObject.SetActive(false);
-          //  this.transform.GetComponentInParent<LineRenderer>().SetPosition(0 , this.transform.GetComponentInParent<Transform>().position)
+            this.transform.GetComponentInParent<LineRenderer>().enabled = false;
+            PlayerTrans.GetComponent<HitEndCube>().PlayerHitEndCube = false;
+            this.transform.GetComponentInParent<HitPlayerCreateLineAndConveyor>().ColidedWithPlayer = false;
+            //this.transform.GetComponentInParent<LineRenderer>()
+            //this.transform.GetComponentInParent<LineRenderer>().SetPosition(1, PlayerTrans.position);
             this.transform.GetComponentInChildren<Image>().color = OriginalBtnColor;
             OnOffTMP.text = "Off";
-            ContraierTrans.transform.GetComponent<Rigidbody>().isKinematic = false;
+           ContraierTrans.transform.GetComponent<Rigidbody>().isKinematic = false;
 
         }
     }

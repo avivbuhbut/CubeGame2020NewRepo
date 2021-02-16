@@ -7,7 +7,7 @@ public class HitPlayerCreateLineAndConveyor : MonoBehaviour
 
      Transform PlayerTrans;
     public LineRenderer LineRenderer;
-    bool ColidedWithPlayer;
+    public bool ColidedWithPlayer;
     public Transform StarchConeyorTrans;
    public  GameObject ConveyorStach;
     int counter = 0;
@@ -51,6 +51,9 @@ public class HitPlayerCreateLineAndConveyor : MonoBehaviour
     {
         if(collision.transform.name == "Player")
         {
+            
+            counter = 0;
+            LineRenderer.enabled = true;
             ColidedWithPlayer = true;
             PlayerTrans = collision.transform;
         }
