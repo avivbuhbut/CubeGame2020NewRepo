@@ -15,12 +15,13 @@ public class HitPlayerCreateLineAndConveyor : MonoBehaviour
     public bool EndCubeToTheLeftOfContainer;
     public bool EndCubeToTheRightOfContainer;
     Vector3 centerPos;
-   
-   
+    public Transform PowerCircleTrans;
+    float CreatePowerCellTimer;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        CreatePowerCellTimer = 2f;
     }
 
     // Update is called once per frame
@@ -51,6 +52,23 @@ public class HitPlayerCreateLineAndConveyor : MonoBehaviour
                 {
                     EndCubeToTheLeftOfContainer = false;
                     EndCubeToTheRightOfContainer = true;
+
+                    CreatePowerCellTimer -= 0.8f * Time.deltaTime;
+
+
+                    if ((int)CreatePowerCellTimer == 0&& this.transform.GetComponent<PowerCellsCounter>().coutnerPowerCells>0)
+                    {
+                        Instantiate(PowerCircleTrans, new Vector3(this.transform.position.x + 2, this.transform.position.y + 1, PlayerTrans.transform.position.z), Quaternion.identity);
+                        PowerCircleTrans.GetComponent<Rigidbody>().useGravity = true;
+                        this.transform.GetComponent<PowerCellsCounter>().coutnerPowerCells -= 1;
+                        this.transform.GetComponent<PowerCellsCounter>().PowerCellTMP.text = "Power Cells: " + this.transform.GetComponent<PowerCellsCounter>().coutnerPowerCells;
+                        //this.transform.GetComponent<PowerCellsCounter>().PowerCellTMP.color = Color.green;
+                        PowerCircleTrans.gameObject.SetActive(true);
+                        CreatePowerCellTimer = 2;
+                    }
+                   // other.gameObject.SetActive(false);
+
+
                 }
 
 

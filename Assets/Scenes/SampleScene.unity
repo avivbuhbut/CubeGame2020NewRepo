@@ -5887,6 +5887,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PowerCellTMP: {fileID: 1727993014}
+  coutnerPowerCells: 0
 --- !u!65 &267217586
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -71008,6 +71009,12 @@ PrefabInstance:
       propertyPath: ConvyorColorMat
       value: 
       objectReference: {fileID: 2100000, guid: 86fe043ed569b5d4bbd830fa94bfd295, type: 2}
+    - target: {fileID: 7798041505566694159, guid: 9f821e1c20ffb2c41999544fb1139706,
+        type: 3}
+      propertyPath: PowerCircleTrans
+      value: 
+      objectReference: {fileID: 1128731734116529907, guid: 8d71b4259b215e34695974b2cd41bc57,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9f821e1c20ffb2c41999544fb1139706, type: 3}
 --- !u!1001 &7837438151850281069

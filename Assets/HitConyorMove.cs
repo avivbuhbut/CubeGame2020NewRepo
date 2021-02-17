@@ -21,14 +21,14 @@ public class HitConyorMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (colidedWithConvyor && ContainerTrans.GetComponent<HitPlayerCreateLineAndConveyor>().EndCubeToTheLeftOfContainer)
+        if (colidedWithConvyor && ContainerTrans.GetComponent<HitPlayerCreateLineAndConveyor>().EndCubeToTheLeftOfContainer&& DoneMovment==false)
         {
             this.transform.position = Vector3.MoveTowards(new Vector3(this.transform.position.x, StrachConveyor.position.y + 0.3f, this.transform.position.z), StartPos.position, 0.1f);
 
             this.transform.GetComponent<Rigidbody>().isKinematic = true;
         }
 
-        if (colidedWithConvyor && ContainerTrans.GetComponent<HitPlayerCreateLineAndConveyor>().EndCubeToTheRightOfContainer)
+        if (colidedWithConvyor && ContainerTrans.GetComponent<HitPlayerCreateLineAndConveyor>().EndCubeToTheRightOfContainer && DoneMovment == false)
         {
             /*while on the conveyor move to the desired position*/
             if ((int)Vector3.Distance(new Vector3(this.transform.position.x, StrachConveyor.position.y + 0.3f, this.transform.position.z), new Vector3(EndPos.position.x + 3, EndPos.position.y, EndPos.position.z)) > 1 && DoneMovment == false)
@@ -46,6 +46,9 @@ public class HitConyorMove : MonoBehaviour
                 DoneMovment = true;
               this.transform.GetComponent<Rigidbody>().isKinematic = false;
                this.transform.GetComponent<Rigidbody>().useGravity = true;
+
+               // this.transform.GetComponent<HitConyorMove>().gameObject.SetActive(false);
+                
                //this.transform.GetComponent<Rigidbody>().AddRelativeForce(this.transform.forward * 5f);
 
             }

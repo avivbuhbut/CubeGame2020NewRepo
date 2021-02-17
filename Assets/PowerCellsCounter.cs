@@ -6,7 +6,7 @@ public class PowerCellsCounter : MonoBehaviour
 {
 
     public TextMeshPro PowerCellTMP;
-    int coutnerPowerCells;
+   public  int coutnerPowerCells;
    // public Material ConvyorMat;
     // Start is called before the first frame update
     void Start()
