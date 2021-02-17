@@ -12,6 +12,8 @@ public class HitPlayerCreateLineAndConveyor : MonoBehaviour
    public  GameObject ConveyorStach;
     int counter = 0;
     public Material ConvyorColorMat;
+    public bool EndCubeToTheLeftOfContainer;
+    public bool EndCubeToTheRightOfContainer;
     Vector3 centerPos;
    
    
@@ -41,7 +43,14 @@ public class HitPlayerCreateLineAndConveyor : MonoBehaviour
 
                 if (PlayerTrans.GetComponent<HitEndCube>().HitCubeTrans.position.x < this.transform.position.x)
                 {
+                    EndCubeToTheLeftOfContainer = true;
+                    EndCubeToTheRightOfContainer = false;
+                }
 
+                if (PlayerTrans.GetComponent<HitEndCube>().HitCubeTrans.position.x > this.transform.position.x)
+                {
+                    EndCubeToTheLeftOfContainer = false;
+                    EndCubeToTheRightOfContainer = true;
                 }
 
 
