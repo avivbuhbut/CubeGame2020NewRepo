@@ -14,13 +14,15 @@ public class MagnetActivation : MonoBehaviour
     void Update()
     {
         OnMouseOver();
-        if (Input.GetMouseButtonDown(0))
-            MoneyMagnet.magnetForce = 0;
+       // if (Input.GetMouseButtonDown(0))
+           // MoneyMagnet.magnetForce = 0;
        // this.transform.GetComponent<SphereCollider>().isTrigger = false; // good to "shoot" the attached objects
 
 
-        if(Input.GetMouseButtonDown(1))
-            MoneyMagnet.magnetForce = 80f;
+        if(Input.GetMouseButtonDown(0))
+            PowerCellMagnet.magnetForce = 80f;
+       if(Input.GetKey(KeyCode.LeftShift) && Input.GetMouseButtonDown(0))
+            PowerCellMagnet.magnetForce = 0;
         ///    this.transform.GetComponent<SphereCollider>().isTrigger = true;
 
     }
