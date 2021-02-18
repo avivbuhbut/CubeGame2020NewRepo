@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 101961170143522034}
   - component: {fileID: 101961170143522033}
   - component: {fileID: -5707592280685428997}
-  - component: {fileID: 687765365975134651}
   m_Layer: 0
   m_Name: TimeCrystalPink
   m_TagString: Untagged
@@ -391,16 +390,3 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 8
   m_CollisionDetection: 0
---- !u!114 &687765365975134651
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 101961170143522032}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d03bd49d9b96b164492c95e70bd99dfe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PlayerTrans: {fileID: 0}

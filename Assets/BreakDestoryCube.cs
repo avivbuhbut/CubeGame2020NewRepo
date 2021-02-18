@@ -5,7 +5,8 @@ using UnityEngine;
 public class BreakDestoryCube : MonoBehaviour
 {
     public GameObject PowerCircleTrans;
-    public GameObject PinKTimeCrystal;    // Start is called before the first frame update
+    public GameObject PinKTimeCrystal;
+    bool MagnitudeOk;// Start is called before the first frame update
     void Start()
     {
 
@@ -15,13 +16,19 @@ public class BreakDestoryCube : MonoBehaviour
     void Update()
     {
 
+        //  Debug.Log(this.transform.GetComponent<Rigidbody>().velocity.magnitude);
         //    Debug.Log(tempRenddomNum);
+        if (this.transform.GetComponent<Rigidbody>().velocity.magnitude >= 25)
+            MagnitudeOk = true;
+        else
+            MagnitudeOk = false;
+
 
     }
     void OnCollisionEnter(Collision collision)
     {
         //  Debug.Log("Destroy cube  Colided with " + collision.transform.name);
-        if (collision.transform.tag == "Floor")
+        if (collision.transform.tag == "Floor" && MagnitudeOk)
         {
             this.transform.GetComponent<MeshDestroy>().DestroyMesh(this.transform.gameObject.GetComponent<MeshFilter>().mesh, this.transform.GetComponent<MeshDestroy>(), this.transform.gameObject);
 
