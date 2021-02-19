@@ -4,16 +4,17 @@ using UnityEngine;
 
 public class FloatAbovePlayer : MonoBehaviour
 {
-    public Transform PlayerTrans;
+     Transform PlayerTrans;
     bool ColidedWithPlayer;
     // Start is called before the first frame update
     void Start()
     {
-        
-    }
+        PlayerTrans = GameObject.Find("Player").transform;
 
-    // Update is called once per frame
-    void Update()
+}
+
+// Update is called once per frame
+void Update()
     {
         if (ColidedWithPlayer)
         {

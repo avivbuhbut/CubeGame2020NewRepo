@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 101961170143522034}
   - component: {fileID: 101961170143522033}
   - component: {fileID: -5707592280685428997}
+  - component: {fileID: -6547426455651096195}
   m_Layer: 0
   m_Name: TimeCrystalPink
   m_TagString: Untagged
@@ -330,7 +331,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 61f12569bc9a9e845b43ebfc4f0416a6, type: 2}
+  - {fileID: 2100000, guid: db4c95c92870b2a43ac2b62fbcb36fb7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -390,3 +391,17 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 8
   m_CollisionDetection: 0
+--- !u!114 &-6547426455651096195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 101961170143522032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47df9a71eb6190e4b8bc3c8356a78a2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ElectredMat: {fileID: 2100000, guid: 95f1d364681e6864da96e22f8262ee14, type: 2}
+  CrystalElectred: 0

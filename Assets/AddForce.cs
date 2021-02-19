@@ -52,7 +52,7 @@ public class AddForce : MonoBehaviour
 
      void OnCollisionEnter(Collision collision)
     {
-        if (collision.transform.name == "Player")
+        if (collision.transform.name == "Player"&& PlayerTrans.GetComponent< CheckIfRainHitPlayer>().PlayerElectricFull)
         {
            // this.transform.GetComponent<Rigidbody>().angularDrag = 10f;
             this.transform.GetComponent<Renderer>().material = HitPlayerMaterial;
