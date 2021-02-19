@@ -59,7 +59,8 @@ public class CheckIfRainHitPlayer : MonoBehaviour
 
 
             }
-            else
+            
+            else if (hit.transform.tag != "Bounds")
             {
                 InRainTimer = 20;
                 NOTInRainTimer -= 0.8f * Time.deltaTime;
@@ -72,9 +73,9 @@ public class CheckIfRainHitPlayer : MonoBehaviour
 
                 if ((int)NOTInRainTimer == 0)
                 {
-                    PlayerElectricFull = false;
+                   PlayerElectricFull = false;
                     this.transform.GetComponent<Renderer>().material = PlayerOriginalMaterial;
-                    NOTInRainTimer = 0;
+                   NOTInRainTimer = 0;
                 }
             }
 
@@ -83,7 +84,7 @@ public class CheckIfRainHitPlayer : MonoBehaviour
         
             // if (Physics.Raycast(this.transform.position, this.transform.TransformDirection(Vector3.up), out hitAbove))
             // {
-            Debug.DrawLine(this.transform.position, this.transform.TransformDirection(Vector3.up), Color.white);
+        //    Debug.DrawLine(this.transform.position, this.transform.TransformDirection(Vector3.up), Color.white);
             //   }
 
 
