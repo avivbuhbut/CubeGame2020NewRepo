@@ -23,7 +23,9 @@ public class GrapplingHook : MonoBehaviour
     public float hookExtendRetractSpeed = 2;
     public Material material;
     public ObiRopeSection section;
-
+    Transform PlayerTrans;
+    public Material ElectricRopeMat;
+    Material deafultMaterialRope;
     private ObiRope rope;
     private ObiRopeBlueprint blueprint;
     private ObiRopeExtrudedRenderer ropeRenderer;
@@ -34,7 +36,7 @@ public class GrapplingHook : MonoBehaviour
 
     void Awake()
     {
-
+        PlayerTrans = GameObject.Find("Player").transform;
         // Create both the rope and the solver:	
         rope = gameObject.AddComponent<ObiRope>();
         ropeRenderer = gameObject.AddComponent<ObiRopeExtrudedRenderer>();
@@ -43,7 +45,7 @@ public class GrapplingHook : MonoBehaviour
         ropeRenderer.normalizeV = false;
         ropeRenderer.uvAnchor = 1;
         rope.GetComponent<MeshRenderer>().material = material;
-
+        deafultMaterialRope = rope.GetComponent<MeshRenderer>().material;
         // Setup a blueprint for the rope:
         blueprint = ScriptableObject.CreateInstance<ObiRopeBlueprint>();
         blueprint.resolution = 0.5f;
@@ -127,6 +129,13 @@ public class GrapplingHook : MonoBehaviour
 
     void Update()
     {
+        if (PlayerTrans.GetComponent<CheckIfRainHitPlayer>().PlayerElectricFull)
+            rope.GetComponent<MeshRenderer>().material = ElectricRopeMat;
+        else
+            rope.GetComponent<MeshRenderer>().material = deafultMaterialRope;
+
+
+
         if (Input.GetMouseButtonDown(0))
             DetachHook();
 

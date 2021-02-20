@@ -6,9 +6,11 @@ public class HitPlayerChangeMat : MonoBehaviour
 {
 
     public Material ElectredMat;
-     Material DefaultMat;
+    Material DefaultMat;
     Transform PlayerTrans;
     public bool CrystalElectred;
+    float TimerDestroy=6;
+    bool startTimer;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,9 +20,17 @@ public class HitPlayerChangeMat : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        
+    void Update() { 
+    
+        if (startTimer) {
+
+            TimerDestroy -= 0.8f * Time.deltaTime;
+            this.transform.GetComponent<Rigidbody>().useGravity = false;
+            if ((int)TimerDestroy == 0)
+            {
+                Destroy(this.gameObject);
+            }
+        }
     }
 
 
@@ -30,10 +40,22 @@ public class HitPlayerChangeMat : MonoBehaviour
         {
             CrystalElectred = true;
             this.transform.GetComponent<Renderer>().material = ElectredMat;
+
         }
-        else
+
+        if (collision.transform.name == "Player" && CrystalElectred && PlayerTrans.GetComponent<CheckIfRainHitPlayer>().PlayerElectricFull == false)
         {
-            CrystalElectred = false;
+            startTimer = true;
+            CrystalElectred = true;
+            this.transform.GetComponent<Renderer>().material = ElectredMat;
+
         }
+
+
+
+        //else
+        // {
+        //     CrystalElectred = false;
+        //}
     }
 }

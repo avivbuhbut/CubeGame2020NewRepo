@@ -6,10 +6,12 @@ public class BreakDestoryCube : MonoBehaviour
 {
     public GameObject PowerCircleTrans;
     public GameObject PinKTimeCrystal;
+
+    Transform PlayerTrans;
     bool MagnitudeOk;// Start is called before the first frame update
     void Start()
     {
-
+        PlayerTrans = GameObject.Find("Player").transform;
     }
 
     // Update is called once per frame
@@ -25,10 +27,15 @@ public class BreakDestoryCube : MonoBehaviour
 
 
     }
+
+
+
     void OnCollisionEnter(Collision collision)
     {
+
+        Debug.Log(collision.transform.name);
         //  Debug.Log("Destroy cube  Colided with " + collision.transform.name);
-        if (collision.transform.tag == "Floor" && MagnitudeOk)
+        if (collision.transform.tag == "Floor" && MagnitudeOk&& PlayerTrans.GetComponent<CheckIfRainHitPlayer>().PlayerElectricFull)
         {
             this.transform.GetComponent<MeshDestroy>().DestroyMesh(this.transform.gameObject.GetComponent<MeshFilter>().mesh, this.transform.GetComponent<MeshDestroy>(), this.transform.gameObject);
 

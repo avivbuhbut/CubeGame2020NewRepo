@@ -9,7 +9,7 @@ public class CheckIfRainHitPlayer : MonoBehaviour
     public ParticleSystem ElectricParticals;
     public Material ElectricMatPlayer;
     static  float InRainTimer  = 20;
-    static float NOTInRainTimer = 20;
+   public static float NOTInRainTimer = 20;
     Material PlayerOriginalMaterial;
     public bool PlayerElectricFull;
     // Start is called before the first frame update
@@ -77,9 +77,12 @@ public class CheckIfRainHitPlayer : MonoBehaviour
                     this.transform.GetComponent<Renderer>().material = PlayerOriginalMaterial;
                    NOTInRainTimer = 0;
                 }
+
+            
+
             }
 
-
+           
         }
         
             // if (Physics.Raycast(this.transform.position, this.transform.TransformDirection(Vector3.up), out hitAbove))
@@ -87,7 +90,18 @@ public class CheckIfRainHitPlayer : MonoBehaviour
         //    Debug.DrawLine(this.transform.position, this.transform.TransformDirection(Vector3.up), Color.white);
             //   }
 
-
+   
         
+    }
+
+     void OnCollisionEnter(Collision collision)
+    {
+        if (collision.transform.name == "TimeCrystalPink(Clone)" && collision.transform.GetComponent<HitPlayerChangeMat>().CrystalElectred)
+        {
+            NOTInRainTimer = 30;
+            this.transform.GetComponent<Renderer>().material = ElectricMatPlayer;
+            this.transform.GetComponent<ParticleSystem>().Play();
+            PlayerElectricFull = true;
+        }
     }
 }
