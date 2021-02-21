@@ -3,14 +3,14 @@
 //					                                //
 // Created by Michael Kremmel                       //
 // www.michaelkremmel.de                            //
-// Copyright © 2020 All rights reserved.            //
+// Copyright © 2021 All rights reserved.            //
 //////////////////////////////////////////////////////
 #ifndef MK_GLOW_COMPOSITE
 	#define MK_GLOW_COMPOSITE
 	
 	#include "../Inc/Common.hlsl"
 
-	UNIFORM_SOURCE_SAMPLER_AND_TEXTURE(_SourceTex)
+	UNIFORM_SAMPLER_AND_TEXTURE_2D(_SourceTex)
 	#ifdef COMPUTE_SHADER
 		UNIFORM_RWTEXTURE_2D(_TargetTex)
 	#else

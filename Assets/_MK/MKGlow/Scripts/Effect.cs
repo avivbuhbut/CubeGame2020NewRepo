@@ -3,7 +3,7 @@
 //					                                //
 // Created by Michael Kremmel                       //
 // www.michaelkremmel.de                            //
-// Copyright © 2020 All rights reserved.            //
+// Copyright © 2021 All rights reserved.            //
 //////////////////////////////////////////////////////
 
 using System.Collections;
@@ -145,14 +145,16 @@ namespace MK.Glow
             _selectiveRenderContext = new RenderContext();
 
             if(shaderOverwrite == null)
+            {
                 _renderMaterialNoGeometry = new Material(_resources.sm40Shader) { hideFlags = HideFlags.HideAndDontSave };
+                _renderMaterialGeometry = new Material(_resources.sm40Shader) { hideFlags = HideFlags.HideAndDontSave };
+            }
             else
+            {
                 _renderMaterialNoGeometry = new Material(shaderOverwrite) { hideFlags = HideFlags.HideAndDontSave };
-            if(shaderGeometryOverwrite == null)
-                _renderMaterialGeometry = new Material(Compatibility.CheckGeometryShaderSupport() ? _resources.sm40GeometryShader : _resources.sm40Shader) { hideFlags = HideFlags.HideAndDontSave };
-            else
-                _renderMaterialGeometry = new Material(Compatibility.CheckGeometryShaderSupport() ? shaderGeometryOverwrite : shaderOverwrite) { hideFlags = HideFlags.HideAndDontSave };
-
+                _renderMaterialGeometry = new Material(shaderOverwrite) { hideFlags = HideFlags.HideAndDontSave };
+            }
+            
             _renderTargetsBundle = new List<RenderTarget>();
             _renderKeywordsBundle = new List<MaterialKeywords>();
 
@@ -220,7 +222,7 @@ namespace MK.Glow
         private void UpdateRenderBuffers()
         {
             RenderDimension renderDimension = new RenderDimension(_cameraData.width, _cameraData.height);
-            _sourceContext[0].UpdateRenderContext(_cameraData.stereoEnabled, _renderTextureFormat, 0, _useComputeShaders, renderDimension);
+            _sourceContext[0].UpdateRenderContext(_cameraData, _renderTextureFormat, 0, _useComputeShaders, renderDimension);
             _sourceContext[0].SinglePassStereoAdjustWidth(_cameraData.stereoEnabled);
             Vector2 anamorphic = new Vector2(_settings.anamorphicRatio < 0 ? -_settings.anamorphicRatio : 0f, _settings.anamorphicRatio > 0 ?  _settings.anamorphicRatio : 0f);
             switch(_settings.quality)
@@ -427,7 +429,7 @@ namespace MK.Glow
             if(_settings.workflow == Workflow.Selective)
             {
                 BeginProfileSample(PipelineProperties.CommandBufferProperties.sampleReplacement);
-                _selectiveRenderContext.UpdateRenderContext(_cameraData.stereoEnabled, _renderTextureFormat, 16, false, _sourceContext[0].renderDimension);
+                _selectiveRenderContext.UpdateRenderContext(_cameraData, _renderTextureFormat, 16, false, _sourceContext[0].renderDimension);
                 //The allowVerticallyFlip flag seems to break sometimes orientation of the rendered glow map, therefore force the old way.
                 _selectiveRenderTarget.renderTexture = RenderTexture.GetTemporary(_cameraData.width / (int)_settings.quality, _cameraData.height / (int)_settings.quality, 16, _renderTextureFormat, RenderTextureReadWrite.Default, 1);//PipelineExtensions.GetTemporary(_selectiveRenderContext, _renderTextureFormat);
                 SetupSelectiveGlowCamera();
@@ -1391,12 +1393,12 @@ namespace MK.Glow
         /// </summary>
         internal enum ShaderRenderPass
         {
-            Copy = 0,
-            Presample = 1,
-            Downsample = 2,
-            Upsample = 3,
-            Composite = 4,
-            Debug = 5
+            //Copy = 0,
+            Presample = 0,
+            Downsample = 1,
+            Upsample = 2,
+            Composite = 3,
+            Debug = 4
         }
 
         /// <summary>

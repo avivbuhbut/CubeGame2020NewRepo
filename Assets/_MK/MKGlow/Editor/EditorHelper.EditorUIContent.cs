@@ -3,7 +3,7 @@
 //					                                //
 // Created by Michael Kremmel                       //
 // www.michaelkremmel.de                            //
-// Copyright © 2020 All rights reserved.            //
+// Copyright © 2021 All rights reserved.            //
 //////////////////////////////////////////////////////
 #if UNITY_EDITOR && !UNITY_CLOUD_BUILD
 using UnityEditor;

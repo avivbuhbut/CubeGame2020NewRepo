@@ -3,7 +3,7 @@
 //					                                //
 // Created by Michael Kremmel                       //
 // www.michaelkremmel.de                            //
-// Copyright © 2020 All rights reserved.            //
+// Copyright © 2021 All rights reserved.            //
 //////////////////////////////////////////////////////
 using System.Collections;
 using System.Collections.Generic;
@@ -165,7 +165,7 @@ namespace MK.Glow
         {
             for(int i = 0; i < levels; i++)
             {
-                renderContexts[i].UpdateRenderContext(cameraData.stereoEnabled, format, depthBufferBits, enableRandomWrite, rawDimension);
+                renderContexts[i].UpdateRenderContext(cameraData, format, depthBufferBits, enableRandomWrite, rawDimension);
                 rawDimension.width = Mathf.Max(SinglePassStereoDownscale(cameraData.stereoEnabled, rawDimension.width, 2), 1);
                 rawDimension.height = Mathf.Max(rawDimension.height / 2, 1);
             }

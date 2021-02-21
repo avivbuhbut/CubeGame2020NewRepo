@@ -3,7 +3,7 @@
 //					                                //
 // Created by Michael Kremmel                       //
 // www.michaelkremmel.de                            //
-// Copyright © 2020 All rights reserved.            //
+// Copyright © 2021 All rights reserved.            //
 //////////////////////////////////////////////////////
 using UnityEngine;
 
@@ -78,23 +78,32 @@ namespace MK.Glow
 		/// <param name="depthBufferBits"></param>
 		/// <param name="enableRandomWrite"></param>
 		/// <param name="dimension"></param>
-		internal void UpdateRenderContext(bool stereoEnabled, RenderTextureFormat format, int depthBufferBits, bool enableRandomWrite, RenderDimension dimension)
+		internal void UpdateRenderContext(CameraData cameraData, RenderTextureFormat format, int depthBufferBits, bool enableRandomWrite, RenderDimension dimension)
         {
-			#if UNITY_2018_3_OR_NEWER
-			#if ENABLE_VR
-			_descriptor.dimension = stereoEnabled ? XRSettings.eyeTextureDesc.dimension : UnityEngine.Rendering.TextureDimension.Tex2D;
-            _descriptor.vrUsage = stereoEnabled ? XRSettings.eyeTextureDesc.vrUsage : VRTextureUsage.None;
-            _descriptor.volumeDepth = stereoEnabled ? XRSettings.eyeTextureDesc.volumeDepth : 1;
-			#else
-			_descriptor.dimension = UnityEngine.Rendering.TextureDimension.Tex2D;
-            _descriptor.vrUsage = VRTextureUsage.None;
-            _descriptor.volumeDepth = 1;
-			#endif
-			#elif UNITY_2017_1_OR_NEWER
-			_descriptor.dimension = UnityEngine.Rendering.TextureDimension.Tex2D;
-            _descriptor.vrUsage = VRTextureUsage.None;
-            _descriptor.volumeDepth = 1;
-			#endif
+			if(cameraData.overwriteDescriptor)
+			{
+				_descriptor.dimension = UnityEngine.Rendering.TextureDimension.Tex2DArray;
+				_descriptor.vrUsage = VRTextureUsage.None;
+				_descriptor.volumeDepth = 2;
+			}
+			else
+			{
+				#if UNITY_2018_3_OR_NEWER
+				#if ENABLE_VR
+				_descriptor.dimension = cameraData.stereoEnabled ? XRSettings.eyeTextureDesc.dimension : UnityEngine.Rendering.TextureDimension.Tex2D;
+				_descriptor.vrUsage = cameraData.stereoEnabled ? XRSettings.eyeTextureDesc.vrUsage : VRTextureUsage.None;
+				_descriptor.volumeDepth = cameraData.stereoEnabled ? XRSettings.eyeTextureDesc.volumeDepth : 1;
+				#else
+				_descriptor.dimension = UnityEngine.Rendering.TextureDimension.Tex2D;
+				_descriptor.vrUsage = VRTextureUsage.None;
+				_descriptor.volumeDepth = 1;
+				#endif
+				#elif UNITY_2017_1_OR_NEWER
+				_descriptor.dimension = UnityEngine.Rendering.TextureDimension.Tex2D;
+				_descriptor.vrUsage = VRTextureUsage.None;
+				_descriptor.volumeDepth = 1;
+				#endif
+			}
 
 			#if UNITY_2017_1_OR_NEWER
             _descriptor.colorFormat = format;

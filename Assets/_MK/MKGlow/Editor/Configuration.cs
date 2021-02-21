@@ -3,7 +3,7 @@
 //					                                //
 // Created by Michael Kremmel                       //
 // www.michaelkremmel.de                            //
-// Copyright © 2020 All rights reserved.            //
+// Copyright © 2021 All rights reserved.            //
 //////////////////////////////////////////////////////
 
 using System.Collections;
@@ -17,6 +17,7 @@ namespace MK.Glow.Editor.InstallWizard
     //[CreateAssetMenu(fileName = "Configuration", menuName = "MK/Install Wizard/Create Configuration Asset")]
     public sealed class Configuration : ScriptableObject
     {
+        #pragma warning disable 0414
         internal static bool isReady 
         { 
             get
@@ -61,6 +62,8 @@ namespace MK.Glow.Editor.InstallWizard
         private Object _examplesPackageURP = null;
         [SerializeField]
         private Object _examplesPackageHDRP = null;
+        [SerializeField]
+        private Object _examplesPackageHDRP_2020_2_and_newer = null;
 
         [SerializeField][Space]
         private ExampleContainer[] _examples = null;
@@ -237,7 +240,11 @@ namespace MK.Glow.Editor.InstallWizard
                     AssetDatabase.ImportPackage(AssetDatabase.GetAssetPath(_instance._examplesPackageURP), false);
                 break;
                 case RenderPipeline.High_Definition:
+                    #if UNITY_2020_2_OR_NEWER
+                    AssetDatabase.ImportPackage(AssetDatabase.GetAssetPath(_instance._examplesPackageHDRP_2020_2_and_newer), false);
+                    #else
                     AssetDatabase.ImportPackage(AssetDatabase.GetAssetPath(_instance._examplesPackageHDRP), false);
+                    #endif
                 break;
                 default:
                 //All cases should be handled
@@ -253,6 +260,7 @@ namespace MK.Glow.Editor.InstallWizard
         {
             AssetDatabase.OpenAsset(_instance._readMe);
         }
+        #pragma warning restore 0414
     }
 }
 #endif

@@ -11,5 +11,6 @@ namespace MK.Glow
         internal bool stereoEnabled = false;
         internal float aspect = 1;
         internal Matrix4x4 worldToCameraMatrix = Matrix4x4.identity;
+        internal bool overwriteDescriptor = false;
     }
 }

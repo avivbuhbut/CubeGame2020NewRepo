@@ -3,7 +3,7 @@
 //					                                //
 // Created by Michael Kremmel                       //
 // www.michaelkremmel.de                            //
-// Copyright © 2020 All rights reserved.            //
+// Copyright © 2021 All rights reserved.            //
 //////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////
@@ -133,9 +133,18 @@
 	#endif
 
 	uniform float2 _RenderTargetSize;
+
 	#if defined(_HDRP) && SHADER_TARGET >= 35
 		#ifndef HDRP
 			#define HDRP
+		#endif
+	#endif
+
+	#ifndef MK_LEGACY_XR_SUPPORT
+		#define MK_LEGACY_XR_SUPPORT 1
+
+		#if MK_LEGACY_XR_SUPPORT == 0
+			#undef MK_LEGACY_XR_SUPPORT
 		#endif
 	#endif
 
@@ -159,18 +168,24 @@
 	// Shader Model dependent Macros
 	/////////////////////////////////////////////////////////////////////////////////////////////
 	#if defined(COMPUTE_SHADER) || SHADER_TARGET >= 35
-		#if defined(UNITY_STEREO_INSTANCING_ENABLED) || defined(UNITY_STEREO_MULTIVIEW_ENABLED)
+		#ifdef HDRP
 			#define UNIFORM_TEXTURE_2D(textureName) uniform Texture2DArray<half4> textureName;
-			#define UNIFORM_SAMPLER_AND_TEXTURE_2D(textureName) uniform Texture2DArray<half4> textureName; uniform SamplerState sampler##textureName;
+			#define UNIFORM_SAMPLER_AND_TEXTURE_2D(textureName) uniform Texture2DArray<half4> textureName; uniform SamplerState sampler_linear_clamp##textureName;
 			#define DECLARE_TEXTURE_2D_ARGS(textureName, samplerName) Texture2DArray<half4> textureName, SamplerState samplerName
 		#else
-			#define UNIFORM_TEXTURE_2D(textureName) uniform Texture2D<half4> textureName;
-			#define UNIFORM_SAMPLER_AND_TEXTURE_2D(textureName) uniform Texture2D<half4> textureName; uniform SamplerState sampler##textureName;
-			#define DECLARE_TEXTURE_2D_ARGS(textureName, samplerName) Texture2D<half4> textureName, SamplerState samplerName
+			#if defined(UNITY_STEREO_INSTANCING_ENABLED) || defined(UNITY_STEREO_MULTIVIEW_ENABLED)
+				#define UNIFORM_TEXTURE_2D(textureName) uniform Texture2DArray<half4> textureName;
+				#define UNIFORM_SAMPLER_AND_TEXTURE_2D(textureName) uniform Texture2DArray<half4> textureName; uniform SamplerState sampler_linear_clamp##textureName;
+				#define DECLARE_TEXTURE_2D_ARGS(textureName, samplerName) Texture2DArray<half4> textureName, SamplerState samplerName
+			#else
+				#define UNIFORM_TEXTURE_2D(textureName) uniform Texture2D<half4> textureName;
+				#define UNIFORM_SAMPLER_AND_TEXTURE_2D(textureName) uniform Texture2D<half4> textureName; uniform SamplerState sampler_linear_clamp##textureName;
+				#define DECLARE_TEXTURE_2D_ARGS(textureName, samplerName) Texture2D<half4> textureName, SamplerState samplerName
+			#endif
 		#endif
 
 		#define UNIFORM_TEXTURE_2D_NO_SCALE(textureName) uniform Texture2D<half4> textureName;
-		#define UNIFORM_SAMPLER_AND_TEXTURE_2D_NO_SCALE(textureName) uniform Texture2D<half4> textureName; uniform SamplerState sampler##textureName;
+		#define UNIFORM_SAMPLER_AND_TEXTURE_2D_NO_SCALE(textureName) uniform Texture2D<half4> textureName; uniform SamplerState sampler_linear_clamp##textureName;
 		#define DECLARE_TEXTURE_2D_NO_SCALE_ARGS(textureName, samplerName) Texture2D<half4> textureName, SamplerState samplerName
 
 		#define PASS_TEXTURE_2D(textureName, samplerName) textureName, samplerName
@@ -186,21 +201,11 @@
 		#define PASS_TEXTURE_2D(textureName, samplerName) textureName
 	#endif
 
-	#ifdef HDRP
-		#define UNIFORM_SOURCE_SAMPLER_AND_TEXTURE(textureName) uniform Texture2DArray<half4> textureName; uniform SamplerState sampler##textureName;
-		#define DECLARE_SOURCE_TEXTURE_2D_ARGS(textureName, samplerName) Texture2DArray<half4> textureName, SamplerState samplerName
-		#define PASS_SOURCE_TEXTURE_2D(textureName, samplerName) textureName, samplerName
-	#else
-		#define UNIFORM_SOURCE_SAMPLER_AND_TEXTURE(textureName) UNIFORM_SAMPLER_AND_TEXTURE_2D(textureName)
-		#define DECLARE_SOURCE_TEXTURE_2D_ARGS(textureName, samplerName) DECLARE_TEXTURE_2D_ARGS(textureName, samplerName)
-		#define PASS_SOURCE_TEXTURE_2D(textureName, samplerName) PASS_TEXTURE_2D(textureName, samplerName)
-	#endif
-
 	#ifdef COMPUTE_SHADER
 		#if defined(UNITY_STEREO_INSTANCING_ENABLED) || defined(UNITY_STEREO_MULTIVIEW_ENABLED)
-			#define UNIFORM_RWTEXTURE_2D(textureName) uniform RWTexture2DArray<half4> textureName; uniform SamplerState sampler##textureName;
+			#define UNIFORM_RWTEXTURE_2D(textureName) uniform RWTexture2DArray<half4> textureName; uniform SamplerState sampler_linear_clamp##textureName;
 		#else
-			#define UNIFORM_RWTEXTURE_2D(textureName) uniform RWTexture2D<half4> textureName; uniform SamplerState sampler##textureName;
+			#define UNIFORM_RWTEXTURE_2D(textureName) uniform RWTexture2D<half4> textureName; uniform SamplerState sampler_linear_clamp##textureName;
 		#endif
 	#endif
 
@@ -295,7 +300,7 @@
 		#define COPY_RENDER_TARGET fO.GET_COPY_RT
 		#define SOURCE_UV o.uv0.xy
 		#define RETURN_TARGET_TEX return
-		#define SAMPLE_SOURCE SampleSourceTex(PASS_SOURCE_TEXTURE_2D(_SourceTex, sampler_SourceTex), SOURCE_UV)
+		#define SAMPLE_SOURCE LoadTex2D(PASS_TEXTURE_2D(_SourceTex, sampler_linear_clamp_SourceTex), SOURCE_UV, _RenderTargetSize)
 		#define RESOLUTION_SCALE _ResolutionScale
 		#define UV_0 o.uv0.xy
 		#define LUMA_SCALE _LumaScale
@@ -515,24 +520,59 @@
 		}
 	#endif
 
-	inline half4 SampleTex2D(DECLARE_TEXTURE_2D_ARGS(tex, samplerTex), float2 uv)
-	{
-		#if defined(COMPUTE_SHADER) || SHADER_TARGET >= 35
-			#if defined(UNITY_STEREO_INSTANCING_ENABLED) || defined(UNITY_STEREO_MULTIVIEW_ENABLED)
-				return tex.Sample(samplerTex, float3((uv).xy, (float)unity_StereoEyeIndex), 0);
-			#else
-				return tex.Sample(samplerTex, UnityStereoTransformScreenSpaceTex(uv), 0);
-			#endif
-		#else
-			return tex2D(tex, UnityStereoTransformScreenSpaceTex(uv));
-		#endif
-	}
+	#ifdef HDRP
 
-	//Wrap around bicubic sampling - TexelSize unused
-	inline half4 SampleTex2D(DECLARE_TEXTURE_2D_ARGS(tex, samplerTex), float2 uv, float2 texelSize)
-	{
-		return SampleTex2D(PASS_TEXTURE_2D(tex, samplerTex), uv);
-	}
+		inline float FixupEyeIndex()
+		{
+			#if defined(UNITY_STEREO_INSTANCING_ENABLED) || defined(UNITY_STEREO_MULTIVIEW_ENABLED)
+				return unity_StereoEyeIndex;
+			#elif MK_LEGACY_XR_SUPPORT == 1
+				return 0;
+			#else
+				return unity_StereoEyeIndex;
+			#endif
+		}
+
+		inline half4 SampleTex2D(DECLARE_TEXTURE_2D_ARGS(tex, samplerTex), float2 uv)
+		{
+			return tex.Sample(samplerTex, float3(uv.xy, FixupEyeIndex()), 0);
+		}
+
+		//Wrap around bicubic sampling - TexelSize unused
+		inline half4 SampleTex2D(DECLARE_TEXTURE_2D_ARGS(tex, samplerTex), float2 uv, float2 texelSize)
+		{
+			return SampleTex2D(PASS_TEXTURE_2D(tex, samplerTex), uv);
+		}
+
+		inline half4 LoadTex2D(DECLARE_TEXTURE_2D_ARGS(tex, samplerTex), float2 uv, float2 size)
+		{
+			return tex.Load(int4(uv * size, FixupEyeIndex(), 0));
+		}
+	#else
+		inline half4 SampleTex2D(DECLARE_TEXTURE_2D_ARGS(tex, samplerTex), float2 uv)
+		{
+			#if defined(COMPUTE_SHADER) || SHADER_TARGET >= 35
+				#if defined(UNITY_STEREO_INSTANCING_ENABLED) || defined(UNITY_STEREO_MULTIVIEW_ENABLED)
+					return tex.Sample(samplerTex, float3((uv).xy, (float)unity_StereoEyeIndex), 0);
+				#else
+					return tex.Sample(samplerTex, UnityStereoTransformScreenSpaceTex(uv), 0);
+				#endif
+			#else
+				return tex2D(tex, UnityStereoTransformScreenSpaceTex(uv));
+			#endif
+		}
+
+		//Wrap around bicubic sampling - TexelSize unused
+		inline half4 SampleTex2D(DECLARE_TEXTURE_2D_ARGS(tex, samplerTex), float2 uv, float2 texelSize)
+		{
+			return SampleTex2D(PASS_TEXTURE_2D(tex, samplerTex), uv);
+		}
+
+		inline half4 LoadTex2D(DECLARE_TEXTURE_2D_ARGS(tex, samplerTex), float2 uv, float2 size)
+		{
+			return SampleTex2D(PASS_TEXTURE_2D(tex, samplerTex), uv);
+		}
+	#endif
 
 	inline half4 SampleTex2DNoScale(DECLARE_TEXTURE_2D_NO_SCALE_ARGS(tex, samplerTex), float2 uv)
 	{
@@ -548,7 +588,7 @@
 	}
 
 	#ifdef HDRP
-		inline half4 SampleSourceTex(DECLARE_SOURCE_TEXTURE_2D_ARGS(tex, samplerTex), float2 uv)
+		inline half4 LoadTex2D(DECLARE_TEXTURE_2D_ARGS(tex, samplerTex), float2 uv)
 		{
 			#if defined(UNITY_STEREO_INSTANCING_ENABLED) || defined(UNITY_STEREO_MULTIVIEW_ENABLED)
 				return tex.Load(int4(uv * _RenderTargetSize.xy, unity_StereoEyeIndex, 0));
@@ -559,7 +599,7 @@
 			#endif
 		}
 	#else
-		inline half4 SampleSourceTex(DECLARE_TEXTURE_2D_ARGS(tex, samplerTex), float2 uv)
+		inline half4 LoadTex2D(DECLARE_TEXTURE_2D_ARGS(tex, samplerTex), float2 uv)
 		{
 			return SampleTex2D(PASS_TEXTURE_2D(tex, samplerTex), uv);
 		}
@@ -609,7 +649,7 @@
 		return lerp(lerp(sample3, sample2, sx), lerp(sample1, sample0, sx), sy);
 	}
 
-	half4 SampleSourceTex2DBicubic(DECLARE_SOURCE_TEXTURE_2D_ARGS(tex, samplerTex), float2 texCoords, float2 texelSize)
+	half4 LoadTex2DBicubic(DECLARE_TEXTURE_2D_ARGS(tex, samplerTex), float2 texCoords, float2 size, float2 texelSize)
 	{
 		float2 textureSize = 1.0 / texelSize;
 		texCoords = texCoords * textureSize - 0.5;
@@ -624,10 +664,10 @@
 		half4 offset = (texCoords.xxyy + float2(-0.5, + 1.5).xyxy) + half4(xcubic.yw, ycubic.yw) / s;
 		offset *= texelSize.xxyy;
 
-		half4 sample0 = SampleSourceTex(PASS_SOURCE_TEXTURE_2D(tex, samplerTex), offset.xz);
-		half4 sample1 = SampleSourceTex(PASS_SOURCE_TEXTURE_2D(tex, samplerTex), offset.yz);
-		half4 sample2 = SampleSourceTex(PASS_SOURCE_TEXTURE_2D(tex, samplerTex), offset.xw);
-		half4 sample3 = SampleSourceTex(PASS_SOURCE_TEXTURE_2D(tex, samplerTex), offset.yw);
+		half4 sample0 = LoadTex2D(PASS_TEXTURE_2D(tex, samplerTex), offset.xz, size);
+		half4 sample1 = LoadTex2D(PASS_TEXTURE_2D(tex, samplerTex), offset.yz, size);
+		half4 sample2 = LoadTex2D(PASS_TEXTURE_2D(tex, samplerTex), offset.xw, size);
+		half4 sample3 = LoadTex2D(PASS_TEXTURE_2D(tex, samplerTex), offset.yw, size);
 
 		half sx = s.x / (s.x + s.y);
 		half sy = s.z / (s.z + s.w);
@@ -698,17 +738,17 @@
 	}
 
 	static const float2 ANTI_FLICKER_DIRECTION = float2(1, -1);
-	half4 PresampleSampleSourceTex(DECLARE_SOURCE_TEXTURE_2D_ARGS(tex, samplerTex), float2 uv, float2 texelSize)
+	half4 Presample(DECLARE_TEXTURE_2D_ARGS(tex, samplerTex), float2 uv, float2 texelSize)
 	{
 		#ifdef MK_HQ_ANTI_FLICKER
 			/*
 			//Karis tend to remove bright flickering on far distanced objecte very good, however on close distance some kind of stronger flickering is visible
 			//For now a bicubic sample does a good job!
 			
-			half3 sample0 = SampleSourceTex(PASS_SOURCE_TEXTURE_2D(tex, samplerTex), uv + texelSize * ANTI_FLICKER_DIRECTION.xx);
-			half3 sample1 = SampleSourceTex(PASS_SOURCE_TEXTURE_2D(tex, samplerTex), uv + texelSize * ANTI_FLICKER_DIRECTION.xy);
-			half3 sample2 = SampleSourceTex(PASS_SOURCE_TEXTURE_2D(tex, samplerTex), uv + texelSize * ANTI_FLICKER_DIRECTION.yy);
-			half3 sample3 = SampleSourceTex(PASS_SOURCE_TEXTURE_2D(tex, samplerTex), uv + texelSize * ANTI_FLICKER_DIRECTION.yx);
+			half3 sample0 = LoadTex2D(PASS_TEXTURE_2D(tex, samplerTex), uv + texelSize * ANTI_FLICKER_DIRECTION.xx);
+			half3 sample1 = LoadTex2D(PASS_TEXTURE_2D(tex, samplerTex), uv + texelSize * ANTI_FLICKER_DIRECTION.xy);
+			half3 sample2 = LoadTex2D(PASS_TEXTURE_2D(tex, samplerTex), uv + texelSize * ANTI_FLICKER_DIRECTION.yy);
+			half3 sample3 = LoadTex2D(PASS_TEXTURE_2D(tex, samplerTex), uv + texelSize * ANTI_FLICKER_DIRECTION.yx);
 
 			//brightness based averae based on karis luma average
 			half weightM = 1.0 / (max(sampleM.r, max(sampleM.g, sampleM.b)) + 1.0);
@@ -721,9 +761,9 @@
 
 			//return half4((sample0 * weight0 + sample1 * weight1 + sample2 * weight2 + sample3 * weight3) * weightSum, 1);
 			*/
-			return SampleSourceTex2DBicubic(PASS_SOURCE_TEXTURE_2D(tex, samplerTex), uv, texelSize);
+			return LoadTex2DBicubic(PASS_TEXTURE_2D(tex, samplerTex), uv, _RenderTargetSize, texelSize);
 		#else
-			return SampleSourceTex(PASS_SOURCE_TEXTURE_2D(tex, samplerTex), uv);
+			return LoadTex2D(PASS_TEXTURE_2D(tex, samplerTex), uv, _RenderTargetSize);
 		#endif
 	}
 

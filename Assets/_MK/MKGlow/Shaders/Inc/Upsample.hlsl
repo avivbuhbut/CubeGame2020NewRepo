@@ -3,7 +3,7 @@
 //					                                //
 // Created by Michael Kremmel                       //
 // www.michaelkremmel.de                            //
-// Copyright © 2020 All rights reserved.            //
+// Copyright © 2021 All rights reserved.            //
 //////////////////////////////////////////////////////
 
 #ifndef MK_GLOW_UPSAMPLE
@@ -172,32 +172,32 @@
 		#ifdef MK_BLOOM
 			half4 bloom = 0;
 			
-			bloom = UpsampleHQ(PASS_TEXTURE_2D(_BloomTex, sampler_BloomTex), BLOOM_UV, BLOOM_UPSAMPLE_SPREAD);
+			bloom = UpsampleHQ(PASS_TEXTURE_2D(_BloomTex, sampler_linear_clamp_BloomTex), BLOOM_UV, BLOOM_UPSAMPLE_SPREAD);
 			#if defined(MK_RENDER_PRIORITY_QUALITY)
-				bloom += half4(SampleTex2DBicubic(PASS_TEXTURE_2D(_HigherMipBloomTex, sampler_HigherMipBloomTex), BLOOM_UV, HIGHER_MIP_BLOOM_TEXEL_SIZE).rgb, 0);
+				bloom += half4(SampleTex2DBicubic(PASS_TEXTURE_2D(_HigherMipBloomTex, sampler_linear_clamp_HigherMipBloomTex), BLOOM_UV, HIGHER_MIP_BLOOM_TEXEL_SIZE).rgb, 0);
 			#else
-				bloom += half4(SampleTex2D(PASS_TEXTURE_2D(_HigherMipBloomTex, sampler_HigherMipBloomTex), BLOOM_UV).rgb, 0);
+				bloom += half4(SampleTex2D(PASS_TEXTURE_2D(_HigherMipBloomTex, sampler_linear_clamp_HigherMipBloomTex), BLOOM_UV).rgb, 0);
 			#endif
 			BLOOM_RENDER_TARGET = bloom;
 		#endif
 
 		#ifdef MK_LENS_FLARE
-			LENS_FLARE_RENDER_TARGET = UpsampleMQ(PASS_TEXTURE_2D(_LensFlareTex, sampler_LensFlareTex), LENS_FLARE_UV, LENS_FLARE_UPSAMPLE_SPREAD);
+			LENS_FLARE_RENDER_TARGET = UpsampleMQ(PASS_TEXTURE_2D(_LensFlareTex, sampler_linear_clamp_LensFlareTex), LENS_FLARE_UV, LENS_FLARE_UPSAMPLE_SPREAD);
 		#endif
 		
 		//TODO: move texcoordcalculation to vertexshader
 		#ifdef MK_GLARE
 			#ifdef MK_GLARE_1
-				GLARE0_RENDER_TARGET = GaussianBlur1D(PASS_TEXTURE_2D(_Glare0Tex, sampler_Glare0Tex), GLARE_UV, GLARE0_TEXEL_SIZE * RESOLUTION_SCALE, GLARE0_SCATTERING, GLARE0_DIRECTION, GLARE0_OFFSET);
+				GLARE0_RENDER_TARGET = GaussianBlur1D(PASS_TEXTURE_2D(_Glare0Tex, sampler_linear_clamp_Glare0Tex), GLARE_UV, GLARE0_TEXEL_SIZE * RESOLUTION_SCALE, GLARE0_SCATTERING, GLARE0_DIRECTION, GLARE0_OFFSET);
 			#endif
 			#ifdef MK_GLARE_2
-				GLARE1_RENDER_TARGET = GaussianBlur1D(PASS_TEXTURE_2D(_Glare1Tex, sampler_Glare1Tex), GLARE_UV, GLARE0_TEXEL_SIZE * RESOLUTION_SCALE, GLARE1_SCATTERING, GLARE1_DIRECTION, GLARE1_OFFSET);
+				GLARE1_RENDER_TARGET = GaussianBlur1D(PASS_TEXTURE_2D(_Glare1Tex, sampler_linear_clamp_Glare1Tex), GLARE_UV, GLARE0_TEXEL_SIZE * RESOLUTION_SCALE, GLARE1_SCATTERING, GLARE1_DIRECTION, GLARE1_OFFSET);
 			#endif
 			#ifdef MK_GLARE_3
-				GLARE2_RENDER_TARGET = GaussianBlur1D(PASS_TEXTURE_2D(_Glare2Tex, sampler_Glare2Tex), GLARE_UV, GLARE0_TEXEL_SIZE * RESOLUTION_SCALE, GLARE2_SCATTERING, GLARE2_DIRECTION, GLARE2_OFFSET);
+				GLARE2_RENDER_TARGET = GaussianBlur1D(PASS_TEXTURE_2D(_Glare2Tex, sampler_linear_clamp_Glare2Tex), GLARE_UV, GLARE0_TEXEL_SIZE * RESOLUTION_SCALE, GLARE2_SCATTERING, GLARE2_DIRECTION, GLARE2_OFFSET);
 			#endif
 			#ifdef MK_GLARE_4
-				GLARE3_RENDER_TARGET = GaussianBlur1D(PASS_TEXTURE_2D(_Glare3Tex, sampler_Glare3Tex), GLARE_UV, GLARE0_TEXEL_SIZE * RESOLUTION_SCALE, GLARE3_SCATTERING, GLARE3_DIRECTION, GLARE3_OFFSET);
+				GLARE3_RENDER_TARGET = GaussianBlur1D(PASS_TEXTURE_2D(_Glare3Tex, sampler_linear_clamp_Glare3Tex), GLARE_UV, GLARE0_TEXEL_SIZE * RESOLUTION_SCALE, GLARE3_SCATTERING, GLARE3_DIRECTION, GLARE3_OFFSET);
 			#endif
 		#endif
 

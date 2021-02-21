@@ -3,7 +3,7 @@
 //					                                //
 // Created by Michael Kremmel                       //
 // www.michaelkremmel.de                            //
-// Copyright © 2020 All rights reserved.            //
+// Copyright © 2021 All rights reserved.            //
 //////////////////////////////////////////////////////
 
 #ifndef MK_GLOW_COPY
@@ -11,7 +11,7 @@
 
 	#include "../Inc/Common.hlsl"
 
-	UNIFORM_SOURCE_SAMPLER_AND_TEXTURE(_SourceTex)
+	UNIFORM_SAMPLER_AND_TEXTURE_2D(_SourceTex)
 
 	#ifdef COMPUTE_SHADER
 		#define HEADER [numthreads(8,8,1)] void Copy (uint2 id : SV_DispatchThreadID)

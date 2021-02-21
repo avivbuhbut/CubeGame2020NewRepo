@@ -3,7 +3,7 @@
 //					                                //
 // Created by Michael Kremmel                       //
 // www.michaelkremmel.de                            //
-// Copyright © 2020 All rights reserved.            //
+// Copyright © 2021 All rights reserved.            //
 //////////////////////////////////////////////////////
 
 #ifndef MK_GLOW_PRE_SAMPLE
@@ -11,7 +11,7 @@
 
 	#include "../Inc/Common.hlsl"
 
-	UNIFORM_SOURCE_SAMPLER_AND_TEXTURE(_SourceTex)
+	UNIFORM_SAMPLER_AND_TEXTURE_2D(_SourceTex)
 	#ifndef COMPUTE_SHADER
 		uniform float2 _SourceTex_TexelSize;
 		uniform half _LumaScale;
@@ -83,7 +83,7 @@
 			INITIALIZE_STRUCT(FragmentOutputAuto, fO);
 		#endif
 		
-		half4 source = PresampleSampleSourceTex(PASS_SOURCE_TEXTURE_2D(_SourceTex, sampler_SourceTex), BLOOM_UV, SOURCE_TEXEL_SIZE); //Bloom is always presampled
+		half4 source = Presample(PASS_TEXTURE_2D(_SourceTex, sampler_linear_clamp_SourceTex), BLOOM_UV, SOURCE_TEXEL_SIZE); //Bloom is always presampled
 		
 		#ifdef MK_BLOOM
 			half4 bloom = source;
@@ -103,7 +103,7 @@
 			#ifdef COMPUTE_SHADER
 				COPY_RENDER_TARGET = _SourceTex[id];
 			#else
-				COPY_RENDER_TARGET = SampleSourceTex(PASS_SOURCE_TEXTURE_2D(_SourceTex, sampler_SourceTex), UV_COPY);
+				COPY_RENDER_TARGET = LoadTex2D(PASS_TEXTURE_2D(_SourceTex, sampler_linear_clamp_SourceTex), UV_COPY);
 			#endif
 		#endif
 
@@ -118,9 +118,9 @@
 				half weight = pow(1.0 - length(UV_HALF - offset) / length(UV_HALF), LENS_FLARE_GHOST_FADE);
 
 				#ifdef MK_NATURAL
-					lensFlare += half4(NaturalRel(SampleSourceTex(PASS_SOURCE_TEXTURE_2D(_SourceTex, sampler_SourceTex), offset).rgb, LUMA_SCALE).rgb * weight, 0) * LENS_FLARE_GHOST_INTENSITY;
+					lensFlare += half4(NaturalRel(LoadTex2D(PASS_TEXTURE_2D(_SourceTex, sampler_linear_clamp_SourceTex), offset).rgb, LUMA_SCALE).rgb * weight, 0) * LENS_FLARE_GHOST_INTENSITY;
 				#else
-					lensFlare += half4(LuminanceThreshold(SampleSourceTex(PASS_SOURCE_TEXTURE_2D(_SourceTex, sampler_SourceTex), offset).rgb, LENS_FLARE_THRESHOLD, LUMA_SCALE).rgb * weight, 0) * LENS_FLARE_GHOST_INTENSITY;
+					lensFlare += half4(LuminanceThreshold(LoadTex2D(PASS_TEXTURE_2D(_SourceTex, sampler_linear_clamp_SourceTex), offset).rgb, LENS_FLARE_THRESHOLD, LUMA_SCALE).rgb * weight, 0) * LENS_FLARE_GHOST_INTENSITY;
 				#endif
 			}
 			
@@ -138,15 +138,15 @@
 			#endif
 
 			#ifdef MK_NATURAL
-				lensFlare += half4(NaturalRel(SampleSourceTex(PASS_SOURCE_TEXTURE_2D(_SourceTex, sampler_SourceTex), LENS_FLARE_UV + haloSize).rgb * weight, LUMA_SCALE), 0);
+				lensFlare += half4(NaturalRel(LoadTex2D(PASS_TEXTURE_2D(_SourceTex, sampler_linear_clamp_SourceTex), LENS_FLARE_UV + haloSize).rgb * weight, LUMA_SCALE), 0);
 			#else
-				lensFlare += half4(LuminanceThreshold(SampleSourceTex(PASS_SOURCE_TEXTURE_2D(_SourceTex, sampler_SourceTex), LENS_FLARE_UV + haloSize).rgb * weight, LENS_FLARE_THRESHOLD, LUMA_SCALE), 0);
+				lensFlare += half4(LuminanceThreshold(LoadTex2D(PASS_TEXTURE_2D(_SourceTex, sampler_linear_clamp_SourceTex), LENS_FLARE_UV + haloSize).rgb * weight, LENS_FLARE_THRESHOLD, LUMA_SCALE), 0);
 			#endif
 
 			#ifdef UNITY_SINGLE_PASS_STEREO
-				lensFlare *= SampleTex2D(PASS_TEXTURE_2D(_LensFlareColorRamp, sampler_LensFlareColorRamp), abs(length(UV_HALF - LENS_FLARE_UV - STEREO_OFFSET)) / length(UV_HALF));
+				lensFlare *= SampleTex2D(PASS_TEXTURE_2D(_LensFlareColorRamp, sampler_linear_clamp_LensFlareColorRamp), abs(length(UV_HALF - LENS_FLARE_UV - STEREO_OFFSET)) / length(UV_HALF));
 			#else
-				lensFlare *= SampleTex2D(PASS_TEXTURE_2D(_LensFlareColorRamp, sampler_LensFlareColorRamp), abs(length(UV_HALF - LENS_FLARE_UV)) / length(UV_HALF));
+				lensFlare *= SampleTex2D(PASS_TEXTURE_2D(_LensFlareColorRamp, sampler_linear_clamp_LensFlareColorRamp), abs(length(UV_HALF - LENS_FLARE_UV)) / length(UV_HALF));
 			#endif
 			#ifdef COLORSPACE_GAMMA
 				lensFlare = GammaToLinearSpace4(lensFlare);

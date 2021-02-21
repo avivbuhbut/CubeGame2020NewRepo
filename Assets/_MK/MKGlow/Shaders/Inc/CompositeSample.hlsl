@@ -3,7 +3,7 @@
 //					                                //
 // Created by Michael Kremmel                       //
 // www.michaelkremmel.de                            //
-// Copyright © 2020 All rights reserved.            //
+// Copyright © 2021 All rights reserved.            //
 //////////////////////////////////////////////////////
 #ifndef MK_GLOW_COMPOSITE_SAMPLE
 	#define MK_GLOW_COMPOSITE_SAMPLE
@@ -14,14 +14,8 @@
 		FragmentOutputAuto fO;
 		INITIALIZE_STRUCT(FragmentOutputAuto, fO);
 	#endif
-	/*
-	#ifdef MK_RENDER_PRIORITY_QUALITY
-		half4 g = UpsampleHQ(PASS_TEXTURE_2D(_BloomTex, sampler_BloomTex), UV_0, BLOOM_COMPOSITE_SPREAD);
-	#else
-		half4 g = SampleTex2D(PASS_TEXTURE_2D(_BloomTex, sampler_BloomTex), UV_0);
-	#endif
-	*/
-	half4 g = SampleTex2D(PASS_TEXTURE_2D(_BloomTex, sampler_BloomTex), UV_0);
+
+	half4 g = SampleTex2D(PASS_TEXTURE_2D(_BloomTex, sampler_linear_clamp_BloomTex), UV_0);
 	//g = 0;
 	
 	#if defined(MK_LENS_SURFACE) && defined(MK_NATURAL)
@@ -33,7 +27,10 @@
 	#else
 		half3 source = SAMPLE_SOURCE.rgb;
 	#endif
-	
+
+	//return SAMPLE_SOURCE + lerp(half4(0.1,0,0,0), half4(0,0.1,0,0), unity_StereoEyeIndex);
+	//return lerp(half4(0.1,0,0,0), half4(0,0.1,0,0), unity_StereoEyeIndex);
+
 	#ifdef MK_GLOW_DEBUG
 		source = 0;
 	#endif
@@ -50,44 +47,16 @@
 	#ifdef MK_GLARE
 		half4 glare = 0;
 		#ifdef MK_GLARE_1
-			/*
-			#ifdef MK_RENDER_PRIORITY_QUALITY
-				glare = GaussianBlur1D(PASS_TEXTURE_2D(_Glare0Tex, sampler_Glare0Tex), UV_0, GLARE0_TEXEL_SIZE * RESOLUTION_SCALE, GLARE0_SCATTERING, GLARE0_DIRECTION, GLARE0_OFFSET) * GLARE0_INTENSITY;
-			#else
-				glare = SampleTex2D(PASS_TEXTURE_2D(_Glare0Tex, sampler_Glare0Tex), UV_0);
-			#endif
-			*/
-			glare = SampleTex2D(PASS_TEXTURE_2D(_Glare0Tex, sampler_Glare0Tex), UV_0) * GLARE0_INTENSITY;
+			glare = SampleTex2D(PASS_TEXTURE_2D(_Glare0Tex, sampler_linear_clamp_Glare0Tex), UV_0) * GLARE0_INTENSITY;
 		#endif
 		#ifdef MK_GLARE_2
-			/*
-			#ifdef MK_RENDER_PRIORITY_QUALITY
-				glare += GaussianBlur1D(PASS_TEXTURE_2D(_Glare1Tex, sampler_Glare1Tex), UV_0, GLARE0_TEXEL_SIZE * RESOLUTION_SCALE, GLARE1_SCATTERING, GLARE1_DIRECTION, GLARE1_OFFSET) * GLARE1_INTENSITY;
-			#else
-				glare += SampleTex2D(PASS_TEXTURE_2D(_Glare1Tex, sampler_Glare1Tex), UV_0);
-			#endif
-			*/
-			glare += SampleTex2D(PASS_TEXTURE_2D(_Glare1Tex, sampler_Glare1Tex), UV_0) * GLARE1_INTENSITY;
+			glare += SampleTex2D(PASS_TEXTURE_2D(_Glare1Tex, sampler_linear_clamp_Glare1Tex), UV_0) * GLARE1_INTENSITY;
 		#endif
 		#ifdef MK_GLARE_3
-			/*
-			#ifdef MK_RENDER_PRIORITY_QUALITY
-				glare += GaussianBlur1D(PASS_TEXTURE_2D(_Glare2Tex, sampler_Glare2Tex), UV_0, GLARE0_TEXEL_SIZE * RESOLUTION_SCALE, GLARE2_SCATTERING, GLARE2_DIRECTION, GLARE2_OFFSET) * GLARE2_INTENSITY;
-			#else
-				glare += SampleTex2D(PASS_TEXTURE_2D(_Glare2Tex, sampler_Glare2Tex), UV_0);
-			#endif
-			*/
-			glare += SampleTex2D(PASS_TEXTURE_2D(_Glare2Tex, sampler_Glare2Tex), UV_0) * GLARE2_INTENSITY;
+			glare += SampleTex2D(PASS_TEXTURE_2D(_Glare2Tex, sampler_linear_clamp_Glare2Tex), UV_0) * GLARE2_INTENSITY;
 		#endif
 		#ifdef MK_GLARE_4
-			/*
-			#ifdef MK_RENDER_PRIORITY_QUALITY
-				glare += GaussianBlur1D(PASS_TEXTURE_2D(_Glare3Tex, sampler_Glare3Tex), UV_0, GLARE0_TEXEL_SIZE * RESOLUTION_SCALE, GLARE3_SCATTERING, GLARE3_DIRECTION, GLARE3_OFFSET) * GLARE3_INTENSITY;
-			#else
-				glare += SampleTex2D(PASS_TEXTURE_2D(_Glare3Tex, sampler_Glare3Tex), UV_0);
-			#endif
-			*/
-			glare += SampleTex2D(PASS_TEXTURE_2D(_Glare3Tex, sampler_Glare3Tex), UV_0) * GLARE3_INTENSITY;
+			glare += SampleTex2D(PASS_TEXTURE_2D(_Glare3Tex, sampler_linear_clamp_Glare3Tex), UV_0) * GLARE3_INTENSITY;
 		#endif
 		#ifdef MK_NATURAL
 			glare.rgb = max(0, lerp(source.rgb, glare.rgb * 0.25, GLARE_GLOBAL_INTENSITY));
@@ -99,12 +68,12 @@
 	#endif
 
 	#ifdef MK_LENS_FLARE
-		g.rgb += SampleTex2DCircularChromaticAberration(PASS_TEXTURE_2D(_LensFlareTex, sampler_LensFlareTex), UV_0, LENS_FLARE_CHROMATIC_ABERRATION).rgb;
+		g.rgb += SampleTex2DCircularChromaticAberration(PASS_TEXTURE_2D(_LensFlareTex, sampler_linear_clamp_LensFlareTex), UV_0, LENS_FLARE_CHROMATIC_ABERRATION).rgb;
 	#endif
 
 	#ifdef MK_LENS_SURFACE
-		half3 dirt = SampleTex2DNoScale(PASS_TEXTURE_2D(_LensSurfaceDirtTex, sampler_LensSurfaceDirtTex), LENS_SURFACE_DIRT_UV).rgb;
-		half3 diffraction = SampleTex2DNoScale(PASS_TEXTURE_2D(_LensSurfaceDiffractionTex, sampler_LensSurfaceDiffractionTex), LENS_DIFFRACTION_UV).rgb;
+		half3 dirt = SampleTex2DNoScale(PASS_TEXTURE_2D(_LensSurfaceDirtTex, sampler_linear_clamp_LensSurfaceDirtTex), LENS_SURFACE_DIRT_UV).rgb;
+		half3 diffraction = SampleTex2DNoScale(PASS_TEXTURE_2D(_LensSurfaceDiffractionTex, sampler_linear_clamp_LensSurfaceDiffractionTex), LENS_DIFFRACTION_UV).rgb;
 
 		#ifdef COLORSPACE_GAMMA
 			dirt = GammaToLinearSpace(dirt);

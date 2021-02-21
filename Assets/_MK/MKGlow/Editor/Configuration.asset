@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43c9baea14160014989b649a6e886278, type: 3}
   m_Name: Configuration
   m_EditorClassIdentifier: 
-  _renderPipeline: 0
-  _version: 4.4.3
+  _renderPipeline: 1
+  _version: 4.4.4
   showInstallerOnReload: 0
   _titleImage: {fileID: 2800000, guid: 4f6068e89df94c2438a76e04d4414901, type: 3}
   _readMe: {fileID: 102900000, guid: aefa311ec11ebfc409de632d2b704542, type: 3}
@@ -31,6 +31,8 @@ MonoBehaviour:
   _examplesPackageURP: {fileID: 102900000, guid: 3d7cf5bdc92f8804b93385a6a074b444,
     type: 3}
   _examplesPackageHDRP: {fileID: 102900000, guid: 2ccf058d8da10a146aaa8455daceb686,
+    type: 3}
+  _examplesPackageHDRP_2020_2_and_newer: {fileID: 102900000, guid: 9512ff5219e390d4d818fa360e277bb4,
     type: 3}
   _examples:
   - name: Cubes
