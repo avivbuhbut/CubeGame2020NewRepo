@@ -12,9 +12,15 @@ public class CheckIfRainHitPlayer : MonoBehaviour
    public static float NOTInRainTimer = 20;
     Material PlayerOriginalMaterial;
     public bool PlayerElectricFull;
+    public ParticleSystem RainFallParticale1;
+    public ParticleSystem RainFallParticale2;
     // Start is called before the first frame update
     void Start()
     {
+      //  this.transform.GetComponent<Renderer>().material = ElectricMatPlayer;
+      //  this.transform.GetComponent<ParticleSystem>().Play();
+       // PlayerElectricFull = true;
+
         //ElectricParticals.Stop();
         PlayerOriginalMaterial = this.transform.GetComponent<Renderer>().material;
     }
@@ -23,6 +29,7 @@ public class CheckIfRainHitPlayer : MonoBehaviour
     void Update()
     {
 
+        
         RaycastHit hit;
 
         if (Physics.Raycast(transform.position, Vector3.up, out hit))
@@ -30,7 +37,8 @@ public class CheckIfRainHitPlayer : MonoBehaviour
             Debug.Log(hit.transform.name);
             if(hit.transform.tag == "Bounds")
             {
-
+                RainFallParticale1.Play();
+                RainFallParticale2.Play();
 
                 //ElectricParticals.gameObject.SetActive(true);
                 //ElectricParticals.Play();
@@ -62,6 +70,9 @@ public class CheckIfRainHitPlayer : MonoBehaviour
             
             else if (hit.transform.tag != "Bounds")
             {
+                RainFallParticale1.Stop();
+                RainFallParticale2.Stop();
+
                 InRainTimer = 20;
                 NOTInRainTimer -= 0.8f * Time.deltaTime;
 
@@ -89,7 +100,7 @@ public class CheckIfRainHitPlayer : MonoBehaviour
             // {
         //    Debug.DrawLine(this.transform.position, this.transform.TransformDirection(Vector3.up), Color.white);
             //   }
-
+        
    
         
     }

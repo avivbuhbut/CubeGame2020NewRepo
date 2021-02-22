@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 321892829657577477}
   - component: {fileID: 321892829657577476}
   - component: {fileID: 321892829657577598}
+  - component: {fileID: -580888402767114237}
   m_Layer: 0
   m_Name: RoboticArm
   m_TagString: Untagged
@@ -156,8 +157,18 @@ MonoBehaviour:
   Arm: {fileID: 321892830421380758}
   LeftArrowRoboticArm: {fileID: 0}
   RightArrowRoboticArm: {fileID: 0}
-  FutureEndPoint: {fileID: 8048606837640266431, guid: 1aba48bec152662479d052c446a4012c,
-    type: 3}
+--- !u!114 &-580888402767114237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 321892829657577479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79fb9398bc0f05a4bae7d643f6598cab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &321892830421380765
 GameObject:
   m_ObjectHideFlags: 0
