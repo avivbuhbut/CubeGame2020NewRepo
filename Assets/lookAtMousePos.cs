@@ -13,11 +13,11 @@ public class lookatMousePos : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 mouse = Input.mousePosition;
-        mouse.z =-7.6f;
-        Vector3 mouseInScene = Camera.main.ScreenToWorldPoint(mouse);
+        
+    }
 
-        transform.LookAt(mouse);
-
+    void OnParticleCollision(GameObject other)
+    {
+        Debug.Log(other.transform.name);
     }
 }

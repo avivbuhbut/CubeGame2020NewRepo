@@ -33,7 +33,7 @@ public class BreakDestoryCube : MonoBehaviour
     void OnCollisionEnter(Collision collision)
     {
 
-        Debug.Log(collision.transform.name);
+
         //  Debug.Log("Destroy cube  Colided with " + collision.transform.name);
         if (collision.transform.tag == "Floor" && MagnitudeOk&& PlayerTrans.GetComponent<CheckIfRainHitPlayer>().PlayerElectricFull)
         {
