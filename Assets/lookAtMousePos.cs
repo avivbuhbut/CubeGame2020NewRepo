@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class lookAtMousePos : MonoBehaviour
+public class lookatMousePos : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -13,6 +13,11 @@ public class lookAtMousePos : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Vector3 mouse = Input.mousePosition;
+        mouse.z =-7.6f;
+        Vector3 mouseInScene = Camera.main.ScreenToWorldPoint(mouse);
+
+        transform.LookAt(mouse);
+
     }
 }
