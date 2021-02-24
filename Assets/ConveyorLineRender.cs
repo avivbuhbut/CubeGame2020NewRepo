@@ -27,7 +27,7 @@ public class ConveyorLineRender : MonoBehaviour
     float angel = 1;
 
     bool HitPlayer;
-
+    Material DefaultLineMat;
     void Start()
     {
         LineRender.startColor = Color.black;
@@ -36,6 +36,7 @@ public class ConveyorLineRender : MonoBehaviour
         LineRender.endWidth = 1f;
         LineRender.positionCount = 2;
         LineRender.useWorldSpace = true;
+        DefaultLineMat = LineRender.GetComponent<Renderer>().material;
     }
 
     // Update is called once per frame
@@ -113,65 +114,12 @@ public class ConveyorLineRender : MonoBehaviour
             centerPos.z = -7.2f;
             ConveyorStach.transform.localScale = new Vector3(scaleX, 0.3f, 3);
 
-            //     ConveyorStach.transform.localRotation = Quaternion.Euler(ConveyorStach.transform.position.x, ConveyorStach.transform.position.y, -ConveyorEndTrans.transform.position.y * 10) ;
-
-            //  Vector3 directionToFace = ConveyorEndTrans.position - ConveyorStach.transform.position;
-
-
-
-            // if(ConveyorEndTrans.transform.position.y>1)
-            //     if (scaleX > 0.5f)
-            //   {
-            //(angel < 10 ? angel++ : angel=1)
-            //      ConveyorStach.transform.localRotation = Quaternion.Euler(ConveyorStach.transform.position.x, ConveyorStach.transform.position.y, -ConveyorEndTrans.transform.position.y * 6) ;
-            //     //      centerPos = new Vector3(ConveyorStartTrans.position.x-1 + ConveyorEndTrans.transform.position.x, ConveyorStartTrans.position.y + 2 +
-            //    ConveyorEndTrans.transform.position.y + 2) / 2f;
-
-            //      centerPos.z = -6.3f;
-
-
-            //  }
-            //  else
-
-
-
-
-            //else
-            //   ConveyorStach.transform.localRotation = Quaternion.Euler(ConveyorStach.transform.position.x, ConveyorStach.transform.position.y, ConveyorStach.transform.position.z); 
-
-            //   float scaleY = Vector3.Distance(new Vector3(0, ConveyorStartTrans.position.y, 0), new Vector3(0, ConveyorEndTrans.transform.position.y, 0));
-
-            //Vector3 eulerRotation = new Vector3(LineRender.transform.rotation.eulerAngles.x, LineRender.transform.rotation.eulerAngles.y, LineRender.transform.rotation.eulerAngles.z);
-
-            // Vector3 targetPostition = new Vector3(ConveyorEndTrans.position.x,
-            //                         ConveyorEndTrans.transform.position.y,
-            //                          ConveyorEndTrans.position.z);
-            // ConveyorStach.transform.LookAt(targetPostition);
-
-            //ConveyorStach.transform.LookAt(ConveyorEndTrans);
-
-
-
-            //ConveyorStach.transform.eulerAngles = new Vector3(0,180, 0); 
-
-            //      ConveyorStach.transform.LookAt(new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z)) ;
-            //ConveyorStach.transform.localRotation = Quaternion.Euler(5, 0, 5);
-            //ConveyorStach.transform.LookAt(ConveyorEndTrans);
-            //  StartPosSCTrans.transform.LookAt(ConveyorStartTrans);
-
-            // ConveyorStach.transform.localRotation = Quaternion.Euler(LineRender.transform.rotation.eulerAngles.x, LineRender.transform.rotation.eulerAngles.y, LineRender.transform.rotation.eulerAngles.z); // try to play with that a bit
-
-
-
-
-            //need to be a combination of these two
-
-
-            //  ConveyorStach.transform.localScale = new Vector3(Mathf.Abs(ConveyorStartTrans.position.x - ConveyorEndTrans.position.x), 0.1f, LineRender.startWidth);
-            //    ConveyorStach.transform.position = new Vector3((ConveyorStartTrans.position.x + ConveyorEndTrans.position.x), (ConveyorStartTrans.position.y + ConveyorEndTrans.position.y) + 2, LineRender.GetPosition(1).z);
-
-            // Debug.Log("ConveyorStach roattion.y: " + ConveyorStach.transform.rotation.eulerAngles.z);
-            //   Debug.Log("LINE render roattion.y: " + LineRender.transform.rotation.eulerAngles.z);
+        if (PlayerTrans.GetComponent<CheckIfRainHitPlayer>().PlayerElectricFull == false)
+        {
+        
+                HitPlayer = false;
+            LineRender.GetComponent<LineRenderer>().material = DefaultLineMat;
+        }
         
 
     }
@@ -182,11 +130,13 @@ public class ConveyorLineRender : MonoBehaviour
 
         Debug.Log(collision.transform.name);
 
-       if(collision.transform.name == "Player")
+        if (collision.transform.name == "Player" && collision.transform.GetComponent<CheckIfRainHitPlayer>().PlayerElectricFull)
         {
             PlayerTrans = collision.transform;
             HitPlayer = true;
+            LineRender.GetComponent<LineRenderer>().material = collision.transform.GetComponent<Renderer>().material;
         }
+  
 
     }
 
