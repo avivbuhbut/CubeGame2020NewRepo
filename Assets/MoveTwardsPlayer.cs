@@ -47,5 +47,20 @@ public class MoveTwardsPlayer : MonoBehaviour
         if (m_Particles == null || m_Particles.Length < m_System.main.maxParticles)
             m_Particles = new ParticleSystem.Particle[m_System.main.maxParticles];
     }
-       
+
+     void OnTriggerEnter(Collider other)
+    {
+
+
+
+        if (other.transform.name == "Player")
+            Debug.Log("Player Is In Radius");
+    }
+
+
+     void OnParticleTrigger()
+    {
+        Debug.Log("Here");
+    }
+
 }

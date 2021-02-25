@@ -14,6 +14,9 @@ public class CheckIfRainHitPlayer : MonoBehaviour
     public bool PlayerElectricFull;
     public ParticleSystem RainFallParticale1;
     public ParticleSystem RainFallParticale2;
+    public Material FirePariclesMat;
+    float timerHitPartricleEnemy = 3;
+    static int NumOfParticles = 80;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,10 +35,38 @@ public class CheckIfRainHitPlayer : MonoBehaviour
         
         RaycastHit hit;
 
-        if (Physics.Raycast(transform.position, Vector3.up, out hit))
+
+        if (Physics.Raycast(transform.position, Vector3.right, out hit))
+        {
+            if (hit.transform.name == "EnemyParticles")
+            {
+          
+
+                timerHitPartricleEnemy -= 0.8f * Time.deltaTime;
+
+                int ParticleEmmitionCount = hit.transform.GetComponent<ParticleSystem>().particleCount;
+                if ((int)timerHitPartricleEnemy == 0)
+                {
+                    hit.transform.GetComponent<ParticleSystem>().GetComponent<Renderer>().material = FirePariclesMat;
+                 //   ParticleEmmitionCount -= 100;
+                                   // hit.transform.GetComponent<ParticleSystem>().Emit(ParticleEmmitionCount);
+                    var emission = hit.transform.GetComponent<ParticleSystem>().emission;
+
+                    emission.rateOverTime = NumOfParticles;
+                    NumOfParticles -= 10;
+                }
+
+            }
+
+
+        }
+
+
+
+            if (Physics.Raycast(transform.position, Vector3.up, out hit))
         {
             Debug.Log(hit.transform.name);
-            if(hit.transform.tag == "Bounds")
+            if(hit.transform.tag == "Bounds" || hit.transform.name == "EnemyParticles")
             {
                 RainFallParticale1.Play();
                 RainFallParticale2.Play();
@@ -68,7 +99,7 @@ public class CheckIfRainHitPlayer : MonoBehaviour
 
             }
             
-            else if (hit.transform.tag != "Bounds")
+            else if (hit.transform.tag != "Bounds" || hit.transform.name != "EnemyParticles")
             {
                 RainFallParticale1.Stop();
                 RainFallParticale2.Stop();
