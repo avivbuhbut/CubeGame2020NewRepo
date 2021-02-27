@@ -18,14 +18,14 @@ public class ConveyorLineRender : MonoBehaviour
     Transform ConveyorEndTrans;
     public Transform StarchConeyorTrans;
     Transform EndConvTrans;
-
-
+    public Material DarkMAteril;
+    public Material ElectredMaterial;
     Vector3 centerPos;
     GameObject ConveyorStach;
     // Start is called before the first frame update
     int counter = 0;
     float angel = 1;
-
+    bool hitPlyaerOnce;
     bool HitPlayer;
     Material DefaultLineMat;
     void Start()
@@ -118,11 +118,15 @@ public class ConveyorLineRender : MonoBehaviour
         {
         
                 HitPlayer = false;
-            LineRender.GetComponent<LineRenderer>().material = DefaultLineMat;
+            LineRender.GetComponent<LineRenderer>().material = DarkMAteril;
         }
-        
 
-    }
+        if (PlayerTrans.GetComponent<CheckIfRainHitPlayer>().PlayerElectricFull && hitPlyaerOnce)
+        {
+            LineRender.GetComponent<LineRenderer>().material = ElectredMaterial;
+        }
+
+        }
 
 
     void OnCollisionStay(Collision collision)
@@ -132,9 +136,10 @@ public class ConveyorLineRender : MonoBehaviour
 
         if (collision.transform.name == "Player" && collision.transform.GetComponent<CheckIfRainHitPlayer>().PlayerElectricFull)
         {
+            hitPlyaerOnce = true;
             PlayerTrans = collision.transform;
             HitPlayer = true;
-            LineRender.GetComponent<LineRenderer>().material = collision.transform.GetComponent<Renderer>().material;
+          
         }
   
 

@@ -12,9 +12,12 @@ public class FlourBackAndForthStrachConv : MonoBehaviour
    public Transform AnotherFlourOnConvTrans;
      public  float Speed;
     float TimerSlowDown=6;
+    Transform PlayerTrans;
+    bool OnConbeyro;
     // Start is called before the first frame update
     void Start()
     {
+        PlayerTrans = GameObject.Find("Player").transform;
         Speed = 0.8f;
     }
 
@@ -38,17 +41,69 @@ public class FlourBackAndForthStrachConv : MonoBehaviour
 
         }
 
+        if (OnConbeyro && PlayerTrans.GetComponent<CheckIfRainHitPlayer>().PlayerElectricFull)
+        {
+
+            ColidedStrachConv = true;
+
+         //   StartPos = collision.transform.Find("StartPos").position;
+          //  EndPos = collision.transform.Find("EndPos").position;
+
+            //Physics.IgnoreCollision(collision.transform.GetComponent<BoxCollider>(), collision.transform.GetComponent<BoxCollider>());
+
+            OnConbeyro = true;
+
+
+            //     collision.transform.position = Vector3.MoveTowards(collision.transform.position
+            //, StartPos, 1.2f * Time.deltaTime);
+            if (ReachStartPos == false)
+            {
+                this.transform.position = Vector3.MoveTowards(new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z),
+                    new Vector3(StartPos.x, this.transform.position.y, this.transform.position.z), Speed * Time.deltaTime);
+
+
+
+
+
+
+                if ((int)Vector3.Distance(this.transform.position, StartPos) == 0)
+                {
+                    Debug.Log("ReachStartPos is not true");
+                    ReachStartPos = true;
+
+                }
+            }
+
+
+
+
+            if (ReachStartPos && PlayerTrans.GetComponent<CheckIfRainHitPlayer>().PlayerElectricFull)
+            {
+                this.transform.position = Vector3.MoveTowards(this.transform.position, EndPos, Speed * Time.deltaTime);
+
+
+                if ((int)Vector3.Distance(this.transform.position, EndPos) == 0)
+                {
+                    Debug.Log("ReachStartPos is not true");
+                    ReachStartPos = false;
+
+                }
+            }
+
+
         }
+
+    }
     
 
     void OnCollisionStay(Collision collision)
     {
 
-        
+  
 
 
 
-        if (collision.transform.name == "StrachConveyor 1(Clone)")
+        if (collision.transform.name == "StrachConveyor 1(Clone)"&& PlayerTrans.GetComponent<CheckIfRainHitPlayer>().PlayerElectricFull)
         {
             ColidedStrachConv = true;
 
@@ -56,13 +111,13 @@ public class FlourBackAndForthStrachConv : MonoBehaviour
             EndPos = collision.transform.Find("EndPos").position;
 
             //Physics.IgnoreCollision(collision.transform.GetComponent<BoxCollider>(), collision.transform.GetComponent<BoxCollider>());
-       
 
+            OnConbeyro = true;
 
 
                 //     collision.transform.position = Vector3.MoveTowards(collision.transform.position
                 //, StartPos, 1.2f * Time.deltaTime);
-                if (ReachStartPos == false)
+            if (ReachStartPos == false)
                 {
                 this.transform.position = Vector3.MoveTowards(new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z),
                     new Vector3(StartPos.x, this.transform.position.y, this.transform.position.z), Speed * Time.deltaTime);
@@ -83,7 +138,7 @@ public class FlourBackAndForthStrachConv : MonoBehaviour
 
 
 
-                if (ReachStartPos)
+                if (ReachStartPos&& PlayerTrans.GetComponent<CheckIfRainHitPlayer>().PlayerElectricFull)
                 {
                 this.transform.position = Vector3.MoveTowards(this.transform.position, EndPos, Speed * Time.deltaTime);
 

@@ -142,8 +142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac8f5f1674cdf2c45ba53b4e47ea0fa6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PowerCircleTrans: {fileID: 1941941306260879961, guid: 8d71b4259b215e34695974b2cd41bc57,
-    type: 3}
+  Money: {fileID: 8492339221049415704, guid: 10ac83e0237a55d4095d75a59ca63657, type: 3}
   PinKTimeCrystal: {fileID: 101961170143522032, guid: 1d678639ff094804ca170a31c58452c0,
     type: 3}
 --- !u!114 &8256340494243104095

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BreakDestoryCube : MonoBehaviour
 {
-    public GameObject PowerCircleTrans;
+    public GameObject Money;
     public GameObject PinKTimeCrystal;
 
     Transform PlayerTrans;
@@ -43,8 +43,9 @@ public class BreakDestoryCube : MonoBehaviour
 
             if ((int)RenddomNum == 1)
             {
-                Instantiate(PowerCircleTrans, new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z), Quaternion.identity);
-                PowerCircleTrans.SetActive(true);
+                Instantiate(Money, new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z), Quaternion.identity);
+                Money.SetActive(true);
+                Money.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionZ;
             }
 
             if ((int)RenddomNum == 2)

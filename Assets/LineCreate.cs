@@ -19,13 +19,19 @@ public class LineCreate : MonoBehaviour
     public Transform StartPosSCTrans;
     public Transform EndPosSCTrans;
     Vector3 centerPos;
+    public Material DarkMaterial;
     GameObject ConveyorStach;
     // Start is called before the first frame update
     int counter = 0;
     float angel = 1;
     void Start()
     {
-        
+        LineRender.startColor = Color.black;
+        LineRender.endColor = Color.black;
+        LineRender.startWidth = 1f;
+        LineRender.endWidth = 1f;
+        LineRender.positionCount = 2;
+        LineRender.useWorldSpace = true;
     }
 
     // Update is called once per frame
@@ -42,12 +48,7 @@ public class LineCreate : MonoBehaviour
 
             //For creating line renderer object
 
-            LineRender.startColor = Color.black;
-        LineRender.endColor = Color.black;
-        LineRender.startWidth = 1f;
-        LineRender.endWidth = 1f;
-        LineRender.positionCount = 2;
-        LineRender.useWorldSpace = true;
+      
 
 
         //For drawing line in the world space, provide the x,y,z values
@@ -98,28 +99,28 @@ public class LineCreate : MonoBehaviour
             centerPos.z = -7.2f;
             ConveyorStach.transform.localScale = new Vector3(scaleX, 0.3f, 3);
 
-         //     ConveyorStach.transform.localRotation = Quaternion.Euler(ConveyorStach.transform.position.x, ConveyorStach.transform.position.y, -ConveyorEndTrans.transform.position.y * 10) ;
+            //     ConveyorStach.transform.localRotation = Quaternion.Euler(ConveyorStach.transform.position.x, ConveyorStach.transform.position.y, -ConveyorEndTrans.transform.position.y * 10) ;
 
             //  Vector3 directionToFace = ConveyorEndTrans.position - ConveyorStach.transform.position;
 
 
 
             // if(ConveyorEndTrans.transform.position.y>1)
-       //     if (scaleX > 0.5f)
-        //   {
-                //(angel < 10 ? angel++ : angel=1)
-          //      ConveyorStach.transform.localRotation = Quaternion.Euler(ConveyorStach.transform.position.x, ConveyorStach.transform.position.y, -ConveyorEndTrans.transform.position.y * 6) ;
-     //     //      centerPos = new Vector3(ConveyorStartTrans.position.x-1 + ConveyorEndTrans.transform.position.x, ConveyorStartTrans.position.y + 2 +
-     //    ConveyorEndTrans.transform.position.y + 2) / 2f;
+            //     if (scaleX > 0.5f)
+            //   {
+            //(angel < 10 ? angel++ : angel=1)
+            //      ConveyorStach.transform.localRotation = Quaternion.Euler(ConveyorStach.transform.position.x, ConveyorStach.transform.position.y, -ConveyorEndTrans.transform.position.y * 6) ;
+            //     //      centerPos = new Vector3(ConveyorStartTrans.position.x-1 + ConveyorEndTrans.transform.position.x, ConveyorStartTrans.position.y + 2 +
+            //    ConveyorEndTrans.transform.position.y + 2) / 2f;
 
-          //      centerPos.z = -6.3f;
+            //      centerPos.z = -6.3f;
 
 
-          //  }
-          //  else
-    
+            //  }
+            //  else
 
-            
+
+
 
             //else
             //   ConveyorStach.transform.localRotation = Quaternion.Euler(ConveyorStach.transform.position.x, ConveyorStach.transform.position.y, ConveyorStach.transform.position.z); 
@@ -157,6 +158,14 @@ public class LineCreate : MonoBehaviour
 
             // Debug.Log("ConveyorStach roattion.y: " + ConveyorStach.transform.rotation.eulerAngles.z);
             //   Debug.Log("LINE render roattion.y: " + LineRender.transform.rotation.eulerAngles.z);
+
+            if (this.transform.GetComponent<CheckIfRainHitPlayer>().PlayerElectricFull == false)
+                LineRender.GetComponent<LineRenderer>().material = DarkMaterial;
+
+
+            if (this.transform.GetComponent<CheckIfRainHitPlayer>().PlayerElectricFull)
+                LineRender.GetComponent<LineRenderer>().material = this.transform.GetComponent<Renderer>().material;
+
         }
 
     }
@@ -165,16 +174,19 @@ public class LineCreate : MonoBehaviour
      void OnCollisionStay(Collision collision)
     {
 
+      //  if (LineRender.GetComponent<LineRenderer>().material == DarkMaterial&& collision.transform.name == "ConeyorBlockStart"&& this.transform.GetComponent<CheckIfRainHitPlayer>().PlayerElectricFull)
+        //    LineRender.GetComponent<LineRenderer>().material  = collision.transform.GetComponent<Renderer>().material;
+        
 
-        if(collision.transform.name == "ConeyorBlockStart")
+        if (collision.transform.name == "ConeyorBlockStart"&& this.transform.GetComponent<CheckIfRainHitPlayer>().PlayerElectricFull)
         {
             ConveyorStartTrans = collision.transform;
             hitConeyorStart = true;
-
+            //this.transform.GetComponent<LineRenderer>().material = collision.transform.GetComponent<Renderer>().material;
         }
 
 
-        if(collision.transform.name == "ConeyorBlockEnd")
+        if(collision.transform.name == "ConeyorBlockEnd" && this.transform.GetComponent<CheckIfRainHitPlayer>().PlayerElectricFull)
         {
             ConveyorEndTrans = collision.transform;
             hitConvyorEnd = true;

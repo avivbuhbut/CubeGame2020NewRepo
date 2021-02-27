@@ -8,7 +8,7 @@ public class CheckIfRainHitPlayer : MonoBehaviour
     RaycastHit hitAbove;
     public ParticleSystem ElectricParticals;
     public Material ElectricMatPlayer;
-    static  float InRainTimer  = 20;
+    static  float InRainTimer  = 13;
    public static float NOTInRainTimer = 20;
     Material PlayerOriginalMaterial;
     public bool PlayerElectricFull;
@@ -88,7 +88,7 @@ public class CheckIfRainHitPlayer : MonoBehaviour
                     NOTInRainTimer += 0.8f * Time.deltaTime;
 
 
-                if ((int)InRainTimer == 0)
+                if ((int)InRainTimer == 5)
                 {
                     this.transform.GetComponent<ParticleSystem>().Play();
                     PlayerElectricFull = true;
@@ -104,7 +104,7 @@ public class CheckIfRainHitPlayer : MonoBehaviour
                 RainFallParticale1.Stop();
                 RainFallParticale2.Stop();
 
-                InRainTimer = 20;
+                InRainTimer = 13;
                 NOTInRainTimer -= 0.8f * Time.deltaTime;
 
                 Debug.Log("NOTInRainTimer: "  + (int)NOTInRainTimer );
