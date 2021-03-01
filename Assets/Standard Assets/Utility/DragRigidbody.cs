@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class DragRigidbody : MonoBehaviour
 {
-    const float k_Spring = 50.0f;
+    const float k_Spring = 10.0f;
     const float k_Damper = 5.0f;
     const float k_Drag = 10.0f;
-    const float k_AngularDrag = 5.0f;
-    const float k_Distance = 0.2f;
+    const float k_AngularDrag = 15.0f;
+    const float k_Distance = 0.1f;
     const bool k_AttachToCenterOfMass = false;
 
     private SpringJoint m_SpringJoint;

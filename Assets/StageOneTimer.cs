@@ -7,7 +7,7 @@ public class StageOneTimer : MonoBehaviour
     public static bool PlayerPassThrow;
     bool PizzaBoxPassThrow;
     public TextMeshPro PlayerTimerTMP;
-    public  float timeLeft = 90;
+    public  static  float timeLeft = 90;
     public Transform Player;
     Color OriginalTextColor;
     // Start is called before the first frame update

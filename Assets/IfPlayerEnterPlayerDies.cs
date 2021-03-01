@@ -24,6 +24,6 @@ public class IfPlayerEnterPlayerDies : MonoBehaviour
      void OnTriggerEnter(Collider other)
     {
         if (other.transform.name == "Player")
-            StartTimerTrans.GetComponent<StageOneTimer>().timeLeft = 1;
+            StageOneTimer.timeLeft = 1;
     }
 }

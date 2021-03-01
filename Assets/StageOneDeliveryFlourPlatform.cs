@@ -95,7 +95,7 @@ public TextMeshPro MoneyValueTMP;
         {
             numberOfFourHit++;
 
-
+            PlayerMoney.moneyCounter += 2;
 
 
 
