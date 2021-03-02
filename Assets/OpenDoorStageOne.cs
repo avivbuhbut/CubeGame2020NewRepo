@@ -10,7 +10,7 @@ public class OpenDoorStageOne : MonoBehaviour
     public Animator openDoorAnim;
     Material defaultMat;
     bool PlayerNotStandingOnPlatform;
-
+    public static bool PlayerFinishLevel;
     float ColorTimer = 3f;
     Color lerpedColor;
     public Material thisObjectMat;
@@ -37,6 +37,7 @@ public class OpenDoorStageOne : MonoBehaviour
     {
         if (collision.transform.name == "Player"&& StageOneDeliveryFlourPlatform.numberOfFourHit==6)
         {
+            PlayerFinishLevel = true;
             PlayerNotStandingOnPlatform = false;
             openDoorAnim.SetBool("Activate", true);
             this.transform.GetComponent<Renderer>().material = GreenMat;

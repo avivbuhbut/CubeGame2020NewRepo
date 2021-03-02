@@ -13,6 +13,7 @@ public class ConvertMoneyIntoTimeStageOne : MonoBehaviour
     bool display7Sec;
     float timeShown;
     public static int CoutnerSecPlayerBuy = 0;
+    public bool AddTime;
     void OnEnable()
     {
 
@@ -63,16 +64,19 @@ public class ConvertMoneyIntoTimeStageOne : MonoBehaviour
             if (PlayerMoney.moneyCounter > 0)
             {
                 PlayerMoney.moneyCounter -= 1;
-
+              
                 StageOneTimer.timeLeft += 7f;
                 CoutnerSecPlayerBuy += 7;
                 timeShown = CoutnerSecPlayerBuy;
+
+               // PersonalBestTimeStageOne.TotalTime += 7;
 
             }
         }
         else
             display7Sec = false;
         Debug.Log("this button is pressed!");
+      
     }
 
 }
