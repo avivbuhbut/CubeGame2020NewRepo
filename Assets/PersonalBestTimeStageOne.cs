@@ -40,14 +40,7 @@ public class PersonalBestTimeStageOne : MonoBehaviour
         TotalTime +=0.4f * Time.deltaTime;
        if (OpenDoorStageOne.PlayerFinishLevel)
        {
-            PeronalBest.gameObject.SetActive(true);
-            if (TotalTime % 60 > 10 && TotalTime > 0)
-                PeronalBest.text = Min + ":" + (int)TotalTime % 60;
-            else if (TotalTime % 60 < 10 && TotalTime > 0)
-            {
-                PeronalBest.text = +Min + ":" + "0" + (int)TotalTime % 60;
-                //  PeronalBest.text = TotalTime + "";
-            }
+            
 
             if (counter == 0)
          {
@@ -59,6 +52,17 @@ public class PersonalBestTimeStageOne : MonoBehaviour
                     //eachLine[0] = TotalTime +"";
                     newBestScore = true;
                     WriteData(TotalTime);
+
+                    PeronalBest.gameObject.SetActive(true);
+                    if (TotalTime % 60 > 10 && TotalTime > 0)
+                        PeronalBest.text = Min + ":" + (int)TotalTime % 60;
+                    else if (TotalTime % 60 < 10 && TotalTime > 0)
+                    {
+                        PeronalBest.text = +Min + ":" + "0" + (int)TotalTime % 60;
+                        //  PeronalBest.text = TotalTime + "";
+                    }
+
+                    StageOneTimer.PlayerPassThrow = false;
 
                 }
              counter = 1;
