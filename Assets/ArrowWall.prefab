@@ -29,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2688391866799615227}
   m_LocalRotation: {x: -0.0023584664, y: -0.015759004, z: -0.69776624, w: -0.7161484}
-  m_LocalPosition: {x: 13.14, y: 15.67, z: -45.33}
+  m_LocalPosition: {x: 13.14, y: 15.65, z: -45.33}
   m_LocalScale: {x: -12.839232, y: 2.0945582, z: 4.2100005}
   m_Children:
   - {fileID: 5771950149970282935}
@@ -131,6 +131,8 @@ MonoBehaviour:
   ElectricWallMat: {fileID: 2100000, guid: f40b0d29b21ba8f42986c1ac6e65988a, type: 2}
   DownArrowWall: {fileID: 5771950149970282935}
   BlackColorArrow: {fileID: 2100000, guid: b6d1734a5af569741a8e4c11d387091b, type: 2}
+  ArrowActivateRedMat: {fileID: 0}
+  TailCubeTrans: {fileID: 0}
 --- !u!1 &2688391867655464747
 GameObject:
   m_ObjectHideFlags: 0

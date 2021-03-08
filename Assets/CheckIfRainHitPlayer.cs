@@ -126,12 +126,15 @@ public class CheckIfRainHitPlayer : MonoBehaviour
 
            
         }
-        
-            // if (Physics.Raycast(this.transform.position, this.transform.TransformDirection(Vector3.up), out hitAbove))
-            // {
+
+        // if (Physics.Raycast(this.transform.position, this.transform.TransformDirection(Vector3.up), out hitAbove))
+        // {
         //    Debug.DrawLine(this.transform.position, this.transform.TransformDirection(Vector3.up), Color.white);
-            //   }
-        
+        //   }
+        if (PlayerElectricFull == false)
+        {
+            this.transform.GetComponent<ParticleSystem>().Stop();
+        }
    
         
     }

@@ -16,10 +16,15 @@ public class ElectircWallOnEnterElectricPlayer : MonoBehaviour
    public Material ArrowActivateRedMat;
     public Transform TailCubeTrans;
     Color lerpedColor;
+    Vector3 EndPos;
+    Vector3 StartPosThisTrans;
     bool PlayerPressedOnArrowDown;
     // Start is called before the first frame update
     void Start()
     {
+        EndPos = new Vector3(this.transform.position.x, this.transform.position.y - 8, this.transform.position.z);
+        StartPosThisTrans = this.transform.position;
+
         defaultWallMat = this.transform.GetComponent<Renderer>().material;
         DeafultDownArrowMat = DownArrowWall.GetComponent<Renderer>().material;
     }
@@ -40,6 +45,9 @@ public class ElectircWallOnEnterElectricPlayer : MonoBehaviour
             {
                 this.transform.GetComponent<Renderer>().material = defaultWallMat;
                 DownArrowWall.GetComponent<Renderer>().material = DeafultDownArrowMat;
+
+
+                //this.transform.position = Vector3.MoveTowards(this.transform.position,StartPosThisTrans, )
 
                 /*activate animation up*/
                 PlayerPressedOnArrowDown = false;
@@ -62,8 +70,27 @@ public class ElectircWallOnEnterElectricPlayer : MonoBehaviour
 
             if (PlayerPressedOnArrowDown)
             {
-                lerpedColor = Color.Lerp(Color.black, ArrowActivateRedMat.color, Mathf.PingPong(Time.time, 1));
-                DownArrowWall.transform.GetComponent<Renderer>().material.color = lerpedColor;
+
+                if ((int)Vector3.Distance(this.transform.position, EndPos) == 0)
+                {
+                    this.transform.GetComponent<Renderer>().material = defaultWallMat;
+                    DownArrowWall.GetComponent<Renderer>().material = DeafultDownArrowMat;
+                    DownArrowWall.gameObject.SetActive(false);
+                }
+                else
+                {
+
+                    lerpedColor = Color.Lerp(Color.black, ArrowActivateRedMat.color, Mathf.PingPong(Time.time, 1));
+                    DownArrowWall.transform.GetComponent<Renderer>().material.color = lerpedColor;
+                    Debug.Log("Distance: " + (int)Vector3.Distance(this.transform.position, EndPos));
+                    if ((int)Vector3.Distance(this.transform.position, EndPos) > 0)
+                    {
+                        this.transform.position = Vector3.MoveTowards(this.transform.position, EndPos, 2 * Time.deltaTime);
+
+                    }
+
+                }
+             
             }
         }
 
