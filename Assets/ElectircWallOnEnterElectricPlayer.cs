@@ -18,6 +18,7 @@ public class ElectircWallOnEnterElectricPlayer : MonoBehaviour
     Color lerpedColor;
     Vector3 EndPos;
     Vector3 StartPosThisTrans;
+    public static bool WallReachEndDest;
     bool PlayerPressedOnArrowDown;
     // Start is called before the first frame update
     void Start()
@@ -76,6 +77,7 @@ public class ElectircWallOnEnterElectricPlayer : MonoBehaviour
                     this.transform.GetComponent<Renderer>().material = defaultWallMat;
                     DownArrowWall.GetComponent<Renderer>().material = DeafultDownArrowMat;
                     DownArrowWall.gameObject.SetActive(false);
+                    WallReachEndDest = true;
                 }
                 else
                 {

@@ -47,6 +47,7 @@ TagManager:
   - Capsule
   - OneDollar
   - CubeDestroyer
+  - LinkCube
   layers:
   - Default
   - TransparentFX

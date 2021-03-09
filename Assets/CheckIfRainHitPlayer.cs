@@ -109,7 +109,7 @@ public class CheckIfRainHitPlayer : MonoBehaviour
 
                 Debug.Log("NOTInRainTimer: "  + (int)NOTInRainTimer );
 
-                if((int)NOTInRainTimer==10)
+                if((int)NOTInRainTimer<=10)
                     this.transform.GetComponent<ParticleSystem>().Stop();
 
 
@@ -131,10 +131,10 @@ public class CheckIfRainHitPlayer : MonoBehaviour
         // {
         //    Debug.DrawLine(this.transform.position, this.transform.TransformDirection(Vector3.up), Color.white);
         //   }
-        if (PlayerElectricFull == false)
-        {
-            this.transform.GetComponent<ParticleSystem>().Stop();
-        }
+       // if (PlayerElectricFull == false)
+       // {
+        //    this.transform.GetComponent<ParticleSystem>().Stop();
+        //}
    
         
     }
