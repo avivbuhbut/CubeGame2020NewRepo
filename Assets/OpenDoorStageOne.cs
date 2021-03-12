@@ -37,6 +37,7 @@ public class OpenDoorStageOne : MonoBehaviour
     {
         if (collision.transform.name == "Player"&& StageOneDeliveryFlourPlatform.numberOfFourHit==6)
         {
+            StageOneDeliveryFlourPlatform.numberOfFourHit = 0;
             PlayerFinishLevel = true;
             PlayerNotStandingOnPlatform = false;
             openDoorAnim.SetBool("Activate", true);

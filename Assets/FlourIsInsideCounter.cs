@@ -13,12 +13,13 @@ public class FlourIsInsideCounter : MonoBehaviour
     public Transform LinkCube4;
     public Transform LinkCube5;
     public Transform LinkCube6;
+    Material DefaultMat;
 
   
     // Start is called before the first frame update
     void Start()
     {
-        
+        DefaultMat = LinkCube1.GetComponent<Renderer>().material;
     }
 
     // Update is called once per frame
@@ -72,5 +73,37 @@ public class FlourIsInsideCounter : MonoBehaviour
         {
             counterColidedWithFlour++;
         }
+    }
+
+
+    private void OnTriggerExit(Collider other)
+    {
+      
+
+        if (counterColidedWithFlour == 1)
+        {
+
+            LinkCube6.GetComponent<Renderer>().material = DefaultMat;
+
+        }
+
+        if (counterColidedWithFlour == 2)
+            LinkCube5.GetComponent<Renderer>().material = DefaultMat;
+
+        if (counterColidedWithFlour == 3)
+            LinkCube4.GetComponent<Renderer>().material = DefaultMat;
+
+        if (counterColidedWithFlour == 4)
+            LinkCube3.GetComponent<Renderer>().material = DefaultMat;
+
+
+        if (counterColidedWithFlour == 5)
+            LinkCube2.GetComponent<Renderer>().material = DefaultMat;
+
+
+        if (counterColidedWithFlour == 6)
+            LinkCube1.GetComponent<Renderer>().material = DefaultMat;
+
+        counterColidedWithFlour--;
     }
 }
