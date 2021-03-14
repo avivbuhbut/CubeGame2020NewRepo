@@ -94,10 +94,13 @@ public TextMeshPro MoneyValueTMP;
             collision.transform.name == "Flour")
         {
             numberOfFourHit++;
-
+            if(collision.transform.GetComponent<RainDamage>().ValueFlourZero==false &&
+                collision.transform.GetComponent<RainDamage>().ValueFlourOne == false)
             PlayerMoney.moneyCounter += 2;
 
 
+            if (collision.transform.GetComponent<RainDamage>().ValueFlourOne)
+                PlayerMoney.moneyCounter += 1;
 
             FlourHit = true;
             //FlourValue = PizzaValue.pizzaValue;
