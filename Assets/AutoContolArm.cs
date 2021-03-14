@@ -69,7 +69,7 @@ public class AutoContolArm : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (this.transform.GetComponent<HitByElectricPlayer>().ArmHasElectricity)
+        if (HitByElectricPlayer.ArmHasElectricity)
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);                    ///Very Useful Code! - tells the object name when clicked by the mouse
 

@@ -8,7 +8,7 @@ public class HitByElectricPlayer : MonoBehaviour
     Material ElectredMat;
     public Transform PlayerTrans;
 
-    public bool ArmHasElectricity;
+    public static bool ArmHasElectricity;
     // Start is called before the first frame update
     void Start()
     {
