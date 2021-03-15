@@ -83,6 +83,7 @@ public class GrapplingHook : MonoBehaviour
         {
 
             // We actually hit something, so attach the hook!
+            if(hookAttachment.transform.name != "TurnOffDamage")
             StartCoroutine(AttachHook());
         }
 

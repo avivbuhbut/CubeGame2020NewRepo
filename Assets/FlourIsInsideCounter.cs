@@ -78,32 +78,34 @@ public class FlourIsInsideCounter : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-      
-
-        if (counterColidedWithFlour == 1)
+        if (other.transform.name == "Flour")
         {
 
-            LinkCube6.GetComponent<Renderer>().material = DefaultMat;
+            if (counterColidedWithFlour == 1)
+            {
 
+                LinkCube6.GetComponent<Renderer>().material = DefaultMat;
+
+            }
+
+            if (counterColidedWithFlour == 2)
+                LinkCube5.GetComponent<Renderer>().material = DefaultMat;
+
+            if (counterColidedWithFlour == 3)
+                LinkCube4.GetComponent<Renderer>().material = DefaultMat;
+
+            if (counterColidedWithFlour == 4)
+                LinkCube3.GetComponent<Renderer>().material = DefaultMat;
+
+
+            if (counterColidedWithFlour == 5)
+                LinkCube2.GetComponent<Renderer>().material = DefaultMat;
+
+
+            if (counterColidedWithFlour == 6)
+                LinkCube1.GetComponent<Renderer>().material = DefaultMat;
+
+            counterColidedWithFlour--;
         }
-
-        if (counterColidedWithFlour == 2)
-            LinkCube5.GetComponent<Renderer>().material = DefaultMat;
-
-        if (counterColidedWithFlour == 3)
-            LinkCube4.GetComponent<Renderer>().material = DefaultMat;
-
-        if (counterColidedWithFlour == 4)
-            LinkCube3.GetComponent<Renderer>().material = DefaultMat;
-
-
-        if (counterColidedWithFlour == 5)
-            LinkCube2.GetComponent<Renderer>().material = DefaultMat;
-
-
-        if (counterColidedWithFlour == 6)
-            LinkCube1.GetComponent<Renderer>().material = DefaultMat;
-
-        counterColidedWithFlour--;
     }
 }

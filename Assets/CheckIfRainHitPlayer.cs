@@ -107,7 +107,7 @@ public class CheckIfRainHitPlayer : MonoBehaviour
                 InRainTimer = 13;
                 NOTInRainTimer -= 0.8f * Time.deltaTime;
 
-                Debug.Log("NOTInRainTimer: "  + (int)NOTInRainTimer );
+
 
                 if((int)NOTInRainTimer<=10)
                     this.transform.GetComponent<ParticleSystem>().Stop();
