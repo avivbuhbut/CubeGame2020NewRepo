@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 1064179318670525114}
   - component: {fileID: 1064179318670525113}
   - component: {fileID: 1064179318670525112}
-  - component: {fileID: 8256340494243104095}
   - component: {fileID: -4146356613198383963}
+  - component: {fileID: -1407482043427427738}
   m_Layer: 0
   m_Name: EnemyKillCubes
   m_TagString: CubeDestroyer
@@ -130,19 +130,6 @@ MonoBehaviour:
   CutCascades: 1
   ExplodeForce: 0
   Distraction1: 0
---- !u!114 &8256340494243104095
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1064179318670525118}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5033797f5992e2147b44550776603f70, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HitPlayerMaterial: {fileID: 2100000, guid: 81e4320e688f95344bf12a97838dd490, type: 2}
 --- !u!114 &-4146356613198383963
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -155,3 +142,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dc1c72568de7a841b00b02ad14ae19b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-1407482043427427738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1064179318670525118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40d94eabff5e9b1488546d3087dac0be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HitPlayerMaterial: {fileID: 2100000, guid: 976b31720675c1a47be763ebf89dc566, type: 2}
