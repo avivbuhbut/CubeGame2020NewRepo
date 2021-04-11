@@ -65,7 +65,7 @@ public TextMeshPro MoneyValueTMP;
         if (numberOfFourHit < 10)
         {
             //CollectMoneyBTN.gameObject.SetActive(false);
-            DeliverdFlourTMP.text = "Deliverd \n\n" + "     " + numberOfFourHit + "/6 ";
+            DeliverdFlourTMP.text = "Deliverd \n\n" + "     " + numberOfFourHit + "/3 ";
         }
 
         if (numberOfFourHit == 10)
@@ -75,7 +75,7 @@ public TextMeshPro MoneyValueTMP;
 
             numberOfFourHit = 10;
             DeliverdFlourTMP.color = Color.green;
-            DeliverdFlourTMP.text = "Deliverd \n\n" + "     " + numberOfFourHit + "/6 ";
+            DeliverdFlourTMP.text = "Deliverd \n\n" + "     " + numberOfFourHit + "/3 ";
         }
 
 

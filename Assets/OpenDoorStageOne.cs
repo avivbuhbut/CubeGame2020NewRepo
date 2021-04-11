@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class OpenDoorStageOne : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -14,6 +14,7 @@ public class OpenDoorStageOne : MonoBehaviour
     float ColorTimer = 3f;
     Color lerpedColor;
     public Material thisObjectMat;
+    Scene currentScene;
     void Start()
     {
         openDoorAnim.SetBool("Activate", false);
@@ -24,7 +25,10 @@ public class OpenDoorStageOne : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (StageOneDeliveryFlourPlatform.numberOfFourHit == 6 && PlayerNotStandingOnPlatform)
+         currentScene = SceneManager.GetActiveScene();
+
+
+        if (StageOneDeliveryFlourPlatform.numberOfFourHit == 3 && PlayerNotStandingOnPlatform)
         {
             lerpedColor = Color.Lerp(Color.black, thisObjectMat.color, Mathf.PingPong(Time.time, 1));
             this.transform.GetComponent<Renderer>().material.color = lerpedColor;
@@ -35,14 +39,17 @@ public class OpenDoorStageOne : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.transform.name == "Player"&& StageOneDeliveryFlourPlatform.numberOfFourHit==6)
+        if (currentScene.name == "Stage1")
         {
-            StageOneDeliveryFlourPlatform.numberOfFourHit = 0;
-            PlayerFinishLevel = true;
-            PlayerNotStandingOnPlatform = false;
-            openDoorAnim.SetBool("Activate", true);
-            this.transform.GetComponent<Renderer>().material = GreenMat;
+            if (collision.transform.name == "Player" && StageOneDeliveryFlourPlatform.numberOfFourHit == 3)
+            {
+                StageOneDeliveryFlourPlatform.numberOfFourHit = 0;
+                PlayerFinishLevel = true;
+                PlayerNotStandingOnPlatform = false;
+                openDoorAnim.SetBool("Activate", true);
+                this.transform.GetComponent<Renderer>().material = GreenMat;
 
+            }
         }
     }
 }

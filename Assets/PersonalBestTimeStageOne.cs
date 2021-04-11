@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEditor;
 using System.IO;
-
+using UnityEngine.SceneManagement;
 public class PersonalBestTimeStageOne : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -14,6 +14,7 @@ public class PersonalBestTimeStageOne : MonoBehaviour
     int Min;
     Color lerpedColor;
     bool newBestScore;
+   
     public static float TotalTime;
                int counter = 0;
     private string theWholeFileAsOneLongString;
@@ -34,7 +35,8 @@ public class PersonalBestTimeStageOne : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-   
+
+        Scene currentScene = SceneManager.GetActiveScene();
 
         Min = (int)TotalTime / 60;
         TotalTime +=0.4f * Time.deltaTime;
@@ -51,7 +53,10 @@ public class PersonalBestTimeStageOne : MonoBehaviour
                     NewBestScore.text = "New Best Score!";
                     //eachLine[0] = TotalTime +"";
                     newBestScore = true;
-                    WriteData(TotalTime);
+
+                    if (currentScene.name == "Stage1") {
+                        WriteData("Stage1",TotalTime);
+                    }
 
                     PeronalBest.gameObject.SetActive(true);
                     if (TotalTime % 60 > 10 && TotalTime > 0)
@@ -97,10 +102,10 @@ public class PersonalBestTimeStageOne : MonoBehaviour
     
 
 
-    void WriteData(float TotalTime)
+    void WriteData(string stage, float TotalTime)
     {
-        File.WriteAllText("MyPath.txt", "");
-        StreamWriter writer = new StreamWriter("MyPath.txt", true);
+        File.WriteAllText(stage + "Score.txt", "");
+        StreamWriter writer = new StreamWriter(stage + "Score.txt", true);
   
        // File.WriteAllText("MyPath.txt", TotalTime + "");
         writer.Write(TotalTime);
