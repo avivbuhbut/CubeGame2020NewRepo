@@ -17,7 +17,7 @@ public class IfPlayerToTheRightTurnOff : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("PlayerTrans.position.x: " + PlayerTrans.position.x + "this.transform.position.x:   " + this.transform.position.x) ;
+
 
         if (PlayerTrans.position.x > this.transform.position.x)
         {
