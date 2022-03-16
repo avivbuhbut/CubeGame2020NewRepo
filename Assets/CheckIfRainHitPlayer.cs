@@ -143,7 +143,7 @@ public class CheckIfRainHitPlayer : MonoBehaviour
     {
         if (collision.transform.name == "TimeCrystalPink(Clone)" && collision.transform.GetComponent<HitPlayerChangeMat>().CrystalElectred)
         {
-            NOTInRainTimer = 30;
+            NOTInRainTimer = 120;
             this.transform.GetComponent<Renderer>().material = ElectricMatPlayer;
             this.transform.GetComponent<ParticleSystem>().Play();
             PlayerElectricFull = true;

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.43914288, g: 0.48740762, b: 0.5676588, a: 1}
+  m_IndirectSpecularColor: {r: 0.4391424, g: 0.4874068, b: 0.56765765, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -55320,6 +55320,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1452269599}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &1456276889 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3781942339518467687, guid: 9b8ac57ba3afef147829b422ebcd8de2,
+    type: 3}
+  m_PrefabInstance: {fileID: 3781942339573339160}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1464746157
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -69602,7 +69608,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0171d1dcc91043c46b9a5eb4be9f1b5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ConveyorEnd: {fileID: 0}
+  ConveyorEnd: {fileID: 1456276889}
   HitConveyorEnd: 0
 --- !u!114 &1814706089
 MonoBehaviour:
@@ -69617,7 +69623,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerHitEndCube: 0
-  HitCubeTrans: {fileID: 0}
+  HitCubeTrans: {fileID: 1456276889}
 --- !u!199 &1814706090
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -90757,6 +90763,11 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 1814706066}
+    - target: {fileID: 3977973256829396727, guid: 7625fa81016045947a5be2ddbe760062,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3977973256829396729, guid: 7625fa81016045947a5be2ddbe760062,
         type: 3}
       propertyPath: m_BeforeStackBundles.Array.size
@@ -90781,12 +90792,12 @@ PrefabInstance:
     - target: {fileID: 3977973256829396730, guid: 7625fa81016045947a5be2ddbe760062,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.1238694
+      value: 7.62
       objectReference: {fileID: 0}
     - target: {fileID: 3977973256829396730, guid: 7625fa81016045947a5be2ddbe760062,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -4.99
+      value: -18.41
       objectReference: {fileID: 0}
     - target: {fileID: 3977973256829396730, guid: 7625fa81016045947a5be2ddbe760062,
         type: 3}
